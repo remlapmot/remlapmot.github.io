@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tom Palmer&#39;s website</title>
+    <link>/</link>
+    <description>Recent content on Tom Palmer&#39;s website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 31 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Fri, 31 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>I am a Lecturer in Medical Statistics at Lancaster University in the UK. My Lancaster University webpage is here: https://www.lancaster.ac.uk/maths/people/tom-palmer.
+This website is made using the blogdown package in R and Hugo. To make some tweaks to the default styles I followed some of the advice by Andrew Bates here: https://asbates.rbind.io/2018/05/09/customize-blogdown-theme/</description>
+    </item>
+    
+  </channel>
+</rss>
