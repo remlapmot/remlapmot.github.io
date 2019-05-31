@@ -1,6 +1,8 @@
 # remlapmot.github.io
 
-Personal github pages website for Tom Palmer.
+[![Website remlapmot.github.io](https://img.shields.io/website-up-down-green-red/https/remlapmot.github.io.svg)](https://remlapmot.github.io/)
+
+Personal GitHub Pages website for Tom Palmer.
 
 The code for the website is in a parent folder which is my remlapmot-githubpages repo on GitHub. 
 
