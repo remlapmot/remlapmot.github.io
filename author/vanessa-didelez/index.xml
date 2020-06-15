@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vanessa Didelez | Dr Tom Palmer</title>
+    <link>https://remlapmot.github.io/author/vanessa-didelez/</link>
+      <atom:link href="https://remlapmot.github.io/author/vanessa-didelez/index.xml" rel="self" type="application/rss+xml" />
+    <description>Vanessa Didelez</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 17 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Vanessa Didelez</title>
+      <link>https://remlapmot.github.io/author/vanessa-didelez/</link>
+    </image>
+    
+    <item>
+      <title>bpbounds: R package and web app</title>
+      <link>https://remlapmot.github.io/talk/2019_mr/</link>
+      <pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/talk/2019_mr/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
