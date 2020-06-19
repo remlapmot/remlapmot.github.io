@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Santiago Moreno | Dr Tom Palmer</title>
-    <link>https://remlapmot.github.io/author/santiago-moreno/</link>
-      <atom:link href="https://remlapmot.github.io/author/santiago-moreno/index.xml" rel="self" type="application/rss+xml" />
+    <link>/author/santiago-moreno/</link>
+      <atom:link href="/author/santiago-moreno/index.xml" rel="self" type="application/rss+xml" />
     <description>Santiago Moreno</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 11 Sep 2009 13:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Santiago Moreno</title>
-      <link>https://remlapmot.github.io/author/santiago-moreno/</link>
+      <link>/author/santiago-moreno/</link>
     </image>
     
     <item>
       <title>Contour enhanced funnel plots for meta-analysis</title>
-      <link>https://remlapmot.github.io/talk/2009_stata/</link>
+      <link>/talk/2009_stata/</link>
       <pubDate>Fri, 11 Sep 2009 13:00:00 +0000</pubDate>
-      <guid>https://remlapmot.github.io/talk/2009_stata/</guid>
+      <guid>/talk/2009_stata/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Performing Bayesian analysis in Stata using WinBUGS</title>
-      <link>https://remlapmot.github.io/talk/2007_stata/</link>
+      <link>/talk/2007_stata/</link>
       <pubDate>Mon, 10 Sep 2007 13:00:00 +0000</pubDate>
-      <guid>https://remlapmot.github.io/talk/2007_stata/</guid>
+      <guid>/talk/2007_stata/</guid>
       <description></description>
     </item>
     

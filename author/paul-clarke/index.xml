@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Paul Clarke | Dr Tom Palmer</title>
-    <link>https://remlapmot.github.io/author/paul-clarke/</link>
-      <atom:link href="https://remlapmot.github.io/author/paul-clarke/index.xml" rel="self" type="application/rss+xml" />
+    <link>/author/paul-clarke/</link>
+      <atom:link href="/author/paul-clarke/index.xml" rel="self" type="application/rss+xml" />
     <description>Paul Clarke</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 15 Sep 2011 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Paul Clarke</title>
-      <link>https://remlapmot.github.io/author/paul-clarke/</link>
+      <link>/author/paul-clarke/</link>
     </image>
     
     <item>
       <title>Generalised method of moments estimation of structural mean models</title>
-      <link>https://remlapmot.github.io/talk/2011_stata/</link>
+      <link>/talk/2011_stata/</link>
       <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
-      <guid>https://remlapmot.github.io/talk/2011_stata/</guid>
+      <guid>/talk/2011_stata/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Estimation using structural mean models with multiple instruments</title>
-      <link>https://remlapmot.github.io/talk/2011_lshtm/</link>
+      <link>/talk/2011_lshtm/</link>
       <pubDate>Wed, 14 Sep 2011 13:00:00 +0000</pubDate>
-      <guid>https://remlapmot.github.io/talk/2011_lshtm/</guid>
+      <guid>/talk/2011_lshtm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Generalised method of moments estimation of structural mean models</title>
-      <link>https://remlapmot.github.io/talk/2011_iscb/</link>
+      <link>/talk/2011_iscb/</link>
       <pubDate>Tue, 23 Aug 2011 13:00:00 +0000</pubDate>
-      <guid>https://remlapmot.github.io/talk/2011_iscb/</guid>
+      <guid>/talk/2011_iscb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Estimation of structural mean models with multiple instruments</title>
-      <link>https://remlapmot.github.io/talk/2011_rss/</link>
+      <link>/talk/2011_rss/</link>
       <pubDate>Wed, 25 May 2011 13:00:00 +0000</pubDate>
-      <guid>https://remlapmot.github.io/talk/2011_rss/</guid>
+      <guid>/talk/2011_rss/</guid>
       <description></description>
     </item>
     
