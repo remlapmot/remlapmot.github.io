@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Frank Windmeijer | Dr Tom Palmer</title>
-    <link>/author/frank-windmeijer/</link>
-      <atom:link href="/author/frank-windmeijer/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://remlapmot.github.io/author/frank-windmeijer/</link>
+      <atom:link href="https://remlapmot.github.io/author/frank-windmeijer/index.xml" rel="self" type="application/rss+xml" />
     <description>Frank Windmeijer</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 15 Sep 2011 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Frank Windmeijer</title>
-      <link>/author/frank-windmeijer/</link>
+      <link>https://remlapmot.github.io/author/frank-windmeijer/</link>
     </image>
     
     <item>
       <title>Generalised method of moments estimation of structural mean models</title>
-      <link>/talk/2011_stata/</link>
+      <link>https://remlapmot.github.io/talk/2011_stata/</link>
       <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
-      <guid>/talk/2011_stata/</guid>
+      <guid>https://remlapmot.github.io/talk/2011_stata/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Estimation using structural mean models with multiple instruments</title>
-      <link>/talk/2011_lshtm/</link>
+      <link>https://remlapmot.github.io/talk/2011_lshtm/</link>
       <pubDate>Wed, 14 Sep 2011 13:00:00 +0000</pubDate>
-      <guid>/talk/2011_lshtm/</guid>
+      <guid>https://remlapmot.github.io/talk/2011_lshtm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Generalised method of moments estimation of structural mean models</title>
-      <link>/talk/2011_iscb/</link>
+      <link>https://remlapmot.github.io/talk/2011_iscb/</link>
       <pubDate>Tue, 23 Aug 2011 13:00:00 +0000</pubDate>
-      <guid>/talk/2011_iscb/</guid>
+      <guid>https://remlapmot.github.io/talk/2011_iscb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Estimation of structural mean models with multiple instruments</title>
-      <link>/talk/2011_rss/</link>
+      <link>https://remlapmot.github.io/talk/2011_rss/</link>
       <pubDate>Wed, 25 May 2011 13:00:00 +0000</pubDate>
-      <guid>/talk/2011_rss/</guid>
+      <guid>https://remlapmot.github.io/talk/2011_rss/</guid>
       <description></description>
     </item>
     

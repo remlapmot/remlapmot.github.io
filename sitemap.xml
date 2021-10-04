@@ -1,252 +1,152 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>/authors/</loc>
+    <loc>https://remlapmot.github.io/authors/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2019_mr/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2019_mr/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/nuala-sheehan/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/nuala-sheehan/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/roland-ramsahai/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/roland-ramsahai/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/tom-palmer/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/tom-palmer/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/vanessa-didelez/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/vanessa-didelez/</loc>
     <lastmod>2019-07-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2017_stata/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2017_stata/</loc>
     <lastmod>2017-09-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/neil-davies/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/neil-davies/</loc>
     <lastmod>2017-09-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/wes-spiller/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/wes-spiller/</loc>
     <lastmod>2017-09-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2017_mr/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2017_mr/</loc>
     <lastmod>2017-07-12T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2017_leibniz/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2017_leibniz/</loc>
     <lastmod>2017-04-20T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/dave-evans/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/dave-evans/</loc>
     <lastmod>2016-04-14T12:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/george-davey-smith/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/george-davey-smith/</loc>
     <lastmod>2016-04-14T12:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2016_ukcim/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2016_ukcim/</loc>
     <lastmod>2016-04-14T12:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2015_iscb/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2015_iscb/</loc>
     <lastmod>2015-08-27T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2015_mr/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2015_mr/</loc>
     <lastmod>2015-06-22T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2014_bk/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2014_bk/</loc>
     <lastmod>2014-03-12T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2013_iscb/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2013_iscb/</loc>
     <lastmod>2013-08-26T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2013_crism/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2013_crism/</loc>
     <lastmod>2013-05-30T17:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2013_ukcim/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2013_ukcim/</loc>
     <lastmod>2013-05-15T09:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/frank-windmeijer/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/frank-windmeijer/</loc>
     <lastmod>2011-09-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2011_stata/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2011_stata/</loc>
     <lastmod>2011-09-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/paul-clarke/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/paul-clarke/</loc>
     <lastmod>2011-09-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/roger-harbord/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/roger-harbord/</loc>
     <lastmod>2011-09-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2011_lshtm/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2011_lshtm/</loc>
     <lastmod>2011-09-14T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2011_iscb/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2011_iscb/</loc>
     <lastmod>2011-08-23T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2011_rss/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2011_rss/</loc>
     <lastmod>2011-05-25T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2010_rss/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2010_rss/</loc>
     <lastmod>2010-09-15T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/debbie-lawlor/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/debbie-lawlor/</loc>
     <lastmod>2010-08-30T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2010_iscb/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2010_iscb/</loc>
     <lastmod>2010-08-30T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/jonathan-sterne/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/jonathan-sterne/</loc>
     <lastmod>2010-08-30T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2009_ghent/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2009_ghent/</loc>
     <lastmod>2009-11-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/alex-sutton/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/alex-sutton/</loc>
     <lastmod>2009-09-11T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2009_stata/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2009_stata/</loc>
     <lastmod>2009-09-11T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/jaime-peters/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/jaime-peters/</loc>
     <lastmod>2009-09-11T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/santiago-moreno/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/santiago-moreno/</loc>
     <lastmod>2009-09-11T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2009_iscb/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2009_iscb/</loc>
     <lastmod>2009-08-26T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/john-thompson/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/john-thompson/</loc>
     <lastmod>2007-09-10T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2007_stata/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2007_stata/</loc>
     <lastmod>2007-09-10T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2007_iges/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2007_iges/</loc>
     <lastmod>2007-09-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/martin-tobin/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/martin-tobin/</loc>
     <lastmod>2007-09-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/author/paul-burton/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/paul-burton/</loc>
     <lastmod>2007-09-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2007_iscb/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2007_iscb/</loc>
     <lastmod>2007-08-01T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2007_ysm/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2007_ysm/</loc>
     <lastmod>2007-04-12T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/2006_iscb/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2006_iscb/</loc>
     <lastmod>2006-08-30T17:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/categories/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/publication_types/</loc>
+  </url><url>
+    <loc>https://remlapmot.github.io/tags/</loc>
   </url>
-  
-  <url>
-    <loc>/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>/publication_types/</loc>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-  </url>
-  
 </urlset>

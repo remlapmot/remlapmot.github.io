@@ -2,213 +2,213 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tom Palmer | Dr Tom Palmer</title>
-    <link>/author/tom-palmer/</link>
-      <atom:link href="/author/tom-palmer/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://remlapmot.github.io/author/tom-palmer/</link>
+      <atom:link href="https://remlapmot.github.io/author/tom-palmer/index.xml" rel="self" type="application/rss+xml" />
     <description>Tom Palmer</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 17 Jul 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/author/tom-palmer/avatar_hu699ba7772663322b217d14b99ff49c22_13787_270x270_fill_q90_lanczos_center.jpg</url>
+      <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Tom Palmer</title>
-      <link>/author/tom-palmer/</link>
+      <link>https://remlapmot.github.io/author/tom-palmer/</link>
     </image>
     
     <item>
       <title>bpbounds: R package and web app</title>
-      <link>/talk/2019_mr/</link>
+      <link>https://remlapmot.github.io/talk/2019_mr/</link>
       <pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/talk/2019_mr/</guid>
+      <guid>https://remlapmot.github.io/talk/2019_mr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>mrrobust: A Stata package for MR-Egger regression type analyses</title>
-      <link>/talk/2017_stata/</link>
+      <link>https://remlapmot.github.io/talk/2017_stata/</link>
       <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>/talk/2017_stata/</guid>
+      <guid>https://remlapmot.github.io/talk/2017_stata/</guid>
       <description></description>
     </item>
     
     <item>
       <title>mrrobust: A Stata package implementing MR-Egger regression type analyses</title>
-      <link>/talk/2017_mr/</link>
+      <link>https://remlapmot.github.io/talk/2017_mr/</link>
       <pubDate>Wed, 12 Jul 2017 13:00:00 +0000</pubDate>
-      <guid>/talk/2017_mr/</guid>
+      <guid>https://remlapmot.github.io/talk/2017_mr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Corrected standard errors for two-stage residual inclusion estimators and a Stata package for MR-Egger regression type analyses</title>
-      <link>/talk/2017_leibniz/</link>
+      <link>https://remlapmot.github.io/talk/2017_leibniz/</link>
       <pubDate>Thu, 20 Apr 2017 13:00:00 +0000</pubDate>
-      <guid>/talk/2017_leibniz/</guid>
+      <guid>https://remlapmot.github.io/talk/2017_leibniz/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Meta-analytic structural equation modelling: Application to Mendelian randomization studies</title>
-      <link>/talk/2016_ukcim/</link>
+      <link>https://remlapmot.github.io/talk/2016_ukcim/</link>
       <pubDate>Thu, 14 Apr 2016 12:00:00 +0000</pubDate>
-      <guid>/talk/2016_ukcim/</guid>
+      <guid>https://remlapmot.github.io/talk/2016_ukcim/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Fitting fixed and random effects meta-analysis models using structural equation models</title>
-      <link>/talk/2015_iscb/</link>
+      <link>https://remlapmot.github.io/talk/2015_iscb/</link>
       <pubDate>Thu, 27 Aug 2015 13:00:00 +0000</pubDate>
-      <guid>/talk/2015_iscb/</guid>
+      <guid>https://remlapmot.github.io/talk/2015_iscb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Corrections to Probit and logistic control function estimator standard errors for marginal parameters</title>
-      <link>/talk/2015_mr/</link>
+      <link>https://remlapmot.github.io/talk/2015_mr/</link>
       <pubDate>Mon, 22 Jun 2015 13:00:00 +0000</pubDate>
-      <guid>/talk/2015_mr/</guid>
+      <guid>https://remlapmot.github.io/talk/2015_mr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Generalised method of moments estimation of mediation models and structural mean models</title>
-      <link>/talk/2014_bk/</link>
+      <link>https://remlapmot.github.io/talk/2014_bk/</link>
       <pubDate>Wed, 12 Mar 2014 13:00:00 +0000</pubDate>
-      <guid>/talk/2014_bk/</guid>
+      <guid>https://remlapmot.github.io/talk/2014_bk/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Strengthening Mendelian randomization through utilizing multiple independent paired combinations of genetic variants to evaluate potential pleiotropy</title>
-      <link>/talk/2013_iscb/</link>
+      <link>https://remlapmot.github.io/talk/2013_iscb/</link>
       <pubDate>Mon, 26 Aug 2013 13:00:00 +0000</pubDate>
-      <guid>/talk/2013_iscb/</guid>
+      <guid>https://remlapmot.github.io/talk/2013_iscb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Topics in instrumental variable estimation: structural mean models and bounds</title>
-      <link>/talk/2013_crism/</link>
+      <link>https://remlapmot.github.io/talk/2013_crism/</link>
       <pubDate>Thu, 30 May 2013 17:00:00 +0000</pubDate>
-      <guid>/talk/2013_crism/</guid>
+      <guid>https://remlapmot.github.io/talk/2013_crism/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Generalised method of moments estimation of mediation models and structural mean models</title>
-      <link>/talk/2013_ukcim/</link>
+      <link>https://remlapmot.github.io/talk/2013_ukcim/</link>
       <pubDate>Wed, 15 May 2013 09:00:00 +0000</pubDate>
-      <guid>/talk/2013_ukcim/</guid>
+      <guid>https://remlapmot.github.io/talk/2013_ukcim/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Generalised method of moments estimation of structural mean models</title>
-      <link>/talk/2011_stata/</link>
+      <link>https://remlapmot.github.io/talk/2011_stata/</link>
       <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
-      <guid>/talk/2011_stata/</guid>
+      <guid>https://remlapmot.github.io/talk/2011_stata/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Estimation using structural mean models with multiple instruments</title>
-      <link>/talk/2011_lshtm/</link>
+      <link>https://remlapmot.github.io/talk/2011_lshtm/</link>
       <pubDate>Wed, 14 Sep 2011 13:00:00 +0000</pubDate>
-      <guid>/talk/2011_lshtm/</guid>
+      <guid>https://remlapmot.github.io/talk/2011_lshtm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Generalised method of moments estimation of structural mean models</title>
-      <link>/talk/2011_iscb/</link>
+      <link>https://remlapmot.github.io/talk/2011_iscb/</link>
       <pubDate>Tue, 23 Aug 2011 13:00:00 +0000</pubDate>
-      <guid>/talk/2011_iscb/</guid>
+      <guid>https://remlapmot.github.io/talk/2011_iscb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Estimation of structural mean models with multiple instruments</title>
-      <link>/talk/2011_rss/</link>
+      <link>https://remlapmot.github.io/talk/2011_rss/</link>
       <pubDate>Wed, 25 May 2011 13:00:00 +0000</pubDate>
-      <guid>/talk/2011_rss/</guid>
+      <guid>https://remlapmot.github.io/talk/2011_rss/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Using multiple independent combinations of genetic variants to strengthen causal inference in Mendelian randomization studies: height and lung function as an example</title>
-      <link>/talk/2010_rss/</link>
+      <link>https://remlapmot.github.io/talk/2010_rss/</link>
       <pubDate>Wed, 15 Sep 2010 13:00:00 +0000</pubDate>
-      <guid>/talk/2010_rss/</guid>
+      <guid>https://remlapmot.github.io/talk/2010_rss/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Instrumental variable estimation of the causal risk ratio in cohorts</title>
-      <link>/talk/2010_iscb/</link>
+      <link>https://remlapmot.github.io/talk/2010_iscb/</link>
       <pubDate>Mon, 30 Aug 2010 13:00:00 +0000</pubDate>
-      <guid>/talk/2010_iscb/</guid>
+      <guid>https://remlapmot.github.io/talk/2010_iscb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Including multiple instrumental variables in Mendelian randomization analyses</title>
-      <link>/talk/2009_ghent/</link>
+      <link>https://remlapmot.github.io/talk/2009_ghent/</link>
       <pubDate>Sun, 01 Nov 2009 00:00:00 +0000</pubDate>
-      <guid>/talk/2009_ghent/</guid>
+      <guid>https://remlapmot.github.io/talk/2009_ghent/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Contour enhanced funnel plots for meta-analysis</title>
-      <link>/talk/2009_stata/</link>
+      <link>https://remlapmot.github.io/talk/2009_stata/</link>
       <pubDate>Fri, 11 Sep 2009 13:00:00 +0000</pubDate>
-      <guid>/talk/2009_stata/</guid>
+      <guid>https://remlapmot.github.io/talk/2009_stata/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Including multiple instrumental variables in Mendelian randomization analyses</title>
-      <link>/talk/2009_iscb/</link>
+      <link>https://remlapmot.github.io/talk/2009_iscb/</link>
       <pubDate>Wed, 26 Aug 2009 13:00:00 +0000</pubDate>
-      <guid>/talk/2009_iscb/</guid>
+      <guid>https://remlapmot.github.io/talk/2009_iscb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Performing Bayesian analysis in Stata using WinBUGS</title>
-      <link>/talk/2007_stata/</link>
+      <link>https://remlapmot.github.io/talk/2007_stata/</link>
       <pubDate>Mon, 10 Sep 2007 13:00:00 +0000</pubDate>
-      <guid>/talk/2007_stata/</guid>
+      <guid>https://remlapmot.github.io/talk/2007_stata/</guid>
       <description></description>
     </item>
     
     <item>
       <title>An adjusted instrumental-variable model for Mendelian randomization</title>
-      <link>/talk/2007_iges/</link>
+      <link>https://remlapmot.github.io/talk/2007_iges/</link>
       <pubDate>Sat, 08 Sep 2007 00:00:00 +0000</pubDate>
-      <guid>/talk/2007_iges/</guid>
+      <guid>https://remlapmot.github.io/talk/2007_iges/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Meta-analysis of Mendelian randomization studies</title>
-      <link>/talk/2007_iscb/</link>
+      <link>https://remlapmot.github.io/talk/2007_iscb/</link>
       <pubDate>Wed, 01 Aug 2007 13:00:00 +0000</pubDate>
-      <guid>/talk/2007_iscb/</guid>
+      <guid>https://remlapmot.github.io/talk/2007_iscb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Meta-analysis of Mendelian randomization studies</title>
-      <link>/talk/2007_ysm/</link>
+      <link>https://remlapmot.github.io/talk/2007_ysm/</link>
       <pubDate>Thu, 12 Apr 2007 13:00:00 +0000</pubDate>
-      <guid>/talk/2007_ysm/</guid>
+      <guid>https://remlapmot.github.io/talk/2007_ysm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Incorporating measures of study similarity in a meta-analysis</title>
-      <link>/talk/2006_iscb/</link>
+      <link>https://remlapmot.github.io/talk/2006_iscb/</link>
       <pubDate>Wed, 30 Aug 2006 17:00:00 +0000</pubDate>
-      <guid>/talk/2006_iscb/</guid>
+      <guid>https://remlapmot.github.io/talk/2006_iscb/</guid>
       <description></description>
     </item>
     
