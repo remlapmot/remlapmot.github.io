@@ -5,12 +5,20 @@
     <link>https://remlapmot.github.io/author/tom-palmer/</link>
       <atom:link href="https://remlapmot.github.io/author/tom-palmer/index.xml" rel="self" type="application/rss+xml" />
     <description>Tom Palmer</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 20 Jan 2022 13:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 20 May 2022 11:30:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Tom Palmer</title>
       <link>https://remlapmot.github.io/author/tom-palmer/</link>
     </image>
+    
+    <item>
+      <title>Investigating and fixing a new CRAN check error in my OneSampleMR package</title>
+      <link>https://remlapmot.github.io/talk/2022_check-error/</link>
+      <pubDate>Fri, 20 May 2022 11:30:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/talk/2022_check-error/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>R and Stata packages for one-sample Mendelian randomization analyses: OneSampleMR and ivonesamplemr</title>
