@@ -28,6 +28,10 @@ jobs:
 
       #- uses: r-lib/actions/setup-renv@v2
 
+      - name: Install blogdown
+        run: install.packages('blogdown')
+        shell: Rscript {0}
+
       - name: Install hugo
         run: blogdown::install_hugo()
         shell: Rscript {0}
