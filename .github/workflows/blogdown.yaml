@@ -26,12 +26,12 @@ jobs:
         with:
           use-public-rspm: true
 
-      #- uses: r-lib/actions/setup-renv@v2
+      - uses: r-lib/actions/setup-renv@v2
 
-      - name: Install blogdown
-        run: |
-          if (inherits(try(install.packages('blogdown', repos = 'https://packagemanager.rstudio.com/__linux__/focal/latest')), "try-error")) install.packages('blogdown', repos = 'https://cloud.r-project.org')
-        shell: Rscript {0}
+      # - name: Install blogdown
+      #   run: |
+      #     if (inherits(try(install.packages('blogdown', repos = 'https://packagemanager.rstudio.com/__linux__/focal/latest')), "try-error")) install.packages('blogdown', repos = 'https://cloud.r-project.org')
+      #   shell: Rscript {0}
 
       - name: Install hugo
         run: blogdown::install_hugo(version = '0.92.2')
