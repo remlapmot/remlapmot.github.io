@@ -38,3 +38,4 @@ rsconnect/
 .DS_Store
 .hugo_build.lock
 README.html
+public/
