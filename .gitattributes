@@ -1,0 +1,12 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Linguist settings for Languages stats
+*.[Rr]md linguist-detectable
+*.md linguist-detectable
+*.html linguist-vendored
+*.ipynb linguist-vendored
+*.scss linguist-vendored
+*.py linguist-vendored
+*.js linguist-vendored
+*.css linguist-vendored

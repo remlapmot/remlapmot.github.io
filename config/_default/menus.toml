@@ -1,0 +1,110 @@
+# Navigation Links
+#   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
+#     desired widget in your `content/home/` folder.
+#   The weight parameter defines the order that the links will appear in.
+
+[[main]]
+  name = "Talks"
+  url = "#talks"
+  weight = 10
+
+[[main]]
+  name = "Awards"
+  url = "#accomplishments"
+  weight = 10
+
+[[main]]
+  identifier = "stata"
+  name = "Stata packages"
+  weight = 10
+  
+[[main]]
+  identifier = "r"
+  name = "R packages"
+  weight = 10
+
+[[main]]
+  parent = "stata"
+  name = "mrrobust"
+  url = "https://remlapmot.github.io/mrrobust/"
+  weight = 10
+
+[[main]]
+  parent = "stata"
+  name = "ivonesamplemr"
+  url = "https://remlapmot.github.io/ivonesamplemr/"
+  weight = 10
+
+[[main]]
+  parent = "stata"
+  identifier = "bpbounds-stata"
+  name = "bpbounds"
+  url = "https://github.com/remlapmot/bpbounds-stata#readme"
+  weight = 10
+
+[[main]]
+  parent = "stata"
+  name = "confunnel"
+  url = "https://github.com/remlapmot/confunnel-stata#readme"
+  weight = 10
+
+[[main]]
+  parent = "r"
+  name = "bpbounds"
+  url = "https://remlapmot.github.io/bpbounds/"
+  weight = 10
+
+[[main]]
+  parent = "r"
+  name = "OneSampleMR"
+  url = "https://remlapmot.github.io/OneSampleMR/"
+  weight = 10
+
+[[main]]
+  parent = "r"
+  name = "mrbayes"
+  url = "https://okezie94.github.io/mrbayes/"
+  weight = 10
+
+[[main]]
+  parent = "r"
+  name = "tmsens"
+  url = "https://dea-hazewinkel.github.io/tmsens/"
+  weight = 10
+
+#[[main]]
+#  name = "Demo"
+#  url = "#hero"
+#  weight = 10
+
+#[[main]]
+#  name = "Posts"
+#  url = "#posts"
+#  weight = 20
+
+#[[main]]
+#  name = "Projects"
+#  url = "#projects"
+#  weight = 30
+
+#[[main]]
+#  name = "Publications"
+#  url = "#featured"
+#  weight = 40
+
+#[[main]]
+#  name = "Courses"
+#  url = "courses/"
+#  weight = 50
+
+#[[main]]
+#  name = "Contact"
+#  url = "#contact"
+#  weight = 60
+
+# Link to a PDF of your resume/CV from the menu.
+# To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
+# [[main]]
+#    name = "CV"
+#    url = "files/cv.pdf"
+#    weight = 70
