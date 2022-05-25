@@ -29,7 +29,7 @@ jobs:
       #- uses: r-lib/actions/setup-renv@v2
 
       - name: Install blogdown
-        run: install.packages('blogdown', repos = 'https://packagemanager.rstudio.com/__linux__/focal/latest') # https://cloud.r-project.org
+        run: install.packages('blogdown', repos = 'https://cloud.r-project.org')
         shell: Rscript {0}
 
       - name: Install hugo
