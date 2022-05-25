@@ -35,4 +35,4 @@ To build the site
     blogdown::build_site()
     # or: rmarkdown::render_site(encoding = 'UTF-8')
     ```  
-  * This will create a directory called `public` with the contents of the site. This will not render correctly when opened locally in browser because it needs a web server running. In the GitHub Action workflow the contents of that directory are moved to the `github-pages` branch which is rendered by GitHub Pages as https://remlapmot.github.io
+  * This will create a directory called `public` with the contents of the site. This will not render correctly when opened locally in browser because it needs a web server running. In the GitHub Action workflow the contents of that directory are moved to the `gh-pages` branch which is rendered by GitHub Pages as https://remlapmot.github.io (because I have enabled GitHub Pages in the repo settings to use `gh-pages` branch from its root directory)
