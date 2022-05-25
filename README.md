@@ -40,4 +40,4 @@ To build the site
     ```toml
     publishDir = "docs"
     ```
-    The rebuild the site and delete the `public` directory if you had previously created that. This is required because GitHub Pages only offers us the use of `root/` or `docs` as its source directory (i.e., the default of `public` will not work). Then in the repo settings change GitHub Pages the source to `docs` on the `master` branch.
+    Then rebuild the site and delete the `public` directory if you had previously created that. This is required because GitHub Pages only allows `root/` or `docs` as its source directory (i.e., the default of `public` will not work). Then in the repo settings change GitHub Pages the source to `docs` on the `master` branch.
