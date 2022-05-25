@@ -36,3 +36,8 @@ To build the site
     # or: rmarkdown::render_site(encoding = 'UTF-8')
     ```  
   * This will create a directory called `public` with the contents of the site. This will not render correctly when opened locally in browser because it needs a web server running. In the GitHub Action workflow the contents of that directory are moved to the `gh-pages` branch which is rendered by GitHub Pages as https://remlapmot.github.io (because I have enabled GitHub Pages in the repo settings to use `gh-pages` branch from its root directory)
+* To build the site locally for use with GitHub Pages, first add the following line to _config.toml_  
+    ```toml
+    publishDir = "docs"
+    ```
+    The rebuild the site and delete the `public` directory if you had previously created that. This is required because GitHub Pages only offers us the use of `root/` or `docs` as its source directory (i.e., the default of `public` will not work). Then in the repo settings change GitHub Pages the source to `docs` on the `master` branch.
