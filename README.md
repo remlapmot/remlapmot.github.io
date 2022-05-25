@@ -12,7 +12,7 @@ To build the site
     ```
 * Install Hugo
     ``` r
-    blogdown::install_hugo()
+    blogdown::install_hugo(version = "0.92.2")
     ```
 * Create a new Academic site
     ``` r

@@ -24,7 +24,7 @@ jobs:
 
       - name: Install hugo
         run: |
-          R -e 'blogdown::install_hugo()'
+          R -e 'blogdown::install_hugo(version = "0.92.2")'
 
       - name: Build site
         run: |
