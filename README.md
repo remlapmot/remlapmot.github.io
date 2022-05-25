@@ -30,9 +30,9 @@ To build the site
     ```r
     blogdown::stop_server()
     ```  
-* Build site
+* The deloyed site is built with a GitHub Action, see [_blogdown.yaml_](.github/workflows/blogdown.yaml). To build the site locally run
     ``` r
     blogdown::build_site()
     # or: rmarkdown::render_site(encoding = 'UTF-8')
-    ```
-* This will create a directory called *public* which is rendered by GitHub Pages as https://github.com/remlapmot/remlapmot.github.io
+    ```  
+  * This will create a directory called `public` with the contents of the site. This will not render correctly when opened locally in browser because it needs a web server running. In the GitHub Action workflow the contents of that directory are moved to the `github-pages` branch which is rendered by GitHub Pages as https://remlapmot.github.io
