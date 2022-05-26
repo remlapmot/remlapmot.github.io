@@ -59,4 +59,4 @@ To build the site
         ```  
     * This creates the `docs` directory (instead of `public`) with the contents of the site. Note, this will not render correctly when opened locally in browser because it needs a web server running. Commit the `docs` folder into the repo. Delete the `public` folder if you have previously created that.
     * Push up to GitHub
-* Your site should appear at https://GITHUB_USERNAME.github.io/
+* Your site should appear at `https://GITHUB_USERNAME.github.io/`
