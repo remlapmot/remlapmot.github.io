@@ -24,8 +24,8 @@ To build the site
 * Serve the site as you build it (nb. just opening `index.html` in a browser doesn't render correctly)
     ``` r
     blogdown::serve_site()
-    # Then in a browser go to the address printed in R console
     ```  
+  * In a browser go to the address printed in the R console, `http://localhost:####`  
 * To stop the served site run  
     ```r
     blogdown::stop_server()
