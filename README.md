@@ -47,9 +47,13 @@ To build the site
     * Push your commits on the master branch upto GitHub, which will trigger the GHA to build the site
 2. Build the site locally
 
-    * Add the following line to _config.toml_  
+    * In earlier versions of the Academic theme add the following line to _config.toml_  
         ```toml
         publishDir = "docs"
+        ```  
+    * In more recent versions of theme add the following line to `config/_defaults/config.yaml`
+        ```yaml
+        publishdir: docs
         ```  
     * This is required because GitHub Pages only allows `root/` or `docs` as its source directory on the `master` branch, i.e., the default of `public` is not allowed. Then in the repo settings change the GitHub Pages source to `docs` on the `master` branch.
     * Then build the site locally with 
