@@ -25,15 +25,15 @@ To build the site
     rstudioapi::initializeProject()
     rstudioapi::openProject(path = '.')
     ```  
-* Edit the content as required
-  * The content goes in the `content/` directory
-  * PDF files etc. go in the `static/` directory
 * Serve the site as you build it (nb. simply opening `index.html` in a browser doesn't render correctly because a web server is required to be running)
     ``` r
     blogdown::serve_site()
     ```  
   * In a browser go to the address printed in the R console, `http://localhost:####`
   * The locally served site will updated when you resave relevant content files
+* Edit the content as required
+  * The content goes in the `content/` directory
+  * PDF files etc. go in the `static/` directory
 * To stop the served site run  
     ```r
     blogdown::stop_server()
