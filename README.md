@@ -14,7 +14,7 @@ To build the site
     ``` r
     blogdown::install_hugo(version = "0.99.1")
     ```
-* Create a new directory called `GITHUB_USERNAME.github.io` and initialise this as a Git repo
+* Create a new directory called `GITHUB_USERNAME.github.io` and initialise this as a Git repo (e.g., using GitHub Desktop)
 * Within this empty repo create a new Academic site
     ``` r
     blogdown::new_site(theme = "gcushen/hugo-academic")
