@@ -2,7 +2,7 @@
 
 [![Website remlapmot.github.io](https://img.shields.io/website-up-down-green-red/https/remlapmot.github.io.svg)](https://remlapmot.github.io/)
 
-This repo contains the source files for [my GitHub Pages website](https://remlapmot.github.io) made with the [blogdown package](https://bookdown.org/yihui/blogdown/) in R.
+This repo contains the source files and built site for [my GitHub Pages website](https://remlapmot.github.io) made with the [**blogdown** package](https://bookdown.org/yihui/blogdown/) in R.
 
 To build the site
 
@@ -18,7 +18,7 @@ To build the site
     ``` r
     blogdown::new_site(theme = "gcushen/hugo-academic")
     ```  
-    * This now downloads the contents from their new wowchemy repos [here](https://github.com/wowchemy/starter-hugo-academic) and [here](https://github.com/wowchemy/wowchemy-hugo-modules)
+    * This now downloads the contents from their new **wowchemy** repos [here](https://github.com/wowchemy/starter-hugo-academic) and [here](https://github.com/wowchemy/wowchemy-hugo-modules)
 * Edit the content as required
   * The content goes in the `content/` directory
   * PDF files etc. go in the `static/` directory
@@ -47,7 +47,7 @@ To build the site
     * In the repo settings enable GitHub Pages (Pages tab) and select the Source as the `gh-pages` branch from its `root/` directory
     * The GitHub Action workflow builds the site and puts those files into the `public` folder. These are then moved to the `gh-pages` branch, which GitHub Pages serves as the website.
     * Push your commits on the master branch upto GitHub, which will trigger the GHA to build the site
-    * You can view the workflow on the Actions page of your repo (e.g. [here](./actions))
+    * You can view the workflow on the Actions page of your repo (e.g. [here](https://github.com/remlapmot/remlapmot.github.io/actions))
 2. Build the site locally
     * With earlier versions of the Academic theme add the following line to `config.toml`  
         ```toml
