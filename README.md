@@ -14,11 +14,17 @@ To build the site
     ``` r
     blogdown::install_hugo(version = "0.99.1")
     ```
-* Create a new Academic site
+* Create a new directory called `GITHUB_USERNAME.github.io` and initialise this as a Git repo
+* Within this empty repo create a new Academic site
     ``` r
     blogdown::new_site(theme = "gcushen/hugo-academic")
     ```  
     * This now downloads the contents from their new **wowchemy** repos [here](https://github.com/wowchemy/starter-hugo-academic) and [here](https://github.com/wowchemy/wowchemy-hugo-modules)
+* Add an RStudio project file to the repo (run within RStudio with the working directory as the repo directory)  
+    ```r
+    rstudioapi::initializeProject()
+    rstudioapi::openProject(path = '.')
+    ```  
 * Edit the content as required
   * The content goes in the `content/` directory
   * PDF files etc. go in the `static/` directory
