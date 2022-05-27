@@ -2,7 +2,7 @@
 
 [![Website remlapmot.github.io](https://img.shields.io/website-up-down-green-red/https/remlapmot.github.io.svg)](https://remlapmot.github.io/)
 
-This repo contains the source files and built site for [my GitHub Pages website](https://remlapmot.github.io) made with the [**blogdown** package](https://bookdown.org/yihui/blogdown/) in R.
+This repo contains the source files and built site for my personal [website](https://remlapmot.github.io) made with the [**blogdown** package](https://bookdown.org/yihui/blogdown/) in R, Hugo, and the Academic theme.
 
 To build the site
 
@@ -20,7 +20,7 @@ To build the site
     blogdown::new_site(theme = "gcushen/hugo-academic")
     ```  
     * This now downloads the contents from their new **wowchemy** repos [here](https://github.com/wowchemy/starter-hugo-academic) and [here](https://github.com/wowchemy/wowchemy-hugo-modules)
-* Add an RStudio project file to the repo (run within RStudio with the working directory as the repo directory)  
+* Add an RStudio project file to the repo (run these commands within RStudio with the working directory as the repo directory)  
     ```r
     rstudioapi::initializeProject()
     rstudioapi::openProject(path = '.')
