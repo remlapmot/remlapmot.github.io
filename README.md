@@ -32,8 +32,8 @@ To build the site
   * In a browser go to the address printed in the R console, `http://localhost:####`
   * The locally served site will updated when you resave relevant content files
 * Edit the content as required
-  * The content goes in the `content/` directory
-  * PDF files etc. go in the `static/` directory
+  * The content goes in the [`content/`](content) directory
+  * PDF files etc. go in the [`static/`](static) directory
 * To stop the served site run  
     ```r
     blogdown::stop_server()
