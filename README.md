@@ -34,6 +34,7 @@ To build the site
 * Edit the content as required
   * The content goes in the [`content/`](content) directory
   * PDF files etc. go in the [`static/`](static) directory
+  * Edit configuration settings in newer versions in the YAML files in `config/_default/`
 * To stop the served site run  
     ```r
     blogdown::stop_server()
