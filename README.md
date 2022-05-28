@@ -20,9 +20,9 @@ To build the site
     blogdown::new_site(theme = "gcushen/hugo-academic")
     ```  
     * This now downloads the contents from their new **wowchemy** repos [here](https://github.com/wowchemy/starter-hugo-academic) and [here](https://github.com/wowchemy/wowchemy-hugo-modules)
-* Add an RStudio project file to the repo (run these commands within RStudio with the working directory as the repo directory)  
+* Open the repo as an RStudio project by double clicking the `.Rproj` file or run from within RStudio (with the working directory as the repo directory)  
     ```r
-    rstudioapi::initializeProject()
+    # rstudioapi::initializeProject() # .Rproj file now created by blogdown::new_site()
     rstudioapi::openProject(path = '.')
     ```  
 * Serve the site as you build it (nb. simply opening `index.html` in a browser doesn't render correctly because a web server is required to be running)
