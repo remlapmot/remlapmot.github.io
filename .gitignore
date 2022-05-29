@@ -39,3 +39,4 @@ rsconnect/
 .hugo_build.lock
 README.html
 public/
+resources/
