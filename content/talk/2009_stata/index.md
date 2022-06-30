@@ -6,7 +6,7 @@ address:
   postcode: 
   region: 
   street: 
-all_day: false
+all_day: true
 authors: ["admin", Jaime Peters, Alex Sutton, Santiago Moreno]
 date: "2009-09-11T13:00:00"
 date_end: ""

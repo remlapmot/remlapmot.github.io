@@ -6,7 +6,7 @@ address:
   postcode: 
   region: 
   street: 
-all_day: false
+all_day: true
 authors: ["admin", Roland Ramsahai, Vanessa Didelez, Nuala Sheehan]
 date: "2019-07-17T00:00:00Z"
 date_end: ""

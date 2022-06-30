@@ -6,7 +6,7 @@ address:
   postcode: 
   region: 
   street: 
-all_day: false
+all_day: true
 authors: ["admin", Elinor Jones]
 date: "2022-06-29T16:20:00"
 date_end: ""

@@ -6,7 +6,7 @@ address:
   postcode: 
   region: 
   street: 
-all_day: false
+all_day: true
 authors: ["admin", Wes Spiller, Neil Davies]
 date: "2017-07-12T13:00:00"
 date_end: ""

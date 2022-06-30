@@ -6,7 +6,7 @@ address:
   postcode: 
   region: 
   street: 
-all_day: false
+all_day: true
 authors: ["admin", Dave Evans, George Davey Smith]
 date: "2013-08-26T13:00:00"
 date_end: ""

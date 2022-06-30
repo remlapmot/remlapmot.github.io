@@ -6,7 +6,7 @@ address:
   postcode: 
   region: 
   street: 
-all_day: false
+all_day: true
 authors: ["admin", Roger Harbord, Vanessa Didelez, Nuala Sheehan, Debbie Lawlor, Jonathan Sterne]
 date: "2010-08-30T13:00:00"
 date_end: ""

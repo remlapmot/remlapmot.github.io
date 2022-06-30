@@ -6,7 +6,7 @@ address:
   postcode: 
   region: 
   street: 
-all_day: false
+all_day: true
 authors: ["admin", Paul Clarke, Frank Windmeijer]
 date: "2011-08-23T13:00:00"
 date_end: ""

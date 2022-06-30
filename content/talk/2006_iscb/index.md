@@ -6,7 +6,7 @@ address:
   postcode: 
   region: 
   street: 
-all_day: false
+all_day: true
 authors: ["admin", John Thompson, Martin Tobin]
 date: "2006-08-30T17:00:00"
 date_end: ""

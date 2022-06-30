@@ -6,7 +6,7 @@ address:
   postcode: 
   region: 
   street: 
-all_day: false
+all_day: true
 authors: ["admin", Debbie Lawlor, Jonathan Sterne]
 date: "2009-08-26T13:00:00"
 date_end: ""

@@ -6,7 +6,7 @@ address:
   postcode: 
   region: 
   street: 
-all_day: false
+all_day: true
 authors: ["admin"]
 date: "2022-05-20T11:30:00"
 date_end: ""
