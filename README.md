@@ -4,7 +4,7 @@
 
 This repo contains the source files and built site for my personal [website](https://remlapmot.github.io) made with the [**blogdown** package](https://bookdown.org/yihui/blogdown/) in R, Hugo, and the Academic theme.
 
-To build the site
+## Building the site
 
 * Install the **blogdown** package
     ``` r
@@ -12,7 +12,7 @@ To build the site
     ```
 * Install Hugo
     ``` r
-    blogdown::install_hugo(version = "0.99.1")
+    blogdown::install_hugo(version = "0.101.0")
     ```
 * Create a new directory called `GITHUB_USERNAME.github.io` and initialise this as a Git repo (e.g., using GitHub Desktop)
 * Within this empty repo create a new Academic site
@@ -24,6 +24,10 @@ To build the site
     ```r
     # rstudioapi::initializeProject() # .Rproj file now created by blogdown::new_site()
     rstudioapi::openProject(path = '.')
+    ```  
+* Add the version of Hugo in a project `.Rprofile` file containing the line
+    ```r
+    options(blogdown.hugo.version = "0.101.0")
     ```  
 * Serve the site as you build it (nb. simply opening `index.html` in a browser doesn't render correctly because a web server is required to be running)
     ``` r
@@ -39,7 +43,7 @@ To build the site
     ```r
     blogdown::stop_server()
     ```  
-* To build the site for use with GitHub Pages there are 2 choices
+## Building the site for deployment on GitHub Pages
 
 1. Build the site with a GitHub Action workflow, see [`blogdown.yaml`](.github/workflows/blogdown.yaml) which is edited from the r-lib/actions version [here](https://github.com/r-lib/actions/blob/v2-branch/examples/blogdown.yaml)
     * Commit `blogdown.yaml` into the repo in the `.github/workflows` directory
@@ -74,3 +78,17 @@ To build the site
     * This creates the `docs` directory (instead of `public`) with the contents of the site. Note, this will not render correctly when opened locally in browser because it needs a web server running. Commit the `docs` folder into the repo. Delete the `public` folder if you have previously created that.
     * Push up to GitHub
 * (If the _pages build and deployment_ workflow completes successfully) your site will be served at `https://GITHUB_USERNAME.github.io/`
+
+## Updating the Hugo version over time
+
+* Create a new branch
+* Install the latest version of Hugo by running
+    ```r
+    blogdown::install_hugo()
+    ```  
+* Change the version number to the latest in the `.Rprofile` file (and in `blogdown.yaml` if using GHA)
+* Verify whether the site builds by running
+    ```r
+    blogdown::serve_site()
+    ```
+* If it builds, push a commit updating the Hugo version number upto GitHub
