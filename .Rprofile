@@ -1,1 +1,1 @@
-options(blogdown.hugo.version = "0.99.1")
+options(blogdown.hugo.version = "0.101.0")
