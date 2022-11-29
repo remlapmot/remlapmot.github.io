@@ -98,7 +98,6 @@ However there is from the RStudio/Posit Package Manager, which achieves this in 
 On Linux when we build binary packages with `R CMD install --build .` they are generated with file names such as `pkgname_version_R_x86_64-pc-linux-gnu.tar.gz`. Posit rename these files to simply `pkgname_version.tar.gz`, which is the same naming format as for bundled source packages. This is no coincidence.
 
 They then place them in a parallel directory structure, called `__linux__/distro-name/latest/`, with the same directory structure as for CRAN's bundled source packages. Hence, binary packages for say Ubuntu Focal Fossa are placed into the `.../__linux__/focal/latest/src/contrib/` directory.
-
 <!-- tree ~/Documents/GitHub/cran/site -d -I 'jammy' --noreport -->
 ```text
 /mycran
