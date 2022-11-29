@@ -1,0 +1,142 @@
+---
+title: Make your own CRAN-like repository with Linux binary R packages
+author: Tom Palmer
+date: '2022-11-29'
+slug: cran-like
+categories:
+  - Blog
+tags:
+  - R
+  - CRAN
+  - Linux
+  - Ubuntu
+subtitle: ''
+summary: 'Make your own CRAN-like repository serving not only bundled source packages and Windows and macOS binary packages but also Linux binary packages.'
+authors: []
+lastmod: '2022-11-29T16:29:01Z'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE,
+                      fig.align = 'center')
+```
+
+## Introduction
+
+The publicly available RStudio (now Posit) Package Manager is a fantastic resource for two reasons, it provides
+
+* CRAN snapshots
+* binary R packages for several Linux distributions.
+
+This post shows how we can recreate some of this magic for ourselves.
+
+## The structure of CRAN
+
+In two excellent blog posts Marks Sellors describes how to make a basic CRAN-like repository.^[<https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/> and <https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/>] And indeed there is even an excellent package, [**miniCRAN**](https://cran.r-project.org/package=miniCRAN) to help us do this, but I don't need to use this for the following explanation.
+
+To host bundled source packages, i.e., package sources which have been run through `R CMD build` to make a `package_version.tar.gz` file, we require the following directory structure.
+<!-- # brew install tree -->
+<!-- tree ~/Documents/GitHub/cran/site -d -I '__linux__|bin' --noreport -->
+```text
+/mycran
+└── latest
+    └── src
+        └── contrib
+            └── 4.3.0
+                └── Recommended
+```
+
+Assuming you have some bundled source package `package_version.tar.gz` files, from say CRAN or built from your own package sources we place those into the `.../src/contrib` directory. In that directory we then run 
+```r
+tools::write_PACKAGES()
+```
+to generate 3 additional files (`PACKAGES`, `PACKAGES.gz`, and `PACKAGES.rds`) which R will use to query what packages are available in our repository.
+
+## Adding Windows and macOS binary R packages
+
+Since CRAN distributes binary packages for Windows and macOS we follow their directory structure, which is as follows.
+<!-- brew install tree -->
+<!-- tree ~/Documents/GitHub/cran/site -d -I '__linux__' --noreport -->
+```text
+/mycran
+└── latest
+    ├── bin
+    │   ├── macosx
+    │   │   ├── big-sur-arm64
+    │   │   │   └── contrib
+    │   │   │       └── 4.2
+    │   │   └── contrib
+    │   │       └── 4.2
+    │   └── windows
+    │       └── contrib
+    │           └── 4.2
+    └── src
+        └── contrib
+            └── 4.3.0
+                └── Recommended
+```
+Noting that the current version of R is 4.2.2 (the directory name changes when R's minor version number changes), we place
+
+* binary Windows packages into the `.../bin/windows/contrib/4.2/` directory.
+* binary x86_64 macOS packages (i.e., for Macs with Intel processors) into the `.../bin/macosx/contrib/4.2/` directory.
+* binary arm64 macOS packages (i.e., for Macs with Apple Silicon processors) into the `.../bin/macosx/big-sur-arm64/contrib/4.2/` directory.
+
+We then run `tools::write_PACKAGES()` in each of these directories.
+
+## Where to store and how to name Linux binary R packages?
+
+CRAN does not distribute Linux binary packages and so there is no folder structure to copy from them.
+
+However there is from the RStudio/Posit Package Manager, which achieves this in a very clever way.
+
+On Linux when we build binary packages with `R CMD install --build .` they are generated with file names such as `pkgname_version_R_x86_64-pc-linux-gnu.tar.gz`. Posit rename these files to simply `pkgname_version.tar.gz`, which is the same naming format as for bundled source packages. This is no coincidence.
+
+They then place them in a parallel directory structure, called `__linux__/distro-name/latest/`, with the same directory structure as for CRAN's bundled source packages. Hence, binary packages for say Ubuntu Focal Fossa are placed into the `.../__linux__/focal/latest/src/contrib/` directory.
+
+<!-- tree ~/Documents/GitHub/cran/site -d -I 'jammy' --noreport -->
+```text
+/mycran
+├── __linux__
+│   └── focal
+│       └── latest
+│           └── src
+│               └── contrib
+│                   └── 4.3.0
+│                       └── Recommended
+└── latest
+    ├── bin
+    │   ├── macosx
+    │   │   ├── big-sur-arm64
+    │   │   │   └── contrib
+    │   │   │       └── 4.2
+    │   │   └── contrib
+    │   │       └── 4.2
+    │   └── windows
+    │       └── contrib
+    │           └── 4.2
+    └── src
+        └── contrib
+            └── 4.3.0
+                └── Recommended
+```
+It is important to rename the `.tar.gz` files, because if you do not R seems not to be able to find the package.
+
+And again we the run `tools::write_PACKAGES()` in the `src/contrib` directory for each Linux distro.
+
+Once this folder structure is being served we can set our repository to `.../__linux__/focal/latest` and R will find the `.tar.gz` files in `.../src/contrib/`.
+
+This also means that the `.tar.gz` files within `__linux__/focal/latest/src/contrib` can be a mix of source and binary packages. This is helpful if you haven't had time to build all your binary versions yet.
+
+## Testing your CRAN-like repositories locally
+
+You can either run a local webserver or use the `file://` URL notation as your `repos` (set as an option or as the argument to `install.packages()`), for example.
+
+```{r echo=FALSE}
+knitr::include_graphics('img/cran-like-focal-example.png')
+```
