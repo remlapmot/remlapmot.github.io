@@ -88,5 +88,5 @@ This also means that the `.tar.gz` files within `__linux__/latest/src/contrib` c
 You can either run a local webserver or use the `file://` URL notation as your `repos`, for example.
 
 ```{r echo=FALSE}
-knitr::include_graphics('cran-like-focal-example.png')
+knitr::include_graphics('img/cran-like-focal-example.png')
 ```
