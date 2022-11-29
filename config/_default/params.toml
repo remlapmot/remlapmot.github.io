@@ -134,8 +134,8 @@ twitter = ""
 ############################
 
 # Date and time format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
-#   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
-date_format = "Jan 2, 2006"
+#   Examples: "Mon, Jan 2, 2006" or "2006-01-02", "Jan 2, 2006"
+date_format = "2006-01-02"
 #   Examples: "3:04 pm" or "15:04"
 time_format = "3:04 PM"
 
@@ -194,8 +194,8 @@ plugins_js  = []
 # Configuration of publication pages.
 [publications]
   # Date format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
-  #   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
-  date_format = "January 2006"
+  #   Examples: "Mon, Jan 2, 2006" or "2006-01-02", "January 2006"
+  date_format = "2006-01-02"
 
   # Citation style ("apa" or "mla")
   citation_style = "apa"
