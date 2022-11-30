@@ -16,60 +16,13 @@
 [[main]]
   identifier = "stata"
   name = "Stata packages"
+  url = "#stata-packages"
   weight = 10
   
 [[main]]
   identifier = "r"
   name = "R packages"
-  weight = 10
-
-[[main]]
-  parent = "stata"
-  name = "mrrobust"
-  url = "https://remlapmot.github.io/mrrobust/"
-  weight = 10
-
-[[main]]
-  parent = "stata"
-  name = "ivonesamplemr"
-  url = "https://remlapmot.github.io/ivonesamplemr/"
-  weight = 10
-
-[[main]]
-  parent = "stata"
-  identifier = "bpbounds-stata"
-  name = "bpbounds"
-  url = "https://github.com/remlapmot/bpbounds-stata#readme"
-  weight = 10
-
-[[main]]
-  parent = "stata"
-  name = "confunnel"
-  url = "https://github.com/remlapmot/confunnel-stata#readme"
-  weight = 10
-
-[[main]]
-  parent = "r"
-  name = "bpbounds"
-  url = "https://remlapmot.github.io/bpbounds/"
-  weight = 10
-
-[[main]]
-  parent = "r"
-  name = "OneSampleMR"
-  url = "https://remlapmot.github.io/OneSampleMR/"
-  weight = 10
-
-[[main]]
-  parent = "r"
-  name = "mrbayes"
-  url = "https://okezie94.github.io/mrbayes/"
-  weight = 10
-
-[[main]]
-  parent = "r"
-  name = "tmsens"
-  url = "https://dea-hazewinkel.github.io/tmsens/"
+  url = "#r-packages"
   weight = 10
 
 #[[main]]
