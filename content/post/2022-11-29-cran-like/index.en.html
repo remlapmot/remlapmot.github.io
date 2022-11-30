@@ -26,14 +26,14 @@ projects: []
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions it does not provide binary packages for Linux and so installing R packages on Linux can be slow as the bundled source packages need to be built on the user’s machine.</p>
+<p>CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions it does not provide binary packages for Linux and so installing R packages on Linux can be slow as the bundled source packages need to be built on users machines.</p>
 <p>Of course there are quite a few resources providing binary R packages for specific Linux distributions (including Michael Rutter’s PPA for Ubuntu, and binary packages for Debian, and the R2U system which can use the BSPM.)</p>
 <p>I will focus on the publicly available Posit (formerly RStudio) Package Manager which is a fantastic resource for two reasons, it provides</p>
 <ul>
 <li>CRAN snapshots (in a similar way to Microsoft’s CRAN snapshots service)</li>
 <li>binary R packages for several Linux distributions (currently for an impressive 11 distros).</li>
 </ul>
-<p>The aim of this is post is to show how the magic of distributing Linux binry packages is achieved.</p>
+<p>The aim of this is post is to show how the magic of distributing Linux binary packages is achieved.</p>
 </div>
 <div id="building-bundled-source-and-binary-packages" class="section level2">
 <h2>Building bundled source and binary packages</h2>
@@ -137,7 +137,7 @@ projects: []
 </div>
 <div id="testing-your-cran-like-repositories-locally" class="section level2">
 <h2>Testing your CRAN-like repositories locally</h2>
-<p>You can either run a local webserver or use the <code>file://...</code> URL notation as your <code>repos</code> global options setting (set with <code>option(repos = c(CRAN = "..."))</code> or as the <code>repos</code> argument to <code>install.packages()</code>).</p>
+<p>You can either run a local web server or use the <code>file://...</code> URL notation as your <code>repos</code> global options setting (set with <code>option(repos = c(CRAN = "..."))</code> or as the <code>repos</code> argument to <code>install.packages()</code>).</p>
 <p>Here’s a screenshot of installing a binary package on Ubuntu Focal Fossa using the <code>file://</code> notation.
 <img src="img/cran-like-focal-example.png" alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa." style="display: block; margin: auto;" /></p>
 </div>

@@ -29,7 +29,7 @@ knitr::opts_chunk$set(collapse = TRUE,
 
 ## Introduction
 
-CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions it does not provide binary packages for Linux and so installing R packages on Linux can be slow as the bundled source packages need to be built on the user's machine.
+CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions it does not provide binary packages for Linux and so installing R packages on Linux can be slow as the bundled source packages need to be built on users machines.
 
 Of course there are quite a few resources providing binary R packages for specific Linux distributions (including Michael Rutter's PPA for Ubuntu, and binary packages for Debian, and the R2U system which can use the BSPM.)
 
@@ -38,7 +38,7 @@ I will focus on the publicly available Posit (formerly RStudio) Package Manager 
 * CRAN snapshots (in a similar way to Microsoft's CRAN snapshots service)
 * binary R packages for several Linux distributions (currently for an impressive 11 distros).
 
-The aim of this is post is to show how the magic of distributing Linux binry packages is achieved.
+The aim of this is post is to show how the magic of distributing Linux binary packages is achieved.
 
 ## Building bundled source and binary packages
 
@@ -184,7 +184,7 @@ It is worth noting that the `package_version.tar.gz` files within `__linux__/foc
 
 ## Testing your CRAN-like repositories locally
 
-You can either run a local webserver or use the `file://...` URL notation as your `repos` global options setting (set with `option(repos = c(CRAN = "..."))` or as the `repos` argument to `install.packages()`).
+You can either run a local web server or use the `file://...` URL notation as your `repos` global options setting (set with `option(repos = c(CRAN = "..."))` or as the `repos` argument to `install.packages()`).
 
 Here's a screenshot of installing a binary package on Ubuntu Focal Fossa using the `file://` notation.
 ```{r echo=FALSE, fig.alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa."}
