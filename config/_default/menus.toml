@@ -52,6 +52,12 @@
   name = "Blogroll"
   url = "/blogroll/"
   weight = 10
+  
+[[main]]
+  parent = "blog"
+  name = "R blog"
+  url = "/tag/r/"
+  weight = 10
 
 #[[main]]
 #  name = "Projects"
