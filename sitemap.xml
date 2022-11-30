@@ -2,13 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://remlapmot.github.io/category/blog/</loc>
+    <lastmod>2022-11-30T15:07:01+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/categories/</loc>
+    <lastmod>2022-11-30T15:07:01+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/cran/</loc>
+    <lastmod>2022-11-30T15:07:01+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/</loc>
+    <lastmod>2022-11-30T15:07:01+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/linux/</loc>
+    <lastmod>2022-11-30T15:07:01+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/</loc>
+    <lastmod>2022-11-30T15:07:01+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/post/</loc>
+    <lastmod>2022-11-30T15:07:01+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/r/</loc>
+    <lastmod>2022-11-30T15:07:01+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tags/</loc>
+    <lastmod>2022-11-30T15:07:01+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/ubuntu/</loc>
+    <lastmod>2022-11-30T15:07:01+00:00</lastmod>
+  </url><url>
     <loc>https://remlapmot.github.io/talk/2022_horizons-in-stem/</loc>
     <lastmod>2022-06-29T16:20:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/authors/</loc>
-    <lastmod>2022-06-29T16:20:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/</loc>
     <lastmod>2022-06-29T16:20:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/author/elinor-jones/</loc>
@@ -158,10 +185,6 @@
     <loc>https://remlapmot.github.io/talk/2006_iscb/</loc>
     <lastmod>2006-08-30T17:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://remlapmot.github.io/categories/</loc>
-  </url><url>
     <loc>https://remlapmot.github.io/publication_types/</loc>
-  </url><url>
-    <loc>https://remlapmot.github.io/tags/</loc>
   </url>
 </urlset>
