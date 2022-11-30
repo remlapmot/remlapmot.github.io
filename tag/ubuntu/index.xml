@@ -23,24 +23,24 @@
 &lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions CRAN does not provide binary packages for Linux and so installing R packages on Linux can be slow as the bundled source packages need to be built on users machines.&lt;/p&gt;
-&lt;p&gt;Let’s install a package from the Posit Package Manager on Ubuntu Linux.
-&lt;img src=&#34;img/rstudio-install-tidyverse-rspm-linux-binary.png&#34; alt=&#34;Installing binary Linux tidyverse package using Posit Package Manager&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
-&lt;strong&gt;&lt;em&gt;Woah!&lt;/em&gt;&lt;/strong&gt; Something magical just happened, we installed a binary R package on Linux! How did that happen, let’s find out.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Let’s install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
+&lt;img src=&#34;https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/img/rstudio-install-tidyverse-rspm-linux-binary.png&#34; alt=&#34;Installing binary Linux tidyverse package using Posit Package Manager.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Woah!&lt;/em&gt;&lt;/strong&gt; Something magical just happened, we installed a binary R package on Linux! How did that happen, let’s find out.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;building-bundled-source-and-binary-packages&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Building bundled source and binary packages&lt;/h2&gt;
 &lt;p&gt;I will use an example of one of my own packages &lt;strong&gt;OneSampleMR&lt;/strong&gt;. I am running RStudio server on Ubuntu Linux, Focal Fossa through Windows Subsystem for Linux.&lt;/p&gt;
 &lt;p&gt;The package sources are in a Git repository hosted on GitHub, &lt;a href=&#34;https://github.com/remlapmot/OneSampleMR&#34;&gt;here&lt;/a&gt;. There is an &lt;code&gt;.Rproj&lt;/code&gt; file, which we open in RStudio as a project.&lt;/p&gt;
 &lt;p&gt;To build an R package we require all of its dependency packages are installed, so we install those with &lt;code&gt;devtools::install_dev_deps()&lt;/code&gt; and if your package requires any system libraries those must be installed too.&lt;/p&gt;
-&lt;p&gt;The Build pane gives us two convenient options, which will build either the bundled source package or binary package through calls to &lt;code&gt;devtools::build()&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/rstudio-build-pane-build-options.png&#34; alt=&#34;Screenshot of build pane options for building bundled source and binary packages&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Clicking on both in turn we see the following.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/rstudio-build-source-package.png&#34; alt=&#34;Screenshot of building a bundled source package in RStudio&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/rstudio-build-binary-package.png&#34; alt=&#34;Screenshot of building a binary package in RStudio&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The Build pane gives us two convenient options, which will build either the bundled source package or binary package through calls to &lt;code&gt;devtools::build()&lt;/code&gt;.
+&lt;img src=&#34;https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/img/rstudio-build-pane-build-options.png&#34; alt=&#34;Screenshot of build pane options for building bundled source and binary packages.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Clicking on both in turn we see the following.
+&lt;img src=&#34;https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/img/rstudio-build-source-package.png&#34; alt=&#34;Screenshot of building a bundled source package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/img/rstudio-build-binary-package.png&#34; alt=&#34;Screenshot of building a binary package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The bundled source package has been built as &lt;code&gt;OneSampleMR_0.1.2.tar.gz&lt;/code&gt; and the binary package has been built as &lt;code&gt;OneSampleMR_0.1.2_R_x86_64-pc-linux-gnu.tar.gz&lt;/code&gt;. Both files are in the directory above the project.&lt;/p&gt;
 &lt;p&gt;We can achieve the same output by making direct calls to &lt;code&gt;R CMD build&lt;/code&gt; and &lt;code&gt;R CMD install --build&lt;/code&gt; in a shell if preferred. We can test that these install as follows.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/rstudio-install-source-package.png&#34; alt=&#34;Screenshot of installing a bundled source package in RStudio&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;img/rstudio-install-binary-package.png&#34; alt=&#34;Screenshot of installing a bundled source package in RStudio&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/img/rstudio-install-source-package.png&#34; alt=&#34;Screenshot of installing a bundled source package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/img/rstudio-install-binary-package.png&#34; alt=&#34;Screenshot of installing a binary package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;cran-structure-for-bundled-source-package-files&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;CRAN structure for bundled source package files&lt;/h2&gt;
@@ -130,7 +130,7 @@
 &lt;h2&gt;Testing your CRAN-like repositories locally&lt;/h2&gt;
 &lt;p&gt;You can either run a local web server or use the &lt;code&gt;file://...&lt;/code&gt; URL notation as your &lt;code&gt;repos&lt;/code&gt; global options setting (set with &lt;code&gt;option(repos = ...)&lt;/code&gt; or as the &lt;code&gt;repos&lt;/code&gt; argument to &lt;code&gt;install.packages()&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;Here’s a screenshot of installing a binary package on Ubuntu Focal Fossa using &lt;code&gt;install.packages(&#34;package&#34;, repos = &#34;file://...&#34;)&lt;/code&gt;.
-&lt;img src=&#34;img/cran-like-focal-example.png&#34; alt=&#34;Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa.&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/img/cran-like-focal-example.png&#34; alt=&#34;Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Summary&lt;/h2&gt;
