@@ -32,10 +32,9 @@ knitr::opts_chunk$set(collapse = TRUE,
 
 CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions CRAN does not provide binary packages for Linux and so installing R packages on Linux can be slow as the bundled source packages need to be built on users machines.
 
-Let's install a package from the Posit Package Manager on Ubuntu Linux.
-```{r, echo=FALSE, fig.alt="Installing binary Linux tidyverse package using Posit Package Manager"}
-knitr::include_graphics("img/rstudio-install-tidyverse-rspm-linux-binary.png")
-```
+Let's install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
+<img src="/post/make-linux-binary-cran-like-repo/img/rstudio-install-tidyverse-rspm-linux-binary.png" alt="Installing binary Linux tidyverse package using Posit Package Manager." style="display: block; margin: auto;">
+
 **_Woah!_** Something magical just happened, we installed a binary R package on Linux! How did that happen, let's find out.^[Note that there are other approaches to distributing binary R packages on Linux, see <https://cran.r-project.org/bin/linux/> and links therein, <https://eddelbuettel.github.io/r2u/>, and <https://enchufa2.github.io/bspm/>]
 
 ## Building bundled source and binary packages
@@ -47,32 +46,20 @@ The package sources are in a Git repository hosted on GitHub, [here](https://git
 To build an R package we require all of its dependency packages are installed, so we install those with `devtools::install_dev_deps()` and if your package requires any system libraries those must be installed too.
 
 The Build pane gives us two convenient options, which will build either the bundled source package or binary package through calls to `devtools::build()`.
-
-```{r echo=FALSE, fig.alt="Screenshot of build pane options for building bundled source and binary packages"}
-knitr::include_graphics("img/rstudio-build-pane-build-options.png")
-```
+<img src="/post/make-linux-binary-cran-like-repo/img/rstudio-build-pane-build-options.png" alt="Screenshot of build pane options for building bundled source and binary packages." style="display: block; margin: auto;">
 
 Clicking on both in turn we see the following.
+<img src="/post/make-linux-binary-cran-like-repo/img/rstudio-build-source-package.png" alt="Screenshot of building a bundled source package in RStudio." style="display: block; margin: auto;">
 
-```{r echo=FALSE, fig.alt="Screenshot of building a bundled source package in RStudio"}
-knitr::include_graphics("img/rstudio-build-source-package.png")
-```
-
-```{r echo=FALSE, fig.alt="Screenshot of building a binary package in RStudio"}
-knitr::include_graphics("img/rstudio-build-binary-package.png")
-```
+<img src="/post/make-linux-binary-cran-like-repo/img/rstudio-build-binary-package.png" alt="Screenshot of building a binary package in RStudio." style="display: block; margin: auto;">
 
 The bundled source package has been built as `OneSampleMR_0.1.2.tar.gz` and the binary package has been built as `OneSampleMR_0.1.2_R_x86_64-pc-linux-gnu.tar.gz`. Both files are in the directory above the project.
 
 We can achieve the same output by making direct calls to `R CMD build` and `R CMD install --build` in a shell if preferred. We can test that these install as follows.
 
-```{r echo=FALSE, fig.alt="Screenshot of installing a bundled source package in RStudio"}
-knitr::include_graphics("img/rstudio-install-source-package.png")
-```
+<img src="/post/make-linux-binary-cran-like-repo/img/rstudio-install-source-package.png" alt="Screenshot of installing a bundled source package in RStudio." style="display: block; margin: auto;">
 
-```{r echo=FALSE, fig.alt="Screenshot of installing a bundled source package in RStudio"}
-knitr::include_graphics("img/rstudio-install-binary-package.png")
-```
+<img src="/post/make-linux-binary-cran-like-repo/img/rstudio-install-binary-package.png" alt="Screenshot of installing a binary package in RStudio." style="display: block; margin: auto;">
 
 ## CRAN structure for bundled source package files
 
@@ -183,9 +170,7 @@ Note that the `package_version.tar.gz` files within `__linux__/focal/latest/src/
 You can either run a local web server or use the `file://...` URL notation as your `repos` global options setting (set with `option(repos = ...)` or as the `repos` argument to `install.packages()`).
 
 Here's a screenshot of installing a binary package on Ubuntu Focal Fossa using `install.packages("package", repos = "file://...")`.
-```{r echo=FALSE, fig.alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa."}
-knitr::include_graphics('img/cran-like-focal-example.png')
-```
+<img src="/post/make-linux-binary-cran-like-repo/img/cran-like-focal-example.png" alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa." style="display: block; margin: auto;">
 
 ## Summary
 
