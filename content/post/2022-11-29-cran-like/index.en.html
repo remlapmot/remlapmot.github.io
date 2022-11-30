@@ -27,7 +27,7 @@ projects: []
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions it does not provide binary packages for Linux and so installing R packages on Linux can be slow as the bundled source packages need to be built on users machines.</p>
-<p>Of course there are quite a few resources providing binary R packages for specific Linux distributions, including; Michael Rutter’s PPA for Ubuntu, and R2U and BSPM.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Of course there are quite a few resources providing binary R packages for specific Linux distributions, including; Michael Rutter’s PPA for Ubuntu, R2U and BSPM, and others.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>I will focus on the approach taken by the Posit (formerly RStudio) Package Manager and the <a href="https://r4pi.org/">R4Pi</a> project. Both of which distribute binary R packages; the Posit Package Manager for an impressive 11 Linux distros, and R4Pi for 32 bit and 64 bit Raspberry Pi OS.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> The aim of this is post is to show how the magic of this approach is achieved.</p>
 </div>
 <div id="building-bundled-source-and-binary-packages" class="section level2">
@@ -126,8 +126,10 @@ projects: []
 <p>We then run</p>
 <pre class="r"><code>tools::write_PACKAGES(type = &quot;source&quot;)</code></pre>
 <p>in the <code>.../__linux__/distro-name/src/contrib</code> directory for each Linux distribution that we make a parallel directory structure for.</p>
-<p>Once this folder structure is being served we can set our repository in R to <code>.../__linux__/focal/latest</code> and R will find the binary package <code>package_version.tar.gz</code> files in the <code>...__linux__/focal/src/contrib/</code> directory.</p>
-<p>It is worth noting that the <code>package_version.tar.gz</code> files within <code>__linux__/focal/latest/src/contrib</code> do not all have to be of binary packages. They can be either bundled source or binary packages (they could be all bundled source packages). This is helpful if you haven’t had time to build all your binary package files.</p>
+<p>Once this folder structure is being served we can set our repository in R to <code>.../__linux__/focal/latest</code> and R will find the binary package <code>package_version.tar.gz</code> files in the <code>...__linux__/focal/src/contrib/</code> directory, e.g., we can install the <strong>tidyverse</strong> from the Posit Package Manager on Ubuntu Focal Fossa with</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;,
+  repos = &quot;https://packagemanager.posit.co/__linux__/focal/latest&quot;)</code></pre>
+<p>It is worth noting that the <code>package_version.tar.gz</code> files within <code>__linux__/focal/latest/src/contrib</code> do not all have to be of binary packages. They can be either bundled source or binary packages (or they could be all bundled source packages). This is helpful if you haven’t had time to build all your binary package files.</p>
 </div>
 <div id="testing-your-cran-like-repositories-locally" class="section level2">
 <h2>Testing your CRAN-like repositories locally</h2>
