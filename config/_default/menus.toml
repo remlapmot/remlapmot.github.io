@@ -78,8 +78,15 @@
 #  weight = 10
 
 [[main]]
+  identifier = "blog"
   name = "Blog"
   url = "#posts"
+  weight = 10
+
+[[main]]
+  parent = "blog"
+  name = "Blogroll"
+  url = "/blogroll/"
   weight = 10
 
 #[[main]]
