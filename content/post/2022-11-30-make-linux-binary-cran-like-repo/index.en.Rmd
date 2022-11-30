@@ -17,8 +17,9 @@ lastmod: '2022-11-30T15:07:01Z'
 featured: no
 image:
   caption: ''
-  focal_point: ''
+  focal_point: 'Center'
   preview_only: no
+  alt_text: 'Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa.'
 projects: []
 ---
 
