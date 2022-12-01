@@ -87,11 +87,24 @@
 &lt;li&gt;Windows binary packages into the &lt;code&gt;.../bin/windows/contrib/4.2/&lt;/code&gt; directory.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;We then run &lt;code&gt;tools::write_PACKAGES(type = &#34;mac.binary&#34;)&lt;/code&gt; (changing to &lt;code&gt;type = &#34;win.binary&#34;&lt;/code&gt; as required) in each of these directories to generate the 3 &lt;code&gt;PACKAGES&lt;/code&gt; files.&lt;/p&gt;
+&lt;p&gt;We can confirm this directory structure using the &lt;code&gt;contrib.url()&lt;/code&gt; function (the last command below was run on an Apple Silicon Mac).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;source&amp;quot;)
+## [1] &amp;quot;/src/contrib&amp;quot;
+contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;win.binary&amp;quot;)
+## [1] &amp;quot;/bin/windows/contrib/4.2&amp;quot;
+contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;mac.binary&amp;quot;)
+## [1] &amp;quot;/bin/macosx/contrib/4.2&amp;quot;
+contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;binary&amp;quot;)
+## [1] &amp;quot;/bin/macosx/big-sur-arm64/contrib/4.2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And they are also listed in the R Installation and Administration manual.&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;On Apple Silicon Macs the &lt;code&gt;big-sur-arm64&lt;/code&gt; filepath corresponds to the end of &lt;code&gt;.Platform$pkgType&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;.Platform$pkgType
+## [1] &amp;quot;mac.binary.big-sur-arm64&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;where-to-store-and-how-to-name-linux-binary-r-packages&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Where to store and how to name Linux binary R packages?&lt;/h2&gt;
 &lt;p&gt;CRAN does not distribute Linux binary packages and so there is no folder structure from them to copy.&lt;/p&gt;
-&lt;p&gt;However both the Posit Package Manager and the &lt;a href=&#34;https://r4pi.org/&#34;&gt;R4Pi&lt;/a&gt; project achieve this in a very clever way.&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;However both the Posit Package Manager and the &lt;a href=&#34;https://r4pi.org/&#34;&gt;R4Pi&lt;/a&gt; project achieve this in a very clever way.&lt;a href=&#34;#fn4&#34; class=&#34;footnote-ref&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;We saw above that on Linux bundled source packages have filenames of the form &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt; whereas the binary package filenames are of the form &lt;code&gt;{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz&lt;/code&gt; (the text after &lt;code&gt;{package}_{version}_&lt;/code&gt; may be different depending on your machine and distro).&lt;/p&gt;
 &lt;p&gt;To distribute the Linux binary packages we create a parallel directory structure, which takes the same form as for the bundled source packages. In the case of Ubuntu Focal Fossa the Posit Package Manager uses &lt;code&gt;__linux__/focal/latest/src/contrib&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;They then rename the &lt;code&gt;{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz&lt;/code&gt; files to the same form as the bundled source package files, i.e., to &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt;. And they put them in this new &lt;code&gt;src/contrib&lt;/code&gt; directory.&lt;/p&gt;
@@ -141,7 +154,8 @@
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Note that there are other approaches to distributing binary R packages on Linux, see &lt;a href=&#34;https://cran.r-project.org/bin/linux/&#34; class=&#34;uri&#34;&gt;https://cran.r-project.org/bin/linux/&lt;/a&gt; and links therein, &lt;a href=&#34;https://eddelbuettel.github.io/r2u/&#34; class=&#34;uri&#34;&gt;https://eddelbuettel.github.io/r2u/&lt;/a&gt;, and &lt;a href=&#34;https://enchufa2.github.io/bspm/&#34; class=&#34;uri&#34;&gt;https://enchufa2.github.io/bspm/&lt;/a&gt;&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;&lt;a href=&#34;https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/&#34; class=&#34;uri&#34;&gt;https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/&lt;/a&gt; and &lt;a href=&#34;https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/&#34; class=&#34;uri&#34;&gt;https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/&lt;/a&gt;&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;See &lt;a href=&#34;https://packagemanager.rstudio.com/client/#/repos/2/overview&#34; class=&#34;uri&#34;&gt;https://packagemanager.rstudio.com/client/#/repos/2/overview&lt;/a&gt; and &lt;a href=&#34;https://pkgs.r4pi.org/&#34; class=&#34;uri&#34;&gt;https://pkgs.r4pi.org/&lt;/a&gt;&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;See &lt;a href=&#34;https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository&#34; class=&#34;uri&#34;&gt;https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository&lt;/a&gt;.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;See &lt;a href=&#34;https://packagemanager.rstudio.com/client/#/repos/2/overview&#34; class=&#34;uri&#34;&gt;https://packagemanager.rstudio.com/client/#/repos/2/overview&lt;/a&gt; and &lt;a href=&#34;https://pkgs.r4pi.org/&#34; class=&#34;uri&#34;&gt;https://pkgs.r4pi.org/&lt;/a&gt;&lt;a href=&#34;#fnref4&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
