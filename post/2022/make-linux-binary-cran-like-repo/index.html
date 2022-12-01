@@ -30,7 +30,7 @@
   <meta name="description" content="Make your own CRAN-like repository serving not only bundled source packages and Windows and macOS binary packages but also Linux binary packages.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/">
+  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/">
 
   
 
@@ -217,7 +217,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png">
 
-  <link rel="canonical" href="https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/">
+  <link rel="canonical" href="https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/">
 
   
   
@@ -232,10 +232,10 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Dr Tom Palmer">
-  <meta property="og:url" content="https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/">
+  <meta property="og:url" content="https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/">
   <meta property="og:title" content="Make your own CRAN-like repository with Linux binary R packages | Dr Tom Palmer">
-  <meta property="og:description" content="Make your own CRAN-like repository serving not only bundled source packages and Windows and macOS binary packages but also Linux binary packages."><meta property="og:image" content="https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/featured.png">
-  <meta property="twitter:image" content="https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/featured.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="Make your own CRAN-like repository serving not only bundled source packages and Windows and macOS binary packages but also Linux binary packages."><meta property="og:image" content="https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/featured.png">
+  <meta property="twitter:image" content="https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/featured.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2022-11-30T00:00:00&#43;00:00">
@@ -264,12 +264,12 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/"
+    "@id": "https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/"
   },
   "headline": "Make your own CRAN-like repository with Linux binary R packages",
   
   "image": [
-    "https://remlapmot.github.io/post/make-linux-binary-cran-like-repo/featured.png"
+    "https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/featured.png"
   ],
   
   "datePublished": "2022-11-30T00:00:00Z",
@@ -649,7 +649,7 @@
 
 <div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 138px;">
   <div style="position: relative">
-    <img src="/post/make-linux-binary-cran-like-repo/featured_huc99899e357642b575dd7537bef771f37_188590_720x0_resize_lanczos_3.png" alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa." class="featured-image">
+    <img src="/post/2022/make-linux-binary-cran-like-repo/featured_huc99899e357642b575dd7537bef771f37_188590_720x0_resize_lanczos_3.png" alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa." class="featured-image">
     
   </div>
 </div>
@@ -666,7 +666,7 @@
 <h2>Introduction</h2>
 <p>CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions CRAN does not provide binary packages for Linux. Therefore, installing R packages on Linux can be slow because the bundled source packages need to be built on users machines.</p>
 <p>But let’s install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
-<img src="/post/make-linux-binary-cran-like-repo/img/rstudio-install-tidyverse-rspm-linux-binary.png" alt="Installing binary Linux tidyverse package using Posit Package Manager." style="display: block; margin: auto;"></p>
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-tidyverse-rspm-linux-binary.png" alt="Installing binary Linux tidyverse package using Posit Package Manager." style="display: block; margin: auto;"></p>
 <p><strong><em>Woah!</em></strong> Something magical just happened, we installed a binary R package on Linux! How did that happen, let’s find out.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
 <div id="building-bundled-source-and-binary-packages" class="section level2">
@@ -675,14 +675,14 @@
 <p>The package sources are in a Git repository hosted on GitHub, <a href="https://github.com/remlapmot/OneSampleMR">here</a>. There is an <code>.Rproj</code> file, which we open in RStudio as a project.</p>
 <p>To build an R package we require all of its dependency packages are installed, so we install those with <code>devtools::install_dev_deps()</code> and if your package requires any system libraries those must be installed too.</p>
 <p>The Build pane gives us two convenient options, which will build either the bundled source package or binary package through calls to <code>devtools::build()</code>.
-<img src="/post/make-linux-binary-cran-like-repo/img/rstudio-build-pane-build-options.png" alt="Screenshot of build pane options for building bundled source and binary packages." style="display: block; margin: auto;"></p>
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-pane-build-options.png" alt="Screenshot of build pane options for building bundled source and binary packages." style="display: block; margin: auto;"></p>
 <p>Clicking on both in turn we see the following.
-<img src="/post/make-linux-binary-cran-like-repo/img/rstudio-build-source-package.png" alt="Screenshot of building a bundled source package in RStudio." style="display: block; margin: auto;"></p>
-<p><img src="/post/make-linux-binary-cran-like-repo/img/rstudio-build-binary-package.png" alt="Screenshot of building a binary package in RStudio." style="display: block; margin: auto;"></p>
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-source-package.png" alt="Screenshot of building a bundled source package in RStudio." style="display: block; margin: auto;"></p>
+<p><img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-binary-package.png" alt="Screenshot of building a binary package in RStudio." style="display: block; margin: auto;"></p>
 <p>The bundled source package has been built as <code>OneSampleMR_0.1.2.tar.gz</code> and the binary package has been built as <code>OneSampleMR_0.1.2_R_x86_64-pc-linux-gnu.tar.gz</code>. Both files are in the directory above the project.</p>
 <p>We can achieve the same output by making direct calls to <code>R CMD build</code> and <code>R CMD install --build</code> in a shell if preferred. We can test that these install as follows.</p>
-<p><img src="/post/make-linux-binary-cran-like-repo/img/rstudio-install-source-package.png" alt="Screenshot of installing a bundled source package in RStudio." style="display: block; margin: auto;"></p>
-<p><img src="/post/make-linux-binary-cran-like-repo/img/rstudio-install-binary-package.png" alt="Screenshot of installing a binary package in RStudio." style="display: block; margin: auto;"></p>
+<p><img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-source-package.png" alt="Screenshot of installing a bundled source package in RStudio." style="display: block; margin: auto;"></p>
+<p><img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-binary-package.png" alt="Screenshot of installing a binary package in RStudio." style="display: block; margin: auto;"></p>
 </div>
 <div id="cran-structure-for-bundled-source-package-files" class="section level2">
 <h2>CRAN structure for bundled source package files</h2>
@@ -745,7 +745,7 @@ contrib.url(&quot;&quot;, type = &quot;binary&quot;)
 </div>
 <div id="where-to-store-and-how-to-name-linux-binary-r-packages" class="section level2">
 <h2>Where to store and how to name Linux binary R packages?</h2>
-<p>CRAN does not distribute Linux binary packages and so there is no folder structure from them to copy.</p>
+<p>CRAN does not distribute Linux binary packages and so there is no directory structure from them to copy.</p>
 <p>However both the Posit Package Manager and the <a href="https://r4pi.org/">R4Pi</a> project achieve this in a very clever way.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <p>We saw above that on Linux bundled source packages have filenames of the form <code>{package}_{version}.tar.gz</code> whereas the binary package filenames are of the form <code>{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz</code> (the text after <code>{package}_{version}_</code> may be different depending on your machine and distro).</p>
 <p>To distribute the Linux binary packages we create a parallel directory structure, which takes the same form as for the bundled source packages. In the case of Ubuntu Focal Fossa the Posit Package Manager uses <code>__linux__/focal/latest/src/contrib</code>.</p>
@@ -777,15 +777,19 @@ contrib.url(&quot;&quot;, type = &quot;binary&quot;)
                 └── Recommended</code></pre>
 <p>We then run</p>
 <pre class="r"><code>tools::write_PACKAGES(type = &quot;source&quot;)</code></pre>
-<p>in the <code>.../__linux__/distro-name/src/contrib</code> directory for each Linux distribution that we make a parallel directory structure for.</p>
-<p>Once this folder structure is being served we can set our repository in R to <code>.../__linux__/focal/latest</code> and R will find the binary package <code>{package}_{version}.tar.gz</code> files in the <code>...__linux__/focal/src/contrib/</code> directory, as per the first figure in this post.</p>
+<p>in the <code>.../__linux__/distro-name/src/contrib</code> directory for each Linux distribution to generate the <code>PACKAGES</code> files.</p>
+<p>Once this directory structure is served we can set our repository in R to <code>.../__linux__/focal/latest</code> and R will find the binary package <code>{package}_{version}.tar.gz</code> files in the <code>...__linux__/focal/src/contrib/</code> directory, as per the first figure in this post.</p>
 <p>Note that the <code>{package}_{version}.tar.gz</code> files within <code>__linux__/focal/latest/src/contrib</code> do not all have to be of binary packages. They can be a mix of bundled source and binary packages, which is helpful if you haven’t had time to build all your binary package files.</p>
+<p>We can also confirm that on Ubuntu Focal Fossa</p>
+<pre class="r"><code>.Platform$pkgType
+## [1] &quot;source&quot;</code></pre>
+<p>therefore, on Linux, <code>utils:::resolvePkgType()</code> always returns <code>"source"</code>. Hence, on Linux, <code>contrib.url()</code> always returns <code>/src/contrib</code> regardless of its <code>type</code> argument.</p>
 </div>
 <div id="testing-your-cran-like-repositories-locally" class="section level2">
 <h2>Testing your CRAN-like repositories locally</h2>
 <p>You can either run a local web server or use the <code>file://...</code> URL notation as your <code>repos</code> global options setting (set with <code>option(repos = ...)</code> or as the <code>repos</code> argument to <code>install.packages()</code>).</p>
-<p>Here’s a screenshot of installing a binary package on Ubuntu Focal Fossa using <code>install.packages("package", repos = "file://...")</code>.
-<img src="/post/make-linux-binary-cran-like-repo/img/cran-like-focal-example.png" alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa." style="display: block; margin: auto;"></p>
+<p>Here’s a screenshot of installing a binary package on Ubuntu Focal Fossa.
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/cran-like-focal-example.png" alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa." style="display: block; margin: auto;"></p>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
