@@ -195,7 +195,7 @@ therefore, on Linux, `utils:::resolvePkgType()` always returns `"source"`. Hence
 
 You can either run a local web server or use the `file://...` URL notation as your `repos` global options setting (set with `option(repos = ...)` or as the `repos` argument to `install.packages()`).
 
-Here's a screenshot of installing a binary package on Ubuntu Focal Fossa using `install.packages("package", repos = "file://...")`.
+Here's a screenshot of installing a binary package on Ubuntu Focal Fossa.
 <img src="/post/2022/make-linux-binary-cran-like-repo/img/cran-like-focal-example.png" alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa." style="display: block; margin: auto;">
 
 ## Summary
