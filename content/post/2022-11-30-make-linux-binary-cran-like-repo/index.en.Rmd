@@ -184,6 +184,13 @@ Once this directory structure is served we can set our repository in R to `.../_
 
 Note that the `{package}_{version}.tar.gz` files within `__linux__/focal/latest/src/contrib` do not all have to be of binary packages. They can be a mix of bundled source and binary packages, which is helpful if you haven't had time to build all your binary package files.
 
+We can also confirm that on Ubuntu Focal Fossa
+``` r
+.Platform$pkgType
+## [1] "source"
+```
+therefore, on Linux, `utils:::resolvePkgType()` always returns `"source"`. Hence, on Linux, `contrib.url()` always returns `/src/contrib` regardless of its `type` argument.
+
 ## Testing your CRAN-like repositories locally
 
 You can either run a local web server or use the `file://...` URL notation as your `repos` global options setting (set with `option(repos = ...)` or as the `repos` argument to `install.packages()`).
