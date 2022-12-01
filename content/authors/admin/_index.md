@@ -47,6 +47,9 @@ social:
 - icon: orcid
   icon_pack: ai
   link: https://orcid.org/0000-0003-4655-4511
+- icon: rss
+  icon_pack: fa
+  link: https://remlapmot.github.io/index.xml
 superuser: true
 title: Tom Palmer
 user_groups:
