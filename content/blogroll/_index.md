@@ -2,4 +2,6 @@
 title: "Blogroll"
 ---
 
-[R bloggers](https://www.r-bloggers.com)
+A list of blogs I like
+
+* [R-Bloggers](https://www.r-bloggers.com)
