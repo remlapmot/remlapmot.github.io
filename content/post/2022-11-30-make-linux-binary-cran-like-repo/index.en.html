@@ -27,8 +27,8 @@ projects: []
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions CRAN does not provide binary packages for Linux and so installing R packages on Linux can be slow as the bundled source packages need to be built on users machines.</p>
-<p>Let’s install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
+<p>CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions CRAN does not provide binary packages for Linux. Therefore, installing R packages on Linux can be slow because the bundled source packages need to be built on users machines.</p>
+<p>But let’s install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
 <img src="/post/make-linux-binary-cran-like-repo/img/rstudio-install-tidyverse-rspm-linux-binary.png" alt="Installing binary Linux tidyverse package using Posit Package Manager." style="display: block; margin: auto;"></p>
 <p><strong><em>Woah!</em></strong> Something magical just happened, we installed a binary R package on Linux! How did that happen, let’s find out.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
@@ -59,13 +59,13 @@ projects: []
         └── contrib
             └── 4.3.0
                 └── Recommended</code></pre>
-<p>Specifically, we place the <code>.tar.gz</code> files into the <code>.../src/contrib</code> directory. In that directory we then run</p>
+<p>Specifically, we place the <code>{package}_{version}.tar.gz</code> files into the <code>.../src/contrib</code> directory. In that directory we then run</p>
 <pre class="r"><code>tools::write_PACKAGES(type = &quot;source&quot;)</code></pre>
 <p>which generates 3 additional files (<code>PACKAGES</code>, <code>PACKAGES.gz</code>, and <code>PACKAGES.rds</code>) which R will use to query what packages are available in our repository when its served on the web.</p>
 </div>
 <div id="adding-windows-and-macos-binary-r-packages" class="section level2">
 <h2>Adding Windows and macOS binary R packages</h2>
-<p>We saw above how to build a binary Linux package. The same process, when repeated on Windows will generate a file called <code>package_version.zip</code> and <code>package_version.tgz</code> on macOS (on Macs with both Intel and Apple Silicon processors).</p>
+<p>We saw above how to build a binary Linux package. The same process, when repeated on Windows will generate a file called <code>{package}_{version}.zip</code> and <code>{package}_{version}.tgz</code> on macOS (on Macs with both Intel and Apple Silicon processors).</p>
 <p>Assuming that we have some of these files we need to know where to put them. Since CRAN distributes binary packages for Windows and macOS we follow their directory structure, which is as follows.
 <!-- brew install tree -->
 <!-- tree ~/Documents/GitHub/cran/site -d -I '__linux__' --noreport --></p>
@@ -97,9 +97,9 @@ projects: []
 <h2>Where to store and how to name Linux binary R packages?</h2>
 <p>CRAN does not distribute Linux binary packages and so there is no folder structure from them to copy.</p>
 <p>However both the Posit Package Manager and the <a href="https://r4pi.org/">R4Pi</a> project achieve this in a very clever way.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
-<p>We saw above that on Linux bundled source packages have filenames of the form <code>package_version.tar.gz</code> whereas the binary package filenames are of the form <code>pkgname_version_R_x86_64-pc-linux-gnu.tar.gz</code> (note the text after <code>package_version_</code> maybe different depending on your machine and distro).</p>
+<p>We saw above that on Linux bundled source packages have filenames of the form <code>{package}_{version}.tar.gz</code> whereas the binary package filenames are of the form <code>{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz</code> (the text after <code>{package}_{version}_</code> may be different depending on your machine and distro).</p>
 <p>To distribute the Linux binary packages we create a parallel directory structure, which takes the same form as for the bundled source packages. In the case of Ubuntu Focal Fossa the Posit Package Manager uses <code>__linux__/focal/latest/src/contrib</code>.</p>
-<p>They then rename the <code>pkgname_version_R_x86_64-pc-linux-gnu.tar.gz</code> files to the same form as the bundled source package files, i.e., to <code>pkgname_version.tar.gz</code>. And they put them in this new <code>src/contrib</code> directory.</p>
+<p>They then rename the <code>{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz</code> files to the same form as the bundled source package files, i.e., to <code>{package}_{version}.tar.gz</code>. And they put them in this new <code>src/contrib</code> directory.</p>
 <p>The structure of our CRAN-like repository (well in fact our 2 parallel repositories) is now.
 <!-- tree ~/Documents/GitHub/cran/site -d -I 'jammy' --noreport --></p>
 <pre class="text"><code>/mycran
@@ -128,8 +128,8 @@ projects: []
 <p>We then run</p>
 <pre class="r"><code>tools::write_PACKAGES(type = &quot;source&quot;)</code></pre>
 <p>in the <code>.../__linux__/distro-name/src/contrib</code> directory for each Linux distribution that we make a parallel directory structure for.</p>
-<p>Once this folder structure is being served we can set our repository in R to <code>.../__linux__/focal/latest</code> and R will find the binary package <code>package_version.tar.gz</code> files in the <code>...__linux__/focal/src/contrib/</code> directory, as per the first figure in this post.</p>
-<p>Note that the <code>package_version.tar.gz</code> files within <code>__linux__/focal/latest/src/contrib</code> do not all have to be of binary packages. They can be a mix of bundled source and binary packages, which is helpful if you haven’t had time to build all your binary package files.</p>
+<p>Once this folder structure is being served we can set our repository in R to <code>.../__linux__/focal/latest</code> and R will find the binary package <code>{package}_{version}.tar.gz</code> files in the <code>...__linux__/focal/src/contrib/</code> directory, as per the first figure in this post.</p>
+<p>Note that the <code>{package}_{version}.tar.gz</code> files within <code>__linux__/focal/latest/src/contrib</code> do not all have to be of binary packages. They can be a mix of bundled source and binary packages, which is helpful if you haven’t had time to build all your binary package files.</p>
 </div>
 <div id="testing-your-cran-like-repositories-locally" class="section level2">
 <h2>Testing your CRAN-like repositories locally</h2>
@@ -139,7 +139,7 @@ projects: []
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
-<p>We have taken a look at the structure of a CRAN-like repository and built bundled source and binary package files. We then saw that the trick for distributing Linux binary packages is to make a parallel directory with the same structure as that required for bundled source packages. We then saw that we need to rename the binary package files to have the same filename format as the bundled source package files.</p>
+<p>We have taken a look at the structure of a CRAN-like repository and built bundled source and binary package files. We saw that the trick for distributing Linux binary packages is to make a parallel directory with the same structure as that required for bundled source packages and that we need to rename the binary package files to have the same filename format as the bundled source package files.</p>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr />
