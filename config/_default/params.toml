@@ -219,10 +219,11 @@ plugins_js  = []
   #   0: Disabled
   #   1: Disqus (https://disqus.com)
   #   2: Commento (https://commento.io)
-  engine = 0
+  #   3: Utterances - made up by TP
+  engine = 3
 
   # Which page types are commentable?
-  commentable = {page = false, post = false, docs = false, project = false, publication = false, talk = false}
+  commentable = {page = false, post = true, docs = false, project = false, publication = false, talk = false}
 
   # Configuration of Disqus.
   [comments.disqus]
