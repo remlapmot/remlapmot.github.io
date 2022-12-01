@@ -116,6 +116,25 @@ Noting that the current version of R is 4.2.2 and that the relevant directory na
 
 We then run `tools::write_PACKAGES(type = "mac.binary")` (changing to `type = "win.binary"` as required) in each of these directories to generate the 3 `PACKAGES` files.
 
+We can confirm this directory structure using the `contrib.url()` function (the last command below was run on an Apple Silicon Mac).
+``` r
+contrib.url("", type = "source")
+## [1] "/src/contrib"
+contrib.url("", type = "win.binary")
+## [1] "/bin/windows/contrib/4.2"
+contrib.url("", type = "mac.binary")
+## [1] "/bin/macosx/contrib/4.2"
+contrib.url("", type = "binary")
+## [1] "/bin/macosx/big-sur-arm64/contrib/4.2"
+```
+And they are also listed in the R Installation and Administration manual.^[See <https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository>.]
+
+On Apple Silicon Macs the `big-sur-arm64` filepath corresponds to the end of `.Platform$pkgType`.
+``` r
+.Platform$pkgType
+## [1] "mac.binary.big-sur-arm64"
+```
+
 ## Where to store and how to name Linux binary R packages?
 
 CRAN does not distribute Linux binary packages and so there is no folder structure from them to copy.
