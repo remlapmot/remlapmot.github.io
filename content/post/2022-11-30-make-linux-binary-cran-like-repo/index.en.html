@@ -92,11 +92,24 @@ projects: []
 <li>Windows binary packages into the <code>.../bin/windows/contrib/4.2/</code> directory.</li>
 </ul>
 <p>We then run <code>tools::write_PACKAGES(type = "mac.binary")</code> (changing to <code>type = "win.binary"</code> as required) in each of these directories to generate the 3 <code>PACKAGES</code> files.</p>
+<p>We can confirm this directory structure using the <code>contrib.url()</code> function (the last command below was run on an Apple Silicon Mac).</p>
+<pre class="r"><code>contrib.url(&quot;&quot;, type = &quot;source&quot;)
+## [1] &quot;/src/contrib&quot;
+contrib.url(&quot;&quot;, type = &quot;win.binary&quot;)
+## [1] &quot;/bin/windows/contrib/4.2&quot;
+contrib.url(&quot;&quot;, type = &quot;mac.binary&quot;)
+## [1] &quot;/bin/macosx/contrib/4.2&quot;
+contrib.url(&quot;&quot;, type = &quot;binary&quot;)
+## [1] &quot;/bin/macosx/big-sur-arm64/contrib/4.2&quot;</code></pre>
+<p>And they are also listed in the R Installation and Administration manual.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>On Apple Silicon Macs the <code>big-sur-arm64</code> filepath corresponds to the end of <code>.Platform$pkgType</code>.</p>
+<pre class="r"><code>.Platform$pkgType
+## [1] &quot;mac.binary.big-sur-arm64&quot;</code></pre>
 </div>
 <div id="where-to-store-and-how-to-name-linux-binary-r-packages" class="section level2">
 <h2>Where to store and how to name Linux binary R packages?</h2>
 <p>CRAN does not distribute Linux binary packages and so there is no folder structure from them to copy.</p>
-<p>However both the Posit Package Manager and the <a href="https://r4pi.org/">R4Pi</a> project achieve this in a very clever way.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>However both the Posit Package Manager and the <a href="https://r4pi.org/">R4Pi</a> project achieve this in a very clever way.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 <p>We saw above that on Linux bundled source packages have filenames of the form <code>{package}_{version}.tar.gz</code> whereas the binary package filenames are of the form <code>{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz</code> (the text after <code>{package}_{version}_</code> may be different depending on your machine and distro).</p>
 <p>To distribute the Linux binary packages we create a parallel directory structure, which takes the same form as for the bundled source packages. In the case of Ubuntu Focal Fossa the Posit Package Manager uses <code>__linux__/focal/latest/src/contrib</code>.</p>
 <p>They then rename the <code>{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz</code> files to the same form as the bundled source package files, i.e., to <code>{package}_{version}.tar.gz</code>. And they put them in this new <code>src/contrib</code> directory.</p>
@@ -146,6 +159,7 @@ projects: []
 <ol>
 <li id="fn1"><p>Note that there are other approaches to distributing binary R packages on Linux, see <a href="https://cran.r-project.org/bin/linux/" class="uri">https://cran.r-project.org/bin/linux/</a> and links therein, <a href="https://eddelbuettel.github.io/r2u/" class="uri">https://eddelbuettel.github.io/r2u/</a>, and <a href="https://enchufa2.github.io/bspm/" class="uri">https://enchufa2.github.io/bspm/</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p><a href="https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/" class="uri">https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/</a> and <a href="https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/" class="uri">https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>See <a href="https://packagemanager.rstudio.com/client/#/repos/2/overview" class="uri">https://packagemanager.rstudio.com/client/#/repos/2/overview</a> and <a href="https://pkgs.r4pi.org/" class="uri">https://pkgs.r4pi.org/</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>See <a href="https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository" class="uri">https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository</a>.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>See <a href="https://packagemanager.rstudio.com/client/#/repos/2/overview" class="uri">https://packagemanager.rstudio.com/client/#/repos/2/overview</a> and <a href="https://pkgs.r4pi.org/" class="uri">https://pkgs.r4pi.org/</a><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
