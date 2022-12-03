@@ -1,0 +1,66 @@
+---
+title: "To my students learning R: these are some of the mistakes I made"
+author: Tom Palmer
+date: '2022-12-09'
+slug: learning-r-mistakes
+categories:
+  - Blog
+tags:
+  - R
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2022-12-03T10:37:33Z'
+featured: no
+draft: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+```{r}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## Introduction
+
+Are you learning R? Let's cover a few R features/pitfalls/gotchas that you might come across.
+
+## Vectors are recycled
+
+Recycling rules in base R are slightly inconsistent.^[See [here](https://vctrs.r-lib.org/articles/type-size.html#appendix-recycling-in-base-r)]
+
+## Assignment versus setting arguments
+
+We can perform left assignment with either `<-` or `=`, however we set argument values with only `=`.
+
+But additionally we can perform assignment within another function call.
+
+
+
+
+## Vectors are recycled
+
+## Objects are overwritten without warning
+
+```{r}
+myvariable <- 10
+myvariable <- "Hello, world!"
+myvariable
+```
+
+## Computers store numbers in different ways
+
+```{r}
+class(1)
+class(1L)
+```
+
+## Different packages with functions with the same name
+
+Namespace conflict
+
+
+My advice, load the **tidyverse** last in your list of `library()` calls.
