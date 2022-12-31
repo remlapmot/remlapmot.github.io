@@ -219,7 +219,7 @@ plugins_js  = []
   #   0: Disabled
   #   1: Disqus (https://disqus.com)
   #   2: Commento (https://commento.io)
-  #   3: Utterances - made up by TP
+  #   3: Utterances/Giscus - made up by TP
   engine = 3
 
   # Which page types are commentable?
