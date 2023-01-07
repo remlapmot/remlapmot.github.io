@@ -1,5 +1,5 @@
 ---
-title: GitHub unwrapped 2022
+title: 'My #GitHubUnwrapped 2022!'
 author: Tom Palmer
 date: '2023-01-07'
 slug: github-unwrapped-2022
@@ -20,7 +20,7 @@ image:
 projects: []
 ---
 
-My GitHub unwrapped 2022
+My #GitHubUnwrapped 2022!
 
 [<img src="/post/2023/github-unwrapped-2022/img/githubunwrapped2022-screenshot.png" width="433" height="442">](https://drive.google.com/file/d/1VVoFQK5aUrgkCppcJXlDMoEPcCKVPW84)
 
