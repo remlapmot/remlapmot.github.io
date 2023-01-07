@@ -22,6 +22,6 @@ projects: []
 
 My #GitHubUnwrapped 2022!
 
-[<img src="/post/2023/github-unwrapped-2022/img/githubunwrapped2022-screenshot.png" width="433" height="442">](https://drive.google.com/file/d/1VVoFQK5aUrgkCppcJXlDMoEPcCKVPW84)
+<iframe src="https://drive.google.com/file/d/1VVoFQK5aUrgkCppcJXlDMoEPcCKVPW84/preview" width="640" height="480" allow="autoplay"></iframe>
 
 Made with <https://www.githubunwrapped.com/>.
