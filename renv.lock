@@ -54,10 +54,10 @@
     },
     "bookdown": {
       "Package": "bookdown",
-      "Version": "0.31",
+      "Version": "0.32",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c82b3e63de8c679339feaef9df19d624",
+      "Hash": "3724d23586f877135f19c0cd91237a60",
       "Requirements": [
         "htmltools",
         "jquerylib",
@@ -99,10 +99,10 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.5.0",
+      "Version": "3.6.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "eb9fc121ad9a1075c471107ef185be46",
+      "Hash": "3177a5a16c243adc199ba33117bd9657",
       "Requirements": []
     },
     "commonmark": {
@@ -133,10 +133,10 @@
     },
     "evaluate": {
       "Package": "evaluate",
-      "Version": "0.19",
+      "Version": "0.20",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "5aac3cd0a3ccb1a738941796b28c26fe",
+      "Hash": "4b68aa51edd89a0e044a66e75ae3cc6c",
       "Requirements": []
     },
     "fastmap": {
@@ -189,10 +189,10 @@
     },
     "httpuv": {
       "Package": "httpuv",
-      "Version": "1.6.7",
+      "Version": "1.6.8",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "13fdc650c853fffbffee66b2a5b9fdbf",
+      "Hash": "08e611aee165b27f8ff18770285fb535",
       "Requirements": [
         "R6",
         "Rcpp",
@@ -399,10 +399,10 @@
     },
     "stringi": {
       "Package": "stringi",
-      "Version": "1.7.8",
+      "Version": "1.7.12",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "a68b980681bcbc84c7a67003fa796bfb",
+      "Hash": "ca8bd84263c77310739d2cf64d84d7c9",
       "Requirements": []
     },
     "stringr": {
