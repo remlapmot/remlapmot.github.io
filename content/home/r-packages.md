@@ -51,6 +51,16 @@ date_format = "Jan 2006"
 [[item]]
   organization = "R"
   organization_url = "http://www.r-project.org"
+  title = "TwoSampleMR R package"
+  url = "https://mrcieu.github.io/TwoSampleMR/"
+  certificate_url = ""
+  date_start = "2020-02-10"
+  date_end = ""
+  description = ""
+
+[[item]]
+  organization = "R"
+  organization_url = "http://www.r-project.org"
   title = "tmsens R package"
   url = "https://dea-hazewinkel.github.io/tmsens/"
   certificate_url = ""
