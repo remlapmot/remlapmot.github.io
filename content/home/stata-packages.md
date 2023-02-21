@@ -21,7 +21,7 @@ date_format = "Jan 2006"
 [[item]]
   organization = "Stata"
   organization_url = "https://www.stata.com/"
-  title = "bpbpounds Stata package"
+  title = "bpbounds Stata package"
   url = "https://github.com/remlapmot/bpbounds-stata#readme"
   certificate_url = ""
   date_start = "2011-10-21"
