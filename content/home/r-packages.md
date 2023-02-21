@@ -21,7 +21,7 @@ date_format = "Jan 2006"
 [[item]]
   organization = "R"
   organization_url = "https://www.r-project.org/"
-  title = "bpbpounds R package"
+  title = "bpbounds R package"
   url = "https://remlapmot.github.io/bpbounds"
   certificate_url = ""
   date_start = "2018-10-25"
