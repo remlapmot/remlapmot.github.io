@@ -20,3 +20,131 @@ image:
   preview_only: no
 projects: []
 ---
+
+<https://wiki.debian.org/Multiarch/HOWTO>
+
+arm64 armhf
+
+Slightly confusingly R reports arm64 as aarch64, and armhf as armv7l.
+
+```bash
+sudo dpkg --add-architecture armhf
+sudo apt-get update
+```
+
+For libjpeg9 to `/etc/apt/sources.list` add
+```bash
+deb http://ftp.uk.debian.org/debian sid main
+```
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+This took a long time.
+
+```bash
+sudo apt-get install libicu67:armhf
+```
+
+```bash
+sudo apt-get install -y g++ gcc gfortran libjpeg9 make:armhf
+sudo apt-get install -y r4pi:armhf
+```
+
+An R session can then be launched with
+```bash
+R --arch=armhf
+```
+or by specifying the full path to the executable.
+
+```
+pi@raspberrypi:~/Downloads/rstan $ R
+
+R version 4.2.2 (2022-10-31) -- "Innocent and Trusting"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: armv7l-unknown-linux-gnueabihf (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+```
+
+R reports armhf as armv7l.
+
+```
+> R.Version()$arch
+[1] "armv7l"
+> version
+               _                             
+platform       armv7l-unknown-linux-gnueabihf
+arch           armv7l                        
+os             linux-gnueabihf               
+system         armv7l, linux-gnueabihf       
+status                                       
+major          4                             
+minor          2.2                           
+year           2022                          
+month          10                            
+day            31                            
+svn rev        83211                         
+language       R                             
+version.string R version 4.2.2 (2022-10-31)  
+nickname       Innocent and Trusting        
+```
+
+```bash
+curl https://cran.r-project.org/src/contrib/rstan_2.21.8.tar.gz
+tar -zxvf rstan_2.21.8.tar.gz
+```
+
+```r
+install.packages('devtools')
+devtools::build(binary = TRUE, args = c('--preclean'))
+```
+
+Failed with the following message
+```
+  /home/pi/R/armv7l-unknown-linux-gnueabihf-library/4.2/BH/include/boost/spirit/include/phoenix_core.hpp:12:1: note: in expansion of macro ‘BOOST_HEADER_DEPRECATED’
+      12 | BOOST_HEADER_DEPRECATED("<boost/phoenix/core.hpp>")
+         | ^~~~~~~~~~~~~~~~~~~~~~~
+   virtual memory exhausted: Cannot allocate memory
+   make: *** [/opt/R/release/lib/R/etc/Makeconf:178: grammar_inst.o] Error 1
+   ERROR: compilation failed for package ‘rstan’
+─  removing ‘/tmp/RtmpxIA0cN/temp_libpathdc8e22e5715c/rstan’
+Error in `(function (command = NULL, args = character(), error_on_status = TRUE, …`:
+! System command 'R' failed
+---
+Exit status: 1
+stdout & stderr: <printed>
+---
+Type .Last.error to see the more details.
+
+```
+
+Need a swap file, as per <https://pimylifeup.com/raspberry-pi-swap-file/>
+
+```bash
+sudo dphys-swapfile swapoff
+sudo nano /etc/dphys-swapfile
+```
+```
+CONF_SWAPSIZE=1024
+```
+```bash
+sudo dphys-swapfile setup
+sudo dphys-swapfile swapon
+sudo reboot
+```
