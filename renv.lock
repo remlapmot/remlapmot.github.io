@@ -42,7 +42,7 @@
     },
     "blogdown": {
       "Package": "blogdown",
-      "Version": "1.16",
+      "Version": "1.17",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -58,11 +58,11 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "afb8759cd21d88848e80bdeb8bd0c862"
+      "Hash": "7199f26829699f1ff2c8919d501ab033"
     },
     "bookdown": {
       "Package": "bookdown",
-      "Version": "0.33",
+      "Version": "0.34",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -75,7 +75,7 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "948ba48e07aa772d3e5564ce8c0a7896"
+      "Hash": "25e3e995e30c235ea6fcc76677efbe27"
     },
     "bslib": {
       "Package": "bslib",
@@ -150,14 +150,14 @@
     },
     "evaluate": {
       "Package": "evaluate",
-      "Version": "0.20",
+      "Version": "0.21",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "4b68aa51edd89a0e044a66e75ae3cc6c"
+      "Hash": "d59f3b464e8da1aef82dc04b588b8dfb"
     },
     "fastmap": {
       "Package": "fastmap",
@@ -230,7 +230,7 @@
     },
     "httpuv": {
       "Package": "httpuv",
-      "Version": "1.6.9",
+      "Version": "1.6.11",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -241,7 +241,7 @@
         "promises",
         "utils"
       ],
-      "Hash": "1046aa31a57eae8b357267a56a0b6d8b"
+      "Hash": "838602f54e32c1a0f8cc80708cefcefa"
     },
     "jquerylib": {
       "Package": "jquerylib",
@@ -281,14 +281,14 @@
     },
     "later": {
       "Package": "later",
-      "Version": "1.3.0",
+      "Version": "1.3.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "Rcpp",
         "rlang"
       ],
-      "Hash": "7e7b457d7766bc47f2a5f21cc2984f8e"
+      "Hash": "40401c9cf2bc2259dfe83311c9384710"
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -315,7 +315,7 @@
     },
     "markdown": {
       "Package": "markdown",
-      "Version": "1.6",
+      "Version": "1.7",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -324,7 +324,7 @@
         "utils",
         "xfun"
       ],
-      "Hash": "c0e8495f796d73f2d2e1a8c6964d67e8"
+      "Hash": "0ffaea87c070a56d140ce00b0727b278"
     },
     "memoise": {
       "Package": "memoise",
@@ -443,7 +443,7 @@
     },
     "sass": {
       "Package": "sass",
-      "Version": "0.4.5",
+      "Version": "0.4.6",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -453,11 +453,11 @@
         "rappdirs",
         "rlang"
       ],
-      "Hash": "2bb4371a4c80115518261866eab6ab11"
+      "Hash": "cc3ec7dd33982ef56570229b62d6388e"
     },
     "servr": {
       "Package": "servr",
-      "Version": "0.26",
+      "Version": "0.27",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -467,7 +467,7 @@
         "mime",
         "xfun"
       ],
-      "Hash": "fd76750552bad91bbb9b89662f3a3f87"
+      "Hash": "f4d1414c2ddc0a34ea27923134ac3c7b"
     },
     "stringi": {
       "Package": "stringi",
