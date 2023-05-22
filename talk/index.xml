@@ -5,12 +5,20 @@
     <link>https://remlapmot.github.io/talk/</link>
       <atom:link href="https://remlapmot.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
     <description>Talks</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 29 Jun 2022 16:20:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 22 May 2023 13:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Talks</title>
       <link>https://remlapmot.github.io/talk/</link>
     </image>
+    
+    <item>
+      <title>Using allele scores to identify confounding by reverse causation: Studies of alcohol consumption as an exemplar</title>
+      <link>https://remlapmot.github.io/talk/2023_reverse-mr/</link>
+      <pubDate>Mon, 22 May 2023 13:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/talk/2023_reverse-mr/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>A review of group-based methods for teaching statistics in higher education</title>

@@ -2,13 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://remlapmot.github.io/authors/</loc>
+    <lastmod>2023-05-22T13:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/</loc>
+    <lastmod>2023-05-22T13:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/george-davey-smith/</loc>
+    <lastmod>2023-05-22T13:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/hannah/</loc>
+    <lastmod>2023-05-22T13:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/kate-tilling/</loc>
+    <lastmod>2023-05-22T13:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/marcus-munafo/</loc>
+    <lastmod>2023-05-22T13:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/sallis/</loc>
+    <lastmod>2023-05-22T13:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/</loc>
+    <lastmod>2023-05-22T13:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/tom-palmer/</loc>
+    <lastmod>2023-05-22T13:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2023_reverse-mr/</loc>
+    <lastmod>2023-05-22T13:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://remlapmot.github.io/category/blog/</loc>
     <lastmod>2023-01-07T12:10:44+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/categories/</loc>
-    <lastmod>2023-01-07T12:10:44+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/</loc>
     <lastmod>2023-01-07T12:10:44+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/github/</loc>
@@ -41,16 +68,7 @@
     <loc>https://remlapmot.github.io/talk/2022_horizons-in-stem/</loc>
     <lastmod>2022-06-29T16:20:00+00:00</lastmod>
   </url><url>
-    <loc>https://remlapmot.github.io/authors/</loc>
-    <lastmod>2022-06-29T16:20:00+00:00</lastmod>
-  </url><url>
     <loc>https://remlapmot.github.io/author/elinor-jones/</loc>
-    <lastmod>2022-06-29T16:20:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/talk/</loc>
-    <lastmod>2022-06-29T16:20:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/author/tom-palmer/</loc>
     <lastmod>2022-06-29T16:20:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/talk/2022_check-error/</loc>
@@ -90,9 +108,6 @@
     <lastmod>2017-04-20T13:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/author/dave-evans/</loc>
-    <lastmod>2016-04-14T12:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/author/george-davey-smith/</loc>
     <lastmod>2016-04-14T12:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/talk/2016_ukcim/</loc>
