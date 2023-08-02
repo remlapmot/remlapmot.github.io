@@ -40,7 +40,7 @@ date_format = "Jan 2006"
 
 [[item]]
   organization = "International Society for Clinical Biostatistics"
-  organization_url = "http://www.iscb.info/"
+  organization_url = "https://iscb.international/"
   title = "Student conference award, Alexandroupolis, Greece"
   url = ""
   certificate_url = ""
