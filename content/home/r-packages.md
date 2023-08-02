@@ -50,7 +50,7 @@ date_format = "Jan 2006"
 
 [[item]]
   organization = "R"
-  organization_url = "http://www.r-project.org"
+  organization_url = "https://www.r-project.org"
   title = "OneSampleMR R package"
   url = "https://remlapmot.github.io/OneSampleMR"
   certificate_url = ""
@@ -60,7 +60,7 @@ date_format = "Jan 2006"
 
 [[item]]
   organization = "R"
-  organization_url = "http://www.r-project.org"
+  organization_url = "https://www.r-project.org"
   title = "Statamarkdown R package"
   url = "https://github.com/Hemken/Statamarkdown#readme"
   certificate_url = ""
@@ -70,7 +70,7 @@ date_format = "Jan 2006"
 
 [[item]]
   organization = "R"
-  organization_url = "http://www.r-project.org"
+  organization_url = "https://www.r-project.org"
   title = "TwoSampleMR R package"
   url = "https://mrcieu.github.io/TwoSampleMR/"
   certificate_url = ""
@@ -80,7 +80,7 @@ date_format = "Jan 2006"
 
 [[item]]
   organization = "R"
-  organization_url = "http://www.r-project.org"
+  organization_url = "https://www.r-project.org"
   title = "tmsens R package"
   url = "https://dea-hazewinkel.github.io/tmsens/"
   certificate_url = ""
