@@ -31,6 +31,16 @@ date_format = "Jan 2006"
 [[item]]
   organization = "R"
   organization_url = "https://www.r-project.org"
+  title = "knitexercise R package"
+  url = "https://remlapmot.github.io/knitexercise/"
+  certificate_url = ""
+  date_start = "2020-02-01"
+  date_end = ""
+  description = ""
+
+[[item]]
+  organization = "R"
+  organization_url = "https://www.r-project.org"
   title = "mrbayes R package"
   url = "https://okezie94.github.io/mrbayes"
   certificate_url = ""
