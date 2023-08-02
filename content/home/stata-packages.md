@@ -40,7 +40,7 @@ date_format = "Jan 2006"
 
 [[item]]
   organization = "Stata"
-  organization_url = "http://www.stata.com"
+  organization_url = "https://www.stata.com"
   title = "mrrobust Stata package"
   url = "https://remlapmot.github.io/mrrobust"
   certificate_url = ""
@@ -50,7 +50,7 @@ date_format = "Jan 2006"
 
 [[item]]
   organization = "Stata"
-  organization_url = "http://www.stata.com"
+  organization_url = "https://www.stata.com"
   title = "ivonesamplemr Stata package"
   url = "https://remlapmot.github.io/ivonesamplemr"
   certificate_url = ""
