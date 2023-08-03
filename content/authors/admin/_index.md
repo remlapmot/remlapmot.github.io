@@ -50,6 +50,9 @@ social:
 - icon: rss
   icon_pack: fa
   link: https://remlapmot.github.io/index.xml
+- icon: rocket
+  icon_pack: fa
+  link: https://remlapmot.r-universe.dev/
 superuser: true
 title: Tom Palmer
 user_groups:
