@@ -399,13 +399,11 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "1.0.1",
-      "Source": "Repository",
+      "Version": "1.0.2",
+      "OS_type": null,
+      "NeedsCompilation": "no",
       "Repository": "CRAN",
-      "Requirements": [
-        "utils"
-      ],
-      "Hash": "6523639dd021b32c3199a41cbe6db340"
+      "Source": "Repository"
     },
     "rlang": {
       "Package": "rlang",
