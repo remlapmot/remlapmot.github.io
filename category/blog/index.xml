@@ -33,7 +33,7 @@
 &lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;version 13
 version 13, user&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;fixed my error. It turns out that both lines are required because the second line only sets the “user version”.&lt;/p&gt;
-&lt;p&gt;In summary, my &lt;code&gt;reffadjustsim&lt;/code&gt; command works again for MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models. If you ever need &lt;em&gt;fuller&lt;/em&gt; reproducibility in your Stata do-file or program remember to set both the version and the user version.&lt;/p&gt;
+&lt;p&gt;In summary, my &lt;code&gt;reffadjustsim&lt;/code&gt; command works again for MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models. The updated version is available from &lt;a href=&#34;https://github.com/remlapmot/reffadjust&#34;&gt;its GitHub repo&lt;/a&gt;. And if you ever need &lt;em&gt;fuller&lt;/em&gt; reproducibility in your Stata do-file or program remember to set both the version and the user version.&lt;/p&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
 &lt;h2&gt;References&lt;/h2&gt;
 &lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
