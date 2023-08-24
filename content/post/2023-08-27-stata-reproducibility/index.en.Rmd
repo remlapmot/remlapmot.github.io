@@ -46,6 +46,6 @@ version 13, user
 ```
 fixed my error. It turns out that both lines are required because the second line only sets the "user version".
 
-In summary, my `reffadjustsim` command works again for MLwiN/`runmlwin` models. If you ever need *fuller* reproducibility in your Stata do-file or program remember to set both the version and the user version.
+In summary, my `reffadjustsim` command works again for MLwiN/`runmlwin` models. The updated version is available from [its GitHub repo](https://github.com/remlapmot/reffadjust). And if you ever need *fuller* reproducibility in your Stata do-file or program remember to set both the version and the user version.
 
 ## References
