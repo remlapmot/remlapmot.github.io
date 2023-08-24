@@ -5,12 +5,51 @@
     <link>https://remlapmot.github.io/post/</link>
       <atom:link href="https://remlapmot.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 07 Jan 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 24 Aug 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
       <link>https://remlapmot.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>Fuller reproducibility in Stata do and ado files: setting the version and user version</title>
+      <link>https://remlapmot.github.io/post/2023/stata-reproducibility/</link>
+      <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2023/stata-reproducibility/</guid>
+      <description>
+
+
+&lt;p&gt;Most proficient Stata users have come across the &lt;code&gt;version&lt;/code&gt; command. This is an incredibly powerful command, which simply by issuing say&lt;/p&gt;
+&lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;version 18&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;at the top of a do-file or within a program (typically in an ado-file) means that you have pretty much guaranteed your code will run in the same way when you come to run it later (most likely in a newer version of Stata).&lt;/p&gt;
+&lt;p&gt;Several years ago I wrote the &lt;strong&gt;reffadjust&lt;/strong&gt; package &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-palmer-sj-2014&#34;&gt;Palmer et al. 2014&lt;/a&gt;)&lt;/span&gt; as part of some work using random effects models &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-mcdw-sim-2012&#34;&gt;Macdonald-Wallis et al. 2012&lt;/a&gt;)&lt;/span&gt;. It has two programs &lt;code&gt;reffadjustsim&lt;/code&gt; and &lt;code&gt;reffadjust4nlcom&lt;/code&gt; which use the output of various random effects commands, including those from MLwiN, run from Stata using the user-written &lt;code&gt;runmlwin&lt;/code&gt; command &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-leckie-jss-2013&#34;&gt;Leckie and Charlton 2013&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;reffadjust&lt;/strong&gt; package doesn’t have many users and over the years I hadn’t regularly checked if the programs were still working. But in the ado-files I had set &lt;code&gt;version 13&lt;/code&gt;, which gave me some residual confidence that the programs might still work.&lt;/p&gt;
+&lt;p&gt;However, a few years ago, when I eventually did run some test code I saw that the &lt;code&gt;reffadjustsim&lt;/code&gt; tests were failing for MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models. I didn’t have time to investigate further at this point, and I didn’t have any intuition whether the error resulted from a change in MLwiN, &lt;code&gt;runmlwin&lt;/code&gt;, or Stata.&lt;/p&gt;
+&lt;p&gt;At the beginning of this year one of my colleagues mentioned that they were using &lt;strong&gt;reffadjust&lt;/strong&gt; in their work and had observed the same error with &lt;code&gt;reffadjustsim&lt;/code&gt;. My guilt kicked in, and I eventually found some time to investigate. I discovered that since I wrote the package, Stata processes matrix row and column stripes (essentially the row and column names) in a more advanced way. This meant that the row and column stripes for covariance elements in the &lt;code&gt;e(V)&lt;/code&gt; matrix (the variance-covariance matrix of parameter estimates) from MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models were being renamed when I hadn’t intended them to be which caused the error.&lt;/p&gt;
+&lt;p&gt;But wait … I had specified &lt;code&gt;version 13&lt;/code&gt; at the top of my program, so why was this update in later versions of Stata taking effect?&lt;/p&gt;
+&lt;p&gt;I couldn’t work it out, so I had to ask Stata Technical Support. They were kind enough to tell me that there’s an additional method of invoking the &lt;code&gt;version&lt;/code&gt; command which controls what is known as the “user version”. There are some modifications in new versions of Stata which are exempt from the basic invocation of the &lt;code&gt;version&lt;/code&gt; command. The “user version”, is set by &lt;code&gt;version #, user&lt;/code&gt;, and holds these additional modifications to the required version.&lt;/p&gt;
+&lt;p&gt;Naturally, this is explained in the &lt;code&gt;version&lt;/code&gt; helpfile and &lt;a href=&#34;https://www.stata.com/manuals/pversion.pdf&#34;&gt;manual entry&lt;/a&gt;, which I admit I had not read until this point. Simply editing the top of my program to&lt;/p&gt;
+&lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;version 13
+version 13, user&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;fixed my error. It turns out that both lines are required because the second line only sets the “user version”.&lt;/p&gt;
+&lt;p&gt;In summary, my &lt;code&gt;reffadjustsim&lt;/code&gt; command works again for MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models. If you ever need &lt;em&gt;fuller&lt;/em&gt; reproducibility in your Stata do-file or program remember to set both the version and the user version.&lt;/p&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+&lt;div id=&#34;ref-leckie-jss-2013&#34; class=&#34;csl-entry&#34;&gt;
+Leckie, George, and Chris Charlton. 2013. &lt;span&gt;“&lt;span class=&#34;nocase&#34;&gt;runmlwin: A Program to Run the MLwiN Multilevel Modeling Software from within Stata&lt;/span&gt;.”&lt;/span&gt; &lt;em&gt;Journal of Statistical Software&lt;/em&gt; 52 (11): 1–40. &lt;a href=&#34;https://doi.org/10.18637/jss.v052.i11&#34;&gt;https://doi.org/10.18637/jss.v052.i11&lt;/a&gt;.
+&lt;/div&gt;
+&lt;div id=&#34;ref-mcdw-sim-2012&#34; class=&#34;csl-entry&#34;&gt;
+Macdonald-Wallis, Corrie, Debbie A. Lawlor, Tom Palmer, and Kate Tilling. 2012. &lt;span&gt;“Multivariate Multilevel Spline Models for Parallel Growth Processes: Application to Weight and Mean Arterial Pressure in Pregnancy.”&lt;/span&gt; &lt;em&gt;Statistics in Medicine&lt;/em&gt; 31 (26): 3147–64. &lt;a href=&#34;https://doi.org/doi.org/10.1002/sim.5385&#34;&gt;https://doi.org/doi.org/10.1002/sim.5385&lt;/a&gt;.
+&lt;/div&gt;
+&lt;div id=&#34;ref-palmer-sj-2014&#34; class=&#34;csl-entry&#34;&gt;
+Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 2014. &lt;span&gt;“&lt;span class=&#34;nocase&#34;&gt;Estimating adjusted associations between random effects from multilevel models: The reffadjust package&lt;/span&gt;.”&lt;/span&gt; &lt;em&gt;The Stata Journal&lt;/em&gt; 14 (1): 119–40. &lt;a href=&#34;https://doi.org/10.1177/1536867X1401400109&#34;&gt;https://doi.org/10.1177/1536867X1401400109&lt;/a&gt;.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>My #GitHubUnwrapped 2022!</title>
