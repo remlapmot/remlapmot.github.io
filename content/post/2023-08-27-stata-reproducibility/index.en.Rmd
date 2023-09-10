@@ -49,7 +49,7 @@ fixed my error. So in a program or ado-file, we require both lines, whereas in a
 We can see the different operation of `version` by the following short example.
 ```{r setup, include=FALSE}
 library(Statamarkdown)
-knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, comment = '//')
 ```
 ```{stata}
 version 13
