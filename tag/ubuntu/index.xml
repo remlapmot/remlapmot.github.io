@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu | Dr Tom Palmer</title>
+    <link>https://remlapmot.github.io/tag/ubuntu/</link>
+      <atom:link href="https://remlapmot.github.io/tag/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <description>Ubuntu</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 30 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <title>Ubuntu</title>
+      <link>https://remlapmot.github.io/tag/ubuntu/</link>
+    </image>
+    
+    <item>
+      <title>Make your own CRAN-like repository with Linux binary R packages</title>
+      <link>https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/</link>
+      <pubDate>Wed, 30 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/</guid>
+      <description>
+
+
+&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions CRAN does not provide binary packages for Linux. Therefore, installing R packages on Linux can be slow because the bundled source packages need to be built on users machines.&lt;/p&gt;
+&lt;p&gt;But let’s install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
+&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-tidyverse-rspm-linux-binary.png&#34; alt=&#34;Installing binary Linux tidyverse package using Posit Package Manager.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Woah!&lt;/em&gt;&lt;/strong&gt; Something magical just happened, we installed a binary R package on Linux! How did that happen, let’s find out.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;building-bundled-source-and-binary-packages&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Building bundled source and binary packages&lt;/h2&gt;
+&lt;p&gt;I will use an example of one of my own packages &lt;strong&gt;OneSampleMR&lt;/strong&gt;. I am running RStudio server on Ubuntu Linux, Focal Fossa through Windows Subsystem for Linux.&lt;/p&gt;
+&lt;p&gt;The package sources are in a Git repository hosted on GitHub, &lt;a href=&#34;https://github.com/remlapmot/OneSampleMR&#34;&gt;here&lt;/a&gt;. There is an &lt;code&gt;.Rproj&lt;/code&gt; file, which we open in RStudio as a project.&lt;/p&gt;
+&lt;p&gt;To build an R package we require all of its dependency packages are installed, so we install those with &lt;code&gt;devtools::install_dev_deps()&lt;/code&gt; and if your package requires any system libraries those must be installed too.&lt;/p&gt;
+&lt;p&gt;The Build pane gives us two convenient options, which will build either the bundled source package or binary package through calls to &lt;code&gt;devtools::build()&lt;/code&gt;.
+&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-pane-build-options.png&#34; alt=&#34;Screenshot of build pane options for building bundled source and binary packages.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Clicking on both in turn we see the following.
+&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-source-package.png&#34; alt=&#34;Screenshot of building a bundled source package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-binary-package.png&#34; alt=&#34;Screenshot of building a binary package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The bundled source package has been built as &lt;code&gt;OneSampleMR_0.1.2.tar.gz&lt;/code&gt; and the binary package has been built as &lt;code&gt;OneSampleMR_0.1.2_R_x86_64-pc-linux-gnu.tar.gz&lt;/code&gt;. Both files are in the directory above the project.&lt;/p&gt;
+&lt;p&gt;We can achieve the same output by making direct calls to &lt;code&gt;R CMD build&lt;/code&gt; and &lt;code&gt;R CMD install --build&lt;/code&gt; in a shell if preferred. We can test that these install as follows.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-source-package.png&#34; alt=&#34;Screenshot of installing a bundled source package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-binary-package.png&#34; alt=&#34;Screenshot of installing a binary package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;cran-structure-for-bundled-source-package-files&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;CRAN structure for bundled source package files&lt;/h2&gt;
+&lt;p&gt;In two excellent blog posts Marks Sellors describes how to make a CRAN-like repository.&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; There is also the &lt;a href=&#34;https://cran.r-project.org/package=miniCRAN&#34;&gt;&lt;strong&gt;miniCRAN&lt;/strong&gt;&lt;/a&gt; package to help do this, but we don’t need to use this for the following explanation.&lt;/p&gt;
+&lt;p&gt;To host bundled source packages, such as our &lt;code&gt;OneSampleMR_0.1.2.tar.gz&lt;/code&gt; file, we require the following directory structure (noting that the &lt;code&gt;latest&lt;/code&gt; directory is optional, but allows us to add snapshot directories if we wanted to).
+&lt;!-- # brew install tree --&gt;
+&lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;__linux__|bin&#39; --noreport --&gt;&lt;/p&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;/mycran
+└── latest
+    └── src
+        └── contrib
+            └── 4.3.0
+                └── Recommended&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Specifically, we place the &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt; files into the &lt;code&gt;.../src/contrib&lt;/code&gt; directory. In that directory we then run&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tools::write_PACKAGES(type = &amp;quot;source&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which generates 3 additional files (&lt;code&gt;PACKAGES&lt;/code&gt;, &lt;code&gt;PACKAGES.gz&lt;/code&gt;, and &lt;code&gt;PACKAGES.rds&lt;/code&gt;) which R will use to query what packages are available in our repository when its served on the web.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;adding-windows-and-macos-binary-r-packages&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Adding Windows and macOS binary R packages&lt;/h2&gt;
+&lt;p&gt;We saw above how to build a binary Linux package. The same process, when repeated on Windows will generate a file called &lt;code&gt;{package}_{version}.zip&lt;/code&gt; and &lt;code&gt;{package}_{version}.tgz&lt;/code&gt; on macOS (on Macs with both Intel and Apple Silicon processors).&lt;/p&gt;
+&lt;p&gt;Assuming that we have some of these files we need to know where to put them. Since CRAN distributes binary packages for Windows and macOS we follow their directory structure, which is as follows.
+&lt;!-- brew install tree --&gt;
+&lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;__linux__&#39; --noreport --&gt;&lt;/p&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;/mycran
+└── latest
+    ├── bin
+    │   ├── macosx
+    │   │   ├── big-sur-arm64
+    │   │   │   └── contrib
+    │   │   │       └── 4.2
+    │   │   └── contrib
+    │   │       └── 4.2
+    │   └── windows
+    │       └── contrib
+    │           └── 4.2
+    └── src
+        └── contrib
+            └── 4.3.0
+                └── Recommended&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Noting that the current version of R is 4.2.2 and that the relevant directory name with the minor version number changes when R’s current minor version number changes, we place&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;macOS arm64 binary packages (for Macs with Apple Silicon processors) into the &lt;code&gt;.../bin/macosx/big-sur-arm64/contrib/4.2/&lt;/code&gt; directory&lt;/li&gt;
+&lt;li&gt;macOS x86_64 binary packages (for Macs with Intel processors) into the &lt;code&gt;.../bin/macosx/contrib/4.2/&lt;/code&gt; directory, and&lt;/li&gt;
+&lt;li&gt;Windows binary packages into the &lt;code&gt;.../bin/windows/contrib/4.2/&lt;/code&gt; directory.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We then run &lt;code&gt;tools::write_PACKAGES(type = &#34;mac.binary&#34;)&lt;/code&gt; (changing to &lt;code&gt;type = &#34;win.binary&#34;&lt;/code&gt; as required) in each of these directories to generate the 3 &lt;code&gt;PACKAGES&lt;/code&gt; files.&lt;/p&gt;
+&lt;p&gt;We can confirm this directory structure using the &lt;code&gt;contrib.url()&lt;/code&gt; function (the last command below was run on an Apple Silicon Mac).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;source&amp;quot;)
+## [1] &amp;quot;/src/contrib&amp;quot;
+contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;win.binary&amp;quot;)
+## [1] &amp;quot;/bin/windows/contrib/4.2&amp;quot;
+contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;mac.binary&amp;quot;)
+## [1] &amp;quot;/bin/macosx/contrib/4.2&amp;quot;
+contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;binary&amp;quot;)
+## [1] &amp;quot;/bin/macosx/big-sur-arm64/contrib/4.2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And they are also listed in the R Installation and Administration manual.&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;On Apple Silicon Macs the &lt;code&gt;big-sur-arm64&lt;/code&gt; filepath corresponds to the end of &lt;code&gt;.Platform$pkgType&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;.Platform$pkgType
+## [1] &amp;quot;mac.binary.big-sur-arm64&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;where-to-store-and-how-to-name-linux-binary-r-packages&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Where to store and how to name Linux binary R packages?&lt;/h2&gt;
+&lt;p&gt;CRAN does not distribute Linux binary packages and so there is no directory structure from them to copy.&lt;/p&gt;
+&lt;p&gt;However both the Posit Package Manager and the &lt;a href=&#34;https://r4pi.org/&#34;&gt;R4Pi&lt;/a&gt; project achieve this in a very clever way.&lt;a href=&#34;#fn4&#34; class=&#34;footnote-ref&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We saw above that on Linux bundled source packages have filenames of the form &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt; whereas the binary package filenames are of the form &lt;code&gt;{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz&lt;/code&gt; (the text after &lt;code&gt;{package}_{version}_&lt;/code&gt; may be different depending on your machine and distro).&lt;/p&gt;
+&lt;p&gt;To distribute the Linux binary packages we create a parallel directory structure, which takes the same form as for the bundled source packages. In the case of Ubuntu Focal Fossa the Posit Package Manager uses &lt;code&gt;__linux__/focal/latest/src/contrib&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;They then rename the &lt;code&gt;{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz&lt;/code&gt; files to the same form as the bundled source package files, i.e., to &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt;. And they put them in this new &lt;code&gt;src/contrib&lt;/code&gt; directory.&lt;/p&gt;
+&lt;p&gt;The structure of our CRAN-like repository (well in fact our 2 parallel repositories) is now.
+&lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;jammy&#39; --noreport --&gt;&lt;/p&gt;
+&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;/mycran
+├── __linux__
+│   └── focal
+│       └── latest
+│           └── src
+│               └── contrib
+│                   └── 4.3.0
+│                       └── Recommended
+└── latest
+    ├── bin
+    │   ├── macosx
+    │   │   ├── big-sur-arm64
+    │   │   │   └── contrib
+    │   │   │       └── 4.2
+    │   │   └── contrib
+    │   │       └── 4.2
+    │   └── windows
+    │       └── contrib
+    │           └── 4.2
+    └── src
+        └── contrib
+            └── 4.3.0
+                └── Recommended&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We then run&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tools::write_PACKAGES(type = &amp;quot;source&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in the &lt;code&gt;.../__linux__/distro-name/src/contrib&lt;/code&gt; directory for each Linux distribution to generate the &lt;code&gt;PACKAGES&lt;/code&gt; files.&lt;/p&gt;
+&lt;p&gt;Once this directory structure is served we can set our repository in R to &lt;code&gt;.../__linux__/focal/latest&lt;/code&gt; and R will find the binary package &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt; files in the &lt;code&gt;...__linux__/focal/src/contrib/&lt;/code&gt; directory, as per the first figure in this post.&lt;/p&gt;
+&lt;p&gt;Note that the &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt; files within &lt;code&gt;__linux__/focal/latest/src/contrib&lt;/code&gt; do not all have to be of binary packages. They can be a mix of bundled source and binary packages, which is helpful if you haven’t had time to build all your binary package files.&lt;/p&gt;
+&lt;p&gt;We can also confirm that on Ubuntu Focal Fossa&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;.Platform$pkgType
+## [1] &amp;quot;source&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;therefore, on Linux, &lt;code&gt;utils:::resolvePkgType()&lt;/code&gt; always returns &lt;code&gt;&#34;source&#34;&lt;/code&gt;. Hence, on Linux, &lt;code&gt;contrib.url()&lt;/code&gt; always returns &lt;code&gt;/src/contrib&lt;/code&gt; regardless of its &lt;code&gt;type&lt;/code&gt; argument.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;testing-your-cran-like-repositories-locally&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Testing your CRAN-like repositories locally&lt;/h2&gt;
+&lt;p&gt;You can either run a local web server or use the &lt;code&gt;file://...&lt;/code&gt; URL notation as your &lt;code&gt;repos&lt;/code&gt; global options setting (set with &lt;code&gt;option(repos = ...)&lt;/code&gt; or as the &lt;code&gt;repos&lt;/code&gt; argument to &lt;code&gt;install.packages()&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Here’s a screenshot of installing a binary package on Ubuntu Focal Fossa.
+&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/cran-like-focal-example.png&#34; alt=&#34;Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;We have taken a look at the structure of a CRAN-like repository and built bundled source and binary package files. We saw that the trick for distributing Linux binary packages is to make a parallel directory with the same structure as that required for bundled source packages and that we need to rename the binary package files to have the same filename format as the bundled source package files.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes footnotes-end-of-document&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Note that there are other approaches to distributing binary R packages on Linux, see &lt;a href=&#34;https://cran.r-project.org/bin/linux/&#34; class=&#34;uri&#34;&gt;https://cran.r-project.org/bin/linux/&lt;/a&gt; and links therein, &lt;a href=&#34;https://eddelbuettel.github.io/r2u/&#34; class=&#34;uri&#34;&gt;https://eddelbuettel.github.io/r2u/&lt;/a&gt;, and &lt;a href=&#34;https://enchufa2.github.io/bspm/&#34; class=&#34;uri&#34;&gt;https://enchufa2.github.io/bspm/&lt;/a&gt;&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;&lt;a href=&#34;https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/&#34; class=&#34;uri&#34;&gt;https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/&lt;/a&gt; and &lt;a href=&#34;https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/&#34; class=&#34;uri&#34;&gt;https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/&lt;/a&gt;&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;See &lt;a href=&#34;https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository&#34; class=&#34;uri&#34;&gt;https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository&lt;/a&gt;.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;See &lt;a href=&#34;https://packagemanager.rstudio.com/client/#/repos/2/overview&#34; class=&#34;uri&#34;&gt;https://packagemanager.rstudio.com/client/#/repos/2/overview&lt;/a&gt; and &lt;a href=&#34;https://pkgs.r4pi.org/&#34; class=&#34;uri&#34;&gt;https://pkgs.r4pi.org/&lt;/a&gt;&lt;a href=&#34;#fnref4&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
