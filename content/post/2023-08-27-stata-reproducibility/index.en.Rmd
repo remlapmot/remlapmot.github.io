@@ -1,5 +1,5 @@
 ---
-title: "Fuller reproducibility in Stata do and ado files: setting the version and user version"
+title: "Fuller reproducibility in Stata ado-files and programs: setting the version and user version"
 author: Tom Palmer
 date: '2023-08-24'
 slug: stata-reproducibility
@@ -8,9 +8,9 @@ categories:
 tags:
   - Stata
 subtitle: ''
-summary: "For fuller reproducibility in a Stata do-file or program set both the version and the user version."
+summary: "For fuller reproducibility in Stata ado-files and programs set both the version and the user version."
 authors: []
-lastmod: '2023-08-24T20:43:29+01:00'
+lastmod: '2023-09-10T20:43:29+01:00'
 featured: no
 image:
   caption: ''
@@ -25,7 +25,7 @@ Most proficient Stata users have come across the `version` command. This is an i
 ```stata
 version 18
 ```
-at the top of a do-file or within a program (typically in an ado-file) means that you have pretty much guaranteed your code will run in the same way when you come to run it later (most likely in a newer version of Stata).
+at the top of a do-file or within a program (typically in an ado-file) means that you have pretty much guaranteed your code will run in the same way when you come to run it later (most likely in a newer version of Stata). But it turns out there's a subtle difference between issuing `version` in a do-file/interactively compared to within a program or ado-file. 
 
 Several years ago I wrote the **reffadjust** package [@palmer-sj-2014] as part of some work using random effects models [@mcdw-sim-2012]. It has two programs `reffadjustsim` and `reffadjust4nlcom` which use the output of various random effects commands, including those from MLwiN, run from Stata using the user-written `runmlwin` command [@leckie-jss-2013].
 
@@ -33,19 +33,39 @@ The **reffadjust** package doesn't have many users and over the years I hadn't r
 
 However, a few years ago, when I eventually did run some test code I saw that the `reffadjustsim` tests were failing for MLwiN/`runmlwin` models. I didn't have time to investigate further at this point, and I didn't have any intuition whether the error resulted from a change in MLwiN, `runmlwin`, or Stata.
 
-At the beginning of this year one of my colleagues mentioned that they were using **reffadjust** in their work and had observed the same error with `reffadjustsim`. My guilt kicked in, and I eventually found some time to investigate. I discovered that since I wrote the package, Stata processes matrix row and column stripes (essentially the row and column names) in a more advanced way. This meant that the row and column stripes for covariance elements in the `e(V)` matrix (the variance-covariance matrix of parameter estimates) from MLwiN/`runmlwin` models were being renamed when I hadn't intended them to be which caused the error.
+At the beginning of this year one of my colleagues mentioned that they were using **reffadjust** in their work and had observed the same error with `reffadjustsim`. My guilt kicked in, and I eventually found some time to investigate. I discovered that since I wrote the package, Stata processes matrix row and column stripes (essentially the row and column names) in a more advanced way. This meant that the row and column stripes for covariance elements in the `e(V)` matrix (the variance-covariance matrix of parameter estimates) from MLwiN/`runmlwin` models were being renamed when I hadn't intended them to be, which caused the error.
 
 But wait ... I had specified `version 13` at the top of my program, so why was this update in later versions of Stata taking effect?
 
-I couldn't work it out, so I had to ask Stata Technical Support. They were kind enough to tell me that there's an additional method of invoking the `version` command which controls what is known as the "user version". There are some modifications in new versions of Stata which are exempt from the basic invocation of the `version` command. The "user version", is set by `version #, user`, and holds these additional modifications to the required version.
+I couldn't work it out, so I had to ask Stata Technical Support. They were kind enough to tell me that there's an additional method of invoking the `version` command which controls what is known as the "user version". There are some modifications in new versions of Stata which are exempt from the basic invocation of the `version` command (but only in programs and ado-files). In do-files issuing `version` sets both the version and the user version, however, in programs and ado-files the "user version", is set by `version #, user`, and holds these additional modifications in Stata to the required version.
 
-Naturally, this is explained in the `version` helpfile and [manual entry](https://www.stata.com/manuals/pversion.pdf), which I admit I had not read until this point. Simply editing the top of my program to
+Naturally, this is explained in the `version` helpfile and [manual entry](https://www.stata.com/manuals/pversion.pdf), which I admit I had not read until this point. Hence, simply editing the top of my program to
 ```stata
 version 13
 version 13, user
 ```
-fixed my error. It turns out that both lines are required because the second line only sets the "user version".
+fixed my error. So in a program or ado-file, we require both lines, whereas in a do-file we'd only require `version 13`.
 
-In summary, my `reffadjustsim` command works again for MLwiN/`runmlwin` models. The updated version is available from [its GitHub repo](https://github.com/remlapmot/reffadjust). And if you ever need *fuller* reproducibility in your Stata do-file or program remember to set both the version and the user version.
+We can see the different operation of `version` by the following short example.
+```{r setup, include=FALSE}
+library(Statamarkdown)
+knitr::opts_chunk$set(collapse = TRUE)
+```
+```{stata}
+version 13
+display c(version), c(userversion), c(stata_version)
+```
+```{stata}
+program mytest
+version 13
+display c(version), c(userversion), c(stata_version)
+version 13, user
+display c(version), c(userversion), c(stata_version)
+end
+
+mytest
+```
+
+In summary, my `reffadjustsim` command works again for MLwiN/`runmlwin` models. The updated version is available from [its GitHub repo](https://github.com/remlapmot/reffadjust). And if you ever need *fuller* reproducibility in your Stata ado-file or program remember to set both the version and the user version.
 
 ## References
