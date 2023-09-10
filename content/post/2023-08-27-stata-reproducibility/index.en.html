@@ -1,5 +1,5 @@
 ---
-title: "Fuller reproducibility in Stata do and ado files: setting the version and user version"
+title: "Fuller reproducibility in Stata ado-files and programs: setting the version and user version"
 author: Tom Palmer
 date: '2023-08-24'
 slug: stata-reproducibility
@@ -8,9 +8,9 @@ categories:
 tags:
   - Stata
 subtitle: ''
-summary: "For fuller reproducibility in a Stata do-file or program set both the version and the user version."
+summary: "For fuller reproducibility in Stata ado-files and programs set both the version and the user version."
 authors: []
-lastmod: '2023-08-24T20:43:29+01:00'
+lastmod: '2023-09-10T20:43:29+01:00'
 featured: no
 image:
   caption: ''
@@ -25,18 +25,32 @@ link-citations: true
 
 <p>Most proficient Stata users have come across the <code>version</code> command. This is an incredibly powerful command, which simply by issuing say</p>
 <pre class="stata"><code>version 18</code></pre>
-<p>at the top of a do-file or within a program (typically in an ado-file) means that you have pretty much guaranteed your code will run in the same way when you come to run it later (most likely in a newer version of Stata).</p>
+<p>at the top of a do-file or within a program (typically in an ado-file) means that you have pretty much guaranteed your code will run in the same way when you come to run it later (most likely in a newer version of Stata). But it turns out there’s a subtle difference between issuing <code>version</code> in a do-file/interactively compared to within a program or ado-file.</p>
 <p>Several years ago I wrote the <strong>reffadjust</strong> package <span class="citation">(<a href="#ref-palmer-sj-2014">Palmer et al. 2014</a>)</span> as part of some work using random effects models <span class="citation">(<a href="#ref-mcdw-sim-2012">Macdonald-Wallis et al. 2012</a>)</span>. It has two programs <code>reffadjustsim</code> and <code>reffadjust4nlcom</code> which use the output of various random effects commands, including those from MLwiN, run from Stata using the user-written <code>runmlwin</code> command <span class="citation">(<a href="#ref-leckie-jss-2013">Leckie and Charlton 2013</a>)</span>.</p>
 <p>The <strong>reffadjust</strong> package doesn’t have many users and over the years I hadn’t regularly checked if the programs were still working. But in the ado-files I had set <code>version 13</code>, which gave me some residual confidence that the programs might still work.</p>
 <p>However, a few years ago, when I eventually did run some test code I saw that the <code>reffadjustsim</code> tests were failing for MLwiN/<code>runmlwin</code> models. I didn’t have time to investigate further at this point, and I didn’t have any intuition whether the error resulted from a change in MLwiN, <code>runmlwin</code>, or Stata.</p>
-<p>At the beginning of this year one of my colleagues mentioned that they were using <strong>reffadjust</strong> in their work and had observed the same error with <code>reffadjustsim</code>. My guilt kicked in, and I eventually found some time to investigate. I discovered that since I wrote the package, Stata processes matrix row and column stripes (essentially the row and column names) in a more advanced way. This meant that the row and column stripes for covariance elements in the <code>e(V)</code> matrix (the variance-covariance matrix of parameter estimates) from MLwiN/<code>runmlwin</code> models were being renamed when I hadn’t intended them to be which caused the error.</p>
+<p>At the beginning of this year one of my colleagues mentioned that they were using <strong>reffadjust</strong> in their work and had observed the same error with <code>reffadjustsim</code>. My guilt kicked in, and I eventually found some time to investigate. I discovered that since I wrote the package, Stata processes matrix row and column stripes (essentially the row and column names) in a more advanced way. This meant that the row and column stripes for covariance elements in the <code>e(V)</code> matrix (the variance-covariance matrix of parameter estimates) from MLwiN/<code>runmlwin</code> models were being renamed when I hadn’t intended them to be, which caused the error.</p>
 <p>But wait … I had specified <code>version 13</code> at the top of my program, so why was this update in later versions of Stata taking effect?</p>
-<p>I couldn’t work it out, so I had to ask Stata Technical Support. They were kind enough to tell me that there’s an additional method of invoking the <code>version</code> command which controls what is known as the “user version”. There are some modifications in new versions of Stata which are exempt from the basic invocation of the <code>version</code> command. The “user version”, is set by <code>version #, user</code>, and holds these additional modifications to the required version.</p>
-<p>Naturally, this is explained in the <code>version</code> helpfile and <a href="https://www.stata.com/manuals/pversion.pdf">manual entry</a>, which I admit I had not read until this point. Simply editing the top of my program to</p>
+<p>I couldn’t work it out, so I had to ask Stata Technical Support. They were kind enough to tell me that there’s an additional method of invoking the <code>version</code> command which controls what is known as the “user version”. There are some modifications in new versions of Stata which are exempt from the basic invocation of the <code>version</code> command (but only in programs and ado-files). In do-files issuing <code>version</code> sets both the version and the user version, however, in programs and ado-files the “user version”, is set by <code>version #, user</code>, and holds these additional modifications in Stata to the required version.</p>
+<p>Naturally, this is explained in the <code>version</code> helpfile and <a href="https://www.stata.com/manuals/pversion.pdf">manual entry</a>, which I admit I had not read until this point. Hence, simply editing the top of my program to</p>
 <pre class="stata"><code>version 13
 version 13, user</code></pre>
-<p>fixed my error. It turns out that both lines are required because the second line only sets the “user version”.</p>
-<p>In summary, my <code>reffadjustsim</code> command works again for MLwiN/<code>runmlwin</code> models. The updated version is available from <a href="https://github.com/remlapmot/reffadjust">its GitHub repo</a>. And if you ever need <em>fuller</em> reproducibility in your Stata do-file or program remember to set both the version and the user version.</p>
+<p>fixed my error. So in a program or ado-file, we require both lines, whereas in a do-file we’d only require <code>version 13</code>.</p>
+<p>We can see the different operation of <code>version</code> by the following short example.</p>
+<pre class="stata"><code>version 13
+display c(version), c(userversion), c(stata_version)
+13 13 17</code></pre>
+<pre class="stata"><code>program mytest
+version 13
+display c(version), c(userversion), c(stata_version)
+version 13, user
+display c(version), c(userversion), c(stata_version)
+end
+
+mytest
+13 17 17
+13 13 17</code></pre>
+<p>In summary, my <code>reffadjustsim</code> command works again for MLwiN/<code>runmlwin</code> models. The updated version is available from <a href="https://github.com/remlapmot/reffadjust">its GitHub repo</a>. And if you ever need <em>fuller</em> reproducibility in your Stata ado-file or program remember to set both the version and the user version.</p>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
