@@ -36,7 +36,7 @@ version 13, user&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can see the different operation of &lt;code&gt;version&lt;/code&gt; by the following short example.&lt;/p&gt;
 &lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;version 13
 display c(version), c(userversion), c(stata_version)
-13 13 17&lt;/code&gt;&lt;/pre&gt;
+// 13 13 17&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;program mytest
 version 13
 display c(version), c(userversion), c(stata_version)
@@ -45,8 +45,8 @@ display c(version), c(userversion), c(stata_version)
 end
 
 mytest
-13 17 17
-13 13 17&lt;/code&gt;&lt;/pre&gt;
+// 13 17 17
+// 13 13 17&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In summary, my &lt;code&gt;reffadjustsim&lt;/code&gt; command works again for MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models. The updated version is available from &lt;a href=&#34;https://github.com/remlapmot/reffadjust&#34;&gt;its GitHub repo&lt;/a&gt;. And if you ever need &lt;em&gt;fuller&lt;/em&gt; reproducibility in your Stata ado-file or program remember to set both the version and the user version.&lt;/p&gt;
 &lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
 &lt;h2&gt;References&lt;/h2&gt;

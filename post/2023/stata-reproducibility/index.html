@@ -676,7 +676,7 @@ version 13, user</code></pre>
 <p>We can see the different operation of <code>version</code> by the following short example.</p>
 <pre class="stata"><code>version 13
 display c(version), c(userversion), c(stata_version)
-13 13 17</code></pre>
+// 13 13 17</code></pre>
 <pre class="stata"><code>program mytest
 version 13
 display c(version), c(userversion), c(stata_version)
@@ -685,8 +685,8 @@ display c(version), c(userversion), c(stata_version)
 end
 
 mytest
-13 17 17
-13 13 17</code></pre>
+// 13 17 17
+// 13 13 17</code></pre>
 <p>In summary, my <code>reffadjustsim</code> command works again for MLwiN/<code>runmlwin</code> models. The updated version is available from <a href="https://github.com/remlapmot/reffadjust">its GitHub repo</a>. And if you ever need <em>fuller</em> reproducibility in your Stata ado-file or program remember to set both the version and the user version.</p>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
