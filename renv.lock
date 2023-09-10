@@ -30,6 +30,17 @@
       ],
       "Hash": "ae6cbbe1492f4de79c45fce06f967ce8"
     },
+    "Statamarkdown": {
+      "Package": "Statamarkdown",
+      "Version": "0.8.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "knitr",
+        "xfun"
+      ],
+      "Hash": "cd1f4e37c9ed0e0df1d48180025e0670"
+    },
     "base64enc": {
       "Package": "base64enc",
       "Version": "0.1-3",
