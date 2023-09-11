@@ -52,10 +52,12 @@ library(Statamarkdown)
 knitr::opts_chunk$set(collapse = TRUE, comment = '//')
 ```
 ```{stata}
+/* Do-file/interactive code to set both the version and the user version */
 version 13
 display c(version), c(userversion), c(stata_version)
 ```
 ```{stata}
+/* Ado-file/program code to set both the version and the user version */
 program mytest
 version 13
 display c(version), c(userversion), c(stata_version)
