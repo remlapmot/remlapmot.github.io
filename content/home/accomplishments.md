@@ -21,12 +21,12 @@ date_format = "Jan 2006"
 [[item]]
   organization = "R Views"
   organization_url = "https://rviews.rstudio.com/"
-  title = "November 2021: \"Top 40\" New CRAN Packages"
+  title = "OneSampleMR included in RStudio's R Views November 2021: \"Top 40\" New CRAN Packages"
   url = "https://rviews.rstudio.com/2021/12/21/november-2021-top-40-new-cran-packages/"
   certificate_url = ""
   date_start = "2021-12-21"
   date_end = ""
-  description = "[**OneSampleMR**](https://remlapmot.github.io/OneSampleMR/) included in R Views November 2021 \"Top 40\" New CRAN Packages"
+  description = ""
 
 [[item]]
   organization = "International Journal of Epidemiology"
