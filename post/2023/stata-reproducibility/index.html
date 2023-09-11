@@ -674,10 +674,12 @@
 version 13, user</code></pre>
 <p>fixed my error. So in a program or ado-file, we require both lines, whereas in a do-file we’d only require <code>version 13</code>.</p>
 <p>We can see the different operation of <code>version</code> by the following short example.</p>
-<pre class="stata"><code>version 13
+<pre class="stata"><code>/* Do-file/interactive code to set both the version and the user version */
+version 13
 display c(version), c(userversion), c(stata_version)
 // 13 13 17</code></pre>
-<pre class="stata"><code>program mytest
+<pre class="stata"><code>/* Ado-file/program code to set both the version and the user version */
+program mytest
 version 13
 display c(version), c(userversion), c(stata_version)
 version 13, user

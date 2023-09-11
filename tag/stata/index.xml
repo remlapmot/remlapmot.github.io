@@ -34,10 +34,12 @@
 version 13, user&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;fixed my error. So in a program or ado-file, we require both lines, whereas in a do-file we’d only require &lt;code&gt;version 13&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;We can see the different operation of &lt;code&gt;version&lt;/code&gt; by the following short example.&lt;/p&gt;
-&lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;version 13
+&lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;/* Do-file/interactive code to set both the version and the user version */
+version 13
 display c(version), c(userversion), c(stata_version)
 // 13 13 17&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;program mytest
+&lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;/* Ado-file/program code to set both the version and the user version */
+program mytest
 version 13
 display c(version), c(userversion), c(stata_version)
 version 13, user
