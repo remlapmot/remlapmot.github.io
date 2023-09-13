@@ -1,0 +1,36 @@
+---
+title: 'Running MLwiN (mlnscript) via R2MLwiN on Apple Silicon Macs '
+author: Package Build
+date: '2023-09-15'
+slug: mlnscript-r2mlwin-apple-silicon
+categories:
+  - Blog
+tags:
+  - R
+  - MLwiN
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2023-09-13T13:02:36+01:00'
+featured: no
+draft: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+## Introduction
+
+* Setup
+* Investigation of universal binaries
+
+## Install R2MLwiN
+
+## Run example
+
+## Summary
+
+## References
+
