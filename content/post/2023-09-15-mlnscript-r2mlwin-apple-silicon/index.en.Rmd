@@ -9,7 +9,7 @@ tags:
   - R
   - MLwiN
 subtitle: ''
-summary: 'How to run MLwiN on Apple Silicon Macs via R.'
+summary: 'Find out how to run MLwiN on Apple Silicon Macs via R.'
 authors: []
 #lastmod: '2023-09-15T13:02:36+01:00'
 featured: no
