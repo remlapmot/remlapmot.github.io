@@ -11,45 +11,45 @@ tags:
 subtitle: ''
 summary: 'Find out how to run MLwiN on Apple Silicon Macs via R.'
 authors: []
-lastmod: '2023-09-13T13:02:36+01:00'
+#lastmod: '2023-09-15T13:02:36+01:00'
 featured: no
 draft: no
 image:
   caption: ''
-  focal_point: ''
+  focal_point: 'Centre'
   preview_only: no
 projects: []
+bibliography: refs.bib
+link-citations: true
 ---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, collapse = TRUE, comment = '#>')
+```
 
 ## Introduction
 
-* Setup
-* Investigation of universal binaries
+* Setup, obtain `mlnscript` from the Centre of Multilevel Modelling.
+* Investigation of the binary and library to check it's a universal binary
+  ```
+  % lipo -archs /Applications/MLwiN/mlnscript
+  x86_64 arm64
+  % lipo -archs /Applications/MLwiN/libmln.dylib
+  x86_64 arm64
+  ```
 
-```
-% file /Applications/MLwiN/*
-/Applications/MLwiN/libmln.dylib: Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit dynamically linked shared library x86_64] [arm64]
-/Applications/MLwiN/libmln.dylib (for architecture x86_64):	Mach-O 64-bit dynamically linked shared library x86_64
-/Applications/MLwiN/libmln.dylib (for architecture arm64):	Mach-O 64-bit dynamically linked shared library arm64
-/Applications/MLwiN/mlnscript:    Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit executable x86_64] [arm64:Mach-O 64-bit executable arm64]
-/Applications/MLwiN/mlnscript (for architecture x86_64):	Mach-O 64-bit executable x86_64
-/Applications/MLwiN/mlnscript (for architecture arm64):	Mach-O 64-bit executable arm64
-```
+* Install R2MLwiN [@r2mlwin] from CRAN.
 
-```
-% lipo -archs /Applications/MLwiN/mlnscript
-x86_64 arm64
-% lipo -archs /Applications/MLwiN/libmln.dylib
-x86_64 arm64
-```
+  ```r
+  install.packages("R2MLwiN")
+  ```
 
-## Install R2MLwiN
+## Run an example
 
-```r
-install.packages("R2MLwiN")
+```{r}
+library(R2MLwiN)
+options(MLwiN_path = "/Applications/MLwiN/mlnscript")
 ```
-
-## Run example
 
 ## Summary
 
