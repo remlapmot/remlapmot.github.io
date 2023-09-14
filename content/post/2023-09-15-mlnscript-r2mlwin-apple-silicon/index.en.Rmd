@@ -29,12 +29,13 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, collapse = TRUE, comment
 
 ## Introduction
 
-* Setup, obtain `mlnscript` from the Centre of Multilevel Modelling.
-* Investigation of the binary and library to check it's a universal binary
+* Obtain `mlnscript` from the Centre of Multilevel Modelling and then install it.
+* On macOS it is recommended to install it to the `/opt/mln/` directory (which you will need to create)
+* Check that `mlnscript` and its library are universal binaries
   ```
-  % lipo -archs /Applications/MLwiN/mlnscript
+  % lipo -archs /opt/mln/mlnscript
   x86_64 arm64
-  % lipo -archs /Applications/MLwiN/libmln.dylib
+  % lipo -archs /opt/mln/libmln.dylib
   x86_64 arm64
   ```
 
