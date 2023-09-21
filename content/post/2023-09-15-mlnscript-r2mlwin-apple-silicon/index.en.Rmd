@@ -36,7 +36,7 @@ knitr::opts_chunk$set(
 
 The aim of this post is to get MLwiN running on Apple Silicon Macs in R using the **R2MLwiN** package [@mlwin;@r2mlwin]. This turns out to be pretty straightforward since there is a non-graphical version of MLwiN called `mlnscript` (`mlnscript.exe` on Windows) with an accompanying library `libmln.dylib`.
 
-* First obtain `mlnscript` from the Centre of Multilevel Modelling and then install it, see the relevant page on the MLwiN [webpages](https://www.bristol.ac.uk/cmm/software/mlwin/).
+* First obtain `mlnscript` installer from the Centre of Multilevel Modelling and then install it, see the relevant download page (depending upon whether you are an academic) on the MLwiN [webpages](https://www.bristol.ac.uk/cmm/software/mlwin/).
 * On macOS it is recommended to install the files into the `/opt/mln/` directory (which you will need to create and which you will need Admin permissions on macOS to create. If you don't have an Admin account simply create a new directory in another location).
 * Once installed we can check that `mlnscript` and `libmln.dylib` are universal binaries,
   ```
