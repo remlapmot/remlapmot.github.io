@@ -1,7 +1,7 @@
 ---
 title: 'Running MLwiN (mlnscript) via the R2MLwiN R package on Apple Silicon Macs '
 author: Package Build
-date: '2023-09-15'
+date: '2023-09-22'
 slug: mlnscript-r2mlwin-apple-silicon
 categories:
   - Blog
@@ -9,7 +9,7 @@ tags:
   - R
   - MLwiN
 subtitle: ''
-summary: 'Find out how to run MLwiN on Apple Silicon Macs via R.'
+summary: 'How to run MLwiN on Apple Silicon Macs via R.'
 authors: []
 #lastmod: '2023-09-15T13:02:36+01:00'
 featured: no
@@ -27,28 +27,36 @@ link-citations: true
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
+<p>The aim of this post is to get MLwiN running on Apple Silicon Macs in R using the <strong>R2MLwiN</strong> package <span class="citation">(<a href="#ref-mlwin">Charlton et al. 2023</a>; <a href="#ref-r2mlwin">Zhang et al. 2016</a>)</span>. This turns out to be pretty straightforward since there is a non-graphical version of MLwiN called <code>mlnscript</code> (<code>mlnscript.exe</code> on Windows) with an accompanying library <code>libmln.dylib</code>.</p>
 <ul>
-<li><p>Setup, obtain <code>mlnscript</code> from the Centre of Multilevel Modelling.</p></li>
-<li><p>Investigation of the binary and library to check it’s a universal binary</p>
-<pre><code>% lipo -archs /Applications/MLwiN/mlnscript
+<li><p>First obtain <code>mlnscript</code> from the Centre of Multilevel Modelling and then install it, see the relevant page on the MLwiN <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">webpages</a>.</p></li>
+<li><p>On macOS it is recommended to install the files into the <code>/opt/mln/</code> directory (which you will need to create and which you will need Admin permissions on macOS to create. If you don’t have an Admin account simply create a new directory in another location).</p></li>
+<li><p>Once installed we can check that <code>mlnscript</code> and <code>libmln.dylib</code> are universal binaries,</p>
+<pre><code>% lipo -archs /opt/mln/mlnscript
 x86_64 arm64
-% lipo -archs /Applications/MLwiN/libmln.dylib
-x86_64 arm64</code></pre></li>
-<li><p>Install R2MLwiN <span class="citation">(<a href="#ref-r2mlwin">Zhang et al. 2016</a>)</span> from CRAN.</p>
+% lipo -archs /opt/mln/libmln.dylib
+x86_64 arm64</code></pre>
+<p>since both architectures are listed this indicates both files are universal binaries.</p></li>
+<li><p>Now we need to install the <strong>R2MLwiN</strong> package from CRAN.</p>
 <pre class="r"><code>install.packages(&quot;R2MLwiN&quot;)</code></pre></li>
 </ul>
 </div>
 <div id="run-an-example" class="section level2">
 <h2>Run an example</h2>
 <pre class="r"><code>library(R2MLwiN)
-options(MLwiN_path = &quot;/Applications/MLwiN/mlnscript&quot;)</code></pre>
+# if you did not install in /opt/mln , set:
+# options(MLwiN_path = &quot;/path-to/mlnscript&quot;)</code></pre>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
+<p>In summary, although it has <em>Win</em> in its name, the core libraries for running MLwiN on other platforms, including macOS for both Intel and Apple Silicon chips and versions of Linux, have been available for sometime.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-mlwin" class="csl-entry">
+Charlton, C, J Rasbash, W. J Browne, M Healy, and B Cameron. 2023. <em>MLwiN Version 3.07.</em> Bristol, UK: Centre for Multilevel Modelling, University of Bristol. <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">https://www.bristol.ac.uk/cmm/software/mlwin/</a>.
+</div>
 <div id="ref-r2mlwin" class="csl-entry">
 Zhang, Zhengzheng, Richard M. A. Parker, Christopher M. J. Charlton, George Leckie, and William J. Browne. 2016. <span>“<span>R2MLwiN</span>: A Package to Run <span>MLwiN</span> from Within <span>R</span>.”</span> <em>Journal of Statistical Software</em> 72 (10): 1–43. <a href="https://doi.org/10.18637/jss.v072.i10">https://doi.org/10.18637/jss.v072.i10</a>.
 </div>
