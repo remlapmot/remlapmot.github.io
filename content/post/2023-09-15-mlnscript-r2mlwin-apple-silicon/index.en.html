@@ -27,29 +27,37 @@ link-citations: true
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>The aim of this post is to get MLwiN running on Apple Silicon Macs in R using the <strong>R2MLwiN</strong> package <span class="citation">(<a href="#ref-mlwin">Charlton et al. 2023</a>; <a href="#ref-r2mlwin">Zhang et al. 2016</a>)</span>. This turns out to be pretty straightforward since there is a non-graphical version of MLwiN called <code>mlnscript</code> (<code>mlnscript.exe</code> on Windows) with an accompanying library <code>libmln.dylib</code>.</p>
+<p>The aim of this post is to get MLwiN running on Apple Silicon Macs in R using the <strong>R2MLwiN</strong> package <span class="citation">(<a href="#ref-mlwin">Charlton et al. 2023</a>; <a href="#ref-r2mlwin">Zhang et al. 2016</a>)</span>. This is achieved using the non-graphical version of MLwiN called <code>mlnscript</code> (<code>mlnscript.exe</code> on Windows) which has an accompanying library <code>libmln.dylib</code>.</p>
+</div>
+<div id="setup-steps" class="section level2">
+<h2>Setup steps</h2>
 <ul>
-<li><p>First obtain the <code>MLN.dmg</code> installer from the Centre for Multilevel Modelling and then install it, see the relevant download page (depending upon whether you are an academic) on the MLwiN <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">webpages</a>.</p></li>
-<li><p>On macOS it is recommended to install the files into the <code>/opt/mln/</code> directory (which you will need to create and which you will need Admin permissions to create. If you don’t have an Admin account simply create a new directory in another location).</p></li>
+<li><p>Obtain the <code>MLN.dmg</code> installer from the Centre for Multilevel Modelling and then install it, see the relevant download page (depending upon whether you are an academic) on the MLwiN <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">website</a>.</p></li>
+<li><p>On macOS it is recommended to install the files into the <code>/opt/mln/</code> directory, which you will need to create with Admin permissions, or install to another directory if you don’t have Admin permissions.</p></li>
 <li><p>Once installed we can check that <code>mlnscript</code> and <code>libmln.dylib</code> are universal binaries,</p>
-<pre><code>% lipo -archs /opt/mln/mlnscript
-x86_64 arm64
-% lipo -archs /opt/mln/libmln.dylib
-x86_64 arm64</code></pre>
+<pre class="bash"><code>lipo -archs /opt/mln/mlnscript
+#&gt; x86_64 arm64</code></pre>
+<pre class="bash"><code>lipo -archs /opt/mln/libmln.dylib
+#&gt; x86_64 arm64</code></pre>
 <p>since both architectures are listed this indicates both files are universal binaries.</p></li>
+<li><p>Enable security settings</p></li>
+<li><p>And we can check it’s running with</p>
+<pre class="bash"><code>/opt/mln/mlnscript --version
+#&gt; 3.08</code></pre></li>
 <li><p>Now we need to install the <strong>R2MLwiN</strong> package from CRAN.</p>
 <pre class="r"><code>install.packages(&quot;R2MLwiN&quot;)</code></pre></li>
-</ul>
-</div>
-<div id="running-an-example" class="section level2">
-<h2>Running an example</h2>
+<li><p>For an example we could run one of the demos in the package, which we list with</p>
+<pre class="r"><code>demo(package = &quot;R2MLwiN&quot;)</code></pre>
+<p>Then run one (output omitted)</p>
 <pre class="r"><code>library(R2MLwiN)
-# if you did not install in /opt/mln , set:
-# options(MLwiN_path = &quot;/path-to/mlnscript&quot;)</code></pre>
+# if you did not install mlnscript in /opt/mln , set:
+# options(MLwiN_path = &quot;/path-to/mlnscript&quot;)
+demo(UserGuide02)</code></pre></li>
+</ul>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
-<p>In summary, although it has <em>Win</em> in its name, the core libraries for running MLwiN on other platforms, including macOS for both Intel and Apple Silicon chips and versions of Linux, have been available for sometime.</p>
+<p>Despite having <em>Win</em> in its name, the core libraries for running MLwiN on other platforms, including macOS for both Intel and Apple Silicon processors and versions of Linux, have been available for sometime and are straightforward to use from R and the R2MLwiN package.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
