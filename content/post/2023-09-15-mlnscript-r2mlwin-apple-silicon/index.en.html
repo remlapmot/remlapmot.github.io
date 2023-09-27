@@ -27,7 +27,7 @@ link-citations: true
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>The aim of this post is to get MLwiN running on Apple Silicon Macs in R using the <strong>R2MLwiN</strong> package <span class="citation">(<a href="#ref-mlwin">Charlton et al. 2023</a>; <a href="#ref-r2mlwin">Zhang et al. 2016</a>)</span>. This is achieved using the non-graphical version of MLwiN called <code>mlnscript</code> (<code>mlnscript.exe</code> on Windows) which has an accompanying library <code>libmln.dylib</code>.</p>
+<p>This post shows how to run MLwiN on Apple Silicon Macs from R using the <strong>R2MLwiN</strong> package <span class="citation">(<a href="#ref-mlwin">Charlton et al. 2023</a>; <a href="#ref-r2mlwin">Zhang et al. 2016</a>)</span>. This is achieved using the non-graphical version of MLwiN called <code>mlnscript</code> (<code>mlnscript.exe</code> on Windows) which has an accompanying library <code>libmln.dylib</code>.</p>
 </div>
 <div id="setup-steps" class="section level2">
 <h2>Setup steps</h2>
@@ -39,16 +39,23 @@ link-citations: true
 #&gt; x86_64 arm64</code></pre>
 <pre class="bash"><code>lipo -archs /opt/mln/libmln.dylib
 #&gt; x86_64 arm64</code></pre>
-<p>since both architectures are listed this indicates both files are universal binaries.</p></li>
-<li><p>Enable security settings</p></li>
-<li><p>And we can check it’s running with</p>
+<p>since both architectures are listed this indicates both files are universal binaries. Apple Silicon Macs will use the arm64 architecture.</p></li>
+<li><p>Now we need to grant the two files permission to run. To do this run in the Terminal app</p>
+<pre class="bash"><code>/opt/mln/mlnscript --version</code></pre>
+<p>which will fail with a pop-up similar to the following.
+<img src="img/security-warning.png" width="259" />
+Click <em>Cancel</em> and then go into the <em>System settings…</em> | <em>Privacy &amp; Security</em> and scroll down and click <em>Allow Anyway</em>
+<img src="img/mlnscript-security.png" width="466" />
+Do the same for <code>libmln.dylib</code>.</p></li>
+<li><p>We can then check it’s running with</p>
 <pre class="bash"><code>/opt/mln/mlnscript --version
-#&gt; 3.08</code></pre></li>
-<li><p>Now we need to install the <strong>R2MLwiN</strong> package from CRAN.</p>
+#&gt; 3.08</code></pre>
+<p>which should output the version number, which is currently 3.08.</p></li>
+<li><p>In R we then install the <strong>R2MLwiN</strong> package from CRAN.</p>
 <pre class="r"><code>install.packages(&quot;R2MLwiN&quot;)</code></pre></li>
-<li><p>For an example we could run one of the demos in the package, which we list with</p>
+<li><p>For an example we could run one of the demos in the package, which we can list with</p>
 <pre class="r"><code>demo(package = &quot;R2MLwiN&quot;)</code></pre>
-<p>Then run one (output omitted)</p>
+<p>Then run one (output omitted), for example</p>
 <pre class="r"><code>library(R2MLwiN)
 # if you did not install mlnscript in /opt/mln , set:
 # options(MLwiN_path = &quot;/path-to/mlnscript&quot;)
@@ -57,7 +64,7 @@ demo(UserGuide02)</code></pre></li>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
-<p>Despite having <em>Win</em> in its name, the core libraries for running MLwiN on other platforms, including macOS for both Intel and Apple Silicon processors and versions of Linux, have been available for sometime and are straightforward to use from R and the R2MLwiN package.</p>
+<p>Despite having <em>Win</em> in its name, the core libraries for running MLwiN on other platforms, including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (Debian, Fedora, FreeBSD, Rocky, and Ubuntu), have been available for sometime and are straightforward to use from R via the R2MLwiN package.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
