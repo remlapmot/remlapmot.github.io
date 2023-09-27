@@ -34,7 +34,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-The aim of this post is to get MLwiN running on Apple Silicon Macs in R using the **R2MLwiN** package [@mlwin;@r2mlwin]. This is achieved using the non-graphical version of MLwiN called `mlnscript` (`mlnscript.exe` on Windows) which has an accompanying library `libmln.dylib`.
+This post shows how to run MLwiN on Apple Silicon Macs from R using the **R2MLwiN** package [@mlwin;@r2mlwin]. This is achieved using the non-graphical version of MLwiN called `mlnscript` (`mlnscript.exe` on Windows) which has an accompanying library `libmln.dylib`.
 
 ## Setup steps
 
@@ -47,25 +47,37 @@ The aim of this post is to get MLwiN running on Apple Silicon Macs in R using th
   ```{bash}
   lipo -archs /opt/mln/libmln.dylib
   ```  
-  since both architectures are listed this indicates both files are universal binaries.
-* Enable security settings
+  since both architectures are listed this indicates both files are universal binaries. Apple Silicon Macs will use the arm64 architecture.
+* Now we need to grant the two files permission to run. To do this run in the Terminal app
+  ```bash
+  /opt/mln/mlnscript --version
+  ```
+  which will fail with a pop-up similar to the following.
+  ```{r echo=FALSE}
+  knitr::include_graphics("img/security-warning.png")
+  ```
+  Click *Cancel* and then go into the *System settings...* | *Privacy & Security* and scroll down and click *Allow Anyway*
+  ```{r echo=FALSE}
+  knitr::include_graphics('img/mlnscript-security.png')
+  ```
+  Do the same for `libmln.dylib`.
 
-* And we can check it's running with
-
+* We can then check it's running with
   ```{bash}
   /opt/mln/mlnscript --version
   ```
+  which should output the version number, which is currently 3.08.
 
-* Now we need to install the **R2MLwiN** package from CRAN.
+* In R we then install the **R2MLwiN** package from CRAN.
   ```r
   install.packages("R2MLwiN")
   ```
 
-* For an example we could run one of the demos in the package, which we list with
+* For an example we could run one of the demos in the package, which we can list with
   ```r
   demo(package = "R2MLwiN")
   ```
-  Then run one (output omitted)
+  Then run one (output omitted), for example
   ```r
   library(R2MLwiN)
   # if you did not install mlnscript in /opt/mln , set:
@@ -75,6 +87,6 @@ The aim of this post is to get MLwiN running on Apple Silicon Macs in R using th
 
 ## Summary
 
-Despite having *Win* in its name, the core libraries for running MLwiN on other platforms, including macOS for both Intel and Apple Silicon processors and versions of Linux, have been available for sometime and are straightforward to use from R and the R2MLwiN package.
+Despite having *Win* in its name, the core libraries for running MLwiN on other platforms, including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (Debian, Fedora, FreeBSD, Rocky, and Ubuntu), have been available for sometime and are straightforward to use from R via the R2MLwiN package.
 
 ## References
