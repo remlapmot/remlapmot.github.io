@@ -708,13 +708,13 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "2.1.0",
+      "Version": "2.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "askpass"
       ],
-      "Hash": "273a6bb4a9844c296a459d2176673270"
+      "Hash": "2a0dc8c6adfb6f032e4d4af82d258ab5"
     },
     "pillar": {
       "Package": "pillar",
@@ -1069,7 +1069,7 @@
     },
     "withr": {
       "Package": "withr",
-      "Version": "2.5.0",
+      "Version": "2.5.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1078,7 +1078,7 @@
         "graphics",
         "stats"
       ],
-      "Hash": "c0e49a9760983e81e55cdd9be92e7182"
+      "Hash": "d77c6f74be05c33164e33fbc85540cae"
     },
     "xfun": {
       "Package": "xfun",
