@@ -34,7 +34,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-This post shows how to run MLwiN on Apple Silicon Macs from R using the **R2MLwiN** package [@mlwin;@r2mlwin]. This is achieved using the non-graphical version of MLwiN called `mlnscript` (`mlnscript.exe` on Windows) which has an accompanying library `libmln.dylib`.
+This post shows how to run MLwiN on Apple Silicon Macs from R using the **R2MLwiN** package [@mlwin;@r2mlwin]. This is achieved using the non-graphical version of MLwiN called `mlnscript` (`mlnscript.exe` on Windows) which has an accompanying library `libmln.dylib`.^[This post is essentially a more detailed explanation of the advice given on the MLwiN website, [here](https://www.bristol.ac.uk/cmm/software/support/support-faqs/commands-macros.html) and [here](https://www.bristol.ac.uk/cmm/software/mlwin/features/sysreq.html#unix).]
 
 ## Setup steps
 
