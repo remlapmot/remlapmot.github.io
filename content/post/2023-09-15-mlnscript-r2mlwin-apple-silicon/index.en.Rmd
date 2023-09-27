@@ -34,34 +34,47 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-The aim of this post is to get MLwiN running on Apple Silicon Macs in R using the **R2MLwiN** package [@mlwin;@r2mlwin]. This turns out to be pretty straightforward since there is a non-graphical version of MLwiN called `mlnscript` (`mlnscript.exe` on Windows) with an accompanying library `libmln.dylib`.
+The aim of this post is to get MLwiN running on Apple Silicon Macs in R using the **R2MLwiN** package [@mlwin;@r2mlwin]. This is achieved using the non-graphical version of MLwiN called `mlnscript` (`mlnscript.exe` on Windows) which has an accompanying library `libmln.dylib`.
 
-* First obtain the `MLN.dmg` installer from the Centre for Multilevel Modelling and then install it, see the relevant download page (depending upon whether you are an academic) on the MLwiN [webpages](https://www.bristol.ac.uk/cmm/software/mlwin/).
-* On macOS it is recommended to install the files into the `/opt/mln/` directory (which you will need to create and which you will need Admin permissions to create. If you don't have an Admin account simply create a new directory in another location).
+## Setup steps
+
+* Obtain the `MLN.dmg` installer from the Centre for Multilevel Modelling and then install it, see the relevant download page (depending upon whether you are an academic) on the MLwiN [website](https://www.bristol.ac.uk/cmm/software/mlwin/).
+* On macOS it is recommended to install the files into the `/opt/mln/` directory, which you will need to create with Admin permissions, or install to another directory if you don't have Admin permissions.
 * Once installed we can check that `mlnscript` and `libmln.dylib` are universal binaries,
+  ```{bash}
+  lipo -archs /opt/mln/mlnscript
   ```
-  % lipo -archs /opt/mln/mlnscript
-  x86_64 arm64
-  % lipo -archs /opt/mln/libmln.dylib
-  x86_64 arm64
-  ```
+  ```{bash}
+  lipo -archs /opt/mln/libmln.dylib
+  ```  
   since both architectures are listed this indicates both files are universal binaries.
+* Enable security settings
+
+* And we can check it's running with
+
+  ```{bash}
+  /opt/mln/mlnscript --version
+  ```
 
 * Now we need to install the **R2MLwiN** package from CRAN.
   ```r
   install.packages("R2MLwiN")
   ```
 
-## Running an example
-
-```{r}
-library(R2MLwiN)
-# if you did not install in /opt/mln , set:
-# options(MLwiN_path = "/path-to/mlnscript")
-```
+* For an example we could run one of the demos in the package, which we list with
+  ```r
+  demo(package = "R2MLwiN")
+  ```
+  Then run one (output omitted)
+  ```r
+  library(R2MLwiN)
+  # if you did not install mlnscript in /opt/mln , set:
+  # options(MLwiN_path = "/path-to/mlnscript")
+  demo(UserGuide02)
+  ```
 
 ## Summary
 
-In summary, although it has *Win* in its name, the core libraries for running MLwiN on other platforms, including macOS for both Intel and Apple Silicon chips and versions of Linux, have been available for sometime.
+Despite having *Win* in its name, the core libraries for running MLwiN on other platforms, including macOS for both Intel and Apple Silicon processors and versions of Linux, have been available for sometime and are straightforward to use from R and the R2MLwiN package.
 
 ## References
