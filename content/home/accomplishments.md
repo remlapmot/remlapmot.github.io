@@ -48,4 +48,14 @@ date_format = "Jan 2006"
   date_end = ""
   description = ""
 
+[[item]]
+  organization = "Pfizer"
+  organization_url = "https://www.pfizer.co.uk/"
+  title = "Pfizer studentship to study MSc in Medical Statistics, University of Leicester"
+  url = ""
+  certificate_url = ""
+  date_start = "2004-09-01"
+  date_end = "2005-08-31"
+  description = ""
+
 +++
