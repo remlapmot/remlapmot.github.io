@@ -20,6 +20,16 @@ date_format = "Jan 2006"
 
 [[item]]
   organization = "Stata"
+  organization_url = "https://www.stata.com"
+  title = "winbugsfromstata Stata package"
+  url = "https://doi.org/10.1177/1536867X0600600406"
+  certificate_url = ""
+  date_start = "2006-11-01"
+  date_end = ""
+  description = ""
+
+[[item]]
+  organization = "Stata"
   organization_url = "https://www.stata.com/"
   title = "bpbounds Stata package"
   url = "https://github.com/remlapmot/bpbounds-stata#readme"
