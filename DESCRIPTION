@@ -13,10 +13,9 @@ Imports:
     languageserver,
     markdown,
     miniUI,
-    ps,
     processx,
+    ps,
     xfun
 Encoding: UTF-8
-SystemRequirements:
-    pandoc (>= 2.3.1) - https://pandoc.org/
-    Stata (>= 17.0) - https://www.stata.com/
+SystemRequirements:pandoc (>= 2.3.1) - https://pandoc.org/ Stata (>=
+    17.0) - https://www.stata.com/
