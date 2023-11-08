@@ -39,7 +39,7 @@
   parent = "blog"
   name = "Recent Posts"
   url = "#posts"
-  weight = 10
+  weight = 5
 
 [[main]]
   parent = "blog"
@@ -51,7 +51,7 @@
   parent = "blog"
   name = "Blogroll"
   url = "/blogroll/"
-  weight = 10
+  weight = 30
   
 [[main]]
   parent = "blog"
