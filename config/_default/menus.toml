@@ -59,6 +59,11 @@
   url = "/tag/r/"
   weight = 10
 
+[[main]]
+  name = "About"
+  url = "/about/"
+  weight = 10
+
 #[[main]]
 #  name = "Projects"
 #  url = "#projects"
