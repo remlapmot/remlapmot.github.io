@@ -161,7 +161,7 @@
     },
     "bslib": {
       "Package": "bslib",
-      "Version": "0.6.0",
+      "Version": "0.6.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -178,7 +178,7 @@
         "rlang",
         "sass"
       ],
-      "Hash": "fac047b773ad75cea6e2a25214b09ca0"
+      "Hash": "c0d8599494bc7fb408cd206bbdd9cab0"
     },
     "cachem": {
       "Package": "cachem",
