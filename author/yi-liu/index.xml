@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yi Liu | Dr Tom Palmer</title>
+    <link>https://remlapmot.github.io/author/yi-liu/</link>
+      <atom:link href="https://remlapmot.github.io/author/yi-liu/index.xml" rel="self" type="application/rss+xml" />
+    <description>Yi Liu</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 01 Dec 2023 11:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <title>Yi Liu</title>
+      <link>https://remlapmot.github.io/author/yi-liu/</link>
+    </image>
+    
+    <item>
+      <title>Using Git, GitHub Desktop, and GitHub for novice and experienced users</title>
+      <link>https://remlapmot.github.io/talk/2023_code-clinic/</link>
+      <pubDate>Fri, 01 Dec 2023 11:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/talk/2023_code-clinic/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
