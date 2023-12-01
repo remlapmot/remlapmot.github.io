@@ -7,7 +7,7 @@ address:
   region: 
   street: 
 all_day: true
-authors: ["admin", Hannah, Sallis, Kate Tilling, George Davey Smith, Marcus Munafò]
+authors: ["admin", Hannah Sallis, Kate Tilling, George Davey Smith, Marcus Munafò]
 date: "2023-05-22T13:00:00"
 date_end: ""
 event: Genetics and Confounding Meeting
