@@ -12,7 +12,7 @@ This repo contains the source files and built site for my personal [website](htt
     ```
 * Install Hugo
     ``` r
-    blogdown::install_hugo(version = "0.120.4")
+    blogdown::install_hugo(version = "0.121.0")
     ```
 * Create a new directory called `GITHUB_USERNAME.github.io` and initialise this as a Git repo (e.g., using GitHub Desktop)
 * Within this empty repo create a new Academic site
@@ -27,7 +27,7 @@ This repo contains the source files and built site for my personal [website](htt
     ```  
 * Add the version of Hugo in a project `.Rprofile` file containing the line
     ```r
-    options(blogdown.hugo.version = "0.120.4")
+    options(blogdown.hugo.version = "0.121.0")
     ```  
 * Serve the site as you build it (nb. simply opening `index.html` in a browser doesn't render correctly because a web server is required to be running)
     ``` r
