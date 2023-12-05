@@ -86,14 +86,14 @@
     },
     "Statamarkdown": {
       "Package": "Statamarkdown",
-      "Version": "0.8.0",
+      "Version": "0.9.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "knitr",
         "xfun"
       ],
-      "Hash": "cd1f4e37c9ed0e0df1d48180025e0670"
+      "Hash": "e059140679930331f28283a1f6e9156a"
     },
     "backports": {
       "Package": "backports",
