@@ -8,7 +8,7 @@ address:
   street: 
 all_day: true
 authors: ["admin"]
-date: "2009-11-01T00:00:00Z"
+date: "2009-11-14T12:00:00Z"
 date_end: ""
 event: 
 event_url: 
