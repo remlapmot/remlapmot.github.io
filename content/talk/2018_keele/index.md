@@ -31,7 +31,7 @@ summary:
 tags: []
 title: "Directed acyclic graphs: what are they and what are they useful for?"
 url_code: ""
-url_pdf: "talk/2018-12-04_palmer-keele-dags.pdf"
-url_slides: ""
+url_pdf: ""
+url_slides: "talk/2018-12-04_palmer-keele-dags.pdf"
 url_video: ""
 ---
