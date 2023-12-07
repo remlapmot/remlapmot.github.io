@@ -21,7 +21,7 @@ links:
 #  icon_pack: fab
 #  name: Follow
 #  url: https://twitter.com/georgecushen
-location: "Keele University"
+location: "Keele University, Keele"
 math: true
 projects:
 - internal-project
