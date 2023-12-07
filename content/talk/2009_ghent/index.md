@@ -35,4 +35,3 @@ url_pdf: ""
 url_slides: "talk/ghent_presentation.pdf"
 url_video: ""
 ---
-
