@@ -21,7 +21,7 @@ links:
 #  icon_pack: fab
 #  name: Follow
 #  url: https://twitter.com/georgecushen
-location: Göttingen, Germany
+location: Department of Medical Statistics, University Medical Center Göttingen, Georg-August-Universität, Göttingen, Germany
 math: true
 projects:
 - internal-project
