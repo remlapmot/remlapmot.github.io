@@ -31,7 +31,7 @@ summary:
 tags: []
 title: "Some topics from Mendelian randomization"
 url_code: ""
-url_pdf: "talk/2017-03-07_mr-talk.pdf"
-url_slides: ""
+url_pdf: ""
+url_slides: "talk/2017-03-07_mr-talk.pdf"
 url_video: ""
 ---
