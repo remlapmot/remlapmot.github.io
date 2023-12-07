@@ -29,7 +29,7 @@ publishDate:
 slides: 
 summary: 
 tags: []
-title: ""
+title: "Lack of identification in structural mean models and multiple paired comparisons for investigating pleiotropy"
 url_code: ""
 url_pdf: ""
 url_slides: "talk/2014-09-09_palmer_IEU.pdf"
