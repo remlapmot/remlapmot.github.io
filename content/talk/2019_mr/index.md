@@ -32,6 +32,7 @@ tags: []
 title: "bpbounds: R package and web app"
 url_code: ""
 url_pdf: "talk/mr2019-tom-palmer-poster-a4.pdf"
-url_slides: "https://remlapmot.github.io/mr2019-tom-palmer-poster/"
+# url_slides: "https://remlapmot.github.io/mr2019-tom-palmer-poster/"
+url_slides: ""
 url_video: ""
 ---
