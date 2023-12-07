@@ -356,10 +356,26 @@ contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;binary&amp;quot;)
     </item>
     
     <item>
+      <title></title>
+      <link>https://remlapmot.github.io/talk/2014_ieu/</link>
+      <pubDate>Tue, 09 Sep 2014 12:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/talk/2014_ieu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Generalised method of moments estimation of mediation models and structural mean models</title>
       <link>https://remlapmot.github.io/talk/2014_bk/</link>
       <pubDate>Wed, 12 Mar 2014 13:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/talk/2014_bk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Topics in instrumental variable estimation: structural mean models and bounds</title>
+      <link>https://remlapmot.github.io/talk/2013_rss/</link>
+      <pubDate>Thu, 07 Nov 2013 16:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/talk/2013_rss/</guid>
       <description></description>
     </item>
     
@@ -414,8 +430,16 @@ contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;binary&amp;quot;)
     <item>
       <title>Estimation of structural mean models with multiple instruments</title>
       <link>https://remlapmot.github.io/talk/2011_rss/</link>
-      <pubDate>Wed, 25 May 2011 13:00:00 +0000</pubDate>
+      <pubDate>Thu, 26 May 2011 13:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/talk/2011_rss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mendelian randomization: using genotypes as instrumental variables in epidemiological studies</title>
+      <link>https://remlapmot.github.io/talk/2011_rss-avon/</link>
+      <pubDate>Thu, 10 Feb 2011 16:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/talk/2011_rss-avon/</guid>
       <description></description>
     </item>
     
@@ -438,7 +462,7 @@ contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;binary&amp;quot;)
     <item>
       <title>Including multiple instrumental variables in Mendelian randomization analyses</title>
       <link>https://remlapmot.github.io/talk/2009_ghent/</link>
-      <pubDate>Sun, 01 Nov 2009 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 14 Nov 2009 12:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/talk/2009_ghent/</guid>
       <description></description>
     </item>
