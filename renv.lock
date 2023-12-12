@@ -206,14 +206,14 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.6.1",
+      "Version": "3.6.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "89e6d8219950eac806ae0c489052048a"
+      "Hash": "1216ac65ac55ec0058a6f75d7ca0fd52"
     },
     "codetools": {
       "Package": "codetools",
@@ -277,17 +277,16 @@
     },
     "desc": {
       "Package": "desc",
-      "Version": "1.4.2",
+      "Version": "1.4.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "R6",
         "cli",
-        "rprojroot",
         "utils"
       ],
-      "Hash": "6b9602c7ebbe87101a9c8edb6e8b6d21"
+      "Hash": "99b79fcbd6c4d1ce087f5c5c758b384f"
     },
     "digest": {
       "Package": "digest",
@@ -579,7 +578,7 @@
     },
     "pkgbuild": {
       "Package": "pkgbuild",
-      "Version": "1.4.2",
+      "Version": "1.4.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -587,13 +586,10 @@
         "R6",
         "callr",
         "cli",
-        "crayon",
         "desc",
-        "prettyunits",
-        "processx",
-        "rprojroot"
+        "processx"
       ],
-      "Hash": "beb25b32a957a22a5c301a9e441190b3"
+      "Hash": "c0143443203205e6a2760ce553dafc24"
     },
     "pkgload": {
       "Package": "pkgload",
@@ -616,19 +612,9 @@
       ],
       "Hash": "903d68319ae9923fb2e2ee7fa8230b91"
     },
-    "prettyunits": {
-      "Package": "prettyunits",
-      "Version": "1.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "6b01fc98b1e86c4f705ce9dcfd2f57c7"
-    },
     "processx": {
       "Package": "processx",
-      "Version": "3.8.2",
+      "Version": "3.8.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -637,7 +623,7 @@
         "ps",
         "utils"
       ],
-      "Hash": "3efbd8ac1be0296a46c55387aeace0f3"
+      "Hash": "82d48b1aec56084d9438dbf98087a7e9"
     },
     "promises": {
       "Package": "promises",
@@ -870,7 +856,7 @@
     },
     "stringi": {
       "Package": "stringi",
-      "Version": "1.8.2",
+      "Version": "1.8.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -879,7 +865,7 @@
         "tools",
         "utils"
       ],
-      "Hash": "e68c45f81639001af5f1b15cd3599bbd"
+      "Hash": "058aebddea264f4c99401515182e656a"
     },
     "stringr": {
       "Package": "stringr",
@@ -1002,10 +988,10 @@
     },
     "yaml": {
       "Package": "yaml",
-      "Version": "2.3.7",
+      "Version": "2.3.8",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0d0056cc5383fbc240ccd0cb584bf436"
+      "Hash": "29240487a071f535f5e5d5a323b7afbd"
     }
   }
 }
