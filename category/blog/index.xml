@@ -5,12 +5,27 @@
     <link>https://remlapmot.github.io/category/blog/</link>
       <atom:link href="https://remlapmot.github.io/category/blog/index.xml" rel="self" type="application/rss+xml" />
     <description>Blog</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 24 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 07 Jan 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Blog</title>
       <link>https://remlapmot.github.io/category/blog/</link>
     </image>
+    
+    <item>
+      <title>My #GitHubUnwrapped 2023!</title>
+      <link>https://remlapmot.github.io/post/2024/github-unwrapped-2023/</link>
+      <pubDate>Sun, 07 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2024/github-unwrapped-2023/</guid>
+      <description>
+
+
+&lt;p&gt;My #GitHubUnwrapped 2023!&lt;/p&gt;
+&lt;iframe src=&#34;https://drive.google.com/file/d/1bhdY7FPgmYJo_loqIChBJOZ8vdm2mEpA/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;
+&lt;/iframe&gt;
+&lt;p&gt;Made with &lt;a href=&#34;https://www.githubunwrapped.com/&#34; class=&#34;uri&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Fuller reproducibility in Stata ado-files and programs: setting the version and user version</title>
