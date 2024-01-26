@@ -53,6 +53,9 @@ social:
 - icon: rocket
   icon_pack: fa
   link: https://remlapmot.r-universe.dev/
+- icon: rocket
+  icon_pack: fa
+  link: https://mrcieu.r-universe.dev/
 superuser: true
 title: Tom Palmer
 user_groups:
