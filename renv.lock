@@ -117,7 +117,7 @@
     },
     "blogdown": {
       "Package": "blogdown",
-      "Version": "1.18",
+      "Version": "1.19",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -133,7 +133,7 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "17045c17691502267d716133eb7058c8"
+      "Hash": "c6f9a963617c1947fe759a2904adf4ad"
     },
     "bookdown": {
       "Package": "bookdown",
@@ -234,10 +234,10 @@
     },
     "commonmark": {
       "Package": "commonmark",
-      "Version": "1.9.0",
+      "Version": "1.9.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d691c61bff84bd63c383874d2d0c3307"
+      "Hash": "5d8225445acb167abf7797de48b2ee3c"
     },
     "cpp11": {
       "Package": "cpp11",
@@ -392,7 +392,7 @@
     },
     "httpuv": {
       "Package": "httpuv",
-      "Version": "1.6.13",
+      "Version": "1.6.14",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -403,7 +403,7 @@
         "promises",
         "utils"
       ],
-      "Hash": "d23d2879001f3d82ee9dc38a9ef53c4c"
+      "Hash": "16abeb167dbf511f8cc0552efaf05bab"
     },
     "jquerylib": {
       "Package": "jquerylib",
