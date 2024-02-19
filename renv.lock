@@ -193,7 +193,7 @@
     },
     "callr": {
       "Package": "callr",
-      "Version": "3.7.3",
+      "Version": "3.7.4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -202,7 +202,7 @@
         "processx",
         "utils"
       ],
-      "Hash": "9b2191ede20fa29828139b9900922e51"
+      "Hash": "01fea59805eb6bf38a0db186cd3cb5f4"
     },
     "cli": {
       "Package": "cli",
@@ -798,7 +798,7 @@
     },
     "servr": {
       "Package": "servr",
-      "Version": "0.28",
+      "Version": "0.29",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -808,7 +808,7 @@
         "mime",
         "xfun"
       ],
-      "Hash": "70954f91166202e83476043dd1942071"
+      "Hash": "d8a65e80fdc852bd6a0635664260a6e3"
     },
     "shiny": {
       "Package": "shiny",
@@ -941,14 +941,15 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.41",
+      "Version": "0.42",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
+        "grDevices",
         "stats",
         "tools"
       ],
-      "Hash": "460a5e0fe46a80ef87424ad216028014"
+      "Hash": "fd1349170df31f7a10bd98b0189e85af"
     },
     "xml2": {
       "Package": "xml2",
