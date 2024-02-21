@@ -193,7 +193,7 @@
     },
     "callr": {
       "Package": "callr",
-      "Version": "3.7.4",
+      "Version": "3.7.5",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -202,7 +202,7 @@
         "processx",
         "utils"
       ],
-      "Hash": "01fea59805eb6bf38a0db186cd3cb5f4"
+      "Hash": "9f0e4fae4963ba775a5e5c520838c87b"
     },
     "cli": {
       "Package": "cli",
