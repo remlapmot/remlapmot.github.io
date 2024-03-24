@@ -797,7 +797,7 @@
     },
     "servr": {
       "Package": "servr",
-      "Version": "0.29",
+      "Version": "0.30",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -807,7 +807,7 @@
         "mime",
         "xfun"
       ],
-      "Hash": "d8a65e80fdc852bd6a0635664260a6e3"
+      "Hash": "562294886e51319dfad3f3e6e61fb0b8"
     },
     "shiny": {
       "Package": "shiny",
