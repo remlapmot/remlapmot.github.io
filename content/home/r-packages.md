@@ -88,4 +88,14 @@ date_format = "Jan 2006"
   date_end = ""
   description = ""
 
+[[item]]
+  organization = "R"
+  organization_url = "https://www.r-project.org"
+  title = "ieugwasr R package"
+  url = "https://mrcieu.github.io/ieugwasr/"
+  certificate_url = ""
+  date_start = "2024-03-25"
+  date_end = ""
+  description = ""
+
 +++
