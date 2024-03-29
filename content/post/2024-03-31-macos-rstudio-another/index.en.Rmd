@@ -1,5 +1,5 @@
 ---
-title: Creating an Automator app to launch another instance of RStudio on macOS
+title: How to create an Automator app to launch a new instance of RStudio Desktop on macOS
 author: Tom Palmer
 date: '2024-03-31'
 slug: macos-rstudio-another
@@ -17,6 +17,45 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'Screenshot of the Automator app to launch another instance of RStudio in the macOS dock.'
+  alt_text: 'Screenshot of an Automator app to launch a new instance of RStudio Desktop in the macOS dock.'
 projects: []
 ---
+
+## Introduction: the problem -- how to obtain a second instance of RStudio Desktop
+
+On macOS when RStudio Desktop is open it can be a bit inconvenient to open a second (or third or fourth) instance of it.
+For example, it's not possible to simply click the icon in the dock (or right click on that etc) as we might do on Windows.
+Within RStudio Desktop we could select *File | Open File...* or *File | Open Project...* but I've never found that very intuitive and somehow I've never got used to using the command pallette.
+It turns out that in a terminal we can issue the following `open` command to achieve opening another instance of RStudio Desktop.
+
+```bash
+open -n -a RStudio.app
+```
+
+## Making an Automator app to open a new instance of RStudio Desktop
+
+macOS comes with Automator, open that from your Applications directory.
+Then select *File | New* and select *Application* and click *Choose*.
+Then from the left most menu select *Utilities* double click *Run Shell Script*.
+Leave the shell as zsh but delete the `cat` text in the box with the `open` command above.
+
+![Screenshot of configuring the automator app to run a shell script to open a new instance of RStudio Desktop.](img/automator-app.png)
+
+Then press Cmd + S or *File | Save* and save your application in your Applications folder.
+Give the app a distinct name such as *RStudio-another.app* or whatever you prefer.
+Now quit Automator.
+
+We can assign a nice icon to our new app.^[I follow the approach detailed on [this](https://www.idownloadblog.com/2023/01/19/how-to-change-app-icons-mac/) blog.]
+
+* First download a nice icon from say [this](https://github.com/amirmasoudabdol/rstudio-icons/tree/main/Icons/macOS/Rectangle) repo of logos kindly designed for RStudio (I chose the dark one).
+* Then navigate to the our new app in Finder and press <kbd>Cmd</kbd> + <kbd>I<kbd>.
+* Then drag the *.icns* file onto the icon in the top left corner of the info box.
+And tada your app will now use this icon!
+
+And you can even drag the app from Finder onto your dock.
+
+![Screenshot of an app to open a second instance of RStudio Desktop.](featured.png)
+
+## Summary
+
+We have created an Automator application which runs a shell script to open a new instance of RStudio Desktop.
