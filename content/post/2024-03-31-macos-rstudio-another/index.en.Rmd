@@ -26,7 +26,8 @@ projects: []
 On macOS when RStudio Desktop is open it can be a bit inconvenient to open a second (or third or fourth) instance of it.
 For example, it's not possible to simply click the icon in the dock (or right click on that etc) as we might do on Windows.
 Within RStudio Desktop we could select *File | Open File...* or *File | Open Project...* but I've never found that very intuitive and somehow I've never got used to using the command pallette.
-It turns out that in a terminal we can issue the following `open` command to achieve opening another instance of RStudio Desktop.
+If you have several directories configured as RStudio projects (with *.Rproj*) files you could open those from the top right project drop down menu or double click them from within Finder.
+It turns out that in a terminal we can issue the following `open` command to achieve opening another instance of RStudio Desktop (note RStudio Desktop needs to be installed in your Applications directory for this to work).
 
 ```bash
 open -n -a RStudio.app
