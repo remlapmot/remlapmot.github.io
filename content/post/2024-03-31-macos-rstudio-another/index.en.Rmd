@@ -48,7 +48,7 @@ knitr::include_graphics("img/automator-app.png")
 ```
 
 Then press Cmd + S or *File | Save* and save your application in your Applications folder.
-Give the app a distinct name such as *RStudio-another.app* or whatever you prefer and then quit Automator.
+Give the app a distinct name such as *Rstudio-another.app* or whatever you prefer and then quit Automator.
 
 Next we would like our app to have a nice icon.^[I follow the approach detailed on [this](https://www.idownloadblog.com/2023/01/19/how-to-change-app-icons-mac/) blog.]
 
