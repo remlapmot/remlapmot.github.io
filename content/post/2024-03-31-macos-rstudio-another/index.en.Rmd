@@ -1,0 +1,22 @@
+---
+title: Creating an Automator app to launch another instance of RStudio on macOS
+author: Tom Palmer
+date: '2024-03-31'
+slug: macos-rstudio-another
+categories:
+  - Blog
+tags:
+  - R
+  - macOS
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2024-03-29T12:12:44Z'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of the Automator app to launch another instance of RStudio in the macOS dock.'
+projects: []
+---
