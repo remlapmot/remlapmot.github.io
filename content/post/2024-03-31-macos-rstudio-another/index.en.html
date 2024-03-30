@@ -26,11 +26,13 @@ projects: []
 
 <div id="introduction-how-to-open-a-second-instance-of-rstudio-desktop-on-macos" class="section level2">
 <h2>Introduction: how to open a second instance of RStudio Desktop on macOS</h2>
-<p>On macOS when RStudio Desktop is open it can be inconvenient to open a second (or third or fourth) instance of it.
-For example, it’s not possible to simply click the icon in the dock (or right click on that etc.) as we might do on Windows.</p>
-<p>Within RStudio Desktop we could select <em>File | Open File…</em> or <em>File | Open Project…</em> but I’ve never found that very intuitive and somehow I’ve never got used to using RStudio’s command palette.
-If you have several directories configured as RStudio projects (with <em>.Rproj</em>) files you could open those from the top right project drop down menu or double click them from within Finder.</p>
-<p>It turns out that in a terminal we can issue the following <code>open</code> command to achieve opening a new instance of RStudio Desktop (note RStudio Desktop needs to be installed in your Applications directory for this to work).</p>
+<p>On macOS when RStudio Desktop is open it can be inconvenient to open a second (or third or fourth) instance of it.</p>
+<p>If you left click the RStudio Desktop icon nothing happens. If you right click on the RStudio Desktop icon there is a convenient <em>New RStudio Window</em>. The problem with this is that by default if you have an RStudio project open the new RStudio window is also opened in that project. However, that can be overcome by opening the RStudio preference pane and in the first tab (<em>General</em> | <em>Basic</em>) deselecting the boxes relating to <em>Restore most recently opened project at startup</em> and <em>Restore previousy open source documents at startup</em>.</p>
+<p><img src="img/rstudio-preference-pane.png" alt="Screenshot of RStudio Desktop preference pane." width="630" /></p>
+<p><img src="img/new-rstudio-window.png" alt="Screenshot of right clicking on the RStudio Desktop icon in the dock." width="504" /></p>
+<p>Alternatively, within RStudio Desktop we could select <em>File | Open Project…</em> but I’ve never found that very intuitive and somehow I’ve never got used to using RStudio’s command palette.
+If you have several directories configured as RStudio projects (with <em>.Rproj</em> files) that you’ve opened before you could open those from the top right project drop down menu or double click them from within Finder.</p>
+<p>But let’s say we want an even more convenient way of doing this – an icon in the dock. It turns out that in a terminal we can issue the following <code>open</code> command to achieve opening a new instance of RStudio Desktop (note RStudio Desktop needs to be installed in your Applications directory for this to work).</p>
 <pre class="bash"><code>open -n -a RStudio.app</code></pre>
 </div>
 <div id="making-an-automator-app-to-open-a-new-instance-of-rstudio-desktop" class="section level2">
@@ -40,12 +42,12 @@ Then select <em>File | New</em> and select <em>Application</em> and click <em>Ch
 Then from the left most menu select <em>Utilities</em> and double click <em>Run Shell Script</em>.
 In the main window on the right, leave the shell as zsh and replace the <code>cat</code> text in the box with the <code>open</code> command above.</p>
 <p><img src="img/automator-app.png" alt="Screenshot of configuring the automator app to run a shell script to open a new instance of RStudio Desktop." width="992" /></p>
-<p>Then press Cmd + S or <em>File | Save</em> and save your application in your Applications folder.
-Give the app a distinct name such as <em>Rstudio-another.app</em> or whatever you prefer and then quit Automator.</p>
+<p>Then press <kbd>Cmd</kbd> + <kbd>S</kbd> or <em>File | Save</em> and save your application in your Applications folder.
+Give the app a distinct name such as <em>RStudio-new-instance.app</em> or whatever you prefer and then quit Automator.</p>
 <p>Next we would like our app to have a nice icon.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <ul>
 <li>First download a nice icon from say <a href="https://github.com/amirmasoudabdol/rstudio-icons/tree/main/Icons/macOS/Rectangle">this</a> repo of logos kindly designed for RStudio (I chose the dark one).</li>
-<li>Then navigate to the our new app in Finder and press <kbd>Cmd</kbd> + <kbd>I<kbd>.</li>
+<li>Then navigate to the our new app in Finder and press <kbd>Cmd</kbd> + <kbd>I</kbd>.</li>
 <li>Then drag the <em>.icns</em> file onto the icon in the top left corner of the info box.
 And tada your app will now use this icon!</li>
 </ul>
@@ -59,6 +61,6 @@ And tada your app will now use this icon!</li>
 <div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
-<li id="fn1"><p>I follow the approach detailed on <a href="https://www.idownloadblog.com/2023/01/19/how-to-change-app-icons-mac/">this</a> blog.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>I follow the approach detailed on <a href="https://www.idownloadblog.com/2023/01/19/how-to-change-app-icons-mac/">this</a> blog and on the <a href="https://github.com/amirmasoudabdol/rstudio-icons/tree/main?tab=readme-ov-file#usage">README</a> where I obtained the icon.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
