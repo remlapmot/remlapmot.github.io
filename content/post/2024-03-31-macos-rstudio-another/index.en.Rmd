@@ -72,6 +72,12 @@ And you can even drag the app from Finder onto your dock from where you can simp
 knitr::include_graphics('featured.png')
 ```
 
+And because the new application is in our Applications directory it is found by Alfred (and hopefully Raycast).
+
+```{r echo=FALSE, fig.alt="Screenshot of using Alfred to launch RStudio Desktop."}
+knitr::include_graphics('img/alfred-launch-rstudio.png')
+```
+
 ## Summary
 
 We have created an Automator application which runs a shell script to open a new instance of RStudio Desktop. We have then given this application a new icon and we have placed this on our dock.
