@@ -39,7 +39,7 @@ knitr::include_graphics('img/new-rstudio-window.png')
 Alternatively, within RStudio Desktop we could select *File | Open Project...* but I've never found that very intuitive and somehow I've never got used to using RStudio's command palette.
 If you have several directories configured as RStudio projects (with *.Rproj* files) that you've opened before you could open those from the top right project drop down menu or double click them from within Finder.
 
-But let's say we want an even more convenient way of doing this -- an icon in the dock. It turns out that in a terminal we can issue the following `open` command to achieve opening a new instance of RStudio Desktop (note RStudio Desktop needs to be installed in your Applications directory for this to work).
+But let's say we want an even more convenient way of doing this -- an icon in the dock. Thanks to [this](https://stackoverflow.com/a/40673644) Stackoverflow answer, it turns out that in a terminal we can issue the following `open` command to achieve opening a new instance of RStudio Desktop (note RStudio Desktop needs to be installed in your Applications directory for this to work).
 
 ```bash
 open -n -a RStudio.app
