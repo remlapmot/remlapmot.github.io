@@ -28,9 +28,9 @@ On macOS when RStudio Desktop is open it can be inconvenient to open a second (o
 
 If you left click the RStudio Desktop icon nothing happens. If you right click on the RStudio Desktop icon there is a convenient *New RStudio Window*. The problem with this is that by default if you have an RStudio project open the new RStudio window is also opened in that project. However, that can be overcome by opening the RStudio preference pane and in the first tab (*General* | *Basic*) deselecting the boxes relating to *Restore most recently opened project at startup* and *Restore previousy open source documents at startup*.
 
-<img src="/post/2024/macos-rstudio-another/img/rstudio-preference-pane.png" alt="Screenshot of RStudio Desktop preference pane." width="630">
+<img src="/post/2024/macos-rstudio-another/img/rstudio-preference-pane.png" alt="Screenshot of RStudio Desktop preference pane." width="630" style="display: block; margin: auto;">
 
-<img src="/post/2024/macos-rstudio-another/img/new-rstudio-window.png" alt="Screenshot of right clicking on the RStudio Desktop icon in the dock." width="504">
+<img src="/post/2024/macos-rstudio-another/img/new-rstudio-window.png" alt="Screenshot of right clicking on the RStudio Desktop icon in the dock." width="504" style="display: block; margin: auto;">
 
 Alternatively, within RStudio Desktop we could select *File | Open Project...* but I've never found that very intuitive and somehow I've never got used to using RStudio's command palette.
 If you have several directories configured as RStudio projects (with *.Rproj* files) that you've opened before you could open those from the top right project drop down menu or double click them from within Finder.
@@ -48,7 +48,7 @@ Then select *File | New* and select *Application* and click *Choose*.
 Then from the left most menu select *Utilities* and double click *Run Shell Script*.
 In the main window on the right, leave the shell as zsh and replace the `cat` text in the box with the `open` command above.
 
-<img src="/post/2024/macos-rstudio-another/img/automator-app.png" alt="Screenshot of configuring the automator app to run a shell script to open a new instance of RStudio Desktop." width="992">
+<img src="/post/2024/macos-rstudio-another/img/automator-app.png" alt="Screenshot of configuring the automator app to run a shell script to open a new instance of RStudio Desktop." width="992" style="display: block; margin: auto;">
 
 Then press <kbd>Cmd</kbd> + <kbd>S</kbd> or *File | Save* and save your application in your Applications folder.
 Give the app a distinct name such as *RStudio-new-instance.app* or whatever you prefer and then quit Automator.
@@ -62,11 +62,11 @@ And tada your app will now use this icon!
 
 And you can even drag the app from Finder onto your dock from where you can simply click the icon to open as many instances of RStudio Desktop as you like.
 
-<img src="/post/2024/macos-rstudio-another/featured.png" alt="Screenshot of our new app's icon in the dock." width="319">
+<img src="/post/2024/macos-rstudio-another/featured.png" alt="Screenshot of our new app's icon in the dock." width="319" style="display: block; margin: auto;">
 
 And because the new application is in our Applications directory it is found by Alfred (and hopefully Raycast).
 
-<img src="/post/2024/macos-rstudio-another/img/alfred-launch-rstudio.png" alt="Screenshot of using Alfred to launch RStudio Desktop." width="719">
+<img src="/post/2024/macos-rstudio-another/img/alfred-launch-rstudio.png" alt="Screenshot of using Alfred to launch RStudio Desktop." width="719" style="display: block; margin: auto;">
 
 ## Summary
 
