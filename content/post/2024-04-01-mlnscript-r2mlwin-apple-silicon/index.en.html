@@ -1,7 +1,7 @@
 ---
 title: 'Running MLwiN using mlnscript via the R2MLwiN R package on Apple Silicon Macs '
-author: Package Build
-date: '2023-09-22'
+author: Tom Palmer
+date: '2024-04-02'
 slug: mlnscript-r2mlwin-apple-silicon
 categories:
   - Blog
@@ -9,9 +9,9 @@ tags:
   - R
   - MLwiN
 subtitle: ''
-summary: 'How to run MLwiN on Apple Silicon Macs via R.'
+summary: 'How to run MLwiN natively on Apple Silicon Macs via R and the R2MLwiN package.'
 authors: []
-#lastmod: '2023-09-15T13:02:36+01:00'
+lastmod: '2024-04-01T20:18:00+01:00'
 featured: no
 draft: no
 image:
@@ -27,53 +27,85 @@ link-citations: true
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>This post shows how to run MLwiN on Apple Silicon Macs from R using the <strong>R2MLwiN</strong> package <span class="citation">(<a href="#ref-mlwin">Charlton et al. 2023</a>; <a href="#ref-r2mlwin">Zhang et al. 2016</a>)</span>. This is achieved using the non-graphical version of MLwiN called <code>mlnscript</code> (<code>mlnscript.exe</code> on Windows) which has an accompanying library <code>libmln.dylib</code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>MLwiN from the Centre for Multilevel Modelling (CMM) at the University of Bristol (where disclaimer, I also work) is a fantastic piece of software <span class="citation">(<a href="#ref-mlwin">Charlton et al. 2024</a>)</span>. The name suggests it only works on Windows, but as we’ll find out this is very much not the case.</p>
+<p>However, in the past this was sort of true because to make it work on a Mac (or Linux machine) with an Intel processor one would need to run it using <a href="https://www.winehq.org/">Wine</a>.</p>
+<p>More recently, CMM have cleverly made the MLwiN libraries available for other operating systems. The files for macOS are universal binaries which means that they run natively on both Intel and Apple Silicon Macs. Let’s find out how to set this up.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
-<div id="setup-steps" class="section level2">
-<h2>Setup steps</h2>
+<div id="setting-up-mlwin-on-an-apple-silicon-mac" class="section level2">
+<h2>Setting up MLwiN on an Apple Silicon Mac</h2>
 <ul>
-<li><p>Obtain the <code>MLN.dmg</code> installer from the Centre for Multilevel Modelling and then install it, see the relevant download page (depending upon whether you are an academic) on the MLwiN <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">website</a>.</p></li>
-<li><p>On macOS it is recommended to install the files into the <code>/opt/mln/</code> directory, which you will need to create with Admin permissions, or install to another directory if you don’t have Admin permissions.</p></li>
-<li><p>Once installed we can check that <code>mlnscript</code> and <code>libmln.dylib</code> are universal binaries,</p>
+<li><p>Obtain the <em>MLN.dmg</em> installer from the Centre for Multilevel Modelling and install it. See the relevant download page (depending upon whether you are an academic) on the MLwiN <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">website</a>.</p></li>
+<li><p>On macOS it is recommended to install the files into the <em>/opt/mln/</em> directory, which you will need to create with Admin permissions, or install to another directory if you don’t have Admin permissions.</p></li>
+<li><p>Once installed we can check that <em>mlnscript</em> and <em>libmln.dylib</em> are universal binaries as follows (we could also use the <code>file</code> command).</p>
 <pre class="bash"><code>lipo -archs /opt/mln/mlnscript
-#&gt; x86_64 arm64</code></pre>
+## x86_64 arm64</code></pre>
 <pre class="bash"><code>lipo -archs /opt/mln/libmln.dylib
-#&gt; x86_64 arm64</code></pre>
-<p>since both architectures are listed this indicates both files are universal binaries. Apple Silicon Macs will use the arm64 architecture.</p></li>
-<li><p>Now we need to grant the two files permission to run. To do this run in the Terminal app</p>
+## x86_64 arm64</code></pre>
+<p>Since both architectures are listed this indicates both files are universal binaries. Apple Silicon Macs will use the arm64 architecture.</p></li>
+<li><p>Now we need to grant the two files permission to run. To do this run the following in the Terminal app.</p>
 <pre class="bash"><code>/opt/mln/mlnscript --version</code></pre>
-<p>which will fail with a pop-up similar to the following.
-<img src="img/security-warning.png" width="259" />
-Click <em>Cancel</em> and then go into the <em>System settings…</em> | <em>Privacy &amp; Security</em> and scroll down and click <em>Allow Anyway</em>
-<img src="img/mlnscript-security.png" width="466" />
-Do the same for <code>libmln.dylib</code>.</p></li>
-<li><p>We can then check it’s running with</p>
+<p>On first run, this will fail with a pop-up similar to the following.</p>
+<p><img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-warning.png" alt="Screenshot of macOS security warning pop-up." width="300" style="display: block; margin: auto;"></p>
+<p>Click <em>Cancel</em> and then go into the <em>System settings…</em> | <em>Privacy &amp; Security</em> and scroll down and click <em>Allow Anyway</em>.</p>
+<p><img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlnscript-security.png" alt="Screenshot of macOS privacy and security setting." style="display: block; margin: auto;"></p>
+<p>You will need to repeat the same process for <em>libmln.dylib</em> when you first run a model.</p></li>
+<li><p>We can then check <em>mlnscript</em> can run with say</p>
 <pre class="bash"><code>/opt/mln/mlnscript --version
-#&gt; 3.08</code></pre>
-<p>which should output the version number, which is currently 3.08.</p></li>
-<li><p>In R we then install the <strong>R2MLwiN</strong> package from CRAN.</p>
+## 3.10</code></pre>
+<p>which should output the version number, which is currently 3.10.</p></li>
+<li><p>In R we then install the <strong>R2MLwiN</strong> package from CRAN <span class="citation">(<a href="#ref-r2mlwin">Zhang et al. 2016</a>)</span>.</p>
 <pre class="r"><code>install.packages(&quot;R2MLwiN&quot;)</code></pre></li>
-<li><p>For an example we could run one of the demos in the package, which we can list with</p>
+</ul>
+<p>That completes the setup - phew 😮!.</p>
+</div>
+<div id="running-a-multilevel-model" class="section level2">
+<h2>Running a multilevel model</h2>
+<p>For an example we could run one of the demos in the package, we can list those with</p>
 <pre class="r"><code>demo(package = &quot;R2MLwiN&quot;)</code></pre>
-<p>Then run one (output omitted), for example</p>
+<p>We can run one, for example, let’s fit the random intercept model from the <em>UserGuide02</em> demo.</p>
 <pre class="r"><code>library(R2MLwiN)
 # if you did not install mlnscript in /opt/mln , set:
 # options(MLwiN_path = &quot;/path-to/mlnscript&quot;)
-demo(UserGuide02)</code></pre></li>
-</ul>
+(mymodel1 &lt;- runMLwiN(normexam ~ 1 + sex + (1 | student), data = tutorial))
+#&gt; 
+#&gt; -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
+#&gt; MLwiN (version: unknown or &gt;3.09)  multilevel model (Normal) 
+#&gt; Estimation algorithm:  IGLS        Elapsed time : 0.02s 
+#&gt; Number of obs:  4059 (from total 4059)        The model converged after 3 iterations.
+#&gt; Log likelihood:      -5727.9 
+#&gt; Deviance statistic:  11455.7 
+#&gt; --------------------------------------------------------------------------------------------------- 
+#&gt; The model formula:
+#&gt; normexam ~ 1 + sex + (1 | student)
+#&gt; Level 1: student      
+#&gt; --------------------------------------------------------------------------------------------------- 
+#&gt; The fixed part estimates:  
+#&gt;                Coef.   Std. Err.       z    Pr(&gt;|z|)         [95% Conf.   Interval] 
+#&gt; Intercept   -0.14035     0.02463   -5.70   1.209e-08   ***     -0.18862    -0.09208 
+#&gt; sexgirl      0.23367     0.03179    7.35   1.985e-13   ***      0.17136     0.29598 
+#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  
+#&gt; --------------------------------------------------------------------------------------------------- 
+#&gt; The random part estimates at the student level: 
+#&gt;                   Coef.   Std. Err. 
+#&gt; var_Intercept   0.98454     0.02185 
+#&gt; -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</code></pre>
+<p>We can see the output in several sections. The first section tells us about MLwiN, how long it took, and so characteristics of the dataset.</p>
+<p>The second section tells us about the model.</p>
+<p>The third section is the fixed effect estimates and the associated statistical inference for them.</p>
+<p>The fourth section is the random effect variance estimates.</p>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
-<p>Despite having <em>Win</em> in its name, the core libraries for running MLwiN on other platforms, including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (Debian, Fedora, FreeBSD, Rocky, and Ubuntu), have been available for sometime and are straightforward to use from R via the R2MLwiN package.</p>
+<p>Despite having <em>Win</em> in its name, the core libraries for running MLwiN on other operating systems (and indeed with other architectures), including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (Debian, Fedora, FreeBSD, Rocky, and Ubuntu), have been available for sometime and are straightforward to use from R via the <strong>R2MLwiN</strong> package.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-mlwin" class="csl-entry">
-Charlton, C, J Rasbash, W. J Browne, M Healy, and B Cameron. 2023. <em><span>MLwiN</span> Version 3.07</em>. Bristol, UK: Centre for Multilevel Modelling, University of Bristol. <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">https://www.bristol.ac.uk/cmm/software/mlwin/</a>.
+Charlton, C, J Rasbash, W. J Browne, M Healy, and B Cameron. 2024. <em><span>MLwiN</span> Version 3.10</em>. Bristol, UK: Centre for Multilevel Modelling, University of Bristol. <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">https://www.bristol.ac.uk/cmm/software/mlwin/</a>.
 </div>
 <div id="ref-r2mlwin" class="csl-entry">
-Zhang, Zhengzheng, Richard M. A. Parker, Christopher M. J. Charlton, George Leckie, and William J. Browne. 2016. <span>“<span>R2MLwiN</span>: A Package to Run <span>MLwiN</span> from Within <span>R</span>.”</span> <em>Journal of Statistical Software</em> 72 (10): 1–43. <a href="https://doi.org/10.18637/jss.v072.i10">https://doi.org/10.18637/jss.v072.i10</a>.
+Zhang, Z, R. M. A Parker, C. M. J Charlton, G Leckie, and W. J Browne. 2016. <span>“<span>R2MLwiN</span>: A Package to Run <span>MLwiN</span> from Within <span>R</span>.”</span> <em>Journal of Statistical Software</em> 72 (10): 1–43. <a href="https://doi.org/10.18637/jss.v072.i10">https://doi.org/10.18637/jss.v072.i10</a>.
 </div>
 </div>
 </div>
