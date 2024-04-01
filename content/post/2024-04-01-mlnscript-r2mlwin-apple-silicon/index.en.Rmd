@@ -1,7 +1,7 @@
 ---
 title: 'Running MLwiN using mlnscript via the R2MLwiN R package on Apple Silicon Macs '
-author: Package Build
-date: '2023-09-22'
+author: Tom Palmer
+date: '2024-04-02'
 slug: mlnscript-r2mlwin-apple-silicon
 categories:
   - Blog
@@ -9,9 +9,9 @@ tags:
   - R
   - MLwiN
 subtitle: ''
-summary: 'How to run MLwiN on Apple Silicon Macs via R.'
+summary: 'How to run MLwiN natively on Apple Silicon Macs via R and the R2MLwiN package.'
 authors: []
-#lastmod: '2023-09-15T13:02:36+01:00'
+lastmod: '2024-04-01T20:18:00+01:00'
 featured: no
 draft: no
 image:
@@ -46,7 +46,7 @@ This post shows how to run MLwiN on Apple Silicon Macs from R using the **R2MLwi
   ```
   ```{bash}
   lipo -archs /opt/mln/libmln.dylib
-  ```  
+  ```
   since both architectures are listed this indicates both files are universal binaries. Apple Silicon Macs will use the arm64 architecture.
 * Now we need to grant the two files permission to run. To do this run in the Terminal app
   ```bash
