@@ -34,71 +34,83 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-MLwiN from the Centre for Multilevel Modelling at the University of Bristol (where disclaimer, I also work) is a fantastic piece of software.[@mlwin] The name suggests it only works on Windows. As we'll find out this isn't the case.
+MLwiN from the Centre for Multilevel Modelling (CMM) at the University of Bristol (where disclaimer, I also work) is a fantastic piece of software [@mlwin]. The name suggests it only works on Windows, but as we'll find out this is very much not the case.
 
-In the past this was sort of true because to make it work on a Mac with an Intel processor one would need to run it using [Wine](https://www.winehq.org/) (I'm assuming it would also work on x86_64 Linux under Wine, although I admit I haven't tried that).
+However, in the past this was sort of true because to make it work on a Mac (or Linux machine) with an Intel processor one would need to run it using [Wine](https://www.winehq.org/).
 
-CMM have cleverly made the MLwiN libraries available natively for other operating systems. The files for macOS are universal binaries which means that they run natively on both Intel and Apple Silicon Macs. Let's find out how to set this up.^[This post is essentially a more detailed explanation of the advice given on the MLwiN website, [here](https://www.bristol.ac.uk/cmm/software/support/support-faqs/commands-macros.html) and [here](https://www.bristol.ac.uk/cmm/software/mlwin/features/sysreq.html#unix).]
+More recently, CMM have cleverly made the MLwiN libraries available for other operating systems. The files for macOS are universal binaries which means that they run natively on both Intel and Apple Silicon Macs. Let's find out how to set this up.^[This post is essentially a more detailed explanation of the advice given on the MLwiN website, [here](https://www.bristol.ac.uk/cmm/software/support/support-faqs/commands-macros.html) and [here](https://www.bristol.ac.uk/cmm/software/mlwin/features/sysreq.html#unix).]
 
 ## Setting up MLwiN on an Apple Silicon Mac
 
-* Obtain the `MLN.dmg` installer from the Centre for Multilevel Modelling and install it. See the relevant download page (depending upon whether you are an academic) on the MLwiN [website](https://www.bristol.ac.uk/cmm/software/mlwin/).
+* Obtain the _MLN.dmg_ installer from the Centre for Multilevel Modelling and install it. See the relevant download page (depending upon whether you are an academic) on the MLwiN [website](https://www.bristol.ac.uk/cmm/software/mlwin/).
 * On macOS it is recommended to install the files into the _/opt/mln/_ directory, which you will need to create with Admin permissions, or install to another directory if you don't have Admin permissions.
-* Once installed we can check that _mlnscript_ and _libmln.dylib_ are universal binaries,
+* Once installed we can check that _mlnscript_ and _libmln.dylib_ are universal binaries as follows (we could also use the `file` command).
 
-  ```{bash}
+  ```{bash, comment='##'}
   lipo -archs /opt/mln/mlnscript
   ```
 
-  ```{bash}
+  ```{bash, comment='##'}
   lipo -archs /opt/mln/libmln.dylib
   ```
 
-  since both architectures are listed this indicates both files are universal binaries. Apple Silicon Macs will use the arm64 architecture.
-* Now we need to grant the two files permission to run. To do this run in the Terminal app
+  Since both architectures are listed this indicates both files are universal binaries. Apple Silicon Macs will use the arm64 architecture.
+* Now we need to grant the two files permission to run. To do this run the following in the Terminal app.
 
   ```bash
   /opt/mln/mlnscript --version
   ```
 
-  which will fail with a pop-up similar to the following.
+  On first run, this will fail with a pop-up similar to the following.
 
-  <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-warning.png" alt="Screenshot of macOS security warning pop-up." style="display: block; margin: auto;">
+  <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-warning.png" alt="Screenshot of macOS security warning pop-up." width="300" style="display: block; margin: auto;">
 
-  Click *Cancel* and then go into the *System settings...* | *Privacy & Security* and scroll down and click *Allow Anyway*
+  Click *Cancel* and then go into the *System settings...* | *Privacy & Security* and scroll down and click *Allow Anyway*.
 
   <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlnscript-security.png" alt="Screenshot of macOS privacy and security setting." style="display: block; margin: auto;">
 
-  Do the same for *libmln.dylib*.
+  You will need to repeat the same process for *libmln.dylib* when you first run a model.
 
-* We can then check it's running with
+* We can then check _mlnscript_ can run with say
 
-  ```{bash}
+  ```{bash, comment='##'}
   /opt/mln/mlnscript --version
   ```
 
   which should output the version number, which is currently 3.10.
 
-* In R we then install the **R2MLwiN** package from CRAN.[@r2mlwin]
+* In R we then install the **R2MLwiN** package from CRAN [@r2mlwin].
 
   ```r
   install.packages("R2MLwiN")
   ```
+  
+That completes the setup - phew 😮!.
 
-* For an example we could run one of the demos in the package, which we can list with
+## Running a multilevel model
 
-  ```r
-  demo(package = "R2MLwiN")
-  ```
+For an example we could run one of the demos in the package, we can list those with
 
-  Then run one, for example
+```r
+demo(package = "R2MLwiN")
+```
 
-  ```{r}
-  library(R2MLwiN)
-  # if you did not install mlnscript in /opt/mln , set:
-  # options(MLwiN_path = "/path-to/mlnscript")
-  demo(UserGuide02)
-  ```
+We can run one, for example, let's fit the random intercept model from the _UserGuide02_ demo.
+
+```{r}
+library(R2MLwiN)
+# if you did not install mlnscript in /opt/mln , set:
+# options(MLwiN_path = "/path-to/mlnscript")
+(mymodel1 <- runMLwiN(normexam ~ 1 + sex + (1 | student), data = tutorial))
+```
+
+We can see the output in several sections. The first section tells us about MLwiN, how long it took, and so characteristics of the dataset.
+
+The second section tells us about the model.
+
+The third section is the fixed effect estimates and the associated statistical inference for them.
+
+The fourth section is the random effect variance estimates.
 
 ## Summary
 
