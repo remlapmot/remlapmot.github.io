@@ -63,15 +63,11 @@ CMM have cleverly made the MLwiN libraries available natively for other operatin
 
   which will fail with a pop-up similar to the following.
 
-  ```{r echo=FALSE}
-  knitr::include_graphics("img/security-warning.png")
-  ```
+  <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-warning.png" alt="Screenshot of macOS security warning pop-up." style="display: block; margin: auto;">
 
   Click *Cancel* and then go into the *System settings...* | *Privacy & Security* and scroll down and click *Allow Anyway*
 
-  ```{r echo=FALSE}
-  knitr::include_graphics('img/mlnscript-security.png')
-  ```
+  <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlnscript-security.png" alt="Screenshot of macOS privacy and security setting." style="display: block; margin: auto;">
 
   Do the same for *libmln.dylib*.
 
@@ -81,7 +77,7 @@ CMM have cleverly made the MLwiN libraries available natively for other operatin
   /opt/mln/mlnscript --version
   ```
 
-  which should output the version number, which is currently 3.08.
+  which should output the version number, which is currently 3.10.
 
 * In R we then install the **R2MLwiN** package from CRAN.[@r2mlwin]
 
@@ -95,9 +91,9 @@ CMM have cleverly made the MLwiN libraries available natively for other operatin
   demo(package = "R2MLwiN")
   ```
 
-  Then run one (output omitted), for example
+  Then run one, for example
 
-  ```r
+  ```{r}
   library(R2MLwiN)
   # if you did not install mlnscript in /opt/mln , set:
   # options(MLwiN_path = "/path-to/mlnscript")
