@@ -42,20 +42,19 @@ More recently, CMM have cleverly made the MLwiN libraries available for other op
 
 ## Setting up MLwiN on an Apple Silicon Mac
 
-* Obtain the _MLN.dmg_ installer from the Centre for Multilevel Modelling and install it. See the relevant download page (depending upon whether you are an academic) on the MLwiN [website](https://www.bristol.ac.uk/cmm/software/mlwin/).
-* On macOS it is recommended to install the files into the _/opt/mln/_ directory, which you will need to create with Admin permissions, or install to another directory if you don't have Admin permissions.
+* Obtain the installer for macOS. See the relevant download page (depending upon whether you are an academic) on the MLwiN [website](https://www.bristol.ac.uk/cmm/software/mlwin/). On the form on the _File to download_ dropdown menu select the _mlnscript for MacOS_ option. This will give you the _MLN.dmg_ installer.
+
+  <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlwin-download-choice.png" alt="Screenshot of MLwiN download choices." width="350" style="display: block; margin: auto;">
+
+* Double click the installer. On macOS it is recommended to install the files into the _/opt/mln/_ directory, which you will need to create with Admin permissions, or install to another directory if you don't have Admin permissions. Copy the 2 files _mlnscript_ and _libmln.dylib_ into the _/opt/mln_ (or other) directory.
 * Once installed we can check that _mlnscript_ and _libmln.dylib_ are universal binaries as follows (we could also use the `file` command).
 
   ```{bash, comment='##'}
   lipo -archs /opt/mln/mlnscript
   ```
 
-  ```{bash, comment='##'}
-  lipo -archs /opt/mln/libmln.dylib
-  ```
-
-  Since both architectures are listed this indicates both files are universal binaries. Apple Silicon Macs will use the arm64 architecture.
-* Now we need to grant the two files permission to run. To do this run the following in the Terminal app.
+  Since both architectures are listed in the output this indicates the files are universal binaries. Apple Silicon Macs will use the arm64 architecture.
+* Now we need to grant the two files permission to run. To do this run the following in your Terminal.
 
   ```bash
   /opt/mln/mlnscript --version
@@ -63,21 +62,23 @@ More recently, CMM have cleverly made the MLwiN libraries available for other op
 
   On first run, this will fail with a pop-up similar to the following.
 
-  <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-warning.png" alt="Screenshot of macOS security warning pop-up." width="300" style="display: block; margin: auto;">
+  <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-popup-01.png" alt="Screenshot of macOS security warning pop-up." width="350" style="display: block; margin: auto;">
 
-  Click *Cancel* and then go into the *System settings...* | *Privacy & Security* and scroll down and click *Allow Anyway*.
+  Click *Cancel* and then go into the *System settings* | *Privacy & Security* and scroll down and click *Allow Anyway*.
 
-  <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlnscript-security.png" alt="Screenshot of macOS privacy and security setting." style="display: block; margin: auto;">
+  <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlnscript-settings.png" alt="Screenshot of macOS privacy and security setting." style="display: block; margin: auto;">
 
-  You will need to repeat the same process for *libmln.dylib* when you first run a model.
+  Then running the version check command again you may receive another popup in which you click _Open_.
+  
+  <img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-popup-02.png" alt="Screenshot of macOS security warning pop-up." width="350" style="display: block; margin: auto;">
 
-* We can then check _mlnscript_ can run with say
+ After this the first popup will then appear but about the *libmln.dylib* file. Again set the security setting to _Allow All_.
+
+ Now running the version check command again you should see the version number -- which is currently 3.10.
 
   ```{bash, comment='##'}
   /opt/mln/mlnscript --version
   ```
-
-  which should output the version number, which is currently 3.10.
 
 * In R we then install the **R2MLwiN** package from CRAN [@r2mlwin].
 
@@ -85,7 +86,7 @@ More recently, CMM have cleverly made the MLwiN libraries available for other op
   install.packages("R2MLwiN")
   ```
   
-That completes the setup - phew 😮!.
+This completes the setup - phew 😮!.
 
 ## Running a multilevel model
 
@@ -104,16 +105,12 @@ library(R2MLwiN)
 (mymodel1 <- runMLwiN(normexam ~ 1 + sex + (1 | student), data = tutorial))
 ```
 
-We can see the output in several sections. The first section tells us about MLwiN, how long it took, and so characteristics of the dataset.
+We can see the output in several sections. The first section tells us about MLwiN, how long it took to fit the model, and some characteristics of the dataset. The second section tells us about the model. The third section is the fixed effect estimates and the associated statistical inference for them. The fourth section is the random effect variance estimates.
 
-The second section tells us about the model.
-
-The third section is the fixed effect estimates and the associated statistical inference for them.
-
-The fourth section is the random effect variance estimates.
+And we can continue with our multilevel modelling as we like.
 
 ## Summary
 
-Despite having *Win* in its name, the core libraries for running MLwiN on other operating systems (and indeed with other architectures), including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (Debian, Fedora, FreeBSD, Rocky, and Ubuntu), have been available for sometime and are straightforward to use from R via the **R2MLwiN** package.
+Despite having *Win* in its name, the core libraries for running MLwiN on operating systems other than Windows (and indeed with other architectures), including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (CentOS, Debian, Fedora, FreeBSD, Rocky, and Ubuntu), have been available for sometime and are straightforward to use from R via the **R2MLwiN** package.
 
 ## References
