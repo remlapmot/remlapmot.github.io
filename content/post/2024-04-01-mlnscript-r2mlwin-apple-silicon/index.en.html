@@ -34,29 +34,31 @@ link-citations: true
 <div id="setting-up-mlwin-on-an-apple-silicon-mac" class="section level2">
 <h2>Setting up MLwiN on an Apple Silicon Mac</h2>
 <ul>
-<li><p>Obtain the <em>MLN.dmg</em> installer from the Centre for Multilevel Modelling and install it. See the relevant download page (depending upon whether you are an academic) on the MLwiN <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">website</a>.</p></li>
-<li><p>On macOS it is recommended to install the files into the <em>/opt/mln/</em> directory, which you will need to create with Admin permissions, or install to another directory if you don’t have Admin permissions.</p></li>
+<li><p>Obtain the installer for macOS. See the relevant download page (depending upon whether you are an academic) on the MLwiN <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">website</a>. On the form on the <em>File to download</em> dropdown menu select the <em>mlnscript for MacOS</em> option. This will give you the <em>MLN.dmg</em> installer.</p>
+<p><img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlwin-download-choice.png" alt="Screenshot of MLwiN download choices." width="350" style="display: block; margin: auto;"></p></li>
+<li><p>Double click the installer. On macOS it is recommended to install the files into the <em>/opt/mln/</em> directory, which you will need to create with Admin permissions, or install to another directory if you don’t have Admin permissions. Copy the 2 files <em>mlnscript</em> and <em>libmln.dylib</em> into the <em>/opt/mln</em> (or other) directory.</p></li>
 <li><p>Once installed we can check that <em>mlnscript</em> and <em>libmln.dylib</em> are universal binaries as follows (we could also use the <code>file</code> command).</p>
 <pre class="bash"><code>lipo -archs /opt/mln/mlnscript
 ## x86_64 arm64</code></pre>
-<pre class="bash"><code>lipo -archs /opt/mln/libmln.dylib
-## x86_64 arm64</code></pre>
-<p>Since both architectures are listed this indicates both files are universal binaries. Apple Silicon Macs will use the arm64 architecture.</p></li>
-<li><p>Now we need to grant the two files permission to run. To do this run the following in the Terminal app.</p>
+<p>Since both architectures are listed in the output this indicates the files are universal binaries. Apple Silicon Macs will use the arm64 architecture.</p></li>
+<li><p>Now we need to grant the two files permission to run. To do this run the following in your Terminal.</p>
 <pre class="bash"><code>/opt/mln/mlnscript --version</code></pre>
 <p>On first run, this will fail with a pop-up similar to the following.</p>
-<p><img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-warning.png" alt="Screenshot of macOS security warning pop-up." width="300" style="display: block; margin: auto;"></p>
-<p>Click <em>Cancel</em> and then go into the <em>System settings…</em> | <em>Privacy &amp; Security</em> and scroll down and click <em>Allow Anyway</em>.</p>
-<p><img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlnscript-security.png" alt="Screenshot of macOS privacy and security setting." style="display: block; margin: auto;"></p>
-<p>You will need to repeat the same process for <em>libmln.dylib</em> when you first run a model.</p></li>
-<li><p>We can then check <em>mlnscript</em> can run with say</p>
+<p><img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-popup-01.png" alt="Screenshot of macOS security warning pop-up." width="350" style="display: block; margin: auto;"></p>
+<p>Click <em>Cancel</em> and then go into the <em>System settings</em> | <em>Privacy &amp; Security</em> and scroll down and click <em>Allow Anyway</em>.</p>
+<p><img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlnscript-settings.png" alt="Screenshot of macOS privacy and security setting." style="display: block; margin: auto;"></p>
+<p>Then running the version check command again you may receive another popup in which you click <em>Open</em>.</p>
+<p><img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-popup-02.png" alt="Screenshot of macOS security warning pop-up." width="350" style="display: block; margin: auto;"></p></li>
+</ul>
+<p>After this the first popup will then appear but about the <em>libmln.dylib</em> file. Again set the security setting to <em>Allow All</em>.</p>
+<p>Now running the version check command again you should see the version number – which is currently 3.10.</p>
 <pre class="bash"><code>/opt/mln/mlnscript --version
 ## 3.10</code></pre>
-<p>which should output the version number, which is currently 3.10.</p></li>
+<ul>
 <li><p>In R we then install the <strong>R2MLwiN</strong> package from CRAN <span class="citation">(<a href="#ref-r2mlwin">Zhang et al. 2016</a>)</span>.</p>
 <pre class="r"><code>install.packages(&quot;R2MLwiN&quot;)</code></pre></li>
 </ul>
-<p>That completes the setup - phew 😮!.</p>
+<p>This completes the setup - phew 😮!.</p>
 </div>
 <div id="running-a-multilevel-model" class="section level2">
 <h2>Running a multilevel model</h2>
@@ -70,7 +72,7 @@ link-citations: true
 #&gt; 
 #&gt; -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
 #&gt; MLwiN (version: unknown or &gt;3.09)  multilevel model (Normal) 
-#&gt; Estimation algorithm:  IGLS        Elapsed time : 0.02s 
+#&gt; Estimation algorithm:  IGLS        Elapsed time : 0.04s 
 #&gt; Number of obs:  4059 (from total 4059)        The model converged after 3 iterations.
 #&gt; Log likelihood:      -5727.9 
 #&gt; Deviance statistic:  11455.7 
@@ -89,14 +91,12 @@ link-citations: true
 #&gt;                   Coef.   Std. Err. 
 #&gt; var_Intercept   0.98454     0.02185 
 #&gt; -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</code></pre>
-<p>We can see the output in several sections. The first section tells us about MLwiN, how long it took, and so characteristics of the dataset.</p>
-<p>The second section tells us about the model.</p>
-<p>The third section is the fixed effect estimates and the associated statistical inference for them.</p>
-<p>The fourth section is the random effect variance estimates.</p>
+<p>We can see the output in several sections. The first section tells us about MLwiN, how long it took to fit the model, and some characteristics of the dataset. The second section tells us about the model. The third section is the fixed effect estimates and the associated statistical inference for them. The fourth section is the random effect variance estimates.</p>
+<p>And we can continue with our multilevel modelling as we like.</p>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
-<p>Despite having <em>Win</em> in its name, the core libraries for running MLwiN on other operating systems (and indeed with other architectures), including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (Debian, Fedora, FreeBSD, Rocky, and Ubuntu), have been available for sometime and are straightforward to use from R via the <strong>R2MLwiN</strong> package.</p>
+<p>Despite having <em>Win</em> in its name, the core libraries for running MLwiN on operating systems other than Windows (and indeed with other architectures), including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (CentOS, Debian, Fedora, FreeBSD, Rocky, and Ubuntu), have been available for sometime and are straightforward to use from R via the <strong>R2MLwiN</strong> package.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
