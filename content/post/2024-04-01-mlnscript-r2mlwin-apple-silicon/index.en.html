@@ -27,12 +27,12 @@ link-citations: true
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>MLwiN from the Centre for Multilevel Modelling (CMM) at the University of Bristol (where disclaimer, I also work) is a fantastic piece of software <span class="citation">(<a href="#ref-mlwin">Charlton et al. 2024</a>)</span>. The name suggests it only works on Windows, but as we’ll find out this is very much not the case.</p>
+<p>MLwiN from the Centre for Multilevel Modelling (CMM) at the University of Bristol (disclaimer: where I also work) is a fantastic piece of software <span class="citation">(<a href="#ref-mlwin">Charlton et al. 2024</a>)</span>. The name suggests it only works on Windows, but as we’ll find out this is very much not the case.</p>
 <p>However, in the past this was sort of true because to make it work on a Mac (or Linux machine) with an Intel processor one would need to run it using <a href="https://www.winehq.org/">Wine</a>.</p>
-<p>More recently, CMM have cleverly made the MLwiN libraries available for other operating systems. The files for macOS are universal binaries which means that they run natively on both Intel and Apple Silicon Macs. Let’s find out how to set this up.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>More recently, CMM have cleverly made the MLwiN libraries available for other operating systems in a command line version of the program called <code>mlnscript</code> and an accompanying library. The files for macOS are universal binaries which means that they run natively on both Intel and Apple Silicon Macs. Let’s find out how to set this up.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
-<div id="setting-up-mlwin-on-an-apple-silicon-mac" class="section level2">
-<h2>Setting up MLwiN on an Apple Silicon Mac</h2>
+<div id="setting-up-mlnscript-on-an-apple-silicon-mac" class="section level2">
+<h2>Setting up mlnscript on an Apple Silicon Mac</h2>
 <ul>
 <li><p>Obtain the installer for macOS. See the relevant download page (depending upon whether you are an academic) on the MLwiN <a href="https://www.bristol.ac.uk/cmm/software/mlwin/">website</a>. On the form on the <em>File to download</em> dropdown menu select the <em>mlnscript for MacOS</em> option. This will give you the <em>MLN.dmg</em> installer.</p>
 <p><img src="/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlwin-download-choice.png" alt="Screenshot of MLwiN download choices." width="350" style="display: block; margin: auto;"></p></li>
@@ -58,15 +58,15 @@ link-citations: true
 <li><p>In R we then install the <strong>R2MLwiN</strong> package from CRAN <span class="citation">(<a href="#ref-r2mlwin">Zhang et al. 2016</a>)</span>.</p>
 <pre class="r"><code>install.packages(&quot;R2MLwiN&quot;)</code></pre></li>
 </ul>
-<p>This completes the setup - phew 😮!.</p>
+<p>This completes the setup - phew 😮!</p>
 </div>
 <div id="running-a-multilevel-model" class="section level2">
 <h2>Running a multilevel model</h2>
-<p>For an example we could run one of the demos in the package, we can list those with</p>
+<p>For an example we could run one of the demos in the package, we can list those with the following code.</p>
 <pre class="r"><code>demo(package = &quot;R2MLwiN&quot;)</code></pre>
 <p>We can run one, for example, let’s fit the random intercept model from the <em>UserGuide02</em> demo.</p>
 <pre class="r"><code>library(R2MLwiN)
-# if you did not install mlnscript in /opt/mln , set:
+# if you did not install mlnscript and libmln.dylib in /opt/mln , set:
 # options(MLwiN_path = &quot;/path-to/mlnscript&quot;)
 (mymodel1 &lt;- runMLwiN(normexam ~ 1 + sex + (1 | student), data = tutorial))
 #&gt; 
@@ -91,12 +91,12 @@ link-citations: true
 #&gt;                   Coef.   Std. Err. 
 #&gt; var_Intercept   0.98454     0.02185 
 #&gt; -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</code></pre>
-<p>We can see the output in several sections. The first section tells us about MLwiN, how long it took to fit the model, and some characteristics of the dataset. The second section tells us about the model. The third section is the fixed effect estimates and the associated statistical inference for them. The fourth section is the random effect variance estimates.</p>
+<p>We can see the output is in several sections. The first section tells us about how <code>mlnscript</code>, which estimation algorithm it used, hwo long it took to fit the model, and some characteristics of the dataset. The second section tells us about the model, in this case a random intercept model. The third section is the fixed effect estimates and the associated statistical inference for them. The fourth section is the random effect variance estimates.</p>
 <p>And we can continue with our multilevel modelling as we like.</p>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
-<p>Despite having <em>Win</em> in its name, the core libraries for running MLwiN on operating systems other than Windows (and indeed with other architectures), including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (CentOS, Debian, Fedora, FreeBSD, Rocky, and Ubuntu), have been available for sometime and are straightforward to use from R via the <strong>R2MLwiN</strong> package.</p>
+<p>Despite having <em>Win</em> in its name, MLwiN is available as a command line program, <code>mlnscript</code>, which is available on operating systems other than Windows (and indeed with other architectures), including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (CentOS, Debian, Fedora, FreeBSD, Rocky, and Ubuntu). This is straightforward to use from R via the <strong>R2MLwiN</strong> package.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
