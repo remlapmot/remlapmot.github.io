@@ -5,12 +5,113 @@
     <link>https://remlapmot.github.io/category/blog/</link>
       <atom:link href="https://remlapmot.github.io/category/blog/index.xml" rel="self" type="application/rss+xml" />
     <description>Blog</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 31 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 02 Apr 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Blog</title>
       <link>https://remlapmot.github.io/category/blog/</link>
     </image>
+    
+    <item>
+      <title>Running MLwiN using mlnscript via the R2MLwiN R package on Apple Silicon Macs </title>
+      <link>https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/</link>
+      <pubDate>Tue, 02 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/</guid>
+      <description>
+
+
+&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;MLwiN from the Centre for Multilevel Modelling (CMM) at the University of Bristol (disclaimer: where I also work) is a fantastic piece of software &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-mlwin&#34;&gt;Charlton et al. 2024&lt;/a&gt;)&lt;/span&gt;. The name suggests it only works on Windows, but as we’ll find out this is very much not the case.&lt;/p&gt;
+&lt;p&gt;However, in the past this was sort of true because to make it work on a Mac (or Linux machine) with an Intel processor one would need to run it using &lt;a href=&#34;https://www.winehq.org/&#34;&gt;Wine&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;More recently, CMM have cleverly made the MLwiN libraries available for other operating systems in a command line version of the program called &lt;code&gt;mlnscript&lt;/code&gt; and an accompanying library. The files for macOS are universal binaries which means that they run natively on both Intel and Apple Silicon Macs. Let’s find out how to set this up.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;setting-up-mlnscript-on-an-apple-silicon-mac&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Setting up mlnscript on an Apple Silicon Mac&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Obtain the installer for macOS. See the relevant download page (depending upon whether you are an academic) on the MLwiN &lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/mlwin/&#34;&gt;website&lt;/a&gt;. On the form on the &lt;em&gt;File to download&lt;/em&gt; dropdown menu select the &lt;em&gt;mlnscript for MacOS&lt;/em&gt; option. This will give you the &lt;em&gt;MLN.dmg&lt;/em&gt; installer.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlwin-download-choice.png&#34; alt=&#34;Screenshot of MLwiN download choices.&#34; width=&#34;350&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Double click the installer. On macOS it is recommended to install the files into the &lt;em&gt;/opt/mln/&lt;/em&gt; directory, which you will need to create with Admin permissions, or install to another directory if you don’t have Admin permissions. Copy the 2 files &lt;em&gt;mlnscript&lt;/em&gt; and &lt;em&gt;libmln.dylib&lt;/em&gt; into the &lt;em&gt;/opt/mln&lt;/em&gt; (or other) directory.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Once installed we can check that &lt;em&gt;mlnscript&lt;/em&gt; and &lt;em&gt;libmln.dylib&lt;/em&gt; are universal binaries as follows (we could also use the &lt;code&gt;file&lt;/code&gt; command).&lt;/p&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;lipo -archs /opt/mln/mlnscript
+## x86_64 arm64&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since both architectures are listed in the output this indicates the files are universal binaries. Apple Silicon Macs will use the arm64 architecture.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Now we need to grant the two files permission to run. To do this run the following in your Terminal.&lt;/p&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;/opt/mln/mlnscript --version&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On first run, this will fail with a pop-up similar to the following.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-popup-01.png&#34; alt=&#34;Screenshot of macOS security warning pop-up.&#34; width=&#34;350&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Click &lt;em&gt;Cancel&lt;/em&gt; and then go into the &lt;em&gt;System settings&lt;/em&gt; | &lt;em&gt;Privacy &amp;amp; Security&lt;/em&gt; and scroll down and click &lt;em&gt;Allow Anyway&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlnscript-settings.png&#34; alt=&#34;Screenshot of macOS privacy and security setting.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then running the version check command again you may receive another popup in which you click &lt;em&gt;Open&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-popup-02.png&#34; alt=&#34;Screenshot of macOS security warning pop-up.&#34; width=&#34;350&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After this the first popup will then appear but about the &lt;em&gt;libmln.dylib&lt;/em&gt; file. Again set the security setting to &lt;em&gt;Allow All&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Now running the version check command again you should see the version number – which is currently 3.10.&lt;/p&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;/opt/mln/mlnscript --version
+## 3.10&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;In R we then install the &lt;strong&gt;R2MLwiN&lt;/strong&gt; package from CRAN &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-r2mlwin&#34;&gt;Zhang et al. 2016&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;R2MLwiN&amp;quot;)&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This completes the setup - phew 😮!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;running-a-multilevel-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Running a multilevel model&lt;/h2&gt;
+&lt;p&gt;For an example we could run one of the demos in the package, we can list those with the following code.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;demo(package = &amp;quot;R2MLwiN&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can run one, for example, let’s fit the random intercept model from the &lt;em&gt;UserGuide02&lt;/em&gt; demo.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(R2MLwiN)
+# if you did not install mlnscript and libmln.dylib in /opt/mln , set:
+# options(MLwiN_path = &amp;quot;/path-to/mlnscript&amp;quot;)
+(mymodel1 &amp;lt;- runMLwiN(normexam ~ 1 + sex + (1 | student), data = tutorial))
+#&amp;gt; 
+#&amp;gt; -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
+#&amp;gt; MLwiN (version: unknown or &amp;gt;3.09)  multilevel model (Normal) 
+#&amp;gt; Estimation algorithm:  IGLS        Elapsed time : 0.03s 
+#&amp;gt; Number of obs:  4059 (from total 4059)        The model converged after 3 iterations.
+#&amp;gt; Log likelihood:      -5727.9 
+#&amp;gt; Deviance statistic:  11455.7 
+#&amp;gt; --------------------------------------------------------------------------------------------------- 
+#&amp;gt; The model formula:
+#&amp;gt; normexam ~ 1 + sex + (1 | student)
+#&amp;gt; Level 1: student      
+#&amp;gt; --------------------------------------------------------------------------------------------------- 
+#&amp;gt; The fixed part estimates:  
+#&amp;gt;                Coef.   Std. Err.       z    Pr(&amp;gt;|z|)         [95% Conf.   Interval] 
+#&amp;gt; Intercept   -0.14035     0.02463   -5.70   1.209e-08   ***     -0.18862    -0.09208 
+#&amp;gt; sexgirl      0.23367     0.03179    7.35   1.985e-13   ***      0.17136     0.29598 
+#&amp;gt; Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1  
+#&amp;gt; --------------------------------------------------------------------------------------------------- 
+#&amp;gt; The random part estimates at the student level: 
+#&amp;gt;                   Coef.   Std. Err. 
+#&amp;gt; var_Intercept   0.98454     0.02185 
+#&amp;gt; -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can see the output is in several sections. The first section tells us about how &lt;code&gt;mlnscript&lt;/code&gt;, which estimation algorithm it used, hwo long it took to fit the model, and some characteristics of the dataset. The second section tells us about the model, in this case a random intercept model. The third section is the fixed effect estimates and the associated statistical inference for them. The fourth section is the random effect variance estimates.&lt;/p&gt;
+&lt;p&gt;And we can continue with our multilevel modelling as we like.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Despite having &lt;em&gt;Win&lt;/em&gt; in its name, MLwiN is available as a command line program, &lt;code&gt;mlnscript&lt;/code&gt;, which is available on operating systems other than Windows (and indeed with other architectures), including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (CentOS, Debian, Fedora, FreeBSD, Rocky, and Ubuntu). This is straightforward to use from R via the &lt;strong&gt;R2MLwiN&lt;/strong&gt; package.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+&lt;div id=&#34;ref-mlwin&#34; class=&#34;csl-entry&#34;&gt;
+Charlton, C., J. Rasbash, W. J. Browne, M. Healy, and B. Cameron. 2024. &lt;em&gt;&lt;span&gt;MLwiN&lt;/span&gt; Version 3.10&lt;/em&gt;. Bristol, UK: Centre for Multilevel Modelling, University of Bristol. &lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/mlwin/&#34;&gt;https://www.bristol.ac.uk/cmm/software/mlwin/&lt;/a&gt;.
+&lt;/div&gt;
+&lt;div id=&#34;ref-r2mlwin&#34; class=&#34;csl-entry&#34;&gt;
+Zhang, Z., R. M. A. Parker, C. M. J. Charlton, G. Leckie, and W. J. Browne. 2016. &lt;span&gt;“&lt;span&gt;R2MLwiN&lt;/span&gt;: A Package to Run &lt;span&gt;MLwiN&lt;/span&gt; from Within &lt;span&gt;R&lt;/span&gt;.”&lt;/span&gt; &lt;em&gt;Journal of Statistical Software&lt;/em&gt; 72 (10): 1–43. &lt;a href=&#34;https://doi.org/10.18637/jss.v072.i10&#34;&gt;https://doi.org/10.18637/jss.v072.i10&lt;/a&gt;.
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes footnotes-end-of-document&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;This post is essentially a more detailed explanation of the advice given on the MLwiN website, &lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/support/support-faqs/commands-macros.html&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/mlwin/features/sysreq.html#unix&#34;&gt;here&lt;/a&gt;.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Creating a simple Automator app to launch a new instance of RStudio Desktop on macOS</title>
