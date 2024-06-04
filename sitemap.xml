@@ -2,13 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://remlapmot.github.io/authors/</loc>
+    <lastmod>2024-06-19T16:45:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/</loc>
+    <lastmod>2024-06-19T16:45:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/</loc>
+    <lastmod>2024-06-19T16:45:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2024_mr/</loc>
+    <lastmod>2024-06-19T16:45:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/tom-palmer/</loc>
+    <lastmod>2024-06-19T16:45:00+00:00</lastmod>
+  </url><url>
     <loc>https://remlapmot.github.io/category/blog/</loc>
     <lastmod>2024-04-01T20:18:00+01:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/categories/</loc>
-    <lastmod>2024-04-01T20:18:00+01:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/</loc>
     <lastmod>2024-04-01T20:18:00+01:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/mlwin/</loc>
@@ -35,16 +47,7 @@
     <loc>https://remlapmot.github.io/tag/rstudio/</loc>
     <lastmod>2024-03-30T18:54:00+00:00</lastmod>
   </url><url>
-    <loc>https://remlapmot.github.io/authors/</loc>
-    <lastmod>2024-01-26T14:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/talk/</loc>
-    <lastmod>2024-01-26T14:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://remlapmot.github.io/talk/2024_mrcieu-r-universe/</loc>
-    <lastmod>2024-01-26T14:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/author/tom-palmer/</loc>
     <lastmod>2024-01-26T14:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/github/</loc>
