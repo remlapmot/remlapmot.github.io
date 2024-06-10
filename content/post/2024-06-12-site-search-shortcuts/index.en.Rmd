@@ -24,3 +24,13 @@ Have you ever typed `Amazon` into the Google Chrome address bar and seen the add
 We can see what these shortcouts are by going to <chrome://settings/searchEngines>.
 
 From here we can see that we can define our own shortcuts, so let's define some helpful ones related to R.
+
+* A shortcut for searching the CRAN mirror on GitHub
+
+```
+Name: CRAN mirror on GitHub
+Shortcut: @cran
+URL with %s in place of query:
+https://github.com/search?q=user%3Acran%20%s&ref=opensearch&type=code
+```
+
