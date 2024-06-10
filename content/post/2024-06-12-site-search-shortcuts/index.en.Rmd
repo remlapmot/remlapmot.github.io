@@ -1,0 +1,26 @@
+---
+title: 'Supercharge your #rstats searching with Chrome Site Search Shortcuts'
+author: Package Build
+date: '2024-06-12'
+slug: site-search-shortcuts
+categories: []
+tags:
+  - R
+  - Chrome
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2024-06-10T14:38:11+01:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+Have you ever typed `Amazon` into the Google Chrome address bar and seen the address bar indicate that it's now searching the Amazon site? It turns out this is because Google Chrome has a feature called site search shortcuts.
+
+We can see what these shortcouts are by going to <chrome://settings/searchEngines>.
+
+From here we can see that we can define our own shortcuts, so let's define some helpful ones related to R.
