@@ -23,7 +23,7 @@ Have you ever typed `Amazon` into the Google Chrome address bar and seen the add
 
 We can see what these shortcouts are by going to <chrome://settings/searchEngines>.
 
-From here we can see that we can define our own shortcuts, so let's define some helpful ones related to R.
+From here we can see that we can define our own shortcuts, so let's define some helpful ones related to R ^[I am following a similar excellent [blogpost](https://chromeunboxed.com/chrome-site-search-shortcuts) by Chrome Unboxed.].
 
 * A shortcut for searching the CRAN mirror on GitHub
 
