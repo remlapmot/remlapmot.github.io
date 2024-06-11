@@ -1,0 +1,216 @@
+---
+title: How to check and fix someone else's R package
+author: Package Build
+date: '2024-06-13'
+slug: how-to-check-an-r-package
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2024-06-11T16:24:49+01:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+I'm going to use the **BWMR** package as an example. It's repo is <https://github.com/jiazhao97/BWMR>.
+
+Fork package
+
+Create new branch "suggestions"
+
+Open in RStudio, create an RStudio project file (.Rproj) if none exists
+
+In this package several entries were missing from the .gitignore and .Rbuildignore files. We make our first commits on our new branch.
+
+Run `devtools::install_dev_deps()` -- by chance I have both soft (DESCRIPTION file Suggests list) and hard (DESCRIPTION file Imports list) dependencies installed. Bizarrely this package has no dependencies declared in this file.
+
+First run of R CMD check -- in this case R CMD build fails
+
+```
+── R CMD build ─────────────────────────────────────────────────────
+✔  checking for file ‘/Users/eptmp/Documents/GitHub/BWMR/DESCRIPTION’ ...
+─  preparing ‘BWMR’:
+✔  checking DESCRIPTION meta-information ...
+─  installing the package to build vignettes
+E  creating vignettes (1.3s)
+   --- re-building ‘BWMR_package.Rnw’ using Sweave
+   
+   Error: processing vignette 'BWMR_package.Rnw' failed with diagnostics:
+    chunk 4 (label = BWMR-fit) 
+   Error in if (class(Sigma_hat) == "try-error") { : 
+     the condition has length > 1
+```
+
+Then run 
+
+```
+devtools::check(
+  env_vars = c(NOT_CRAN = FALSE),
+  args = c(
+    '--no-manual', 
+    '--no-vignettes', 
+    '--no-build-vignettes'
+  ),
+  build_args = c(
+    '--no-build-vignettes',
+    '--no-manual'
+  )
+)
+```
+
+Fails with the simple error
+
+```
+E  checking for file ‘BWMR/DESCRIPTION’
+   Required field missing or empty:
+     ‘License’
+```
+
+So we add a License to the DESCRIPTION and commit this to our new branch.
+
+Rerun the R CMD check. This now fails with
+
+```
+1 error ✖ | 5 warnings ✖ | 5 notes ✖
+```
+
+Technically we should start by fixing the errors, then the warnings, then the notes. But sometimes it's more convenient to make the simple fixes first.
+
+* Add `^updates$` to .Rbuildignore
+* Add newline to end of .Rnw vignette
+* ggplot2 is used in the examples so add that to the DESCRIPTION file Imports list (technically this should probably be a soft dependency but lets make things easier on ourselves for now)
+
+Now we are down to
+
+```
+1 error ✖ | 4 warnings ✖ | 5 notes ✖
+```
+
+The check error is in the helpfile example. This package does not use roxygen, so we look in the BWMR.Rd file to see the code that fails.
+
+Click the *Install* button in the build pane.
+
+The error is in the BWMR() function.
+
+```r
+library(BWMR)
+library(ggplot2)
+data(ExampleData)
+MRres <- BWMR(ExampleData$beta.exposure, ExampleData$beta.outcome, ExampleData$se.exposure, ExampleData$se.outcome)
+# Error in if (class(Sigma_hat) == "try-error") { : 
+#  the condition has length > 1
+```
+
+Double click on line 213 of the BWMR.R file to set a break point. Then click install again. Now we're into the debugger, we can inspect the class of the `Sigma_hat` object in this example.
+
+```r
+class(Sigma_hat)
+# > [1] "matrix" "array" 
+```
+
+We can see it has more than one class. So we amend the call to `class()` with a call to `inherits()`. We then stop the debugging (click Stop or enter Q in the debugging console). We also make this fix in another file.
+
+Run the limited R CMD check again -- the example now runs.
+
+We insert a line break to break a long line of code over 2 lines.
+
+We add a full stop (period for you Americans!) to the end of the Description field in the DESCRIPTION file.
+
+We are down to 
+
+```
+0 errors ✔ | 4 warnings ✖ | 3 notes ✖
+```
+
+To remove the .Random.seed from ExampleData.RData, simply load it, rm() the object then resave
+
+```r
+load('data/ExampleData.RData')
+rm(.Random.seed)
+save(ExampleData, file = 'data/ExampleData.RData')
+```
+
+We commit the amended .RData file and then restart our R session.
+
+There are now many notes of the form
+
+```
+BWMR: no visible global function definition for ‘ggplot’
+```
+
+We simply need to prefix the package name in front of these function calls, i.e., this becomes `ggplot2::ggplot()`. Use the Find in Files feature to find the instances of each function call. For other functions we prefix the relevant package, i.e., stats for `pchisq()`.
+
+We are down to
+
+```
+0 errors ✔ | 3 warnings ✖ | 2 notes ✖
+```
+
+Since the vignette is built by Sweave can delete the pdf file.
+
+Delete the `library(ggplot2)` and `library(reshape2)` lines in two of the files.
+
+Run `usethis::use_tidy_description()`
+
+Delete the Type: field in the DESCRIPTION file.
+
+We are down to
+
+```
+── R CMD check results ───────────────────────────────────────────────── BWMR 0.1.1 ────
+Duration: 7.7s
+
+❯ checking for missing documentation entries ... WARNING
+  Undocumented code objects:
+    ‘BWMR_quick’ ‘ELBO_func’ ‘ExampleData’ ‘alpha’ ‘sqsigma0’
+  Undocumented data sets:
+    ‘ExampleData’
+  All user-level objects in a package should have documentation entries.
+  See chapter ‘Writing R documentation files’ in the ‘Writing R
+  Extensions’ manual.
+
+❯ checking R code for possible problems ... NOTE
+  BWMR: no visible binding for global variable ‘ELBO_iter’
+  BWMR: no visible binding for global variable ‘weight’
+  BWMR: no visible binding for global variable ‘w’
+  Undefined global functions or variables:
+    ELBO_iter w weight
+
+❯ checking Rd files ... NOTE
+  prepare_Rd: BWMR.Rd:53-55: Dropping empty section \references
+  prepare_Rd: BWMR.Rd:59-60: Dropping empty section \seealso
+
+❯ checking package vignettes ... NOTE
+  Package vignette without corresponding tangle output:
+    ‘BWMR_package.Rnw’
+
+0 errors ✔ | 1 warning ✖ | 3 notes ✖
+```
+
+```
+tinytex::tlmgr_search('grfext')
+tinytex::tlmgr_install('grfext')
+```
+
+We add some boiler plate code to the vignette. And add the latex dependency to the .Rnw file.
+
+We add `Depends: R (>= 3.5.0)` to the DESCRIPTION file.
+
+We are down to
+
+```
+0 errors ✔ | 1 warning ✖ | 2 notes ✖
+```
+
+Make `alpha` an argument.
+
+Add a globals.R file.
+
+Delete empty sections in the BWMR.Rd file.
+
+Make sqsigma0 an argument.
