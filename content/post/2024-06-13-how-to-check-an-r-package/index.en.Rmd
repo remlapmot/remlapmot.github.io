@@ -220,3 +220,23 @@ Amended the Sweave syntax for the plots, to make the plots show up.
 Wrote helpfile for ExampleData dataset and set up roxygen in the package.
 
 Added the new arguments to the BWMR.Rd helpfile.
+
+We are down to
+
+```
+── R CMD check results ───────────────────────────── BWMR 0.1.1 ────
+Duration: 12.8s
+
+❯ checking for missing documentation entries ... WARNING
+  Undocumented code objects:
+    ‘BWMR_quick’ ‘ELBO_func’
+  All user-level objects in a package should have documentation entries.
+  See chapter ‘Writing R documentation files’ in the ‘Writing R
+  Extensions’ manual.
+
+0 errors ✔ | 1 warning ✖ | 0 notes ✔
+Error: R CMD check found WARNINGs
+Execution halted
+
+Exited with status 1.
+```
