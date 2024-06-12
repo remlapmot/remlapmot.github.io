@@ -214,3 +214,9 @@ Add a globals.R file.
 Delete empty sections in the BWMR.Rd file.
 
 Make sqsigma0 an argument.
+
+Amended the Sweave syntax for the plots, to make the plots show up.
+
+Wrote helpfile for ExampleData dataset and set up roxygen in the package.
+
+Added the new arguments to the BWMR.Rd helpfile.
