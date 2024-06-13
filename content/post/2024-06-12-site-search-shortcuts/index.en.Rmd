@@ -34,3 +34,11 @@ URL with %s in place of query:
 https://github.com/search?q=user%3Acran%20%s&ref=opensearch&type=code
 ```
 
+Or we could search the third edition of the Oxford Dictionary of Statistics
+
+```
+Name: Oxford Dictionary of Statistics
+Shortcut: @stats
+URL with %s in place of query:
+https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188.001.0001%2Facref-9780199679188&q=%s
+```
