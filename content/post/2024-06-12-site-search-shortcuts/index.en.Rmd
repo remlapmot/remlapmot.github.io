@@ -1,5 +1,5 @@
 ---
-title: 'Supercharge your #rstats searching with Chrome Site Search Shortcuts'
+title: 'Supercharge your #rstats web searching in Google Chrome with Site Search Shortcuts'
 author: Package Build
 date: '2024-06-14'
 slug: chrome-site-search-shortcuts
@@ -24,7 +24,7 @@ projects: []
 
 Have you ever typed `Amazon` into the Google Chrome address bar and seen the address bar indicate that it's now searching the Amazon site? It turns out this is a feature in Google Chrome called site search shortcuts.
 
-We can see what default shortcuts Chrome provides by going to <chrome://settings/searchEngines> and scrolling to the *Site Search* section.
+We can see what default shortcuts Chrome provides by in the Chrome address bar going to `chrome://settings/searchEngines` and scrolling to the *Site Search* section.
 
 From here we can see that we can define our own shortcuts, so let's define some helpful ones related to R and statistics.^[I am following an excellent [blogpost](https://chromeunboxed.com/chrome-site-search-shortcuts) by Chrome Unboxed.]
 
@@ -40,6 +40,16 @@ Shortcut: @cran
 URL with %s in place of query:
 https://github.com/search?q=user%3Acran%20%s&ref=opensearch&type=code
 ```
+
+On the Chrome settings page click add and enter the information. To use this simply type `@cran` into the address bar
+
+<img src="/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step1.png" alt="Screenshot of a site search shortcut in the Google Chrome address bar." width="630" style="display: block; margin: auto;">
+
+and then type your search term
+
+<img src="/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step2.png" alt="Screenshot of a site search shortcut in the Google Chrome address bar." width="630" style="display: block; margin: auto;">
+
+Here are some other shortcuts.
 
 * A shortcut for searching for a package description on METACRAN
 
