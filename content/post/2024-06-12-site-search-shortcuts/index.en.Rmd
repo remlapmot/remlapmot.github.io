@@ -3,7 +3,8 @@ title: 'Supercharge your #rstats web searching in Google Chrome with Site Search
 author: Package Build
 date: '2024-06-14'
 slug: chrome-site-search-shortcuts
-categories: []
+categories:
+  - Blog
 tags:
   - R
   - Chrome
