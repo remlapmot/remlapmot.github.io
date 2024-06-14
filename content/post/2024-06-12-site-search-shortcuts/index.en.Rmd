@@ -2,7 +2,7 @@
 title: 'Supercharge your #rstats searching with Chrome Site Search Shortcuts'
 author: Package Build
 date: '2024-06-14'
-slug: site-search-shortcuts
+slug: chrome-site-search-shortcuts
 categories: []
 tags:
   - R
@@ -44,7 +44,7 @@ https://github.com/search?q=user%3Acran%20%s&ref=opensearch&type=code
 * A shortcut for searching for a package description on METACRAN
 
 ```
-Name: Search METACRAN
+Name: METACRAN
 Shortcut: @metacran
 URL with %s in place of query:
 https://r-pkg.org/search.html/?q=%s
@@ -53,7 +53,7 @@ https://r-pkg.org/search.html/?q=%s
 * A shortcut for searching using [Rseek](https://rseek.org/)
 
 ```
-Name: Search Rseek
+Name: Rseek
 Shortcut: @rseek
 URL with %s in place of query:
 https://rseek.org/?q=%s
@@ -62,7 +62,7 @@ https://rseek.org/?q=%s
 * A shortcut for searching [R-universe](https://r-universe.dev/)
 
 ```
-Name: Search R-universe
+Name: R-universe
 Shortcut: @runi
 URL with %s in place of query:
 https://r-universe.dev/search/?q=%s
