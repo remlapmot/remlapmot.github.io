@@ -1,4 +1,4 @@
-source("renv/activate.R")
+# source("renv/activate.R")
 options(
   blogdown.hugo.version = "0.127.0",
   blogdown.generator.server = TRUE,
