@@ -1,6 +1,6 @@
 Package: remlapmot.github.io
-Title: This is not really an R package. This file lists extra dependencies
-    for renv to use.
+Title: This is not really an R package. This file lists packages for the
+    GHA workflow setup-r-dependencies to use.
 Version: 0.1
 Authors@R: 
     person("Tom", "Palmer", , "remlapmot@hotmail.com", role = c("aut", "cre"),
@@ -9,12 +9,9 @@ URL: https://github.com/remlapmot/remlapmot.github.io
 Depends: 
     R (>= 3.5.0)
 Imports:
-    commonmark,
+    blogdown,
     languageserver,
     markdown,
-    miniUI,
-    processx,
-    ps,
     xfun
 Encoding: UTF-8
 SystemRequirements: pandoc (>= 2.3.1) - https://pandoc.org/, Stata (>=
