@@ -63,4 +63,4 @@ user_groups:
 - Visitors
 ---
 
-Dr Tom Palmer, Senior Lecturer in Biostatistics applied to Genetics
+Dr Tom Palmer, Senior Lecturer in Biostatistics
