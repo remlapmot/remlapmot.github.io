@@ -9,7 +9,7 @@ on:
 
 name: blogdown
 
-permissions: read-all
+permissions: write-all
 
 jobs:
   blogdown:
