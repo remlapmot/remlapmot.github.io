@@ -29,7 +29,7 @@ publishDate:
 slides: 
 summary: 
 tags: []
-title: "The MRC IEU R-Universe of Mendelian randomization related R packages"
+title: "The MRC IEU R-Universe of Mendelian randomization related R packages 🚀"
 url_code: ""
 url_pdf: "talk/2024-mrconf-palmer-a4.pdf"
 # url_slides: "https://remlapmot.github.io/mr2019-tom-palmer-poster/"
