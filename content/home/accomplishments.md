@@ -19,6 +19,16 @@ date_format = "Jan 2006"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 
 [[item]]
+  organization = "Statistics in Medicine"
+  organization_url = "https://onlinelibrary.wiley.com/journal/10970258"
+  title = "Paper in top 10% of downloaded papers in 2022"
+  url = "https://onlinelibrary.wiley.com/doi/full/10.1002/sim.9299"
+  certificate_url = ""
+  date_start = "2024-07-10"
+  date_end = ""
+  description = ""
+
+[[item]]
   organization = "R Views"
   organization_url = "https://rviews.rstudio.com/"
   title = "OneSampleMR included in RStudio's R Views November 2021: \"Top 40\" New CRAN Packages"
