@@ -51,7 +51,7 @@ date_format = "Jan 2006"
 [[item]]
   organization = "Stata Press"
   organization_url = "https://www.stata-press.com/"
-  title = "Co-editor of Meta-Analysis in Stata: An Updated Collection from the Stata Journal, Second Edition"
+  title = "Co-editor, with Prof. Jonathan Sterne, of Meta-Analysis in Stata: An Updated Collection from the Stata Journal, Second Edition"
   url = "https://www.stata.com/bookstore/meta-analysis-in-stata/"
   certificate_url = ""
   date_start = "2015-10-08"
