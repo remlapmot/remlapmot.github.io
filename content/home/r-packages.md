@@ -98,4 +98,13 @@ date_format = "Jan 2006"
   date_end = ""
   description = ""
 
+[[item]]
+  organization = "R-Universe"
+  organization_url = "https://r-universe.dev"
+  title = "Personal R-Universe 🚀"
+  url = "https://remlapmot.r-universe.dev"
+  certificate_url = ""
+  date_start = "2023-06-01"
+  date_end = ""
+  description = ""
 +++
