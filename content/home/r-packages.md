@@ -107,4 +107,15 @@ date_format = "Jan 2006"
   date_start = "2023-06-01"
   date_end = ""
   description = ""
+
+[[item]]
+  organization = "R-Universe"
+  organization_url = "https://r-universe.dev"
+  title = "MRCIEU R-Universe 🚀"
+  url = "https://mrcieu.r-universe.dev"
+  certificate_url = ""
+  date_start = "2023-06-02"
+  date_end = ""
+  description = ""
+  
 +++
