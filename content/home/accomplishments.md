@@ -19,6 +19,16 @@ date_format = "Jan 2006"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 
 [[item]]
+  organization = "Bennett Institute, University of Oxford"
+  organization_url = "https://www.bennett.ox.ac.uk/"
+  title = "Secondment to software development team at the Bennett Institute"
+  url = ""
+  certificate_url = ""
+  date_start = "2024-09-01"
+  date_end = "2025-03-31"
+  description = "Two day per week secondment to the Research Analysis Pipeline software development team in Prof. Ben Goldacre's Bennett Institute, University of Oxford. I will work on R related projects within the OpenSAFELY programme."
+
+[[item]]
   organization = "Statistics in Medicine"
   organization_url = "https://onlinelibrary.wiley.com/journal/10970258"
   title = "Paper in top 10% of downloaded papers from Statistics in Medicine journal in 2022"
