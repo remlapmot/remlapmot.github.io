@@ -26,7 +26,7 @@ date_format = "Jan 2006"
   certificate_url = ""
   date_start = "2024-09-01"
   date_end = "2025-03-31"
-  description = "Two day per week secondment to the Research Analysis Pipeline software development team in Prof. Ben Goldacre's Bennett Institute, University of Oxford. I will work on R related projects within the OpenSAFELY programme."
+  description = "Two day per week secondment to the Reproducible Analytics Pipeline software development team in Prof. Ben Goldacre's Bennett Institute, University of Oxford. I will work on R related projects within the OpenSAFELY programme."
 
 [[item]]
   organization = "Statistics in Medicine"
