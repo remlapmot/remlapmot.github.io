@@ -31,7 +31,7 @@ date_format = "Jan 2006"
 [[item]]
   organization = "Statistics in Medicine"
   organization_url = "https://onlinelibrary.wiley.com/journal/10970258"
-  title = "Paper in top 10% of downloaded papers from Statistics in Medicine journal in 2022"
+  title = "Paper in top 10% of downloaded papers from Statistics in Medicine in 2022"
   url = "https://onlinelibrary.wiley.com/doi/full/10.1002/sim.9299"
   certificate_url = ""
   date_start = "2024-07-10"
