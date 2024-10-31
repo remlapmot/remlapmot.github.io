@@ -51,12 +51,12 @@ date_format = "Jan 2006"
 [[item]]
   organization = "International Journal of Epidemiology"
   organization_url = "https://academic.oup.com/ije"
-  title = "Best of IJE 2019"
+  title = "Article in Best of IJE 2019"
   url = "https://academic.oup.com/ije/pages/the_best_of_ije"
   certificate_url = ""
   date_start = "2019-12-20"
   date_end = ""
-  description = ""
+  description = "Spiller, et al., Software application profile: mrrobust--a tool for performing two-sample summary Mendelian randomization analyses, IJE, 48, 3, 684--690, <https://doi.org/10.1093/ije/dyy195> was the second most cited IJE paper in 2019."
 
 [[item]]
   organization = "Stata Press"
