@@ -30,6 +30,7 @@ jobs:
         with:
           use-public-rspm: false
           http-user-agent: "release"
+          r-version: '4.4.1'
       
       # - name: Install libcurl on Linux
       #   if: runner.os == 'Linux'
@@ -39,10 +40,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          cache-version: 1
           dependencies: '"hard"'
-          upgrade: 'TRUE'
-          extra-packages: any::Rcpp
       
       - name: Install hugo
         run: blogdown::install_hugo(version = "0.136.5")
