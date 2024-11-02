@@ -19,7 +19,7 @@ date_format = "Jan 2006"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 
 [[item]]
-  organization = "Bennett Institute, University of Oxford"
+  organization = "Prof. Ben Goldacre's Bennett Institute for Applied Data Science in the Nuffield Department of Primary Care Health Sciences, University of Oxford"
   organization_url = "https://www.bennett.ox.ac.uk/"
   title = "Secondment to software development team at the Bennett Institute"
   url = ""
