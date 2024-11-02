@@ -41,6 +41,7 @@ jobs:
         with:
           cache-version: 1
           dependencies: '"hard"'
+          upgrade: 'TRUE'
       
       - name: Install hugo
         run: blogdown::install_hugo(version = "0.136.5")
