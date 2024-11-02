@@ -42,6 +42,7 @@ jobs:
           cache-version: 1
           dependencies: '"hard"'
           upgrade: 'TRUE'
+          extra-packages: any::Rcpp
       
       - name: Install hugo
         run: blogdown::install_hugo(version = "0.136.5")
