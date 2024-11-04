@@ -40,7 +40,6 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           dependencies: '"hard"'
-          upgrade: 'TRUE'
       
       - name: Install hugo
         run: blogdown::install_hugo(version = "0.137.0")
