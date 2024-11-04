@@ -43,7 +43,7 @@ jobs:
           upgrade: 'TRUE'
       
       - name: Install hugo
-        run: blogdown::install_hugo(version = "0.136.5")
+        run: blogdown::install_hugo(version = "0.137.0")
         shell: Rscript {0}
 
       - name: Build site
