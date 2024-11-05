@@ -42,7 +42,7 @@ jobs:
           dependencies: '"hard"'
       
       - name: Install hugo
-        run: blogdown::install_hugo(version = "0.137.0")
+        run: blogdown::install_hugo(version = "0.137.1")
         shell: Rscript {0}
 
       - name: Build site
