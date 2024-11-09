@@ -49,6 +49,16 @@ date_format = "Jan 2006"
   description = ""
 
 [[item]]
+  organization = "MRC Integrative Epidemiology Unit"
+  organization_url = "https://www.bristol.ac.uk/integrative-epidemiology/"
+  title = "Co-chair of the organising committe for the 5th International Mendelian randomization conference"
+  url = "https://www.mendelianrandomization.org.uk/"
+  certificate_url = ""
+  date_start = "2021-07-07"
+  date_end = ""
+  description = ""
+  
+[[item]]
   organization = "International Journal of Epidemiology"
   organization_url = "https://academic.oup.com/ije"
   title = "Article in Best of IJE 2019"
