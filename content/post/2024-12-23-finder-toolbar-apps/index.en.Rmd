@@ -1,0 +1,30 @@
+---
+title: 'Launch RStudio, Positron, and other Data Science apps from your Finder Toolbar'
+author: Package Build
+date: '2024-12-23'
+slug: finder-toolbar-apps
+categories:
+  - Blog
+tags:
+  - Positron
+  - R
+  - RStudio
+subtitle: ''
+summary: 'Create Automator Apps to launch Data Science apps open in the current Finder window.'
+authors: []
+lastmod: '2024-12-23T09:15:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of RStudio, Positron, Visual Studio Code, and R icons in Finder toolbar.'
+projects: []
+---
+
+## Introduction
+
+
+
+## Summary
+
