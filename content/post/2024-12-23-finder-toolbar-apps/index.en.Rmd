@@ -24,7 +24,7 @@ projects: []
 
 ## Introduction
 
-Have you ever wanted to be able to quickly open a Data Science app, say RStudio Desktop or Positron in the current Finder window at the click of a button? We'll see how to achieve this by creating Automator apps containing AppleScript. Here's a screenshot of what we'll end up with.
+Have you ever wanted to be able to quickly open a Data Science app, say RStudio Desktop or Positron in the current Finder window at the click of a button? We'll see how to achieve this by creating Automator apps. Here's a screenshot of what we'll end up with.
 
 <img src="/post/2024/finder-toolbar-apps/img/finder-window-with-toolbar-apps.png" alt="Screenshot of a Finder window with app icons in its toolbar." width="630" style="display: block; margin: auto;">
 
@@ -34,7 +34,7 @@ Open Automator and select _New_ then _Application_. The in the top left search b
 
 <img src="/post/2024/finder-toolbar-apps/img/automator-run-applescript.png" alt="Screenshot of the Automator app." width="630" style="display: block; margin: auto;">
 
-Next it is a question of entering the relevant AppleScript code for the each app. At the moment I use WezTerm for my terminal emulator, Zed as my main text editor, RStudio Desktop for most of my R coding, Visual Studio Code for other text editing tasks, and I occasionally try out Positron. My AppleScript code was as follows.
+We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use [WezTerm](https://wezfurlong.org/wezterm/) for my terminal emulator, [Zed](https://zed.dev/) as my main text editor, [RStudio Desktop](https://posit.co/products/open-source/rstudio/) for most of my R/R Markdown/Quarto coding, [Visual Studio Code](https://code.visualstudio.com/) for other text editing tasks, and I have been starting to try out [Positron](https://positron.posit.co/). My AppleScript code for each app is as follows.
 
 ### RStudio Desktop
 
@@ -72,7 +72,7 @@ end tell
 end run
 ```
 
-### R launched in a WezTerm window
+### R launched in a WezTerm terminal session
 
 ```applescript
 on run {input, parameters}
@@ -86,9 +86,9 @@ end run
 
 ### Visual Studio Code and Positron
 
-First enable the ability to launch `code` and `positron` from a Terminal in each app, see [here](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line) and [here](https://positron.posit.co/add-to-path.html). 
+First enable the ability to launch these apps with `code` and `positron` from a Terminal in each app, see [here](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line) and [here](https://positron.posit.co/add-to-path.html). 
 
-This script is more involved because we first check for any _.code-workspace_ files and open one if found. My AppleScript coding is not very proficient, so there may well be better approaches to coding this.
+This script is more involved because we first check for any _.code-workspace_ files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this.
 
 ```applescript
 on run {input, parameters}
@@ -103,7 +103,7 @@ tell application "Finder"
     else if (count of workspaceFiles) = 1 then 
       set workspaceFile to item 1 of workspaceFiles
       set workspacePath to POSIX path of (workspaceFile as alias)
-		  do shell script "/usr/local/bin/positron -n " & quoted form of workspacePath
+      do shell script "/usr/local/bin/positron -n " & quoted form of workspacePath
     else if (count of workspaceFiles) > 1 then 
       display dialog "Multiple code-workspace files found in directory."  
     end if
