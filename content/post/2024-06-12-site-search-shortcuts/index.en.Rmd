@@ -35,7 +35,7 @@ From here we can see that we can define our own shortcuts, so let's define some 
 
 *  A shortcut for searching the METACRAN CRAN mirror on GitHub
 
-```
+```plaintext
 Name: CRAN mirror on GitHub
 Shortcut: @cran
 URL with %s in place of query:
@@ -54,7 +54,7 @@ Here are some other shortcuts.
 
 * A shortcut for searching for a package description on METACRAN
 
-```
+```plaintext
 Name: METACRAN
 Shortcut: @metacran
 URL with %s in place of query:
@@ -63,7 +63,7 @@ https://r-pkg.org/search.html/?q=%s
 
 * A shortcut for searching using [Rseek](https://rseek.org/)
 
-```
+```plaintext
 Name: Rseek
 Shortcut: @rseek
 URL with %s in place of query:
@@ -72,7 +72,7 @@ https://rseek.org/?q=%s
 
 * A shortcut for searching [R-universe](https://r-universe.dev/)
 
-```
+```plaintext
 Name: R-universe
 Shortcut: @runi
 URL with %s in place of query:
@@ -81,7 +81,7 @@ https://r-universe.dev/search/?q=%s
 
 * A shortcut for searching the third edition of the Oxford Dictionary of Statistics
 
-```
+```plaintext
 Name: Oxford Dictionary of Statistics
 Shortcut: @stats
 URL with %s in place of query:
