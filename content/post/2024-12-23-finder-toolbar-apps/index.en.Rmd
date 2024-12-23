@@ -38,7 +38,7 @@ We then need to enter the relevant AppleScript code for launching each app in th
 
 ### RStudio Desktop
 
-```applescript
+```scpt
 on run {input, parameters}
   tell application "Finder"
     set myWin to window 1
@@ -50,7 +50,7 @@ end run
 
 ### WezTerm
 
-```applescript
+```scpt
 on run {input, parameters}
   tell application "Finder"
     set myWin to window 1
@@ -62,7 +62,7 @@ end run
 
 ### Zed
 
-```applescript
+```scpt
 on run {input, parameters}
   tell application "Finder"
     set myWin to window 1
@@ -74,7 +74,7 @@ end run
 
 ### R launched in a WezTerm terminal session
 
-```applescript
+```scpt
 on run {input, parameters}
   tell application "Finder"
     set myWin to window 1
@@ -90,7 +90,7 @@ First enable the ability to launch these apps with `code` and `positron` from a 
 
 This script is more involved because we first check for any _.code-workspace_ files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this.
 
-```applescript
+```scpt
 on run {input, parameters}
   tell application "Finder"
     try
