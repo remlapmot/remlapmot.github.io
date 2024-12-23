@@ -189,11 +189,11 @@ We can also confirm that on Ubuntu Focal Fossa
 .Platform$pkgType
 ## [1] "source"
 ```
-therefore, on Linux, `utils:::resolvePkgType()` always returns `"source"`. Hence, on Linux, `contrib.url()` always returns `/src/contrib` regardless of its `type` argument.
+therefore, on Linux, `utils:::resolvePkgType()`{.r} always returns `"source"`. Hence, on Linux, `contrib.url()`{.r} always returns `/src/contrib` regardless of its `type` argument.
 
 ## Testing your CRAN-like repositories locally
 
-You can either run a local web server or use the `file://...` URL notation as your `repos` global options setting (set with `option(repos = ...)` or as the `repos` argument to `install.packages()`).
+You can either run a local web server or use the `file://...` URL notation as your `repos` global options setting (set with `option(repos = ...)` or as the `repos` argument to `install.packages()`{.r}).
 
 Here's a screenshot of installing a binary package on Ubuntu Focal Fossa.
 <img src="/post/2022/make-linux-binary-cran-like-repo/img/cran-like-focal-example.png" alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa." style="display: block; margin: auto;">
