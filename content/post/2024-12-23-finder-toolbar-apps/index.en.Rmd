@@ -10,7 +10,7 @@ tags:
   - R
   - RStudio
 subtitle: ''
-summary: 'Create Automator Apps to launch Data Science apps open in the current Finder window.'
+summary: 'Create Automator Apps to launch Data Science apps open in the current Finder window on macOS.'
 authors: []
 lastmod: '2024-12-23T09:15:00+00:00'
 featured: no
@@ -114,19 +114,19 @@ end tell
 end run
 ```
 
-(For Visual Studio Code simply replace `positron` with `code`.)
+(For your Visual Studio Code app simply replace `positron` with `code`.)
 
 ### Saving and adding icons
 
 After adding the AppleScript code save each app. I call mine, e.g., _RStudio-openhere.app_.
 
-Next it is helpful to give each app the relevant icon. To do this in Finder bring up the Info box for the original app and your _-openhere_ version <kbd>Cmd</kbd>+<kbd>I</kbd>. Next drag the large icon from the original app onto the small icon of your _-openhere_ app.
+Next it is helpful to give each app the relevant icon. To do this in Finder bring up the Info boxes for the original app and your _-openhere_ version by selecting each app and pressing <kbd>Cmd</kbd>+<kbd>I</kbd>. Next drag the large icon from the original app onto the small icon of your _-openhere_ app.
 
 <img src="/post/2024/finder-toolbar-apps/img/updating-icon.png" alt="Screenshot of copying the Positron icon onto our openhere app." width="630" style="display: block; margin: auto;">
 
 ### Adding the apps to the Finder toolbar
 
-Finally, we need to place shortcuts of these apps onto the Finder toolbar. To do this first hold down <kbd>Cmd</kbd> then drag the app from Finder onto the toolbar to the location you would like. On release the app should now be in the toolbar.
+Finally, we need to place shortcuts of these apps onto the Finder toolbar. To do this first hold down <kbd>Cmd</kbd> then drag the app from Finder onto the toolbar to the location you would like. On release the app should now be in the toolbar. (And to remove an icon from the toolbar, again hold <kbd>Cmd</kbd> then drag it off the toolbar.)
 
 <img src="/post/2024/finder-toolbar-apps/img/add-app-to-toolbar.png" alt="Screenshot of moving our Positron-openhere app onto the Finder toolbar." width="630" style="display: block; margin: auto;">
 
