@@ -146,11 +146,11 @@ contrib.url(&quot;&quot;, type = &quot;binary&quot;)
 <p>We can also confirm that on Ubuntu Focal Fossa</p>
 <pre class="r"><code>.Platform$pkgType
 ## [1] &quot;source&quot;</code></pre>
-<p>therefore, on Linux, <code>utils:::resolvePkgType()</code> always returns <code>"source"</code>. Hence, on Linux, <code>contrib.url()</code> always returns <code>/src/contrib</code> regardless of its <code>type</code> argument.</p>
+<p>therefore, on Linux, <code class="r">utils:::resolvePkgType()</code> always returns <code>"source"</code>. Hence, on Linux, <code class="r">contrib.url()</code> always returns <code>/src/contrib</code> regardless of its <code>type</code> argument.</p>
 </div>
 <div id="testing-your-cran-like-repositories-locally" class="section level2">
 <h2>Testing your CRAN-like repositories locally</h2>
-<p>You can either run a local web server or use the <code>file://...</code> URL notation as your <code>repos</code> global options setting (set with <code>option(repos = ...)</code> or as the <code>repos</code> argument to <code>install.packages()</code>).</p>
+<p>You can either run a local web server or use the <code>file://...</code> URL notation as your <code>repos</code> global options setting (set with <code>option(repos = ...)</code> or as the <code>repos</code> argument to <code class="r">install.packages()</code>).</p>
 <p>Here’s a screenshot of installing a binary package on Ubuntu Focal Fossa.
 <img src="/post/2022/make-linux-binary-cran-like-repo/img/cran-like-focal-example.png" alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa." style="display: block; margin: auto;"></p>
 </div>
