@@ -27,10 +27,10 @@
   
     
   
-  <meta name="description" content="For fuller reproducibility in Stata ado-files and programs set both the version and the user version.">
+  <meta name="description" content="Create Automator Apps to launch Data Science apps open in the current Finder window on macOS.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2023/stata-reproducibility/">
+  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2024/finder-toolbar-apps/">
 
   
 
@@ -217,7 +217,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu10978985619530458252.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu5609693425197255918.png">
 
-  <link rel="canonical" href="https://remlapmot.github.io/post/2023/stata-reproducibility/">
+  <link rel="canonical" href="https://remlapmot.github.io/post/2024/finder-toolbar-apps/">
 
   
   
@@ -232,15 +232,15 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Dr Tom Palmer">
-  <meta property="og:url" content="https://remlapmot.github.io/post/2023/stata-reproducibility/">
-  <meta property="og:title" content="Fuller reproducibility in Stata ado-files and programs: setting the version and user version | Dr Tom Palmer">
-  <meta property="og:description" content="For fuller reproducibility in Stata ado-files and programs set both the version and the user version."><meta property="og:image" content="https://remlapmot.github.io/post/2023/stata-reproducibility/featured.png">
-  <meta property="twitter:image" content="https://remlapmot.github.io/post/2023/stata-reproducibility/featured.png"><meta property="og:locale" content="en-us">
+  <meta property="og:url" content="https://remlapmot.github.io/post/2024/finder-toolbar-apps/">
+  <meta property="og:title" content="Launch RStudio, Positron, and other Data Science apps from your Finder Toolbar | Dr Tom Palmer">
+  <meta property="og:description" content="Create Automator Apps to launch Data Science apps open in the current Finder window on macOS."><meta property="og:image" content="https://remlapmot.github.io/post/2024/finder-toolbar-apps/featured.png">
+  <meta property="twitter:image" content="https://remlapmot.github.io/post/2024/finder-toolbar-apps/featured.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2023-08-24T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2024-12-23T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2023-09-10T20:43:29&#43;01:00">
+    <meta property="article:modified_time" content="2024-12-23T09:15:00&#43;00:00">
   
 
   
@@ -264,16 +264,16 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://remlapmot.github.io/post/2023/stata-reproducibility/"
+    "@id": "https://remlapmot.github.io/post/2024/finder-toolbar-apps/"
   },
-  "headline": "Fuller reproducibility in Stata ado-files and programs: setting the version and user version",
+  "headline": "Launch RStudio, Positron, and other Data Science apps from your Finder Toolbar",
   
   "image": [
-    "https://remlapmot.github.io/post/2023/stata-reproducibility/featured.png"
+    "https://remlapmot.github.io/post/2024/finder-toolbar-apps/featured.png"
   ],
   
-  "datePublished": "2023-08-24T00:00:00Z",
-  "dateModified": "2023-09-10T20:43:29+01:00",
+  "datePublished": "2024-12-23T00:00:00Z",
+  "dateModified": "2024-12-23T09:15:00Z",
   
   "author": {
     "@type": "Person",
@@ -288,7 +288,7 @@
       "url": "https://remlapmot.github.io/images/icon_hu5609693425197255918.png"
     }
   },
-  "description": "For fuller reproducibility in Stata ado-files and programs set both the version and the user version."
+  "description": "Create Automator Apps to launch Data Science apps open in the current Finder window on macOS."
 }
 </script>
 
@@ -306,7 +306,7 @@
 
 
 
-  <title>Fuller reproducibility in Stata ado-files and programs: setting the version and user version | Dr Tom Palmer</title>
+  <title>Launch RStudio, Positron, and other Data Science apps from your Finder Toolbar | Dr Tom Palmer</title>
 
 </head>
 
@@ -608,7 +608,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>Fuller reproducibility in Stata ado-files and programs: setting the version and user version</h1>
+  <h1>Launch RStudio, Positron, and other Data Science apps from your Finder Toolbar</h1>
 
   
 
@@ -628,7 +628,7 @@
           Last updated on
       
     
-    Sep 10, 2023
+    Dec 23, 2024
   </span>
   
 
@@ -667,9 +667,9 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 242px; max-height: 81px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 346px; max-height: 108px;">
   <div style="position: relative">
-    <img src="/post/2023/stata-reproducibility/featured.png" alt="" class="featured-image">
+    <img src="/post/2024/finder-toolbar-apps/featured.png" alt="Screenshot of RStudio, Positron, Visual Studio Code, and R icons in Finder toolbar." class="featured-image">
     
   </div>
 </div>
@@ -682,49 +682,98 @@
       
 
 
-<p>Most proficient Stata users have come across the <code>version</code> command. This is an incredibly powerful command, which simply by issuing say</p>
-<pre class="stata"><code>version 18</code></pre>
-<p>at the top of a do-file or within a program (typically in an ado-file) means that you have pretty much guaranteed your code will run in the same way when you come to run it later (most likely in a newer version of Stata). But it turns out there’s a subtle difference between issuing <code>version</code> in a do-file/interactively compared to within a program or ado-file.</p>
-<p>Several years ago I wrote the <strong>reffadjust</strong> package <span class="citation">(<a href="#ref-palmer-sj-2014">Palmer et al. 2014</a>)</span> as part of some work using random effects models <span class="citation">(<a href="#ref-mcdw-sim-2012">Macdonald-Wallis et al. 2012</a>)</span>. It has two programs <code>reffadjustsim</code> and <code>reffadjust4nlcom</code> which use the output of various random effects commands, including those from MLwiN, run from Stata using the user-written <code>runmlwin</code> command <span class="citation">(<a href="#ref-leckie-jss-2013">Leckie and Charlton 2013</a>)</span>.</p>
-<p>The <strong>reffadjust</strong> package doesn’t have many users and over the years I hadn’t regularly checked if the programs were still working. But in the ado-files I had set <code>version 13</code>, which gave me some residual confidence that the programs might still work.</p>
-<p>However, a few years ago, when I eventually did run some test code I saw that the <code>reffadjustsim</code> tests were failing for MLwiN/<code>runmlwin</code> models. I didn’t have time to investigate further at this point, and I didn’t have any intuition whether the error resulted from a change in MLwiN, <code>runmlwin</code>, or Stata.</p>
-<p>At the beginning of this year one of my colleagues mentioned that they were using <strong>reffadjust</strong> in their work and had observed the same error with <code>reffadjustsim</code>. My guilt kicked in, and I eventually found some time to investigate. I discovered that since I wrote the package, Stata processes matrix row and column stripes (essentially the row and column names) in a more advanced way. This meant that the row and column stripes for covariance elements in the <code>e(V)</code> matrix (the variance-covariance matrix of parameter estimates) from MLwiN/<code>runmlwin</code> models were being renamed when I hadn’t intended them to be, which caused the error.</p>
-<p>But wait … I had specified <code>version 13</code> at the top of my program, so why was this update in later versions of Stata taking effect?</p>
-<p>I couldn’t work it out, so I had to ask Stata Technical Support. They were kind enough to tell me that there’s an additional method of invoking the <code>version</code> command which controls what is known as the “user version”. There are some modifications in new versions of Stata which are exempt from the basic invocation of the <code>version</code> command (but only in programs and ado-files). In do-files issuing <code>version</code> sets both the version and the user version, however, in programs and ado-files the “user version”, is set by <code>version #, user</code>, and holds these additional modifications in Stata to the required version.</p>
-<p>Naturally, this is explained in the <code>version</code> helpfile and <a href="https://www.stata.com/manuals/pversion.pdf">manual entry</a>, which I admit I had not read until this point. Hence, simply editing the top of my program to</p>
-<pre class="stata"><code>version 13
-version 13, user</code></pre>
-<p>fixed my error. So in a program or ado-file, we require both lines, whereas in a do-file we’d only require <code>version 13</code>.</p>
-<p>We can see the different operation of <code>version</code> by the following short example.</p>
-<pre class="stata"><code>/* Do-file/interactive code to set both the version and the user version */
-version 13
-display c(version), c(userversion), c(stata_version)
-// 13 13 17</code></pre>
-<pre class="stata"><code>/* Ado-file/program code to set both the version and the user version */
-program mytest
-version 13
-display c(version), c(userversion), c(stata_version)
-version 13, user
-display c(version), c(userversion), c(stata_version)
-end
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Have you ever wanted to be able to quickly open a Data Science app, say RStudio Desktop or Positron in the current Finder window at the click of a button? We’ll see how to achieve this by creating Automator apps. Here’s a screenshot of what we’ll end up with.</p>
+<p><img src="/post/2024/finder-toolbar-apps/img/finder-window-with-toolbar-apps.png" alt="Screenshot of a Finder window with app icons in its toolbar." width="630" style="display: block; margin: auto;"></p>
+</div>
+<div id="creating-the-automator-apps" class="section level2">
+<h2>Creating the Automator apps</h2>
+<p>Open Automator and select <em>New</em> then <em>Application</em>. The in the top left search bar enter <em>applescript</em> and drag and drop that element onto the main window.</p>
+<p><img src="/post/2024/finder-toolbar-apps/img/automator-run-applescript.png" alt="Screenshot of the Automator app." width="630" style="display: block; margin: auto;"></p>
+<p>We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use <a href="https://wezfurlong.org/wezterm/">WezTerm</a> for my terminal emulator, <a href="https://zed.dev/">Zed</a> as my main text editor, <a href="https://posit.co/products/open-source/rstudio/">RStudio Desktop</a> for most of my R/R Markdown/Quarto coding, <a href="https://code.visualstudio.com/">Visual Studio Code</a> for other text editing tasks, and I have been starting to try out <a href="https://positron.posit.co/">Positron</a>. My AppleScript code for each app is as follows.</p>
+<div id="rstudio-desktop" class="section level3">
+<h3>RStudio Desktop</h3>
+<pre class="applescript"><code>on run {input, parameters}
+tell application &quot;Finder&quot;
+  set myWin to window 1
+  set thePath to (quoted form of POSIX path of (target of myWin as alias))
+  Do Shell Script &quot;/Applications/RStudio.app/Contents/MacOS/RStudio &quot; &amp; thePath
+end tell
+end run</code></pre>
+</div>
+<div id="wezterm" class="section level3">
+<h3>WezTerm</h3>
+<pre class="applescript"><code>on run {input, parameters}
+tell application &quot;Finder&quot;
+  set myWin to window 1
+  set thePath to (quoted form of POSIX path of (target of myWin as alias))
+  Do Shell Script &quot;/opt/homebrew/bin/wezterm-gui start --cwd &quot; &amp; thePath
+end tell
+end run</code></pre>
+</div>
+<div id="zed" class="section level3">
+<h3>Zed</h3>
+<pre class="applescript"><code>on run {input, parameters}
+tell application &quot;Finder&quot;
+  set myWin to window 1
+  set thePath to (quoted form of POSIX path of (target of myWin as alias))
+  Do Shell Script &quot;/usr/local/bin/zed -n &quot; &amp; thePath
+end tell
+end run</code></pre>
+</div>
+<div id="r-launched-in-a-wezterm-terminal-session" class="section level3">
+<h3>R launched in a WezTerm terminal session</h3>
+<pre class="applescript"><code>on run {input, parameters}
+tell application &quot;Finder&quot;
+  set myWin to window 1
+  set thePath to (quoted form of POSIX path of (target of myWin as alias))
+  Do Shell Script &quot;/opt/homebrew/bin/wezterm-gui start --cwd &quot; &amp; thePath &amp; &quot; -- /usr/local/bin/R&quot;
+end tell
+end run</code></pre>
+</div>
+<div id="visual-studio-code-and-positron" class="section level3">
+<h3>Visual Studio Code and Positron</h3>
+<p>First enable the ability to launch these apps with <code>code</code> and <code>positron</code> from a Terminal in each app, see <a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">here</a> and <a href="https://positron.posit.co/add-to-path.html">here</a>.</p>
+<p>This script is more involved because we first check for any <em>.code-workspace</em> files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this.</p>
+<pre class="applescript"><code>on run {input, parameters}
 
-mytest
-// 13 17 17
-// 13 13 17</code></pre>
-<p>In summary, my <code>reffadjustsim</code> command works again for MLwiN/<code>runmlwin</code> models. The updated version is available from <a href="https://github.com/remlapmot/reffadjust">its GitHub repo</a>. And if you ever need <em>fuller</em> reproducibility in your Stata ado-file or program remember to set both the version and the user version.</p>
-<div id="references" class="section level2 unnumbered">
-<h2>References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-leckie-jss-2013" class="csl-entry">
-Leckie, George, and Chris Charlton. 2013. <span>“<span class="nocase">runmlwin: A Program to Run the MLwiN Multilevel Modeling Software from within Stata</span>.”</span> <em>Journal of Statistical Software</em> 52 (11): 1–40. <a href="https://doi.org/10.18637/jss.v052.i11">https://doi.org/10.18637/jss.v052.i11</a>.
+tell application &quot;Finder&quot;
+  try
+    set currentFolder to (folder of window 1) as alias
+    set workspaceFiles to (every file of currentFolder whose name extension is &quot;code-workspace&quot;)
+    if (count of workspaceFiles) = 0 then 
+      set folderPath to POSIX path of currentFolder
+      do shell script &quot;/usr/local/bin/positron -n &quot; &amp; quoted form of folderPath
+    else if (count of workspaceFiles) = 1 then 
+      set workspaceFile to item 1 of workspaceFiles
+      set workspacePath to POSIX path of (workspaceFile as alias)
+      do shell script &quot;/usr/local/bin/positron -n &quot; &amp; quoted form of workspacePath
+    else if (count of workspaceFiles) &gt; 1 then 
+      display dialog &quot;Multiple code-workspace files found in directory.&quot;  
+    end if
+    on error
+        display dialog &quot;No Finder window is open.&quot;
+    end try
+end tell
+end run</code></pre>
+<p>(For your Visual Studio Code app simply replace <code>positron</code> with <code>code</code>.)</p>
 </div>
-<div id="ref-mcdw-sim-2012" class="csl-entry">
-Macdonald-Wallis, Corrie, Debbie A. Lawlor, Tom Palmer, and Kate Tilling. 2012. <span>“Multivariate Multilevel Spline Models for Parallel Growth Processes: Application to Weight and Mean Arterial Pressure in Pregnancy.”</span> <em>Statistics in Medicine</em> 31 (26): 3147–64. <a href="https://doi.org/doi.org/10.1002/sim.5385">https://doi.org/doi.org/10.1002/sim.5385</a>.
+<div id="saving-and-adding-icons" class="section level3">
+<h3>Saving and adding icons</h3>
+<p>After adding the AppleScript code save each app. I call mine, e.g., <em>RStudio-openhere.app</em>.</p>
+<p>Next it is helpful to give each app the relevant icon. To do this in Finder bring up the Info boxes for the original app and your <em>-openhere</em> version by selecting each app and pressing <kbd>Cmd</kbd>+<kbd>I</kbd>. Next drag the large icon from the original app onto the small icon of your <em>-openhere</em> app.</p>
+<p><img src="/post/2024/finder-toolbar-apps/img/updating-icon.png" alt="Screenshot of copying the Positron icon onto our openhere app." width="630" style="display: block; margin: auto;"></p>
 </div>
-<div id="ref-palmer-sj-2014" class="csl-entry">
-Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 2014. <span>“<span class="nocase">Estimating adjusted associations between random effects from multilevel models: The reffadjust package</span>.”</span> <em>The Stata Journal</em> 14 (1): 119–40. <a href="https://doi.org/10.1177/1536867X1401400109">https://doi.org/10.1177/1536867X1401400109</a>.
+<div id="adding-the-apps-to-the-finder-toolbar" class="section level3">
+<h3>Adding the apps to the Finder toolbar</h3>
+<p>Finally, we need to place shortcuts of these apps onto the Finder toolbar. To do this first hold down <kbd>Cmd</kbd> then drag the app from Finder onto the toolbar to the location you would like. On release the app should now be in the toolbar. (And to remove an icon from the toolbar, again hold <kbd>Cmd</kbd> then drag it off the toolbar.)</p>
+<p><img src="/post/2024/finder-toolbar-apps/img/add-app-to-toolbar.png" alt="Screenshot of moving our Positron-openhere app onto the Finder toolbar." width="630" style="display: block; margin: auto;"></p>
 </div>
 </div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>I have shown how to create Automator apps to open RStudio Desktop, Positron, and several other Data Science apps from the current Finder window.</p>
 </div>
 
     </div>
@@ -738,7 +787,11 @@ Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tag/stata/">Stata</a>
+  <a class="badge badge-light" href="/tag/positron/">Positron</a>
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+  <a class="badge badge-light" href="/tag/rstudio/">RStudio</a>
   
 </div>
 
@@ -950,13 +1003,13 @@ Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/2024/finder-toolbar-apps/">Launch RStudio, Positron, and other Data Science apps from your Finder Toolbar</a></li>
+      <li><a href="/post/2024/macos-rstudio-another/">Creating a simple Automator app to launch a new instance of RStudio Desktop on macOS</a></li>
       
       <li><a href="/post/2024/chrome-site-search-shortcuts/">Supercharge your #rstats web searching in Google Chrome with Site Search Shortcuts</a></li>
       
       <li><a href="/post/2024/mlnscript-r2mlwin-apple-silicon/">Running MLwiN using mlnscript via the R2MLwiN R package on Apple Silicon Macs </a></li>
       
-      <li><a href="/post/2024/macos-rstudio-another/">Creating a simple Automator app to launch a new instance of RStudio Desktop on macOS</a></li>
+      <li><a href="/post/2022/make-linux-binary-cran-like-repo/">Make your own CRAN-like repository with Linux binary R packages</a></li>
       
       <li><a href="/post/2024/github-unwrapped-2023/">My #GitHubUnwrapped 2023!</a></li>
       
