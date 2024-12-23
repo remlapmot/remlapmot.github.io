@@ -36,7 +36,7 @@ projects: []
 <p>We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use <a href="https://wezfurlong.org/wezterm/">WezTerm</a> for my terminal emulator, <a href="https://zed.dev/">Zed</a> as my main text editor, <a href="https://posit.co/products/open-source/rstudio/">RStudio Desktop</a> for most of my R/R Markdown/Quarto coding, <a href="https://code.visualstudio.com/">Visual Studio Code</a> for other text editing tasks, and I have been starting to try out <a href="https://positron.posit.co/">Positron</a>. My AppleScript code for each app is as follows.</p>
 <div id="rstudio-desktop" class="section level3">
 <h3>RStudio Desktop</h3>
-<pre class="applescript"><code>on run {input, parameters}
+<pre class="scpt"><code>on run {input, parameters}
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
@@ -46,7 +46,7 @@ end run</code></pre>
 </div>
 <div id="wezterm" class="section level3">
 <h3>WezTerm</h3>
-<pre class="applescript"><code>on run {input, parameters}
+<pre class="scpt"><code>on run {input, parameters}
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
@@ -56,7 +56,7 @@ end run</code></pre>
 </div>
 <div id="zed" class="section level3">
 <h3>Zed</h3>
-<pre class="applescript"><code>on run {input, parameters}
+<pre class="scpt"><code>on run {input, parameters}
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
@@ -66,7 +66,7 @@ end run</code></pre>
 </div>
 <div id="r-launched-in-a-wezterm-terminal-session" class="section level3">
 <h3>R launched in a WezTerm terminal session</h3>
-<pre class="applescript"><code>on run {input, parameters}
+<pre class="scpt"><code>on run {input, parameters}
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
@@ -78,7 +78,7 @@ end run</code></pre>
 <h3>Visual Studio Code and Positron</h3>
 <p>First enable the ability to launch these apps with <code>code</code> and <code>positron</code> from a Terminal in each app, see <a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">here</a> and <a href="https://positron.posit.co/add-to-path.html">here</a>.</p>
 <p>This script is more involved because we first check for any <em>.code-workspace</em> files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this.</p>
-<pre class="applescript"><code>on run {input, parameters}
+<pre class="scpt"><code>on run {input, parameters}
   tell application &quot;Finder&quot;
     try
       set currentFolder to (folder of window 1) as alias
