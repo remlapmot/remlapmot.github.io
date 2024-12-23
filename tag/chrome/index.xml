@@ -32,7 +32,7 @@
 &lt;ul&gt;
 &lt;li&gt;A shortcut for searching the METACRAN CRAN mirror on GitHub&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;Name: CRAN mirror on GitHub
+&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;Name: CRAN mirror on GitHub
 Shortcut: @cran
 URL with %s in place of query:
 https://github.com/search?q=user%3Acran%20%s&amp;amp;ref=opensearch&amp;amp;type=code&lt;/code&gt;&lt;/pre&gt;
@@ -44,28 +44,28 @@ https://github.com/search?q=user%3Acran%20%s&amp;amp;ref=opensearch&amp;amp;type
 &lt;ul&gt;
 &lt;li&gt;A shortcut for searching for a package description on METACRAN&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;Name: METACRAN
+&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;Name: METACRAN
 Shortcut: @metacran
 URL with %s in place of query:
 https://r-pkg.org/search.html/?q=%s&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;A shortcut for searching using &lt;a href=&#34;https://rseek.org/&#34;&gt;Rseek&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;Name: Rseek
+&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;Name: Rseek
 Shortcut: @rseek
 URL with %s in place of query:
 https://rseek.org/?q=%s&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;A shortcut for searching &lt;a href=&#34;https://r-universe.dev/&#34;&gt;R-universe&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;Name: R-universe
+&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;Name: R-universe
 Shortcut: @runi
 URL with %s in place of query:
 https://r-universe.dev/search/?q=%s&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;A shortcut for searching the third edition of the Oxford Dictionary of Statistics&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;Name: Oxford Dictionary of Statistics
+&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;Name: Oxford Dictionary of Statistics
 Shortcut: @stats
 URL with %s in place of query:
 https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188.001.0001%2Facref-9780199679188&amp;amp;q=%s&lt;/code&gt;&lt;/pre&gt;
