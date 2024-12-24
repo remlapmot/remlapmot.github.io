@@ -48,7 +48,7 @@
 &lt;p&gt;To host bundled source packages, such as our &lt;code&gt;OneSampleMR_0.1.2.tar.gz&lt;/code&gt; file, we require the following directory structure (noting that the &lt;code&gt;latest&lt;/code&gt; directory is optional, but allows us to add snapshot directories if we wanted to).
 &lt;!-- # brew install tree --&gt;
 &lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;__linux__|bin&#39; --noreport --&gt;&lt;/p&gt;
-&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;/mycran
+&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;/mycran
 └── latest
     └── src
         └── contrib
@@ -64,7 +64,7 @@
 &lt;p&gt;Assuming that we have some of these files we need to know where to put them. Since CRAN distributes binary packages for Windows and macOS we follow their directory structure, which is as follows.
 &lt;!-- brew install tree --&gt;
 &lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;__linux__&#39; --noreport --&gt;&lt;/p&gt;
-&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;/mycran
+&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;/mycran
 └── latest
     ├── bin
     │   ├── macosx
@@ -110,7 +110,7 @@ contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;binary&amp;quot;)
 &lt;p&gt;They then rename the &lt;code&gt;{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz&lt;/code&gt; files to the same form as the bundled source package files, i.e., to &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt;. And they put them in this new &lt;code&gt;src/contrib&lt;/code&gt; directory.&lt;/p&gt;
 &lt;p&gt;The structure of our CRAN-like repository (well in fact our 2 parallel repositories) is now.
 &lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;jammy&#39; --noreport --&gt;&lt;/p&gt;
-&lt;pre class=&#34;text&#34;&gt;&lt;code&gt;/mycran
+&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;/mycran
 ├── __linux__
 │   └── focal
 │       └── latest

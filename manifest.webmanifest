@@ -2,8 +2,8 @@
   "name": "Dr Tom Palmer",
   "short_name": "Dr Tom Palmer",
   "lang": "en-us",
-  "theme_color": "#2962ff",
-  "background_color": "#2962ff",
+  "theme_color": "rgb(0, 136, 204)",
+  "background_color": "rgb(0, 136, 204)",
   "icons": [{
     "src": "/images/icon_hu5609693425197255918.png",
     "sizes": "192x192",
