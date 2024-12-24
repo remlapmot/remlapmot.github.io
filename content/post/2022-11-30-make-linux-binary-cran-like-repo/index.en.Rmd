@@ -68,7 +68,7 @@ In two excellent blog posts Marks Sellors describes how to make a CRAN-like repo
 To host bundled source packages, such as our `OneSampleMR_0.1.2.tar.gz` file, we require the following directory structure (noting that the `latest` directory is optional, but allows us to add snapshot directories if we wanted to).
 <!-- # brew install tree -->
 <!-- tree ~/Documents/GitHub/cran/site -d -I '__linux__|bin' --noreport -->
-```text
+```plaintext
 /mycran
 └── latest
     └── src
@@ -90,7 +90,7 @@ We saw above how to build a binary Linux package. The same process, when repeate
 Assuming that we have some of these files we need to know where to put them. Since CRAN distributes binary packages for Windows and macOS we follow their directory structure, which is as follows.
 <!-- brew install tree -->
 <!-- tree ~/Documents/GitHub/cran/site -d -I '__linux__' --noreport -->
-```text
+```plaintext
 /mycran
 └── latest
     ├── bin
@@ -149,7 +149,7 @@ They then rename the `{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz` files to
 
 The structure of our CRAN-like repository (well in fact our 2 parallel repositories) is now.
 <!-- tree ~/Documents/GitHub/cran/site -d -I 'jammy' --noreport -->
-```text
+```plaintext
 /mycran
 ├── __linux__
 │   └── focal
