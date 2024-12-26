@@ -692,6 +692,7 @@
 <p>We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use <a href="https://wezfurlong.org/wezterm/">WezTerm</a> for my terminal emulator, <a href="https://zed.dev/">Zed</a> as my main text editor, <a href="https://posit.co/products/open-source/rstudio/">RStudio Desktop</a> for most of my R/R Markdown/Quarto coding, <a href="https://code.visualstudio.com/">Visual Studio Code</a> for other text editing tasks, and I have been starting to try out <a href="https://positron.posit.co/">Positron</a>. My AppleScript code for each app is as follows.</p>
 <div id="rstudio-desktop" class="section level3">
 <h3>RStudio Desktop</h3>
+<p>It is worth noting that RStudio automatically detects whether there is an <em>.Rproj</em> file in the directory and opens in project mode if one is found.</p>
 <pre class="applescript"><code>on run {input, parameters}
   tell application &quot;Finder&quot;
     set myWin to window 1
@@ -733,7 +734,7 @@ end run</code></pre>
 <div id="visual-studio-code-and-positron" class="section level3">
 <h3>Visual Studio Code and Positron</h3>
 <p>First enable the ability to launch these apps with <code>code</code> and <code>positron</code> from a Terminal in each app, see <a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">here</a> and <a href="https://positron.posit.co/add-to-path.html">here</a>.</p>
-<p>This script is more involved because we first check for any <em>.code-workspace</em> files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this.</p>
+<p>This script is more involved because we first check for any <em>.code-workspace</em> files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this. If we didn’t explicitly open the <em>.code-workspace</em> file and if one is present in the directy Visual Studio Code/Positron will detect it and pop up a dialogue box asking if we want to reopen the directory as a workspace (I just prefer to skip this step).</p>
 <pre class="applescript"><code>on run {input, parameters}
   tell application &quot;Finder&quot;
     try
