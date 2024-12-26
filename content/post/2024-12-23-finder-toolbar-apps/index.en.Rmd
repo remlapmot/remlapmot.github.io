@@ -90,7 +90,7 @@ end run
 
 First enable the ability to launch these apps with `code` and `positron` from a Terminal in each app, see [here](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line) and [here](https://positron.posit.co/add-to-path.html). 
 
-This script is more involved because we first check for any _.code-workspace_ files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this.
+This script is more involved because we first check for any _.code-workspace_ files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this. If we didn't explicitly open the _.code-workspace_ file and if one is present in the directy Visual Studio Code/Positron will detect it and pop up a dialogue box asking if we want to reopen the directory as a workspace (I just prefer to skip this step).
 
 ```applescript
 on run {input, parameters}
