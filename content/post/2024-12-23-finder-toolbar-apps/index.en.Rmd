@@ -38,6 +38,8 @@ We then need to enter the relevant AppleScript code for launching each app in th
 
 ### RStudio Desktop
 
+It is worth noting that RStudio automatically detects whether there is an _.Rproj_ file in the directory and opens in project mode if one is found.
+
 ```applescript
 on run {input, parameters}
   tell application "Finder"
