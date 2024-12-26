@@ -74,7 +74,7 @@ end run&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;visual-studio-code-and-positron&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Visual Studio Code and Positron&lt;/h3&gt;
 &lt;p&gt;First enable the ability to launch these apps with &lt;code&gt;code&lt;/code&gt; and &lt;code&gt;positron&lt;/code&gt; from a Terminal in each app, see &lt;a href=&#34;https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://positron.posit.co/add-to-path.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This script is more involved because we first check for any &lt;em&gt;.code-workspace&lt;/em&gt; files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this. If we didn’t explicitly open the &lt;em&gt;.code-workspace&lt;/em&gt; file and if one is present in the directy Visual Studio Code/Positron will detect it and pop up a dialogue box asking if we want to reopen the directory as a workspace (I just prefer to skip this step).&lt;/p&gt;
+&lt;p&gt;This script is more involved because we first check for any &lt;em&gt;.code-workspace&lt;/em&gt; files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this. If we didn’t explicitly open the &lt;em&gt;.code-workspace&lt;/em&gt; file and if one is present in the directory Visual Studio Code/Positron will detect it and pop up a dialogue box asking if we want to reopen the directory as a workspace (I just prefer to skip this step).&lt;/p&gt;
 &lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     try
