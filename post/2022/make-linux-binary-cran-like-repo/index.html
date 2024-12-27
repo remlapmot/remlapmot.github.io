@@ -680,6 +680,13 @@
       
 
 
+<style type="text/css">
+.lineheightone {
+  line-height: 1.29;
+  font-variant-ligatures: normal;
+  font-feature-settings: normal;
+}
+</style>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions CRAN does not provide binary packages for Linux. Therefore, installing R packages on Linux can be slow because the bundled source packages need to be built on users machines.</p>
@@ -708,7 +715,7 @@
 <p>To host bundled source packages, such as our <code>OneSampleMR_0.1.2.tar.gz</code> file, we require the following directory structure (noting that the <code>latest</code> directory is optional, but allows us to add snapshot directories if we wanted to).
 <!-- # brew install tree -->
 <!-- tree ~/Documents/GitHub/cran/site -d -I '__linux__|bin' --noreport --></p>
-<pre class="plaintext"><code>/mycran
+<pre class="plaintext lineheightone"><code>/mycran
 └── latest
     └── src
         └── contrib
@@ -724,7 +731,7 @@
 <p>Assuming that we have some of these files we need to know where to put them. Since CRAN distributes binary packages for Windows and macOS we follow their directory structure, which is as follows.
 <!-- brew install tree -->
 <!-- tree ~/Documents/GitHub/cran/site -d -I '__linux__' --noreport --></p>
-<pre class="plaintext"><code>/mycran
+<pre class="plaintext lineheightone"><code>/mycran
 └── latest
     ├── bin
     │   ├── macosx
@@ -770,7 +777,7 @@ contrib.url(&quot;&quot;, type = &quot;binary&quot;)
 <p>They then rename the <code>{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz</code> files to the same form as the bundled source package files, i.e., to <code>{package}_{version}.tar.gz</code>. And they put them in this new <code>src/contrib</code> directory.</p>
 <p>The structure of our CRAN-like repository (well in fact our 2 parallel repositories) is now.
 <!-- tree ~/Documents/GitHub/cran/site -d -I 'jammy' --noreport --></p>
-<pre class="plaintext"><code>/mycran
+<pre class="plaintext lineheightone"><code>/mycran
 ├── __linux__
 │   └── focal
 │       └── latest
