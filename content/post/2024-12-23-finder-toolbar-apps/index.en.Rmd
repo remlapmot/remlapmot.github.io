@@ -30,7 +30,7 @@ Have you ever wanted to be able to quickly open a Data Science app, say RStudio 
 
 ## Creating the Automator apps
 
-Open Automator and select _New_ then _Application_. The in the top left search bar enter _applescript_ and drag and drop that element onto the main window.
+Open Automator and select _New_ then _Application_ and click _Choose_. Then in the top left search bar enter _applescript_ and drag and drop the _Run Applescript_ action onto the main window.
 
 <img src="/post/2024/finder-toolbar-apps/img/automator-run-applescript.png" alt="Screenshot of the Automator app." width="630" style="display: block; margin: auto;">
 
