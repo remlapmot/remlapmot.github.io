@@ -56,7 +56,7 @@ end run&lt;/code&gt;&lt;/pre&gt;
         display dialog &amp;quot;Multiple Rproj files found in directory.&amp;quot;
       end if
       on error
-          display dialog &amp;quot;No Finder window is open.&amp;quot;
+        display dialog &amp;quot;No Finder window is open.&amp;quot;
       end try
   end tell
 end run&lt;/code&gt;&lt;/pre&gt;
@@ -111,7 +111,7 @@ end run&lt;/code&gt;&lt;/pre&gt;
         display dialog &amp;quot;Multiple code-workspace files found in directory.&amp;quot;  
       end if
       on error
-          display dialog &amp;quot;No Finder window is open.&amp;quot;
+        display dialog &amp;quot;No Finder window is open.&amp;quot;
       end try
   end tell
 end run&lt;/code&gt;&lt;/pre&gt;
