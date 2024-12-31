@@ -27,17 +27,37 @@
 &lt;/div&gt;
 &lt;div id=&#34;creating-the-automator-apps&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Creating the Automator apps&lt;/h2&gt;
-&lt;p&gt;Open Automator and select &lt;em&gt;New&lt;/em&gt; then &lt;em&gt;Application&lt;/em&gt;. The in the top left search bar enter &lt;em&gt;applescript&lt;/em&gt; and drag and drop that element onto the main window.&lt;/p&gt;
+&lt;p&gt;Open Automator and select &lt;em&gt;New&lt;/em&gt; then &lt;em&gt;Application&lt;/em&gt; and click &lt;em&gt;Choose&lt;/em&gt;. Then in the top left search bar enter &lt;em&gt;applescript&lt;/em&gt; and drag and drop the &lt;em&gt;Run Applescript&lt;/em&gt; action onto the main window.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/automator-run-applescript.png&#34; alt=&#34;Screenshot of the Automator app.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use &lt;a href=&#34;https://wezfurlong.org/wezterm/&#34;&gt;WezTerm&lt;/a&gt; for my terminal emulator, &lt;a href=&#34;https://zed.dev/&#34;&gt;Zed&lt;/a&gt; as my main text editor, &lt;a href=&#34;https://posit.co/products/open-source/rstudio/&#34;&gt;RStudio Desktop&lt;/a&gt; for most of my R/R Markdown/Quarto coding, &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; for other text editing tasks, and I have been starting to try out &lt;a href=&#34;https://positron.posit.co/&#34;&gt;Positron&lt;/a&gt;. My AppleScript code for each app is as follows.&lt;/p&gt;
 &lt;div id=&#34;rstudio-desktop&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;RStudio Desktop&lt;/h3&gt;
-&lt;p&gt;It is worth noting that RStudio automatically detects whether there is an &lt;em&gt;.Rproj&lt;/em&gt; file in the directory and opens in project mode if one is found.&lt;/p&gt;
+&lt;p&gt;It is worth noting that RStudio automatically detects whether there is an &lt;em&gt;.Rproj&lt;/em&gt; file in the directory and opens in project mode if one is found (note this only works if RStudio is not already open).&lt;/p&gt;
 &lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &amp;quot;/Applications/RStudio.app/Contents/MacOS/RStudio &amp;quot; &amp;amp; thePath
+  end tell
+end run&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can create an alternative app which specifically opens RStudio project (&lt;em&gt;.Rproj&lt;/em&gt;) files as follows.&lt;/p&gt;
+&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+  tell application &amp;quot;Finder&amp;quot;
+    try
+      set currentFolder to (folder of window 1) as alias
+      set workspaceFiles to (every file of currentFolder whose name extension is &amp;quot;Rproj&amp;quot;)
+      if (count of workspaceFiles) = 0 then 
+        display dialog &amp;quot;No Rproj files found in directory.&amp;quot;
+      else if (count of workspaceFiles) = 1 then 
+        set workspaceFile to item 1 of workspaceFiles
+        set workspacePath to POSIX path of (workspaceFile as alias)
+        do shell script &amp;quot;open -n -a RStudio &amp;quot; &amp;amp; quoted form of workspacePath
+      else if (count of workspaceFiles) &amp;gt; 1 then 
+        display dialog &amp;quot;Multiple Rproj files found in directory.&amp;quot;
+      end if
+      on error
+          display dialog &amp;quot;No Finder window is open.&amp;quot;
+      end try
   end tell
 end run&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
