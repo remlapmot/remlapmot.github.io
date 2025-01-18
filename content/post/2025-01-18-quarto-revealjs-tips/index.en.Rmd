@@ -26,7 +26,7 @@ projects: []
 
 Like alot of lecturers I'm teaching at the moment. If I have a presentation to do that's mainly images I'll use Powerpoint or Google Slides, and if I have alot of maths or code or both I used to use LaTeX Beamer presentations. Over the years I have grown tired of Beamer and so I thought I'd try making some revealjs presentations using Quarto.
 
-It's important to stress that revealjs has been around far longer than Quarto, I remember seeing a colleague present one in about 2008, and you can happily make a revealjs presentation without Quarto.
+It's important to stress that revealjs has been around far longer than Quarto, I remember seeing a colleague present using revealjs in about 2008, and you can happily make a revealjs presentation without Quarto. However, the convenience of writing in the Quarto Markdown format is of course amazingly convenient.
 
 The following tips are little hurdles I found I needed to overcome.
 
@@ -34,13 +34,56 @@ The following tips are little hurdles I found I needed to overcome.
 
 
 
-## Longer code chunks
+## Taller code chunks
 
+Code chunks come in several flavours in a rendered presentation. There are code input chunks, code output, and chunks for any code output errors. To make the input code chunks taller there is a convenient Quarto option `code-block-height` which is specified in the YAML header (the default is TODOpx, so pick a value greater than that).
 
+```yaml
+---
+format:
+  revealjs:
+    code-block-height: 650px
+---
+```
 
-## Longer code output chunks
+## Taller code output chunks
+
+```css
+.cell .cell-output-stdout pre code {
+  max-height: 650px; // Adjust this value as needed
+  overflow-y: auto; // Add this to handle overflow
+}
+```
+
+The default is 400px, so choose a value larger than that.
 
 ## Embedding interactive Mentimeter presentations
+
+Mentimeter provides the html code required to embed a presentation within an html document. To obtain this, go into a presentation and click the _Share_ button, then select the _Slides_ tab, then click _Copy code_ under _Embed slides_.
+
+<img src="/post/2025/quarto-revealjs-tips/img/mentimeter-share-iframe-code.png" alt="Screenshot of the menu to copy the html code to embed a Mentimeter presentation." width="630" style="display: block; margin: auto;">
+
+This results in a div containing an iframe, which looks like this (I have replaced the code to my presentation with hashes).
+
+```html
+<div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe data-external="1" sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/app/presentation/###############/embed' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+```
+
+When I first rendered a presentation using this when I viewed my slides I didn't see my Mentimeter presentation but rather the following spinning dots.
+
+
+
+Thanks [to this post](https://stackoverflow.com/questions/79092017/quarto-markdown-to-revealjs-or-html-desmos-embedded-iframes-not-loading) it turns out this is because I had specified `embed-resources: true` in my revealjs options in the YAML header. When you do this you need to add the `data-external="1"` attribute to the iframe [as detailed in the Quarto documentation](https://quarto.org/docs/reference/formats/presentations/revealjs.html#rendering) as follows.
+
+```html
+<iframe data-external="1" sandbox=...
+```
+
+And then my Mentimeter presentation was correctly embedded in the slide as per the header image above.
+
+## Disable HTML table processing for some tables
+
+
 
 ## Summary
 
