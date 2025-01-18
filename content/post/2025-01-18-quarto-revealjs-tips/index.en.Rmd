@@ -40,7 +40,7 @@ styler::style_file(TODO)
 
 ## Taller code chunks
 
-Code chunks come in several flavours in a rendered presentation. There are code input chunks, code output, and chunks for any code output errors. To make the input code chunks taller there is a convenient Quarto option `code-block-height` which is specified in the YAML header (the default is TODOpx, so pick a value greater than that).
+Code chunks come in several flavours in a rendered presentation. There are code input chunks, code output, and chunks for any code output errors. To make the input code chunks taller there is a convenient Quarto option `code-block-height` which is specified in the YAML header (the default is 500px, so pick a value greater than that).
 
 ```yaml
 ---
