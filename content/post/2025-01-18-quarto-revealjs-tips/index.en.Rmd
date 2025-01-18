@@ -10,7 +10,7 @@ tags:
   - R
   - revealjs
 subtitle: ''
-summary: 'Some hopefully helpful tips for working with Quarto revealjs html presentations.'
+summary: 'Wider code styling, taller input and output code chunks, embedding Mentimeter presentations, and disabling HTML table processing.'
 authors: []
 lastmod: '2025-01-20T09:15:00+00:00'
 featured: no
@@ -26,13 +26,17 @@ projects: []
 
 Like alot of lecturers I'm teaching at the moment. If I have a presentation to do that's mainly images I'll use Powerpoint or Google Slides, and if I have alot of maths or code or both I used to use LaTeX Beamer presentations. Over the years I have grown tired of Beamer and so I thought I'd try making some revealjs presentations using Quarto.
 
-It's important to stress that revealjs has been around far longer than Quarto, I remember seeing a colleague present using revealjs in about 2008, and you can happily make a revealjs presentation without Quarto. However, the convenience of writing in the Quarto Markdown format is of course amazingly convenient.
+Revealjs has been around far longer than Quarto, I remember seeing a colleague present using revealjs in about 2008, and you can happily make a revealjs presentation without Quarto. However, the convenience of writing in the Quarto Markdown format is of course a game changer.
 
-The following tips are little hurdles I found I needed to overcome.
+The following tips are solutions to little hurdles that I found I needed to overcome.
 
 ## Wider code styling
 
+Apparently monitors are wider than they are tall so we can easily watch films on our computer. This means that vertical space on a slide is at a premium. Therefore, in a presentation I line break my code wider that I do when coding normally. You can implement this using the **styler** package with the following code.
 
+```r
+styler::style_file(TODO)
+```
 
 ## Taller code chunks
 
@@ -63,15 +67,18 @@ Mentimeter provides the html code required to embed a presentation within an htm
 
 <img src="/post/2025/quarto-revealjs-tips/img/mentimeter-share-iframe-code.png" alt="Screenshot of the menu to copy the html code to embed a Mentimeter presentation." width="630" style="display: block; margin: auto;">
 
-This results in a div containing an iframe, which looks like this (I have replaced the code to my presentation with hashes).
+This results in a div containing an iframe, which looks like this (I have added the line breaks and replaced the id code to my presentation with hashes).
 
 ```html
-<div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe data-external="1" sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/app/presentation/###############/embed' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'></iframe></div>
+<div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'>
+<iframe sandbox='allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/app/presentation/###############/embed' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420'>
+</iframe>
+</div>
 ```
 
-When I first rendered a presentation using this when I viewed my slides I didn't see my Mentimeter presentation but rather the following spinning dots.
+When I first rendered a presentation using this code I didn't see my Mentimeter presentation in the relevant slide but rather the following spinning dots.
 
-
+<img src="/post/2025/quarto-revealjs-tips/img/menti-failing-to-load.gif" alt="Animated GIF of the spinning dots when a Mentimeter presentation is incorrectly embedded in an HTML document." width="630" style="display: block; margin: auto;">
 
 Thanks [to this post](https://stackoverflow.com/questions/79092017/quarto-markdown-to-revealjs-or-html-desmos-embedded-iframes-not-loading) it turns out this is because I had specified `embed-resources: true` in my revealjs options in the YAML header. When you do this you need to add the `data-external="1"` attribute to the iframe [as detailed in the Quarto documentation](https://quarto.org/docs/reference/formats/presentations/revealjs.html#rendering) as follows.
 
@@ -79,12 +86,30 @@ Thanks [to this post](https://stackoverflow.com/questions/79092017/quarto-markdo
 <iframe data-external="1" sandbox=...
 ```
 
-And then my Mentimeter presentation was correctly embedded in the slide as per the header image above.
+And then my Mentimeter presentation was correctly embedded in the slide as per the screenshot at the top of this post.
 
 ## Disable HTML table processing for some tables
 
+There are now so many fantastic R packages for html table generation. My two favourite are [**gtsummary**](https://www.danieldsjoberg.com/gtsummary/) and [**sjPlot**](https://strengejacke.github.io/sjPlot/). However, I notice that for some **sjPlot** tables Quarto issues the following warning when rendering the slides.
 
+```plaintext
+WARNING (/Applications/quarto/share/filters/main.lua:9319) Unable to parse table from raw html block: skipping.
+```
+
+To avoid this it's possible to [disable Quarto's html table processing](https://quarto.org/docs/authoring/tables.html#disabling-quarto-table-processing) using the `html-table-processing` argument either at the document or chunk level. Here is an example slide doing so at the chunk level.
+
+````{verbatim, lang="markdown"}
+## Slide presenting a multilevel model
+
+```{r}
+#| html-table-processing: none
+library(sjPlot)
+library(lme4)
+fm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
+tab_model(fm1)
+```
+````
 
 ## Summary
 
-I have shown a few tips I needed to workout when making revealjs presentations with Quarto.
+I have shown a few tips that I needed to workout when making revealjs presentations with Quarto.
