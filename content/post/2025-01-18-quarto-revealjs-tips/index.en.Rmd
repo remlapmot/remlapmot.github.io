@@ -10,7 +10,7 @@ tags:
   - R
   - revealjs
 subtitle: ''
-summary: 'Wider code styling, taller input and output code chunks, embedding Mentimeter presentations, and disabling HTML table processing.'
+summary: 'Some tips including; wider code styling, taller input and output code chunks, embedding Mentimeter presentations, and disabling HTML table processing.'
 authors: []
 lastmod: '2025-01-20T09:15:00+00:00'
 featured: no
@@ -52,14 +52,22 @@ format:
 
 ## Taller code output chunks
 
+Currently, there doesn't seem to be a Quarto option to make the code output chunks taller. Therefore I had to inspect the source code the html slides. In most browsers simply right click on a slide and in Chrome click _Inspect_.
+
+<img src="/post/2025/quarto-revealjs-tips/img/chrome-context-menu-inspect.png" alt="Screenshot of Google Chrome context menu." width="200" style="display: block; margin: auto;">
+
+We can then see that the CSS classes for some code output is given in the TODO pane.
+
+TODO SCREENSHOT HERE
+
+Therefore, we can make this have a taller maximum height by specifying `max-height` as follows. Note that the default is 400px, so choose a value larger than that.
+
 ```css
 .cell .cell-output-stdout pre code {
   max-height: 650px; // Adjust this value as needed
   overflow-y: auto; // Add this to handle overflow
 }
 ```
-
-The default is 400px, so choose a value larger than that.
 
 ## Embedding interactive Mentimeter presentations
 
@@ -78,7 +86,7 @@ This results in a div containing an iframe, which looks like this (I have added 
 
 When I first rendered a presentation using this code I didn't see my Mentimeter presentation in the relevant slide but rather the following spinning dots.
 
-<img src="/post/2025/quarto-revealjs-tips/img/menti-failing-to-load.gif" alt="Animated GIF of the spinning dots when a Mentimeter presentation is incorrectly embedded in an HTML document." width="630" style="display: block; margin: auto;">
+<img src="/post/2025/quarto-revealjs-tips/img/menti-failing-to-load.gif" alt="Animated GIF of the spinning dots when a Mentimeter presentation is incorrectly embedded in an HTML document." width="170" style="display: block; margin: auto;">
 
 Thanks [to this post](https://stackoverflow.com/questions/79092017/quarto-markdown-to-revealjs-or-html-desmos-embedded-iframes-not-loading) it turns out this is because I had specified `embed-resources: true` in my revealjs options in the YAML header. When you do this you need to add the `data-external="1"` attribute to the iframe [as detailed in the Quarto documentation](https://quarto.org/docs/reference/formats/presentations/revealjs.html#rendering) as follows.
 
