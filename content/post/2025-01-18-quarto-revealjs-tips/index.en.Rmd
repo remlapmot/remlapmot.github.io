@@ -28,6 +28,8 @@ Like alot of lecturers I'm teaching at the moment. If I have a presentation to d
 
 Revealjs has been around far longer than Quarto, I remember seeing a colleague present using revealjs in about 2008, and you can happily make a revealjs presentation without Quarto. However, the convenience of writing in the Quarto Markdown format is of course a game changer.
 
+To learn the basics of making revealjs slides with Quarto I recommend reading [the user guide](https://quarto.org/docs/presentations/revealjs/). And full documentation is available [here](https://quarto.org/docs/reference/formats/presentations/revealjs.html) and [here](https://quarto.org/docs/presentations/revealjs/advanced.html).
+
 The following tips are solutions to little hurdles that I found I needed to overcome.
 
 ## Wider code styling
