@@ -60,7 +60,17 @@ We can then see that the CSS classes for some code output is given in the TODO p
 
 TODO SCREENSHOT HERE
 
-Therefore, we can make this have a taller maximum height by specifying `max-height` as follows. Note that the default is 400px, so choose a value larger than that.
+Therefore, we can make this have a taller maximum height by specifying `max-height` as follows in a CSS file which we reference in the YAML header. Note that the default is 400px, so choose a value larger than that.
+
+```yaml
+---
+format:
+  revealjs:
+    theme: [simple, custom.css]
+---
+```
+
+With the contents of _custom.css_ being as follows.
 
 ```css
 .cell .cell-output-stdout pre code {
