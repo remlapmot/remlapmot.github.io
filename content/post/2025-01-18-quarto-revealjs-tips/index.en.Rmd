@@ -1,7 +1,7 @@
 ---
 title: 'Some tips for working with Quarto revealjs presentations'
 author: Package Build
-date: '2024-01-20'
+date: '2025-01-20'
 slug: quarto-revealjs-tips
 categories:
   - Blog
