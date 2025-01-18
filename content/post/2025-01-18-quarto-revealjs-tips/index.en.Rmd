@@ -10,7 +10,7 @@ tags:
   - R
   - revealjs
 subtitle: ''
-summary: 'Some tips including; wider code styling, taller input and output code chunks, embedding Mentimeter presentations, and disabling HTML table processing.'
+summary: 'Some tips including; wider code styling, taller input and output code chunks, embedding Mentimeter presentations, disabling HTML table processing, and programmatic rendering and pdf export.'
 authors: []
 lastmod: '2025-01-20T09:15:00+00:00'
 featured: no
@@ -118,11 +118,17 @@ tab_model(fm1)
 ```
 ````
 
-## Programmatic pdf export for printing
+## Programmatic rendering and pdf export for printing
 
-It's helpful to provide the students with a pdf copy of the slides for printing. You can do this in a browser or programmatically using pagedown's chrome_print() function. When I called this function with no options the page size of the pdf was unusual, neither A4 nor US paper size, so I call it as follows to ensure an A4 page size.
+Of course one can click the _Render_ button in RStudio, but I find it easier to keep a _render.R_ script with a call to `quarto::quarto_render()`.
+
+It's helpful to provide the students with a pdf copy of the slides for printing. You can do this in a browser or programmatically using **pagedown**'s `chrome_print()` function. When I called this function with no options the page size of the pdf was unusual, producing pages with neither A4 nor US paper size, so I call it as follows to ensure an A4 page size.
+
+Therefore, my _render.R_ script often looks something like the following.
 
 ```r
+quarto::quarto_render(input = "my-great-slides.qmd")
+
 pagedown::chrome_print("my-great-slides.html", 
   options = 
     list(printBackground = FALSE, preferCSSPageSize = FALSE, 
