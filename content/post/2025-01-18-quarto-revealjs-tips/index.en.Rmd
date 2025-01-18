@@ -24,3 +24,13 @@ projects: []
 
 ## Introduction
 
+
+
+* Longer code chunks
+
+* Longer code output chunks
+
+* Embedding interactive Mentimeter presentations
+
+
+
