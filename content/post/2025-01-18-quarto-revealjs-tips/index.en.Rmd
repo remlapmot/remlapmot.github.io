@@ -151,6 +151,8 @@ pagedown::chrome_print("my-great-slides.html",
       marginTop = 0.1, marginBottom = 0.1, marginLeft = 0.1, marginRight = 0.1))
 ```
 
+I usually find that a few slides have slightly too much content for an A4 page, and so those slides will take up 2 pages in the pdf. And hence the pdf usually has a few more pages than the number of slides.
+
 ## Summary
 
 I have shown a few tips that I needed to workout when making revealjs presentations with Quarto.
