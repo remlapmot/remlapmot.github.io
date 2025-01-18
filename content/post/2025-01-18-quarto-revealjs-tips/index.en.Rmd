@@ -118,6 +118,18 @@ tab_model(fm1)
 ```
 ````
 
+## Programmatic pdf export for printing
+
+It's helpful to provide the students with a pdf copy of the slides for printing. You can do this in a browser or programmatically using pagedown's chrome_print() function. When I called this function with no options the page size of the pdf was unusual, neither A4 nor US paper size, so I call it as follows to ensure an A4 page size.
+
+```r
+pagedown::chrome_print("my-great-slides.html", 
+  options = 
+    list(printBackground = FALSE, preferCSSPageSize = FALSE, 
+      paperWidth = 8.3, paperHeight = 11.7, 
+      marginTop = 0.1, marginBottom = 0.1, marginLeft = 0.1, marginRight = 0.1))
+```
+
 ## Summary
 
 I have shown a few tips that I needed to workout when making revealjs presentations with Quarto.
