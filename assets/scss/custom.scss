@@ -3,3 +3,12 @@ code {
        font-feature-settings: "liga" 0;
        color: blue;
 }
+
+#TableOfContents, .docs-toc-title {
+  border-left: 1px solid $sta-primary;
+  /* "$sta-primary" is the primary colour from the theme (sass/scss) */
+}
+
+.article-container {
+  max-width: 960px;
+}
