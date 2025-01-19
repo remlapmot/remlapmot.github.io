@@ -135,7 +135,7 @@ This results in a div containing an iframe, which we can simply paste in as the 
 </div>
 ````
 
-When I first rendered a presentation using this code I didn't see my Mentimeter presentation in the relevant slide but rather the following spinning dots.
+But when I first rendered a presentation using this code I didn't see my Mentimeter presentation in the relevant slide but rather the following spinning dots.
 
 <img src="/post/2025/quarto-revealjs-tips/img/menti-failing-to-load.gif" alt="Animated GIF of the spinning dots when a Mentimeter presentation is incorrectly embedded in an HTML document." width="170" style="display: block; margin: auto;">
 
