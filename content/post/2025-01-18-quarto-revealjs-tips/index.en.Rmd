@@ -38,11 +38,11 @@ The great thing about making a presentation in Powerpoint or Google Slides is th
 
 Additionally it is helpful to be able to preview your slides on the size on monitor you will be presenting on. My University has 1080p monitors in most lecture theatres, however, my monitor is bigger than that. Chrome allows setting the size of the display by opening Developer Tools (Three dots | More tools | Developer Tools). Then you can enter the desired resolution in the top bar as follows.
 
-<img src="/post/2025/quarto-revealjs-tips/img/slide-size-and-1080p.png" alt="Screenshot of using Google Chrome developer tools to inspect the size of a slide and to preview the slides at 1080p resolution." width="500" style="display: block; margin: auto;">
+<img src="/post/2025/quarto-revealjs-tips/img/slide-size-and-1080p.png" alt="Screenshot of using Google Chrome developer tools to inspect the size of a slide and to preview the slides at 1080p resolution." width="700" style="display: block; margin: auto;">
 
 I find this especially helpful when working on a Mac, whose laptops often have unusual screen resolutions.
 
-## 2. Wider line cutoff in code chunks
+## 2. Wider width cutoff in code chunks
 
 Vertical space on a slide is at a premium. Therefore, in a presentation I line break my code wider that I do when coding normally. As described in the [RMarkdown cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html) and in [this GitHub issue](https://github.com/quarto-dev/quarto-cli/issues/5852) we can enable the use of the **formatR** package on a code chunk using the `tidy` and `tidy-opts` chunk options (I think the default is 85 characters, so I choose a value greater than that. I find that 110 is about the widest I can set).
 
@@ -90,7 +90,7 @@ Currently, there doesn't seem to be a Quarto option to make the code output chun
 
 <img src="/post/2025/quarto-revealjs-tips/img/chrome-context-menu-inspect.png" alt="Screenshot of Google Chrome context menu." width="600" style="display: block; margin: auto;">
 
-Doing so over a code output cell shows the developer tools on the right handside. We can then see that the classes for the code output cell are given just above the bottom right pane, i.e., `div.cell div.cell-output.cell-output-stdout pre code`.
+Doing so over a code output cell shows the developer tools on the right handside. We can then see that the elements and classes for the code output cell are given just above the bottom right pane, i.e., `div.cell div.cell-output.cell-output-stdout pre code`.
 
 <img src="/post/2025/quarto-revealjs-tips/img/inspect-output-cell.png" alt="Screenshot of using Google Chrome developer tools to inspect the CSS class of an element of a code output cell." width="500" style="display: block; margin: auto;">
 
@@ -104,7 +104,7 @@ format:
 ---
 ```
 
-The contents of _custom.css_ use the classes of the code chunk we discovered as follows.
+The contents of _custom.css_ use the elements and classes of the code chunk we discovered as follows.
 
 ```css
 .cell .cell-output-stdout pre code {
@@ -119,7 +119,7 @@ Mentimeter provides the html code required to embed a presentation within an htm
 
 <img src="/post/2025/quarto-revealjs-tips/img/mentimeter-share-iframe-code.png" alt="Screenshot of the menu to copy the html code to embed a Mentimeter presentation." width="700" style="display: block; margin: auto;">
 
-This results in a div containing an iframe, which looks like this (I have added the line breaks and replaced the id code to my presentation with hashes) which we simply paste as the content of our slide.
+This results in a div containing an iframe, which we can simply paste in as the content of our slide (I have added the line breaks and replaced part of the URL to my presentation with hashes).
 
 ````{verbatim, lang="markdown"}
 ## My slide with an embedded Menti
@@ -171,9 +171,9 @@ tab_model(fm1)
 
 ## 7. Programmatic rendering and pdf export for printing
 
-To render a Quarto document we can click the _Render_ button in RStudio, but I find it easier to make a _render.R_ script with a call to `quarto::quarto_render()`.
+To render a Quarto document we can click the _Render_ button in RStudio, but I find it easier to make a _render.R_ script with a call to the [**quarto**](https://quarto-dev.github.io/quarto-r/) package's `quarto_render()` function.
 
-It's helpful to provide students with a pdf copy of the slides for printing. You can do this in a browser or programmatically using **pagedown**'s `chrome_print()` function. When I called this function with no options the page size of the pdf was unusual, producing pages with neither A4 nor US paper size, so I call it as follows to ensure an A4 page size.
+It's helpful to provide students with a pdf copy of the slides for printing. You can do this in a browser through the print menu or programmatically using **pagedown**'s `chrome_print()` function. When I called this function with no options the page size of the pdf was unusual, producing pages with neither A4 nor US paper size, so I call it as follows to ensure an A4 page size.
 
 Therefore, my _render.R_ script often looks something like the following.
 
