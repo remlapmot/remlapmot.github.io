@@ -30,7 +30,7 @@ Revealjs has been around far longer than Quarto, I remember seeing a colleague p
 
 To learn the basics of making revealjs slides with Quarto I recommend reading [the user guide](https://quarto.org/docs/presentations/revealjs/). And full documentation is available [here](https://quarto.org/docs/reference/formats/presentations/revealjs.html) and [here](https://quarto.org/docs/presentations/revealjs/advanced.html).
 
-The following tips are solutions to little hurdles that I found I needed to overcome.
+The following tips are solutions to little hurdles that I found I needed to overcome when making my first revealjs presentations using Quarto.
 
 ## Wider code styling
 
@@ -54,15 +54,15 @@ format:
 
 ## Taller code output chunks
 
-Currently, there doesn't seem to be a Quarto option to make the code output chunks taller. Therefore I had to inspect the source code the html slides. In most browsers simply right click on a slide and in Chrome click _Inspect_.
+Currently, there doesn't seem to be a Quarto option to make the code output chunks taller. Therefore I had to inspect the source code the html slides. In most browsers simply right click on a slide and in Chrome click _Inspect_ - do this over the element on the page you want to find out about.
 
 <img src="/post/2025/quarto-revealjs-tips/img/chrome-context-menu-inspect.png" alt="Screenshot of Google Chrome context menu." width="200" style="display: block; margin: auto;">
 
-We can then see that the CSS classes for some code output is given in the TODO pane.
+Doing so over a code output cell shows the developer tools on the right handside. We can then see that the classes for the code output cell are given just above the bottom right pane, i.e., `div.cell div.cell-output.cell-output-stdout pre code`.
 
-TODO SCREENSHOT HERE
+<img src="/post/2025/quarto-revealjs-tips/img/inspect-output-cell.png" alt="Screenshot of Google Chrome context menu." width="630" style="display: block; margin: auto;">
 
-Therefore, we can make this have a taller maximum height by specifying `max-height` as follows in a CSS file which we reference in the YAML header. Note that the default is 400px, so choose a value larger than that.
+Therefore, we can make the code output cell have a taller maximum height by specifying `max-height` as follows in a CSS file which we reference in the YAML header. Note that the default is 400px, so choose a value larger than that.
 
 ```yaml
 ---
@@ -72,7 +72,7 @@ format:
 ---
 ```
 
-With the contents of _custom.css_ being as follows.
+The contents of _custom.css_ use the classes of the code chunk we discovered as follows.
 
 ```css
 .cell .cell-output-stdout pre code {
