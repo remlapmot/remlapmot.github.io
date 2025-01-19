@@ -32,13 +32,26 @@ To learn the basics of making revealjs slides with Quarto I recommend reading [t
 
 The following tips are solutions to little hurdles that I found I needed to overcome when making my first revealjs presentations using Quarto.
 
-## Wider code styling
+## Wider line cutoff in code chunks
 
-Apparently monitors are wider than they are tall so we can easily watch films on our computer. This means that vertical space on a slide is at a premium. Therefore, in a presentation I line break my code wider that I do when coding normally. You can implement this using the **styler** package with the following code.
+Vertical space on a slide is at a premium. Therefore, in a presentation I line break my code wider that I do when coding normally. As described in the [RMarkdown cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html) and in [this GitHub issue](https://github.com/quarto-dev/quarto-cli/issues/5852) we can enable the use of the **formatR** package on a code chunk using the `tidy` and `tidy-opts` chunk options (I think the default is 85 characters, so I choose a value greater than that).
 
-```r
-styler::style_file(TODO)
+````{verbatim, lang="markdown"}
+```{r}
+#| tidy: TRUE
+#| tidy-opts: !expr list(width.cutoff = I(110))
+# ... Wide R code here ...
 ```
+````
+
+We can also set these globally for the Quarto document in a chunk at the top of your Quarto document as below, but I tend just to do this on chunks in which I know I have wide code.
+
+````{verbatim, lang="markdown"}
+```{r}
+#| include: false
+knitr::opts_chunk$set(tidy = TRUE, tidy.opts = list(width.cutoff = I(110)))
+```
+````
 
 ## Taller code chunks
 
