@@ -62,14 +62,14 @@ format:
 <div id="taller-code-output-chunks" class="section level2">
 <h2>3. Taller code output chunks</h2>
 <p>Currently, there doesn’t seem to be a Quarto option to make the code output chunks taller. Therefore I had to inspect the source code of the html slides to find out how to modify this. In most browsers simply right click on a slide and in Chrome click <em>Inspect</em> - do this over the element on the page you want to find out about.</p>
-<p><img src="/post/2025/quarto-revealjs-tips/img/chrome-context-menu-inspect.png" alt="Screenshot of Google Chrome context menu." width="200" style="display: block; margin: auto;"></p>
+<p><img src="/post/2025/quarto-revealjs-tips/img/chrome-context-menu-inspect.png" alt="Screenshot of Google Chrome context menu." width="600" style="display: block; margin: auto;"></p>
 <p>Doing so over a code output cell shows the developer tools on the right handside. We can then see that the classes for the code output cell are given just above the bottom right pane, i.e., <code>div.cell div.cell-output.cell-output-stdout pre code</code>.</p>
 <p><img src="/post/2025/quarto-revealjs-tips/img/inspect-output-cell.png" alt="Screenshot of using Google Chrome developer tools to inspect the CSS class of an element of a code output cell." width="500" style="display: block; margin: auto;"></p>
 <p>Therefore, we can make the code output cell have a taller maximum height by specifying <code>max-height</code> as follows in a CSS file which we reference in the YAML header. Note that the default is 400px, so choose a value larger than that.</p>
 <pre class="yaml"><code>---
 format:
   revealjs:
-    theme: [simple, custom.css]
+    css: custom.css
 ---</code></pre>
 <p>The contents of <em>custom.css</em> use the classes of the code chunk we discovered as follows.</p>
 <pre class="css"><code>.cell .cell-output-stdout pre code {
@@ -82,7 +82,9 @@ format:
 <p>Mentimeter provides the html code required to embed a presentation within an html document. To obtain this, go into a presentation and click the <em>Share</em> button, then select the <em>Slides</em> tab, then click <em>Copy code</em> under <em>Embed slides</em>.</p>
 <p><img src="/post/2025/quarto-revealjs-tips/img/mentimeter-share-iframe-code.png" alt="Screenshot of the menu to copy the html code to embed a Mentimeter presentation." width="700" style="display: block; margin: auto;"></p>
 <p>This results in a div containing an iframe, which looks like this (I have added the line breaks and replaced the id code to my presentation with hashes) which we simply paste as the content of our slide.</p>
-<pre class="html"><code>&lt;div style=&#39;position: relative; padding-bottom: 56.25%; padding-top: 35px;
+<pre class="markdown"><code>## My slide with an embedded Menti
+
+&lt;div style=&#39;position: relative; padding-bottom: 56.25%; padding-top: 35px;
   height: 0; overflow: hidden;&#39;&gt;
 &lt;iframe sandbox=&#39;allow-scripts allow-same-origin allow-presentation&#39;
   allowfullscreen=&#39;true&#39; allowtransparency=&#39;true&#39; frameborder=&#39;0&#39; height=&#39;315&#39;
