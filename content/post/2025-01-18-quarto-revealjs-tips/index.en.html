@@ -100,7 +100,7 @@ format:
   width=&#39;420&#39;&gt;
 &lt;/iframe&gt;
 &lt;/div&gt;</code></pre>
-<p>When I first rendered a presentation using this code I didn’t see my Mentimeter presentation in the relevant slide but rather the following spinning dots.</p>
+<p>But when I first rendered a presentation using this code I didn’t see my Mentimeter presentation in the relevant slide but rather the following spinning dots.</p>
 <p><img src="/post/2025/quarto-revealjs-tips/img/menti-failing-to-load.gif" alt="Animated GIF of the spinning dots when a Mentimeter presentation is incorrectly embedded in an HTML document." width="170" style="display: block; margin: auto;"></p>
 <p>Thanks <a href="https://stackoverflow.com/questions/79092017/quarto-markdown-to-revealjs-or-html-desmos-embedded-iframes-not-loading">to this post</a> it turns out this is because I had specified <code>embed-resources: true</code> in my revealjs options in the YAML header. When you do this you need to add the <code>data-external="1"</code> attribute to the iframe <a href="https://quarto.org/docs/reference/formats/presentations/revealjs.html#rendering">as detailed in the Quarto documentation</a> as follows.</p>
 <pre class="html"><code>&lt;iframe data-external=&quot;1&quot; sandbox=...</code></pre>
