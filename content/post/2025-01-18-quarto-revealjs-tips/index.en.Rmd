@@ -36,7 +36,7 @@ The following tips are solutions to little hurdles that I found I needed to over
 
 The great thing about making a presentation in Powerpoint or Google Slides is that you can instantly see if your content fits on a slide. So it helps to have an understanding of how big a slide is. By default a revealjs slide is [1050px wide by 700px tall](https://quarto.org/docs/presentations/revealjs/advanced.html#presentation-size). This helps you when setting the size of figures and code blocks.
 
-Additionally it is helpful to be able to preview your slides on the size on monitor you will be presenting on. My University has 1080p monitors in most lecture theatres, however, my monitor is bigger than that. Chrome allows setting the size of the display by opening Developer Tools (Three dots | More tools | Developer Tools). Then you can enter the desired resolution in the top bar as follows.
+Additionally it is helpful to be able to preview your slides on the size on monitor you will be presenting on. My University has 1080p monitors in most lecture theatres, however, my monitor is bigger than that. Chrome allows setting the size of the display by opening Developer Tools (Three dots | More tools | Developer Tools). Then you can enter the desired resolution in the top bar as follows (a 1080p screen is 1080 pixels tall and 1920 pixels wide).
 
 <img src="/post/2025/quarto-revealjs-tips/img/slide-size-and-1080p.png" alt="Screenshot of using Google Chrome developer tools to inspect the size of a slide and to preview the slides at 1080p resolution." width="700" style="display: block; margin: auto;">
 
