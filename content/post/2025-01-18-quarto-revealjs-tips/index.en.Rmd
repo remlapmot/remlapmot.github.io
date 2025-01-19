@@ -44,7 +44,16 @@ Vertical space on a slide is at a premium. Therefore, in a presentation I line b
 ```
 ````
 
-We can also set these globally for the Quarto document in a chunk at the top of your Quarto document as below, but I tend just to do this on chunks in which I know I have wide code.
+We can also set these globally for the Quarto document in either the YAML header,
+
+```yaml
+knitr:
+  opts_chunk: 
+    tidy: TRUE
+    tidy-opts: !expr list(width.cutoff = I(110))
+```
+
+or in a chunk at the top of your Quarto document.
 
 ````{verbatim, lang="markdown"}
 ```{r}
