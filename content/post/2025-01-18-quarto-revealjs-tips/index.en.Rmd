@@ -78,7 +78,7 @@ format:
 
 Currently, there doesn't seem to be a Quarto option to make the code output chunks taller. Therefore I had to inspect the source code of the html slides to find out how to modify this. In most browsers simply right click on a slide and in Chrome click _Inspect_ - do this over the element on the page you want to find out about.
 
-<img src="/post/2025/quarto-revealjs-tips/img/chrome-context-menu-inspect.png" alt="Screenshot of Google Chrome context menu." width="200" style="display: block; margin: auto;">
+<img src="/post/2025/quarto-revealjs-tips/img/chrome-context-menu-inspect.png" alt="Screenshot of Google Chrome context menu." width="600" style="display: block; margin: auto;">
 
 Doing so over a code output cell shows the developer tools on the right handside. We can then see that the classes for the code output cell are given just above the bottom right pane, i.e., `div.cell div.cell-output.cell-output-stdout pre code`.
 
@@ -90,7 +90,7 @@ Therefore, we can make the code output cell have a taller maximum height by spec
 ---
 format:
   revealjs:
-    theme: [simple, custom.css]
+    css: custom.css
 ---
 ```
 
@@ -111,7 +111,9 @@ Mentimeter provides the html code required to embed a presentation within an htm
 
 This results in a div containing an iframe, which looks like this (I have added the line breaks and replaced the id code to my presentation with hashes) which we simply paste as the content of our slide.
 
-```html
+````{verbatim, lang="markdown"}
+## My slide with an embedded Menti
+
 <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px;
   height: 0; overflow: hidden;'>
 <iframe sandbox='allow-scripts allow-same-origin allow-presentation'
@@ -121,7 +123,7 @@ This results in a div containing an iframe, which looks like this (I have added 
   width='420'>
 </iframe>
 </div>
-```
+````
 
 When I first rendered a presentation using this code I didn't see my Mentimeter presentation in the relevant slide but rather the following spinning dots.
 
