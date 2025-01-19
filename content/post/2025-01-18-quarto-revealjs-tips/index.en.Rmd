@@ -64,7 +64,7 @@ knitr::opts_chunk$set(tidy = TRUE, tidy.opts = list(width.cutoff = I(110)))
 
 ## Taller code chunks
 
-Code chunks come in several flavours in a rendered presentation. There are code input chunks, code output, and chunks for any code output errors. To make the input code chunks taller there is a convenient Quarto option `code-block-height` which is specified in the YAML header (the default is 500px, so pick a value greater than that).
+Code chunks come in several flavours in a rendered presentation. There are code input chunks, code output chunks, and chunks for any code output errors. To make the input code chunks taller there is a convenient [Quarto option `code-block-height`](https://quarto.org/docs/presentations/revealjs/#code-block-height) which is specified in the YAML header (the default is 500px, so pick a value greater than that).
 
 ```yaml
 ---
@@ -76,13 +76,13 @@ format:
 
 ## Taller code output chunks
 
-Currently, there doesn't seem to be a Quarto option to make the code output chunks taller. Therefore I had to inspect the source code the html slides. In most browsers simply right click on a slide and in Chrome click _Inspect_ - do this over the element on the page you want to find out about.
+Currently, there doesn't seem to be a Quarto option to make the code output chunks taller. Therefore I had to inspect the source code of the html slides to find out how to modify this. In most browsers simply right click on a slide and in Chrome click _Inspect_ - do this over the element on the page you want to find out about.
 
 <img src="/post/2025/quarto-revealjs-tips/img/chrome-context-menu-inspect.png" alt="Screenshot of Google Chrome context menu." width="200" style="display: block; margin: auto;">
 
 Doing so over a code output cell shows the developer tools on the right handside. We can then see that the classes for the code output cell are given just above the bottom right pane, i.e., `div.cell div.cell-output.cell-output-stdout pre code`.
 
-<img src="/post/2025/quarto-revealjs-tips/img/inspect-output-cell.png" alt="Screenshot of Google Chrome context menu." width="630" style="display: block; margin: auto;">
+<img src="/post/2025/quarto-revealjs-tips/img/inspect-output-cell.png" alt="Screenshot of using Google Chrome developer tools to inspect the CSS class of an element of a code output cell." width="500" style="display: block; margin: auto;">
 
 Therefore, we can make the code output cell have a taller maximum height by specifying `max-height` as follows in a CSS file which we reference in the YAML header. Note that the default is 400px, so choose a value larger than that.
 
@@ -107,7 +107,7 @@ The contents of _custom.css_ use the classes of the code chunk we discovered as 
 
 Mentimeter provides the html code required to embed a presentation within an html document. To obtain this, go into a presentation and click the _Share_ button, then select the _Slides_ tab, then click _Copy code_ under _Embed slides_.
 
-<img src="/post/2025/quarto-revealjs-tips/img/mentimeter-share-iframe-code.png" alt="Screenshot of the menu to copy the html code to embed a Mentimeter presentation." width="630" style="display: block; margin: auto;">
+<img src="/post/2025/quarto-revealjs-tips/img/mentimeter-share-iframe-code.png" alt="Screenshot of the menu to copy the html code to embed a Mentimeter presentation." width="700" style="display: block; margin: auto;">
 
 This results in a div containing an iframe, which looks like this (I have added the line breaks and replaced the id code to my presentation with hashes).
 
@@ -159,7 +159,7 @@ tab_model(fm1)
 
 ## Programmatic rendering and pdf export for printing
 
-Of course one can click the _Render_ button in RStudio, but I find it easier to keep a _render.R_ script with a call to `quarto::quarto_render()`.
+To render a Quarto document we can click the _Render_ button in RStudio, but I find it easier to keep a _render.R_ script with a call to `quarto::quarto_render()`.
 
 It's helpful to provide the students with a pdf copy of the slides for printing. You can do this in a browser or programmatically using **pagedown**'s `chrome_print()` function. When I called this function with no options the page size of the pdf was unusual, producing pages with neither A4 nor US paper size, so I call it as follows to ensure an A4 page size.
 
@@ -170,9 +170,12 @@ quarto::quarto_render(input = "my-great-slides.qmd")
 
 pagedown::chrome_print("my-great-slides.html", 
   options = 
-    list(printBackground = FALSE, preferCSSPageSize = FALSE, 
+    list(
+      printBackground = FALSE,
+      preferCSSPageSize = FALSE, 
       paperWidth = 8.3, paperHeight = 11.7, 
-      marginTop = 0.1, marginBottom = 0.1, marginLeft = 0.1, marginRight = 0.1))
+      marginTop = 0.1, marginBottom = 0.1, 
+      marginLeft = 0.1, marginRight = 0.1))
 ```
 
 I usually find that a few slides have slightly too much content for an A4 page, and so those slides will take up 2 pages in the pdf. And hence the pdf usually has a few more pages than the number of slides.
