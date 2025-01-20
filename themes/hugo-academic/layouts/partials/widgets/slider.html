@@ -5,7 +5,7 @@
 <!-- Indicators -->
 <ol class="carousel-indicators">
   {{ range $index, $item := $page.Params.item }}
-  <li data-target="#{{$hash_id}}" data-slide-to="{{$index}}" {{if eq $index 0}}class="active"{{end}}></li>
+  <li data-bs-target="#{{$hash_id}}" data-slide-to="{{$index}}" {{if eq $index 0}}class="active"{{end}}></li>
   {{ end }}
 </ol>
 
