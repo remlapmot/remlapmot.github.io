@@ -41,7 +41,9 @@ CRAN is a fantastic resource, in particular because it provides binary packages 
 But let's install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
 <img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-tidyverse-rspm-linux-binary.png" alt="Installing binary Linux tidyverse package using Posit Package Manager." style="display: block; margin: auto;">
 
-**_Woah!_** Something magical just happened, we installed a binary R package on Linux! How did that happen, let's find out.^[Note that there are other approaches to distributing binary R packages on Linux, see <https://cran.r-project.org/bin/linux/> and links therein, <https://eddelbuettel.github.io/r2u/>, and <https://enchufa2.github.io/bspm/>]
+**_Woah!_** Something magical just happened, we installed a binary R package on Linux! How did that happen, let's find out.[^1]
+
+[^1]: Note that there are other approaches to distributing binary R packages on Linux, see <https://cran.r-project.org/bin/linux/> and links therein, <https://eddelbuettel.github.io/r2u/>, and <https://enchufa2.github.io/bspm/>
 
 ## Building bundled source and binary packages
 
@@ -69,7 +71,9 @@ We can achieve the same output by making direct calls to `R CMD build` and `R CM
 
 ## CRAN structure for bundled source package files
 
-In two excellent blog posts Marks Sellors describes how to make a CRAN-like repository.^[<https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/> and <https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/>] There is also the [**miniCRAN**](https://cran.r-project.org/package=miniCRAN) package to help do this, but we don't need to use this for the following explanation.
+In two excellent blog posts Marks Sellors describes how to make a CRAN-like repository.[^2]
+
+[^2]: <https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/> and <https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/>] There is also the [**miniCRAN**](https://cran.r-project.org/package=miniCRAN) package to help do this, but we don't need to use this for the following explanation.
 
 To host bundled source packages, such as our `OneSampleMR_0.1.2.tar.gz` file, we require the following directory structure (noting that the `latest` directory is optional, but allows us to add snapshot directories if we wanted to).
 <!-- # brew install tree -->
@@ -133,7 +137,9 @@ contrib.url("", type = "mac.binary")
 contrib.url("", type = "binary")
 ## [1] "/bin/macosx/big-sur-arm64/contrib/4.2"
 ```
-And they are also listed in the R Installation and Administration manual.^[See <https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository>.]
+And they are also listed in the R Installation and Administration manual.[^3]
+
+[^3]: See <https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository>.
 
 On Apple Silicon Macs the `big-sur-arm64` filepath corresponds to the end of `.Platform$pkgType`.
 ``` r
@@ -145,7 +151,9 @@ On Apple Silicon Macs the `big-sur-arm64` filepath corresponds to the end of `.P
 
 CRAN does not distribute Linux binary packages and so there is no directory structure from them to copy.
 
-However both the Posit Package Manager and the [R4Pi](https://r4pi.org/) project achieve this in a very clever way.^[See <https://packagemanager.rstudio.com/client/#/repos/2/overview> and <https://pkgs.r4pi.org/>]
+However both the Posit Package Manager and the [R4Pi](https://r4pi.org/) project achieve this in a very clever way.[^4]
+
+[^4]: See <https://packagemanager.rstudio.com/client/#/repos/2/overview> and <https://pkgs.r4pi.org/>
 
 We saw above that on Linux bundled source packages have filenames of the form `{package}_{version}.tar.gz` whereas the binary package filenames are of the form `{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz` (the text after `{package}_{version}_` may be different depending on your machine and distro).
 
