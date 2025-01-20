@@ -20,6 +20,7 @@ image:
   preview_only: no
   alt_text: 'Screenshot of RStudio, Positron, Visual Studio Code, and R icons in Finder toolbar.'
 projects: []
+toc: true
 ---
 
 ## Introduction

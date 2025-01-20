@@ -21,6 +21,7 @@ image:
   preview_only: no
   alt_text: 'Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa.'
 projects: []
+toc: true
 ---
 
 

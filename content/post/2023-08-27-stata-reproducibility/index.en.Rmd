@@ -19,6 +19,7 @@ image:
 projects: []
 bibliography: refs.bib
 link-citations: true
+toc: true
 ---
 
 Most proficient Stata users have come across the `version` command. This is an incredibly powerful command, which simply by issuing say

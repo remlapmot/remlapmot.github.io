@@ -19,6 +19,7 @@ image:
   preview_only: no
   alt_text: 'Screenshot of a Google Chrome site search shortcut for the METACRAN CRAN mirror.'
 projects: []
+toc: true
 ---
 
 ## Introduction

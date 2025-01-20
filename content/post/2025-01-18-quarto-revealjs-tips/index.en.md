@@ -20,6 +20,7 @@ image:
   preview_only: no
   alt_text: 'Screenshot of a Mentimeter presentation embedded in a Quarto revealjs html slide.'
 projects: []
+toc: true
 ---
 
 ## Introduction

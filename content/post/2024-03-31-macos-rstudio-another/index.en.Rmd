@@ -20,6 +20,7 @@ image:
   preview_only: no
   alt_text: 'Screenshot of an Automator app to launch a new instance of RStudio Desktop in the macOS dock.'
 projects: []
+toc: true
 ---
 
 ## Introduction: how to open a second instance of RStudio Desktop on macOS

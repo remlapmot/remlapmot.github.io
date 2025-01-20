@@ -21,6 +21,7 @@ image:
 projects: []
 bibliography: refs.bib
 link-citations: true
+toc: true
 ---
 
 ```{r include=FALSE}
