@@ -308,7 +308,7 @@
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="dark">
+<body id="top" data-spy="scroll" data-offset="70" data-bs-target="#TableOfContents" class="dark">
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -360,8 +360,8 @@
     
 
     
-    <button type="button" class="navbar-toggler" data-toggle="collapse"
-            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+            data-bs-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
     <span><i class="fas fa-bars"></i></span>
     </button>
     
@@ -433,7 +433,7 @@
 
         
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>Blog</span><span class="caret"></span>
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"><span>Blog</span><span class="caret"></span>
           </a>
           <div class="dropdown-menu">
             
@@ -553,7 +553,7 @@
 
       
       <li class="nav-item dropdown theme-dropdown">
-        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
+        <a href="#" class="nav-link js-theme-selector" data-bs-toggle="dropdown" aria-haspopup="true">
           <i class="fas fa-palette" aria-hidden="true"></i>
         </a>
         <div class="dropdown-menu">
@@ -578,9 +578,35 @@
 </nav>
 
 
-  <article class="article">
-
   
+<div class="container-fluid docs">
+    <div class="row flex-xl-nowrap">
+      <div class="d-none d-xl-block col-xl-2 docs-toc">
+        <ul class="nav toc-top">
+          <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+        </ul>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#creating-the-automator-apps">Creating the Automator apps</a>
+      <ul>
+        <li><a href="#rstudio-desktop">RStudio Desktop</a></li>
+        <li><a href="#wezterm">WezTerm</a></li>
+        <li><a href="#zed">Zed</a></li>
+        <li><a href="#r-launched-in-a-wezterm-terminal-session">R launched in a WezTerm terminal session</a></li>
+        <li><a href="#visual-studio-code-and-positron">Visual Studio Code and Positron</a></li>
+        <li><a href="#saving-and-adding-icons">Saving and adding icons</a></li>
+        <li><a href="#adding-the-apps-to-the-finder-toolbar">Adding the apps to the Finder toolbar</a></li>
+      </ul>
+    </li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+      </div>
+      <main class="col-12 col-md-0 col-xl-10 py-md-3 pl-md-5 docs-content" role="main">
+
+        <article class="article">
+            
 
 
 
@@ -673,35 +699,32 @@
 </div>
 
 
-
-  <div class="article-container">
-
-    <div class="article-style">
-      
-
-
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>Have you ever wanted to be able to quickly open a Data Science app, say RStudio Desktop or Positron in the current Finder window at the click of a button? We’ll see how to achieve this by creating Automator apps. Here’s a screenshot of what we’ll end up with.</p>
-<p><img src="/post/2024/finder-toolbar-apps/img/finder-window-with-toolbar-apps.png" alt="Screenshot of a Finder window with app icons in its toolbar." width="630" style="display: block; margin: auto;"></p>
-</div>
-<div id="creating-the-automator-apps" class="section level2">
-<h2>Creating the Automator apps</h2>
+            <div class="article-container">
+              <div class="article-style">
+                <h2 id="introduction">Introduction</h2>
+<p>Have you ever wanted to be able to quickly open a Data Science app, say RStudio Desktop or Positron in the current Finder window at the click of a button? We&rsquo;ll see how to achieve this by creating Automator apps. Here&rsquo;s a screenshot of what we&rsquo;ll end up with.</p>
+<img src="/post/2024/finder-toolbar-apps/img/finder-window-with-toolbar-apps.png" alt="Screenshot of a Finder window with app icons in its toolbar." width="630" style="display: block; margin: auto;">
+<h2 id="creating-the-automator-apps">Creating the Automator apps</h2>
 <p>Open Automator and select <em>New</em> then <em>Application</em> and click <em>Choose</em>. Then in the top left search bar enter <em>applescript</em> and drag and drop the <em>Run Applescript</em> action onto the main window.</p>
-<p><img src="/post/2024/finder-toolbar-apps/img/automator-run-applescript.png" alt="Screenshot of the Automator app." width="630" style="display: block; margin: auto;"></p>
-<p>We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use <a href="https://wezfurlong.org/wezterm/">WezTerm</a> for my terminal emulator, <a href="https://zed.dev/">Zed</a> as my main text editor, <a href="https://posit.co/products/open-source/rstudio/">RStudio Desktop</a> for most of my R/R Markdown/Quarto coding, <a href="https://code.visualstudio.com/">Visual Studio Code</a> for other text editing tasks, and I have been starting to try out <a href="https://positron.posit.co/">Positron</a>. My AppleScript code for each app is as follows.</p>
-<div id="rstudio-desktop" class="section level3">
-<h3>RStudio Desktop</h3>
+<img src="/post/2024/finder-toolbar-apps/img/automator-run-applescript.png" alt="Screenshot of the Automator app." width="630" style="display: block; margin: auto;">
+<p>We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use 
+<a href="https://wezfurlong.org/wezterm/" target="_blank" rel="noopener">WezTerm</a> for my terminal emulator, 
+<a href="https://zed.dev/" target="_blank" rel="noopener">Zed</a> as my main text editor, 
+<a href="https://posit.co/products/open-source/rstudio/" target="_blank" rel="noopener">RStudio Desktop</a> for most of my R/R Markdown/Quarto coding, 
+<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a> for other text editing tasks, and I have been starting to try out 
+<a href="https://positron.posit.co/" target="_blank" rel="noopener">Positron</a>. My AppleScript code for each app is as follows.</p>
+<h3 id="rstudio-desktop">RStudio Desktop</h3>
 <p>It is worth noting that RStudio automatically detects whether there is an <em>.Rproj</em> file in the directory and opens in project mode if one is found (note this only works if RStudio is not already open).</p>
-<pre class="applescript"><code>on run {input, parameters}
+<pre><code class="language-applescript">on run {input, parameters}
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &quot;/Applications/RStudio.app/Contents/MacOS/RStudio &quot; &amp; thePath
   end tell
-end run</code></pre>
+end run
+</code></pre>
 <p>We can create an alternative app which specifically opens RStudio project (<em>.Rproj</em>) files as follows.</p>
-<pre class="applescript"><code>on run {input, parameters}
+<pre><code class="language-applescript">on run {input, parameters}
   tell application &quot;Finder&quot;
     try
       set currentFolder to (folder of window 1) as alias
@@ -719,43 +742,41 @@ end run</code></pre>
         display dialog &quot;No Finder window is open.&quot;
       end try
   end tell
-end run</code></pre>
-</div>
-<div id="wezterm" class="section level3">
-<h3>WezTerm</h3>
-<pre class="applescript"><code>on run {input, parameters}
+end run
+</code></pre>
+<h3 id="wezterm">WezTerm</h3>
+<pre><code class="language-applescript">on run {input, parameters}
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &quot;/opt/homebrew/bin/wezterm-gui start --cwd &quot; &amp; thePath
   end tell
-end run</code></pre>
-</div>
-<div id="zed" class="section level3">
-<h3>Zed</h3>
-<pre class="applescript"><code>on run {input, parameters}
+end run
+</code></pre>
+<h3 id="zed">Zed</h3>
+<pre><code class="language-applescript">on run {input, parameters}
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &quot;/usr/local/bin/zed -n &quot; &amp; thePath
   end tell
-end run</code></pre>
-</div>
-<div id="r-launched-in-a-wezterm-terminal-session" class="section level3">
-<h3>R launched in a WezTerm terminal session</h3>
-<pre class="applescript"><code>on run {input, parameters}
+end run
+</code></pre>
+<h3 id="r-launched-in-a-wezterm-terminal-session">R launched in a WezTerm terminal session</h3>
+<pre><code class="language-applescript">on run {input, parameters}
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &quot;/opt/homebrew/bin/wezterm-gui start --cwd &quot; &amp; thePath &amp; &quot; -- /usr/local/bin/R&quot;
   end tell
-end run</code></pre>
-</div>
-<div id="visual-studio-code-and-positron" class="section level3">
-<h3>Visual Studio Code and Positron</h3>
-<p>First enable the ability to launch these apps with <code>code</code> and <code>positron</code> from a Terminal in each app, see <a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line">here</a> and <a href="https://positron.posit.co/add-to-path.html">here</a>.</p>
-<p>This script is more involved because we first check for any <em>.code-workspace</em> files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this. If we didn’t explicitly open the <em>.code-workspace</em> file and if one is present in the directory Visual Studio Code/Positron will detect it and pop up a dialogue box asking if we want to reopen the directory as a workspace (I just prefer to skip this step).</p>
-<pre class="applescript"><code>on run {input, parameters}
+end run
+</code></pre>
+<h3 id="visual-studio-code-and-positron">Visual Studio Code and Positron</h3>
+<p>First enable the ability to launch these apps with <code>code</code> and <code>positron</code> from a Terminal in each app, see 
+<a href="https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line" target="_blank" rel="noopener">here</a> and 
+<a href="https://positron.posit.co/add-to-path.html" target="_blank" rel="noopener">here</a>.</p>
+<p>This script is more involved because we first check for any <em>.code-workspace</em> files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this. If we didn&rsquo;t explicitly open the <em>.code-workspace</em> file and if one is present in the directory Visual Studio Code/Positron will detect it and pop up a dialogue box asking if we want to reopen the directory as a workspace (I just prefer to skip this step).</p>
+<pre><code class="language-applescript">on run {input, parameters}
   tell application &quot;Finder&quot;
     try
       set currentFolder to (folder of window 1) as alias
@@ -774,29 +795,21 @@ end run</code></pre>
         display dialog &quot;No Finder window is open.&quot;
       end try
   end tell
-end run</code></pre>
+end run
+</code></pre>
 <p>(For your Visual Studio Code app simply replace <code>positron</code> with <code>code</code>.)</p>
-</div>
-<div id="saving-and-adding-icons" class="section level3">
-<h3>Saving and adding icons</h3>
+<h3 id="saving-and-adding-icons">Saving and adding icons</h3>
 <p>After adding the AppleScript code save each app. I call mine, e.g., <em>RStudio-openhere.app</em>.</p>
 <p>Next it is helpful to give each app the relevant icon. To do this in Finder bring up the Info boxes for the original app and your <em>-openhere</em> version by selecting each app and pressing <kbd>Cmd</kbd>+<kbd>I</kbd>. Next drag the large icon from the original app onto the small icon of your <em>-openhere</em> app.</p>
-<p><img src="/post/2024/finder-toolbar-apps/img/updating-icon.png" alt="Screenshot of copying the Positron icon onto our openhere app." width="630" style="display: block; margin: auto;"></p>
-</div>
-<div id="adding-the-apps-to-the-finder-toolbar" class="section level3">
-<h3>Adding the apps to the Finder toolbar</h3>
+<img src="/post/2024/finder-toolbar-apps/img/updating-icon.png" alt="Screenshot of copying the Positron icon onto our openhere app." width="630" style="display: block; margin: auto;">
+<h3 id="adding-the-apps-to-the-finder-toolbar">Adding the apps to the Finder toolbar</h3>
 <p>Finally, we need to place shortcuts of these apps onto the Finder toolbar. To do this first hold down <kbd>Cmd</kbd> then drag the app from Finder onto the toolbar to the location you would like. On release the app should now be in the toolbar. (And to remove an icon from the toolbar, again hold <kbd>Cmd</kbd> then drag it off the toolbar.)</p>
-<p><img src="/post/2024/finder-toolbar-apps/img/add-app-to-toolbar.png" alt="Screenshot of moving our Positron-openhere app onto the Finder toolbar." width="630" style="display: block; margin: auto;"></p>
-</div>
-</div>
-<div id="summary" class="section level2">
-<h2>Summary</h2>
+<img src="/post/2024/finder-toolbar-apps/img/add-app-to-toolbar.png" alt="Screenshot of moving our Positron-openhere app onto the Finder toolbar." width="630" style="display: block; margin: auto;">
+<h2 id="summary">Summary</h2>
 <p>I have shown how to create Automator apps to open RStudio Desktop, Positron, and several other Data Science apps from the current Finder window.</p>
-</div>
 
-    </div>
-
-    
+              </div>
+              
 
 
 
@@ -1038,9 +1051,13 @@ end run</code></pre>
 
 
 
-
+            </div>
+        </article>
+  
+      </main>
+    </div>
   </div>
-</article>
+  
 
       
 
@@ -1163,7 +1180,7 @@ end run</code></pre>
     
     
     
-    <script src="/js/academic.min.c18541c811ce86c256076a7e9e0266c2.js"></script>
+    <script src="/js/academic.min.6a440ec9db0a7a29df3d23963a43971c.js"></script>
 
     
 

@@ -17,97 +17,103 @@
       <link>https://remlapmot.github.io/post/2025/quarto-revealjs-tips/</link>
       <pubDate>Sun, 19 Jan 2025 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2025/quarto-revealjs-tips/</guid>
-      <description>
-
-
-&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Like alot of lecturers I’m teaching at the moment. If I have a presentation to do that’s mainly images I’ll use Powerpoint or Google Slides. If the presentation includes maths or code or both I used to use LaTeX Beamer. Over the years I have grown tired of Beamer and so I thought I’d try making some revealjs presentations using Quarto.&lt;/p&gt;
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Like alot of lecturers I&amp;rsquo;m teaching at the moment. If I have a presentation to do that&amp;rsquo;s mainly images I&amp;rsquo;ll use Powerpoint or Google Slides. If the presentation includes maths or code or both I used to use LaTeX Beamer. Over the years I have grown tired of Beamer and so I thought I&amp;rsquo;d try making some revealjs presentations using Quarto.&lt;/p&gt;
 &lt;p&gt;Revealjs has been around far longer than Quarto, I remember seeing a colleague present using revealjs in about 2012, and you can happily make a revealjs presentation without Quarto. However, the convenience of writing in the Quarto Markdown format is fantastic.&lt;/p&gt;
-&lt;p&gt;To learn the basics of making revealjs slides with Quarto I recommend reading &lt;a href=&#34;https://quarto.org/docs/presentations/revealjs/&#34;&gt;the user guide&lt;/a&gt;. And full documentation is available &lt;a href=&#34;https://quarto.org/docs/reference/formats/presentations/revealjs.html&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://quarto.org/docs/presentations/revealjs/advanced.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To learn the basics of making revealjs slides with Quarto I recommend reading 
+&lt;a href=&#34;https://quarto.org/docs/presentations/revealjs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the user guide&lt;/a&gt;. And full documentation is available 
+&lt;a href=&#34;https://quarto.org/docs/reference/formats/presentations/revealjs.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; and 
+&lt;a href=&#34;https://quarto.org/docs/presentations/revealjs/advanced.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The following tips are solutions to little hurdles that I found I needed to overcome when making my first revealjs presentations using Quarto.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;slide-size-and-testing-on-a-smaller-display-size-on-your-own-monitor&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;1. Slide size and testing on a smaller display size on your own monitor&lt;/h2&gt;
-&lt;p&gt;The great thing about making a presentation in Powerpoint or Google Slides is that you can instantly see if your content fits on a slide. So it helps to have an understanding of how big a slide is. By default a revealjs slide is &lt;a href=&#34;https://quarto.org/docs/presentations/revealjs/advanced.html#presentation-size&#34;&gt;1050px wide by 700px tall&lt;/a&gt;. This helps you when setting the size of figures and code blocks.&lt;/p&gt;
+&lt;h2 id=&#34;1-slide-size-and-testing-on-a-smaller-display-size-on-your-own-monitor&#34;&gt;1. Slide size and testing on a smaller display size on your own monitor&lt;/h2&gt;
+&lt;p&gt;The great thing about making a presentation in Powerpoint or Google Slides is that you can instantly see if your content fits on a slide. So it helps to have an understanding of how big a slide is. By default a revealjs slide is 
+&lt;a href=&#34;https://quarto.org/docs/presentations/revealjs/advanced.html#presentation-size&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;1050px wide by 700px tall&lt;/a&gt;. This helps you when setting the size of figures and code blocks.&lt;/p&gt;
 &lt;p&gt;Additionally it is helpful to be able to preview your slides on the size on monitor you will be presenting on. My University has 1080p monitors in most lecture theatres, however, my monitor is bigger than that. Chrome allows setting the size of the display by opening Developer Tools (Three dots | More tools | Developer Tools). Then you can enter the desired resolution in the top bar as follows (a 1080p screen is 1080 pixels tall and 1920 pixels wide).&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-revealjs-tips/img/slide-size-and-1080p.png&#34; alt=&#34;Screenshot of using Google Chrome developer tools to inspect the size of a slide and to preview the slides at 1080p resolution.&#34; width=&#34;700&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-revealjs-tips/img/slide-size-and-1080p.png&#34; alt=&#34;Screenshot of using Google Chrome developer tools to inspect the size of a slide and to preview the slides at 1080p resolution.&#34; width=&#34;700&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;I find this especially helpful when working on a Mac, whose laptops often have unusual screen resolutions.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;wider-width-cutoff-in-code-chunks&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;2. Wider width cutoff in code chunks&lt;/h2&gt;
-&lt;p&gt;Vertical space on a slide is at a premium. Therefore, in a presentation I line break my code wider that I do when coding normally. As described in the &lt;a href=&#34;https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html&#34;&gt;RMarkdown cookbook&lt;/a&gt; and in &lt;a href=&#34;https://github.com/quarto-dev/quarto-cli/issues/5852&#34;&gt;this GitHub issue&lt;/a&gt; we can enable the use of the &lt;strong&gt;formatR&lt;/strong&gt; package on a code chunk using the &lt;code&gt;tidy&lt;/code&gt; and &lt;code&gt;tidy-opts&lt;/code&gt; chunk options (I think the default is 85 characters, so I choose a value greater than that. I find that 110 is about the widest I can set).&lt;/p&gt;
-&lt;pre class=&#34;markdown&#34;&gt;&lt;code&gt;```{r}
+&lt;h2 id=&#34;2-wider-width-cutoff-in-code-chunks&#34;&gt;2. Wider width cutoff in code chunks&lt;/h2&gt;
+&lt;p&gt;Vertical space on a slide is at a premium. Therefore, in a presentation I line break my code wider that I do when coding normally. As described in the 
+&lt;a href=&#34;https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RMarkdown cookbook&lt;/a&gt; and in 
+&lt;a href=&#34;https://github.com/quarto-dev/quarto-cli/issues/5852&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this GitHub issue&lt;/a&gt; we can enable the use of the &lt;strong&gt;formatR&lt;/strong&gt; package on a code chunk using the &lt;code&gt;tidy&lt;/code&gt; and &lt;code&gt;tidy-opts&lt;/code&gt; chunk options (I think the default is 85 characters, so I choose a value greater than that. I find that 110 is about the widest I can set).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;```{r}
 #| tidy: TRUE
 #| tidy-opts: !expr list(width.cutoff = I(110))
 # ... Wide R code here ...
-```&lt;/code&gt;&lt;/pre&gt;
+```
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can also set these globally for the Quarto document in either the YAML header,&lt;/p&gt;
-&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;knitr:
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;knitr:
   opts_chunk: 
     tidy: TRUE
-    tidy-opts: !expr list(width.cutoff = I(110))&lt;/code&gt;&lt;/pre&gt;
+    tidy-opts: !expr list(width.cutoff = I(110))
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;or in a chunk at the top of your Quarto document.&lt;/p&gt;
-&lt;pre class=&#34;markdown&#34;&gt;&lt;code&gt;```{r}
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;```{r}
 #| include: false
 knitr::opts_chunk$set(tidy = TRUE, tidy.opts = list(width.cutoff = I(110)))
-```&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;taller-code-chunks&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;3. Taller code chunks&lt;/h2&gt;
-&lt;p&gt;Code chunks come in several flavours in a rendered presentation. There are code input chunks, code output chunks, and chunks for any code output errors. To make the input code chunks taller there is a convenient &lt;a href=&#34;https://quarto.org/docs/presentations/revealjs/#code-block-height&#34;&gt;Quarto option &lt;code&gt;code-block-height&lt;/code&gt;&lt;/a&gt; which is specified in the YAML header (the default is 500px, so pick a value greater than that).&lt;/p&gt;
-&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;---
+```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;3-taller-code-chunks&#34;&gt;3. Taller code chunks&lt;/h2&gt;
+&lt;p&gt;Code chunks come in several flavours in a rendered presentation. There are code input chunks, code output chunks, and chunks for any code output errors. To make the input code chunks taller there is a convenient 
+&lt;a href=&#34;https://quarto.org/docs/presentations/revealjs/#code-block-height&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quarto option &lt;code&gt;code-block-height&lt;/code&gt;&lt;/a&gt; which is specified in the YAML header (the default is 500px, so pick a value greater than that).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;---
 format:
   revealjs:
     code-block-height: 650px
----&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;taller-code-output-chunks&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;4. Taller code output chunks&lt;/h2&gt;
-&lt;p&gt;Currently, there doesn’t seem to be a Quarto option to make the code output chunks taller. Therefore I had to inspect the source code of the html slides to find out how to modify this. In most browsers simply right click on a slide and in Chrome click &lt;em&gt;Inspect&lt;/em&gt; - do this over the element on the page you want to find out about.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-revealjs-tips/img/chrome-context-menu-inspect.png&#34; alt=&#34;Screenshot of Google Chrome context menu.&#34; width=&#34;600&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+---
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;4-taller-code-output-chunks&#34;&gt;4. Taller code output chunks&lt;/h2&gt;
+&lt;p&gt;Currently, there doesn&amp;rsquo;t seem to be a Quarto option to make the code output chunks taller. Therefore I had to inspect the source code of the html slides to find out how to modify this. In most browsers simply right click on a slide and in Chrome click &lt;em&gt;Inspect&lt;/em&gt; - do this over the element on the page you want to find out about.&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-revealjs-tips/img/chrome-context-menu-inspect.png&#34; alt=&#34;Screenshot of Google Chrome context menu.&#34; width=&#34;600&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;Doing so over a code output cell shows the developer tools on the right handside. We can then see that the elements and classes for the code output cell are given just above the bottom right pane, i.e., &lt;code&gt;div.cell div.cell-output.cell-output-stdout pre code&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-revealjs-tips/img/inspect-output-cell.png&#34; alt=&#34;Screenshot of using Google Chrome developer tools to inspect the CSS class of an element of a code output cell.&#34; width=&#34;500&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-revealjs-tips/img/inspect-output-cell.png&#34; alt=&#34;Screenshot of using Google Chrome developer tools to inspect the CSS class of an element of a code output cell.&#34; width=&#34;500&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;Therefore, we can make the code output cell have a taller maximum height by specifying &lt;code&gt;max-height&lt;/code&gt; as follows in a CSS file which we reference in the YAML header. Note that the default is 400px, so choose a value larger than that.&lt;/p&gt;
-&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;---
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;---
 format:
   revealjs:
     css: custom.css
----&lt;/code&gt;&lt;/pre&gt;
+---
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The contents of &lt;em&gt;custom.css&lt;/em&gt; use the elements and classes of the code chunk we discovered as follows.&lt;/p&gt;
-&lt;pre class=&#34;css&#34;&gt;&lt;code&gt;.cell .cell-output-stdout pre code {
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.cell .cell-output-stdout pre code {
   max-height: 650px; // Adjust this value as needed
   overflow-y: auto; // Add this to handle overflow
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;embedding-interactive-mentimeter-presentations&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;5. Embedding interactive Mentimeter presentations&lt;/h2&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;5-embedding-interactive-mentimeter-presentations&#34;&gt;5. Embedding interactive Mentimeter presentations&lt;/h2&gt;
 &lt;p&gt;Mentimeter provides the html code required to embed a presentation within an html document. To obtain this, go into a presentation and click the &lt;em&gt;Share&lt;/em&gt; button, then select the &lt;em&gt;Slides&lt;/em&gt; tab, then click &lt;em&gt;Copy code&lt;/em&gt; under &lt;em&gt;Embed slides&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-revealjs-tips/img/mentimeter-share-iframe-code.png&#34; alt=&#34;Screenshot of the menu to copy the html code to embed a Mentimeter presentation.&#34; width=&#34;700&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-revealjs-tips/img/mentimeter-share-iframe-code.png&#34; alt=&#34;Screenshot of the menu to copy the html code to embed a Mentimeter presentation.&#34; width=&#34;700&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;This results in a div containing an iframe, which we can simply paste in as the content of our slide (I have added the line breaks and replaced part of the URL to my presentation with hashes).&lt;/p&gt;
-&lt;pre class=&#34;markdown&#34;&gt;&lt;code&gt;## My slide with an embedded Menti
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;## My slide with an embedded Menti
 
-&amp;lt;div style=&amp;#39;position: relative; padding-bottom: 56.25%; padding-top: 35px;
-  height: 0; overflow: hidden;&amp;#39;&amp;gt;
-&amp;lt;iframe sandbox=&amp;#39;allow-scripts allow-same-origin allow-presentation&amp;#39;
-  allowfullscreen=&amp;#39;true&amp;#39; allowtransparency=&amp;#39;true&amp;#39; frameborder=&amp;#39;0&amp;#39; height=&amp;#39;315&amp;#39;
-  src=&amp;#39;https://www.mentimeter.com/app/presentation/###############/embed&amp;#39;
-  style=&amp;#39;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&amp;#39;
-  width=&amp;#39;420&amp;#39;&amp;gt;
+&amp;lt;div style=&#39;position: relative; padding-bottom: 56.25%; padding-top: 35px;
+  height: 0; overflow: hidden;&#39;&amp;gt;
+&amp;lt;iframe sandbox=&#39;allow-scripts allow-same-origin allow-presentation&#39;
+  allowfullscreen=&#39;true&#39; allowtransparency=&#39;true&#39; frameborder=&#39;0&#39; height=&#39;315&#39;
+  src=&#39;https://www.mentimeter.com/app/presentation/###############/embed&#39;
+  style=&#39;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#39;
+  width=&#39;420&#39;&amp;gt;
 &amp;lt;/iframe&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But when I first rendered a presentation using this code I didn’t see my Mentimeter presentation in the relevant slide but rather the following spinning dots.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-revealjs-tips/img/menti-failing-to-load.gif&#34; alt=&#34;Animated GIF of the spinning dots when a Mentimeter presentation is incorrectly embedded in an HTML document.&#34; width=&#34;170&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Thanks &lt;a href=&#34;https://stackoverflow.com/questions/79092017/quarto-markdown-to-revealjs-or-html-desmos-embedded-iframes-not-loading&#34;&gt;to this post&lt;/a&gt; it turns out this is because I had specified &lt;code&gt;embed-resources: true&lt;/code&gt; in my revealjs options in the YAML header. When you do this you need to add the &lt;code&gt;data-external=&#34;1&#34;&lt;/code&gt; attribute to the iframe &lt;a href=&#34;https://quarto.org/docs/reference/formats/presentations/revealjs.html#rendering&#34;&gt;as detailed in the Quarto documentation&lt;/a&gt; as follows.&lt;/p&gt;
-&lt;pre class=&#34;html&#34;&gt;&lt;code&gt;&amp;lt;iframe data-external=&amp;quot;1&amp;quot; sandbox=...&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And then my Mentimeter presentation was correctly embedded in the slide as per the screenshot at the &lt;a href=&#34;#top&#34;&gt;top of this post&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;disable-html-table-processing-for-some-tables&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;6. Disable HTML table processing for some tables&lt;/h2&gt;
-&lt;p&gt;There are now so many fantastic R packages for html table generation. My two favourite are &lt;a href=&#34;https://www.danieldsjoberg.com/gtsummary/&#34;&gt;&lt;strong&gt;gtsummary&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&#34;https://strengejacke.github.io/sjPlot/&#34;&gt;&lt;strong&gt;sjPlot&lt;/strong&gt;&lt;/a&gt;. However, I notice that for some &lt;strong&gt;sjPlot&lt;/strong&gt; tables Quarto issues the following warning when rendering the slides.&lt;/p&gt;
-&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;WARNING (/Applications/quarto/share/filters/main.lua:9319) Unable to parse table from raw html block: skipping.&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To avoid this it’s possible to &lt;a href=&#34;https://quarto.org/docs/authoring/tables.html#disabling-quarto-table-processing&#34;&gt;disable Quarto’s html table processing&lt;/a&gt; using the &lt;code&gt;html-table-processing&lt;/code&gt; argument either at the document or chunk level. Here is an example slide doing so at the chunk level.&lt;/p&gt;
-&lt;pre class=&#34;markdown&#34;&gt;&lt;code&gt;## Slide presenting a multilevel model
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But when I first rendered a presentation using this code I didn&amp;rsquo;t see my Mentimeter presentation in the relevant slide but rather the following spinning dots.&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-revealjs-tips/img/menti-failing-to-load.gif&#34; alt=&#34;Animated GIF of the spinning dots when a Mentimeter presentation is incorrectly embedded in an HTML document.&#34; width=&#34;170&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;p&gt;Thanks 
+&lt;a href=&#34;https://stackoverflow.com/questions/79092017/quarto-markdown-to-revealjs-or-html-desmos-embedded-iframes-not-loading&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;to this post&lt;/a&gt; it turns out this is because I had specified &lt;code&gt;embed-resources: true&lt;/code&gt; in my revealjs options in the YAML header. When you do this you need to add the &lt;code&gt;data-external=&amp;quot;1&amp;quot;&lt;/code&gt; attribute to the iframe 
+&lt;a href=&#34;https://quarto.org/docs/reference/formats/presentations/revealjs.html#rendering&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;as detailed in the Quarto documentation&lt;/a&gt; as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;iframe data-external=&amp;quot;1&amp;quot; sandbox=...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And then my Mentimeter presentation was correctly embedded in the slide as per the screenshot at the 
+&lt;a href=&#34;#top&#34;&gt;top of this post&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;6-disable-html-table-processing-for-some-tables&#34;&gt;6. Disable HTML table processing for some tables&lt;/h2&gt;
+&lt;p&gt;There are now so many fantastic R packages for html table generation. My two favourite are 
+&lt;a href=&#34;https://www.danieldsjoberg.com/gtsummary/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;gtsummary&lt;/strong&gt;&lt;/a&gt; and 
+&lt;a href=&#34;https://strengejacke.github.io/sjPlot/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;sjPlot&lt;/strong&gt;&lt;/a&gt;. However, I notice that for some &lt;strong&gt;sjPlot&lt;/strong&gt; tables Quarto issues the following warning when rendering the slides.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;WARNING (/Applications/quarto/share/filters/main.lua:9319) Unable to parse table from raw html block: skipping.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To avoid this it&amp;rsquo;s possible to 
+&lt;a href=&#34;https://quarto.org/docs/authoring/tables.html#disabling-quarto-table-processing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;disable Quarto&amp;rsquo;s html table processing&lt;/a&gt; using the &lt;code&gt;html-table-processing&lt;/code&gt; argument either at the document or chunk level. Here is an example slide doing so at the chunk level.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;## Slide presenting a multilevel model
 
 ```{r}
 #| html-table-processing: none
@@ -115,14 +121,14 @@ library(sjPlot)
 library(lme4)
 fm1 &amp;lt;- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
 tab_model(fm1)
-```&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;programmatic-rendering-and-pdf-export-for-printing&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;7. Programmatic rendering and pdf export for printing&lt;/h2&gt;
-&lt;p&gt;To render a Quarto document we can click the &lt;em&gt;Render&lt;/em&gt; button in RStudio, but I find it easier to make a &lt;em&gt;render.R&lt;/em&gt; script with a call to the &lt;a href=&#34;https://quarto-dev.github.io/quarto-r/&#34;&gt;&lt;strong&gt;quarto&lt;/strong&gt;&lt;/a&gt; package’s &lt;code&gt;quarto_render()&lt;/code&gt; function.&lt;/p&gt;
-&lt;p&gt;It’s helpful to provide students with a pdf copy of the slides for printing. You can do this in a browser through the print menu or programmatically using &lt;strong&gt;pagedown&lt;/strong&gt;’s &lt;code&gt;chrome_print()&lt;/code&gt; function. When I called this function with no options the page size of the pdf was unusual, producing pages with neither A4 nor US paper size, so I call it as follows to ensure an A4 page size.&lt;/p&gt;
+```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;7-programmatic-rendering-and-pdf-export-for-printing&#34;&gt;7. Programmatic rendering and pdf export for printing&lt;/h2&gt;
+&lt;p&gt;To render a Quarto document we can click the &lt;em&gt;Render&lt;/em&gt; button in RStudio, but I find it easier to make a &lt;em&gt;render.R&lt;/em&gt; script with a call to the 
+&lt;a href=&#34;https://quarto-dev.github.io/quarto-r/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;quarto&lt;/strong&gt;&lt;/a&gt; package&amp;rsquo;s &lt;code&gt;quarto_render()&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s helpful to provide students with a pdf copy of the slides for printing. You can do this in a browser through the print menu or programmatically using &lt;strong&gt;pagedown&lt;/strong&gt;&amp;rsquo;s &lt;code&gt;chrome_print()&lt;/code&gt; function. When I called this function with no options the page size of the pdf was unusual, producing pages with neither A4 nor US paper size, so I call it as follows to ensure an A4 page size.&lt;/p&gt;
 &lt;p&gt;Therefore, my &lt;em&gt;render.R&lt;/em&gt; script often looks something like the following.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;quarto::quarto_render(input = &amp;quot;my-great-slides.qmd&amp;quot;)
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;quarto::quarto_render(input = &amp;quot;my-great-slides.qmd&amp;quot;)
 
 pagedown::chrome_print(&amp;quot;my-great-slides.html&amp;quot;, 
   options = 
@@ -131,13 +137,11 @@ pagedown::chrome_print(&amp;quot;my-great-slides.html&amp;quot;,
       preferCSSPageSize = FALSE, 
       paperWidth = 8.3, paperHeight = 11.7, 
       marginTop = 0.1, marginBottom = 0.1, 
-      marginLeft = 0.1, marginRight = 0.1))&lt;/code&gt;&lt;/pre&gt;
+      marginLeft = 0.1, marginRight = 0.1))
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I usually find that a few slides have slightly too much content for an A4 page, and so those slides will take up 2 pages in the pdf. And hence the pdf usually has a few more pages than the number of slides.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;I have shown seven tips that I needed to workout when making revealjs presentations with Quarto.&lt;/p&gt;
-&lt;/div&gt;
 </description>
     </item>
     
@@ -146,15 +150,10 @@ pagedown::chrome_print(&amp;quot;my-great-slides.html&amp;quot;,
       <link>https://remlapmot.github.io/post/2025/github-unwrapped-2024/</link>
       <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2025/github-unwrapped-2024/</guid>
-      <description>
-
-
-&lt;p&gt;My #GitHubUnwrapped 2024!&lt;/p&gt;
-&lt;p align=&#34;center&#34;&gt;
-&lt;iframe src=&#34;https://drive.google.com/file/d/10zFAtzcEFhxLNSRDZDXUgnafU4GDVepZ/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;
-&lt;/iframe&gt;
-&lt;/p&gt;
-&lt;p&gt;Made with &lt;a href=&#34;https://www.githubunwrapped.com/&#34; class=&#34;uri&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;My #GitHubUnwrapped 2024!&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;iframe src=&#34;https://drive.google.com/file/d/10zFAtzcEFhxLNSRDZDXUgnafU4GDVepZ/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;Made with 
+&lt;a href=&#34;https://www.githubunwrapped.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -163,31 +162,30 @@ pagedown::chrome_print(&amp;quot;my-great-slides.html&amp;quot;,
       <link>https://remlapmot.github.io/post/2024/finder-toolbar-apps/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2024/finder-toolbar-apps/</guid>
-      <description>
-
-
-&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Have you ever wanted to be able to quickly open a Data Science app, say RStudio Desktop or Positron in the current Finder window at the click of a button? We’ll see how to achieve this by creating Automator apps. Here’s a screenshot of what we’ll end up with.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/finder-window-with-toolbar-apps.png&#34; alt=&#34;Screenshot of a Finder window with app icons in its toolbar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;creating-the-automator-apps&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Creating the Automator apps&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Have you ever wanted to be able to quickly open a Data Science app, say RStudio Desktop or Positron in the current Finder window at the click of a button? We&amp;rsquo;ll see how to achieve this by creating Automator apps. Here&amp;rsquo;s a screenshot of what we&amp;rsquo;ll end up with.&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/finder-window-with-toolbar-apps.png&#34; alt=&#34;Screenshot of a Finder window with app icons in its toolbar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h2 id=&#34;creating-the-automator-apps&#34;&gt;Creating the Automator apps&lt;/h2&gt;
 &lt;p&gt;Open Automator and select &lt;em&gt;New&lt;/em&gt; then &lt;em&gt;Application&lt;/em&gt; and click &lt;em&gt;Choose&lt;/em&gt;. Then in the top left search bar enter &lt;em&gt;applescript&lt;/em&gt; and drag and drop the &lt;em&gt;Run Applescript&lt;/em&gt; action onto the main window.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/automator-run-applescript.png&#34; alt=&#34;Screenshot of the Automator app.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use &lt;a href=&#34;https://wezfurlong.org/wezterm/&#34;&gt;WezTerm&lt;/a&gt; for my terminal emulator, &lt;a href=&#34;https://zed.dev/&#34;&gt;Zed&lt;/a&gt; as my main text editor, &lt;a href=&#34;https://posit.co/products/open-source/rstudio/&#34;&gt;RStudio Desktop&lt;/a&gt; for most of my R/R Markdown/Quarto coding, &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; for other text editing tasks, and I have been starting to try out &lt;a href=&#34;https://positron.posit.co/&#34;&gt;Positron&lt;/a&gt;. My AppleScript code for each app is as follows.&lt;/p&gt;
-&lt;div id=&#34;rstudio-desktop&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;RStudio Desktop&lt;/h3&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/automator-run-applescript.png&#34; alt=&#34;Screenshot of the Automator app.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;p&gt;We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use 
+&lt;a href=&#34;https://wezfurlong.org/wezterm/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;WezTerm&lt;/a&gt; for my terminal emulator, 
+&lt;a href=&#34;https://zed.dev/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Zed&lt;/a&gt; as my main text editor, 
+&lt;a href=&#34;https://posit.co/products/open-source/rstudio/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RStudio Desktop&lt;/a&gt; for most of my R/R Markdown/Quarto coding, 
+&lt;a href=&#34;https://code.visualstudio.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Visual Studio Code&lt;/a&gt; for other text editing tasks, and I have been starting to try out 
+&lt;a href=&#34;https://positron.posit.co/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Positron&lt;/a&gt;. My AppleScript code for each app is as follows.&lt;/p&gt;
+&lt;h3 id=&#34;rstudio-desktop&#34;&gt;RStudio Desktop&lt;/h3&gt;
 &lt;p&gt;It is worth noting that RStudio automatically detects whether there is an &lt;em&gt;.Rproj&lt;/em&gt; file in the directory and opens in project mode if one is found (note this only works if RStudio is not already open).&lt;/p&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &amp;quot;/Applications/RStudio.app/Contents/MacOS/RStudio &amp;quot; &amp;amp; thePath
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
+end run
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can create an alternative app which specifically opens RStudio project (&lt;em&gt;.Rproj&lt;/em&gt;) files as follows.&lt;/p&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     try
       set currentFolder to (folder of window 1) as alias
@@ -205,43 +203,41 @@ end run&lt;/code&gt;&lt;/pre&gt;
         display dialog &amp;quot;No Finder window is open.&amp;quot;
       end try
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;wezterm&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;WezTerm&lt;/h3&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+end run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;wezterm&#34;&gt;WezTerm&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &amp;quot;/opt/homebrew/bin/wezterm-gui start --cwd &amp;quot; &amp;amp; thePath
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;zed&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Zed&lt;/h3&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+end run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;zed&#34;&gt;Zed&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &amp;quot;/usr/local/bin/zed -n &amp;quot; &amp;amp; thePath
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;r-launched-in-a-wezterm-terminal-session&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;R launched in a WezTerm terminal session&lt;/h3&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+end run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;r-launched-in-a-wezterm-terminal-session&#34;&gt;R launched in a WezTerm terminal session&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &amp;quot;/opt/homebrew/bin/wezterm-gui start --cwd &amp;quot; &amp;amp; thePath &amp;amp; &amp;quot; -- /usr/local/bin/R&amp;quot;
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;visual-studio-code-and-positron&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Visual Studio Code and Positron&lt;/h3&gt;
-&lt;p&gt;First enable the ability to launch these apps with &lt;code&gt;code&lt;/code&gt; and &lt;code&gt;positron&lt;/code&gt; from a Terminal in each app, see &lt;a href=&#34;https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://positron.posit.co/add-to-path.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This script is more involved because we first check for any &lt;em&gt;.code-workspace&lt;/em&gt; files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this. If we didn’t explicitly open the &lt;em&gt;.code-workspace&lt;/em&gt; file and if one is present in the directory Visual Studio Code/Positron will detect it and pop up a dialogue box asking if we want to reopen the directory as a workspace (I just prefer to skip this step).&lt;/p&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+end run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;visual-studio-code-and-positron&#34;&gt;Visual Studio Code and Positron&lt;/h3&gt;
+&lt;p&gt;First enable the ability to launch these apps with &lt;code&gt;code&lt;/code&gt; and &lt;code&gt;positron&lt;/code&gt; from a Terminal in each app, see 
+&lt;a href=&#34;https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; and 
+&lt;a href=&#34;https://positron.posit.co/add-to-path.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This script is more involved because we first check for any &lt;em&gt;.code-workspace&lt;/em&gt; files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this. If we didn&amp;rsquo;t explicitly open the &lt;em&gt;.code-workspace&lt;/em&gt; file and if one is present in the directory Visual Studio Code/Positron will detect it and pop up a dialogue box asking if we want to reopen the directory as a workspace (I just prefer to skip this step).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     try
       set currentFolder to (folder of window 1) as alias
@@ -260,25 +256,18 @@ end run&lt;/code&gt;&lt;/pre&gt;
         display dialog &amp;quot;No Finder window is open.&amp;quot;
       end try
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
+end run
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;(For your Visual Studio Code app simply replace &lt;code&gt;positron&lt;/code&gt; with &lt;code&gt;code&lt;/code&gt;.)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;saving-and-adding-icons&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Saving and adding icons&lt;/h3&gt;
+&lt;h3 id=&#34;saving-and-adding-icons&#34;&gt;Saving and adding icons&lt;/h3&gt;
 &lt;p&gt;After adding the AppleScript code save each app. I call mine, e.g., &lt;em&gt;RStudio-openhere.app&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Next it is helpful to give each app the relevant icon. To do this in Finder bring up the Info boxes for the original app and your &lt;em&gt;-openhere&lt;/em&gt; version by selecting each app and pressing &lt;kbd&gt;Cmd&lt;/kbd&gt;+&lt;kbd&gt;I&lt;/kbd&gt;. Next drag the large icon from the original app onto the small icon of your &lt;em&gt;-openhere&lt;/em&gt; app.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/updating-icon.png&#34; alt=&#34;Screenshot of copying the Positron icon onto our openhere app.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;adding-the-apps-to-the-finder-toolbar&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Adding the apps to the Finder toolbar&lt;/h3&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/updating-icon.png&#34; alt=&#34;Screenshot of copying the Positron icon onto our openhere app.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h3 id=&#34;adding-the-apps-to-the-finder-toolbar&#34;&gt;Adding the apps to the Finder toolbar&lt;/h3&gt;
 &lt;p&gt;Finally, we need to place shortcuts of these apps onto the Finder toolbar. To do this first hold down &lt;kbd&gt;Cmd&lt;/kbd&gt; then drag the app from Finder onto the toolbar to the location you would like. On release the app should now be in the toolbar. (And to remove an icon from the toolbar, again hold &lt;kbd&gt;Cmd&lt;/kbd&gt; then drag it off the toolbar.)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/add-app-to-toolbar.png&#34; alt=&#34;Screenshot of moving our Positron-openhere app onto the Finder toolbar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/add-app-to-toolbar.png&#34; alt=&#34;Screenshot of moving our Positron-openhere app onto the Finder toolbar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;I have shown how to create Automator apps to open RStudio Desktop, Positron, and several other Data Science apps from the current Finder window.&lt;/p&gt;
-&lt;/div&gt;
 </description>
     </item>
     
@@ -287,68 +276,70 @@ end run&lt;/code&gt;&lt;/pre&gt;
       <link>https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/</link>
       <pubDate>Fri, 14 Jun 2024 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/</guid>
-      <description>
-
-
-&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Have you ever typed &lt;code&gt;Amazon&lt;/code&gt; into the Google Chrome address bar and seen the address bar indicate that it’s now searching the Amazon site? It turns out this is a feature in Google Chrome called site search shortcuts.&lt;/p&gt;
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Have you ever typed &lt;code&gt;Amazon&lt;/code&gt; into the Google Chrome address bar and seen the address bar indicate that it&amp;rsquo;s now searching the Amazon site? It turns out this is a feature in Google Chrome called site search shortcuts.&lt;/p&gt;
 &lt;p&gt;We can see what default shortcuts Chrome provides by in the Chrome address bar going to &lt;code&gt;chrome://settings/searchEngines&lt;/code&gt; and scrolling to the &lt;em&gt;Site Search&lt;/em&gt; section.&lt;/p&gt;
-&lt;p&gt;From here we can see that we can define our own shortcuts, so let’s define some helpful ones related to R and statistics.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;helpful-google-chrome-site-search-shortcuts-for-r-and-statistics&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Helpful Google Chrome site search shortcuts for R and statistics&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://r-pkg.org/&#34;&gt;METACRAN&lt;/a&gt; provides several amazingly useful services around CRAN.&lt;/p&gt;
+&lt;p&gt;From here we can see that we can define our own shortcuts, so let&amp;rsquo;s define some helpful ones related to R and statistics.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&#34;helpful-google-chrome-site-search-shortcuts-for-r-and-statistics&#34;&gt;Helpful Google Chrome site search shortcuts for R and statistics&lt;/h2&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://r-pkg.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;METACRAN&lt;/a&gt; provides several amazingly useful services around CRAN.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;A shortcut for searching the METACRAN CRAN mirror on GitHub&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;Name: CRAN mirror on GitHub
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;Name: CRAN mirror on GitHub
 Shortcut: @cran
 URL with %s in place of query:
-https://github.com/search?q=user%3Acran%20%s&amp;amp;ref=opensearch&amp;amp;type=code&lt;/code&gt;&lt;/pre&gt;
+https://github.com/search?q=user%3Acran%20%s&amp;amp;ref=opensearch&amp;amp;type=code
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;On the Chrome settings page click add and enter the information. To use this simply type &lt;code&gt;@cran&lt;/code&gt; into the address bar&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step1.png&#34; alt=&#34;Screenshot of a site search shortcut in the Google Chrome address bar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step1.png&#34; alt=&#34;Screenshot of a site search shortcut in the Google Chrome address bar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;and then type your search term&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step2.png&#34; alt=&#34;Screenshot of a site search shortcut in the Google Chrome address bar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step2.png&#34; alt=&#34;Screenshot of a site search shortcut in the Google Chrome address bar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;Here are some other shortcuts.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;A shortcut for searching for a package description on METACRAN&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;Name: METACRAN
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;Name: METACRAN
 Shortcut: @metacran
 URL with %s in place of query:
-https://r-pkg.org/search.html/?q=%s&lt;/code&gt;&lt;/pre&gt;
+https://r-pkg.org/search.html/?q=%s
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
-&lt;li&gt;A shortcut for searching using &lt;a href=&#34;https://rseek.org/&#34;&gt;Rseek&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;A shortcut for searching using 
+&lt;a href=&#34;https://rseek.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Rseek&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;Name: Rseek
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;Name: Rseek
 Shortcut: @rseek
 URL with %s in place of query:
-https://rseek.org/?q=%s&lt;/code&gt;&lt;/pre&gt;
+https://rseek.org/?q=%s
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
-&lt;li&gt;A shortcut for searching &lt;a href=&#34;https://r-universe.dev/&#34;&gt;R-universe&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;A shortcut for searching 
+&lt;a href=&#34;https://r-universe.dev/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R-universe&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;Name: R-universe
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;Name: R-universe
 Shortcut: @runi
 URL with %s in place of query:
-https://r-universe.dev/search/?q=%s&lt;/code&gt;&lt;/pre&gt;
+https://r-universe.dev/search/?q=%s
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;A shortcut for searching the third edition of the Oxford Dictionary of Statistics&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class=&#34;plaintext&#34;&gt;&lt;code&gt;Name: Oxford Dictionary of Statistics
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;Name: Oxford Dictionary of Statistics
 Shortcut: @stats
 URL with %s in place of query:
-https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188.001.0001%2Facref-9780199679188&amp;amp;q=%s&lt;/code&gt;&lt;/pre&gt;
+https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188.001.0001%2Facref-9780199679188&amp;amp;q=%s
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;And we could define many more.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;In summary we have defined several Google Chrome site search shortcuts related to R and statistics.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;footnotes footnotes-end-of-document&#34;&gt;
-&lt;hr /&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;I am following an excellent &lt;a href=&#34;https://chromeunboxed.com/chrome-site-search-shortcuts&#34;&gt;blogpost&lt;/a&gt; by Chrome Unboxed.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;I am following an excellent 
+&lt;a href=&#34;https://chromeunboxed.com/chrome-site-search-shortcuts&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;blogpost&lt;/a&gt; by Chrome Unboxed.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -359,50 +350,61 @@ https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188
       <link>https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/</link>
       <pubDate>Tue, 02 Apr 2024 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/</guid>
-      <description>
-
-
-&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;MLwiN from the Centre for Multilevel Modelling (CMM) at the University of Bristol (disclaimer: where I also work) is a fantastic piece of software &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-mlwin&#34;&gt;Charlton et al. 2024&lt;/a&gt;)&lt;/span&gt;. The name suggests it only works on Windows, but as we’ll find out this is very much not the case.&lt;/p&gt;
-&lt;p&gt;However, in the past this was sort of true because to make it work on a Mac (or Linux machine) with an Intel processor one would need to run it using &lt;a href=&#34;https://www.winehq.org/&#34;&gt;Wine&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;More recently, CMM have cleverly made the MLwiN libraries available for other operating systems in a command line version of the program called &lt;code&gt;mlnscript&lt;/code&gt; and an accompanying library. The files for macOS are universal binaries which means that they run natively on both Intel and Apple Silicon Macs. Let’s find out how to set this up.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;setting-up-mlnscript-on-an-apple-silicon-mac&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Setting up mlnscript on an Apple Silicon Mac&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;MLwiN from the Centre for Multilevel Modelling (CMM) at the University of Bristol (disclaimer: where I also work) is a fantastic piece of software (
+&lt;a href=&#34;#ref-mlwin&#34;&gt;Charlton et al. 2024&lt;/a&gt;). The name suggests it only works on Windows, but as we’ll find out this is very much not the case.&lt;/p&gt;
+&lt;p&gt;However, in the past this was sort of true because to make it work on a Mac (or Linux machine) with an Intel processor one would need to run it using 
+&lt;a href=&#34;https://www.winehq.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wine&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;More recently, CMM have cleverly made the MLwiN libraries available for other operating systems in a command line version of the program called &lt;code&gt;mlnscript&lt;/code&gt; and an accompanying library. The files for macOS are universal binaries which means that they run natively on both Intel and Apple Silicon Macs. Let’s find out how to set this up.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&#34;setting-up-mlnscript-on-an-apple-silicon-mac&#34;&gt;Setting up mlnscript on an Apple Silicon Mac&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Obtain the installer for macOS. See the relevant download page (depending upon whether you are an academic) on the MLwiN &lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/mlwin/&#34;&gt;website&lt;/a&gt;. On the form on the &lt;em&gt;File to download&lt;/em&gt; dropdown menu select the &lt;em&gt;mlnscript for MacOS&lt;/em&gt; option. This will give you the &lt;em&gt;MLN.dmg&lt;/em&gt; installer.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlwin-download-choice.png&#34; alt=&#34;Screenshot of MLwiN download choices.&#34; width=&#34;350&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Double click the installer. On macOS it is recommended to install the files into the &lt;em&gt;/opt/mln/&lt;/em&gt; directory, which you will need to create with Admin permissions, or install to another directory if you don’t have Admin permissions. Copy the 2 files &lt;em&gt;mlnscript&lt;/em&gt; and &lt;em&gt;libmln.dylib&lt;/em&gt; into the &lt;em&gt;/opt/mln&lt;/em&gt; (or other) directory.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Once installed we can check that &lt;em&gt;mlnscript&lt;/em&gt; and &lt;em&gt;libmln.dylib&lt;/em&gt; are universal binaries as follows (we could also use the &lt;code&gt;file&lt;/code&gt; command).&lt;/p&gt;
-&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;lipo -archs /opt/mln/mlnscript
-## x86_64 arm64&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Since both architectures are listed in the output this indicates the files are universal binaries. Apple Silicon Macs will use the arm64 architecture.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Now we need to grant the two files permission to run. To do this run the following in your Terminal.&lt;/p&gt;
-&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;/opt/mln/mlnscript --version&lt;/code&gt;&lt;/pre&gt;
+&lt;li&gt;
+&lt;p&gt;Obtain the installer for macOS. See the relevant download page (depending upon whether you are an academic) on the MLwiN 
+&lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/mlwin/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;website&lt;/a&gt;. On the form on the &lt;em&gt;File to download&lt;/em&gt; dropdown menu select the &lt;em&gt;mlnscript for MacOS&lt;/em&gt; option. This will give you the &lt;em&gt;MLN.dmg&lt;/em&gt; installer.&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlwin-download-choice.png&#34; alt=&#34;Screenshot of MLwiN download choices.&#34; width=&#34;350&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Double click the installer. On macOS it is recommended to install the files into the &lt;em&gt;/opt/mln/&lt;/em&gt; directory, which you will need to create with Admin permissions, or install to another directory if you don’t have Admin permissions. Copy the 2 files &lt;em&gt;mlnscript&lt;/em&gt; and &lt;em&gt;libmln.dylib&lt;/em&gt; into the &lt;em&gt;/opt/mln&lt;/em&gt; (or other) directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once installed we can check that &lt;em&gt;mlnscript&lt;/em&gt; and &lt;em&gt;libmln.dylib&lt;/em&gt; are universal binaries as follows (we could also use the &lt;code&gt;file&lt;/code&gt; command).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;lipo -archs /opt/mln/mlnscript
+## x86_64 arm64
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since both architectures are listed in the output this indicates the files are universal binaries. Apple Silicon Macs will use the arm64 architecture.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now we need to grant the two files permission to run. To do this run the following in your Terminal.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;/opt/mln/mlnscript --version
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;On first run, this will fail with a pop-up similar to the following.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-popup-01.png&#34; alt=&#34;Screenshot of macOS security warning pop-up.&#34; width=&#34;350&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-popup-01.png&#34; alt=&#34;Screenshot of macOS security warning pop-up.&#34; width=&#34;350&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;Click &lt;em&gt;Cancel&lt;/em&gt; and then go into the &lt;em&gt;System settings&lt;/em&gt; | &lt;em&gt;Privacy &amp;amp; Security&lt;/em&gt; and scroll down and click &lt;em&gt;Allow Anyway&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlnscript-settings.png&#34; alt=&#34;Screenshot of macOS privacy and security setting.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/mlnscript-settings.png&#34; alt=&#34;Screenshot of macOS privacy and security setting.&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;Then running the version check command again you may receive another popup in which you click &lt;em&gt;Open&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-popup-02.png&#34; alt=&#34;Screenshot of macOS security warning pop-up.&#34; width=&#34;350&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/mlnscript-r2mlwin-apple-silicon/img/security-popup-02.png&#34; alt=&#34;Screenshot of macOS security warning pop-up.&#34; width=&#34;350&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;After this the first popup will then appear but about the &lt;em&gt;libmln.dylib&lt;/em&gt; file. Again set the security setting to &lt;em&gt;Allow All&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Now running the version check command again you should see the version number – which is currently 3.10.&lt;/p&gt;
-&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;/opt/mln/mlnscript --version
-## 3.10&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;/opt/mln/mlnscript --version
+## 3.13
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;In R we then install the &lt;strong&gt;R2MLwiN&lt;/strong&gt; package from CRAN &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-r2mlwin&#34;&gt;Zhang et al. 2016&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;R2MLwiN&amp;quot;)&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In R we then install the &lt;strong&gt;R2MLwiN&lt;/strong&gt; package from CRAN (
+&lt;a href=&#34;#ref-r2mlwin&#34;&gt;Zhang et al. 2016&lt;/a&gt;).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;install.packages(&amp;quot;R2MLwiN&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This completes the setup - phew 😮!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;running-a-multilevel-model&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Running a multilevel model&lt;/h2&gt;
+&lt;h2 id=&#34;running-a-multilevel-model&#34;&gt;Running a multilevel model&lt;/h2&gt;
 &lt;p&gt;For an example we could run one of the demos in the package, we can list those with the following code.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;demo(package = &amp;quot;R2MLwiN&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;demo(package = &amp;quot;R2MLwiN&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can run one, for example, let’s fit the random intercept model from the &lt;em&gt;UserGuide02&lt;/em&gt; demo.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(R2MLwiN)
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(R2MLwiN)
 # if you did not install mlnscript and libmln.dylib in /opt/mln , set:
 # options(MLwiN_path = &amp;quot;/path-to/mlnscript&amp;quot;)
 (mymodel1 &amp;lt;- runMLwiN(normexam ~ 1 + sex + (1 | student), data = tutorial))
@@ -422,34 +424,36 @@ https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188
 #&amp;gt;                Coef.   Std. Err.       z    Pr(&amp;gt;|z|)         [95% Conf.   Interval] 
 #&amp;gt; Intercept   -0.14035     0.02463   -5.70   1.209e-08   ***     -0.18862    -0.09208 
 #&amp;gt; sexgirl      0.23367     0.03179    7.35   1.985e-13   ***      0.17136     0.29598 
-#&amp;gt; Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1  
+#&amp;gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  
 #&amp;gt; --------------------------------------------------------------------------------------------------- 
 #&amp;gt; The random part estimates at the student level: 
 #&amp;gt;                   Coef.   Std. Err. 
 #&amp;gt; var_Intercept   0.98454     0.02185 
-#&amp;gt; -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-&lt;/code&gt;&lt;/pre&gt;
+#&amp;gt; -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can see the output is in several sections. The first section tells us about how &lt;code&gt;mlnscript&lt;/code&gt;, which estimation algorithm it used, hwo long it took to fit the model, and some characteristics of the dataset. The second section tells us about the model, in this case a random intercept model. The third section is the fixed effect estimates and the associated statistical inference for them. The fourth section is the random effect variance estimates.&lt;/p&gt;
 &lt;p&gt;And we can continue with our multilevel modelling as we like.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;Despite having &lt;em&gt;Win&lt;/em&gt; in its name, MLwiN is available as a command line program, &lt;code&gt;mlnscript&lt;/code&gt;, which is available on operating systems other than Windows (and indeed with other architectures), including macOS for both Intel and Apple Silicon processors and various Linux and Unix distributions (CentOS, Debian, Fedora, FreeBSD, Rocky, and Ubuntu). This is straightforward to use from R via the &lt;strong&gt;R2MLwiN&lt;/strong&gt; package.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
-&lt;h2&gt;References&lt;/h2&gt;
-&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34; entry-spacing=&#34;0&#34;&gt;
 &lt;div id=&#34;ref-mlwin&#34; class=&#34;csl-entry&#34;&gt;
-Charlton, C., J. Rasbash, W. J. Browne, M. Healy, and B. Cameron. 2024. &lt;em&gt;&lt;span&gt;MLwiN&lt;/span&gt; Version 3.10&lt;/em&gt;. Bristol, UK: Centre for Multilevel Modelling, University of Bristol. &lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/mlwin/&#34;&gt;https://www.bristol.ac.uk/cmm/software/mlwin/&lt;/a&gt;.
+&lt;p&gt;Charlton, C., J. Rasbash, W. J. Browne, M. Healy, and B. Cameron. 2024. &lt;em&gt;MLwiN Version 3.10&lt;/em&gt;. Bristol, UK: Centre for Multilevel Modelling, University of Bristol. 
+&lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/mlwin/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.bristol.ac.uk/cmm/software/mlwin/&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-r2mlwin&#34; class=&#34;csl-entry&#34;&gt;
-Zhang, Z., R. M. A. Parker, C. M. J. Charlton, G. Leckie, and W. J. Browne. 2016. &lt;span&gt;“&lt;span&gt;R2MLwiN&lt;/span&gt;: A Package to Run &lt;span&gt;MLwiN&lt;/span&gt; from Within &lt;span&gt;R&lt;/span&gt;.”&lt;/span&gt; &lt;em&gt;Journal of Statistical Software&lt;/em&gt; 72 (10): 1–43. &lt;a href=&#34;https://doi.org/10.18637/jss.v072.i10&#34;&gt;https://doi.org/10.18637/jss.v072.i10&lt;/a&gt;.
+&lt;p&gt;Zhang, Z., R. M. A. Parker, C. M. J. Charlton, G. Leckie, and W. J. Browne. 2016. “R2MLwiN: A Package to Run MLwiN from Within R.” &lt;em&gt;Journal of Statistical Software&lt;/em&gt; 72 (10): 1–43. 
+&lt;a href=&#34;https://doi.org/10.18637/jss.v072.i10&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://doi.org/10.18637/jss.v072.i10&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;footnotes footnotes-end-of-document&#34;&gt;
-&lt;hr /&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;This post is essentially a more detailed explanation of the advice given on the MLwiN website, &lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/support/support-faqs/commands-macros.html&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/mlwin/features/sysreq.html#unix&#34;&gt;here&lt;/a&gt;.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;This post is essentially a more detailed explanation of the advice given on the MLwiN website, 
+&lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/support/support-faqs/commands-macros.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; and 
+&lt;a href=&#34;https://www.bristol.ac.uk/cmm/software/mlwin/features/sysreq.html#unix&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -460,49 +464,47 @@ Zhang, Z., R. M. A. Parker, C. M. J. Charlton, G. Leckie, and W. J. Browne. 2016
       <link>https://remlapmot.github.io/post/2024/macos-rstudio-another/</link>
       <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2024/macos-rstudio-another/</guid>
-      <description>
-
-
-&lt;div id=&#34;introduction-how-to-open-a-second-instance-of-rstudio-desktop-on-macos&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Introduction: how to open a second instance of RStudio Desktop on macOS&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;introduction-how-to-open-a-second-instance-of-rstudio-desktop-on-macos&#34;&gt;Introduction: how to open a second instance of RStudio Desktop on macOS&lt;/h2&gt;
 &lt;p&gt;On macOS when RStudio Desktop is open it can be inconvenient to open a second (or third or fourth) instance of it.&lt;/p&gt;
 &lt;p&gt;If you left click the RStudio Desktop icon nothing happens. If you right click on the RStudio Desktop icon there is a convenient &lt;em&gt;New RStudio Window&lt;/em&gt;. The problem with this is that by default if you have an RStudio project open the new RStudio window is also opened in that project. However, that can be overcome by opening the RStudio preference pane and in the first tab (&lt;em&gt;General&lt;/em&gt; | &lt;em&gt;Basic&lt;/em&gt;) deselecting the boxes relating to &lt;em&gt;Restore most recently opened project at startup&lt;/em&gt; and &lt;em&gt;Restore previousy open source documents at startup&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/macos-rstudio-another/img/rstudio-preference-pane.png&#34; alt=&#34;Screenshot of RStudio Desktop preference pane.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/macos-rstudio-another/img/new-rstudio-window.png&#34; alt=&#34;Screenshot of right clicking on the RStudio Desktop icon in the dock.&#34; width=&#34;504&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Alternatively, within RStudio Desktop we could select &lt;em&gt;File | Open Project…&lt;/em&gt; but I’ve never found that very intuitive and somehow I’ve never got used to using RStudio’s command palette.
-If you have several directories configured as RStudio projects (with &lt;em&gt;.Rproj&lt;/em&gt; files) that you’ve opened before you could open those from the top right project drop down menu or double click them from within Finder.&lt;/p&gt;
-&lt;p&gt;But let’s say we want an even more convenient way of doing this – an icon in the dock. Thanks to &lt;a href=&#34;https://stackoverflow.com/a/40673644&#34;&gt;this&lt;/a&gt; Stackoverflow answer, it turns out that in a terminal we can issue the following &lt;code&gt;open&lt;/code&gt; command to achieve opening a new instance of RStudio Desktop (note RStudio Desktop needs to be installed in your Applications directory for this to work).&lt;/p&gt;
-&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;open -n -a RStudio.app&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;making-an-automator-app-to-open-a-new-instance-of-rstudio-desktop&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Making an Automator app to open a new instance of RStudio Desktop&lt;/h2&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/macos-rstudio-another/img/rstudio-preference-pane.png&#34; alt=&#34;Screenshot of RStudio Desktop preference pane.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/macos-rstudio-another/img/new-rstudio-window.png&#34; alt=&#34;Screenshot of right clicking on the RStudio Desktop icon in the dock.&#34; width=&#34;504&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;p&gt;Alternatively, within RStudio Desktop we could select &lt;em&gt;File | Open Project&amp;hellip;&lt;/em&gt; but I&amp;rsquo;ve never found that very intuitive and somehow I&amp;rsquo;ve never got used to using RStudio&amp;rsquo;s command palette.
+If you have several directories configured as RStudio projects (with &lt;em&gt;.Rproj&lt;/em&gt; files) that you&amp;rsquo;ve opened before you could open those from the top right project drop down menu or double click them from within Finder.&lt;/p&gt;
+&lt;p&gt;But let&amp;rsquo;s say we want an even more convenient way of doing this &amp;ndash; an icon in the dock. Thanks to 
+&lt;a href=&#34;https://stackoverflow.com/a/40673644&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this&lt;/a&gt; Stackoverflow answer, it turns out that in a terminal we can issue the following &lt;code&gt;open&lt;/code&gt; command to achieve opening a new instance of RStudio Desktop (note RStudio Desktop needs to be installed in your Applications directory for this to work).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;open -n -a RStudio.app
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;making-an-automator-app-to-open-a-new-instance-of-rstudio-desktop&#34;&gt;Making an Automator app to open a new instance of RStudio Desktop&lt;/h2&gt;
 &lt;p&gt;macOS comes with Automator, open that from your Applications directory.
 Then select &lt;em&gt;File | New&lt;/em&gt; and select &lt;em&gt;Application&lt;/em&gt; and click &lt;em&gt;Choose&lt;/em&gt;.
 Then from the left most menu select &lt;em&gt;Utilities&lt;/em&gt; and double click &lt;em&gt;Run Shell Script&lt;/em&gt;.
 In the main window on the right, leave the shell as zsh and replace the &lt;code&gt;cat&lt;/code&gt; text in the box with the &lt;code&gt;open&lt;/code&gt; command above.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/macos-rstudio-another/img/automator-app.png&#34; alt=&#34;Screenshot of configuring the automator app to run a shell script to open a new instance of RStudio Desktop.&#34; width=&#34;992&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/macos-rstudio-another/img/automator-app.png&#34; alt=&#34;Screenshot of configuring the automator app to run a shell script to open a new instance of RStudio Desktop.&#34; width=&#34;992&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;Then press &lt;kbd&gt;Cmd&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt; or &lt;em&gt;File | Save&lt;/em&gt; and save your application in your Applications folder.
 Give the app a distinct name such as &lt;em&gt;RStudio-new-instance.app&lt;/em&gt; or whatever you prefer and then quit Automator.&lt;/p&gt;
-&lt;p&gt;Next we would like our app to have a nice icon.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Next we would like our app to have a nice icon.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;First download a nice icon from say &lt;a href=&#34;https://github.com/amirmasoudabdol/rstudio-icons/tree/main/Icons/macOS/Rectangle&#34;&gt;this&lt;/a&gt; repo of logos kindly designed for RStudio (I chose the dark one).&lt;/li&gt;
+&lt;li&gt;First download a nice icon from say 
+&lt;a href=&#34;https://github.com/amirmasoudabdol/rstudio-icons/tree/main/Icons/macOS/Rectangle&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this&lt;/a&gt; repo of logos kindly designed for RStudio (I chose the dark one).&lt;/li&gt;
 &lt;li&gt;Then navigate to the our new app in Finder and press &lt;kbd&gt;Cmd&lt;/kbd&gt; + &lt;kbd&gt;I&lt;/kbd&gt;.&lt;/li&gt;
 &lt;li&gt;Then drag the &lt;em&gt;.icns&lt;/em&gt; file onto the icon in the top left corner of the info box.
 And tada your app will now use this icon!&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;And you can even drag the app from Finder onto your dock from where you can simply click the icon to open as many instances of RStudio Desktop as you like.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/macos-rstudio-another/featured.png&#34; alt=&#34;Screenshot of our new app&#39;s icon in the dock.&#34; width=&#34;319&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/macos-rstudio-another/featured.png&#34; alt=&#34;Screenshot of our new app&#39;s icon in the dock.&#34; width=&#34;319&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;And because the new application is in our Applications directory it is found by Alfred (and hopefully Raycast).&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/macos-rstudio-another/img/alfred-launch-rstudio.png&#34; alt=&#34;Screenshot of using Alfred to launch RStudio Desktop.&#34; width=&#34;719&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/macos-rstudio-another/img/alfred-launch-rstudio.png&#34; alt=&#34;Screenshot of using Alfred to launch RStudio Desktop.&#34; width=&#34;719&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;We have created an Automator application which runs a shell script to open a new instance of RStudio Desktop. We have then given this application a new icon and we have placed this on our dock.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;footnotes footnotes-end-of-document&#34;&gt;
-&lt;hr /&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;I follow the approach detailed on &lt;a href=&#34;https://www.idownloadblog.com/2023/01/19/how-to-change-app-icons-mac/&#34;&gt;this&lt;/a&gt; blog and on the &lt;a href=&#34;https://github.com/amirmasoudabdol/rstudio-icons/tree/main?tab=readme-ov-file#usage&#34;&gt;README&lt;/a&gt; where I obtained the icon.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;I follow the approach detailed on 
+&lt;a href=&#34;https://www.idownloadblog.com/2023/01/19/how-to-change-app-icons-mac/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this&lt;/a&gt; blog and on the 
+&lt;a href=&#34;https://github.com/amirmasoudabdol/rstudio-icons/tree/main?tab=readme-ov-file#usage&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;README&lt;/a&gt; where I obtained the icon.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -513,15 +515,10 @@ And tada your app will now use this icon!&lt;/li&gt;
       <link>https://remlapmot.github.io/post/2024/github-unwrapped-2023/</link>
       <pubDate>Sun, 07 Jan 2024 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2024/github-unwrapped-2023/</guid>
-      <description>
-
-
-&lt;p&gt;My #GitHubUnwrapped 2023!&lt;/p&gt;
-&lt;p align=&#34;center&#34;&gt;
-&lt;iframe src=&#34;https://drive.google.com/file/d/1bhdY7FPgmYJo_loqIChBJOZ8vdm2mEpA/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;
-&lt;/iframe&gt;
-&lt;/p&gt;
-&lt;p&gt;Made with &lt;a href=&#34;https://www.githubunwrapped.com/&#34; class=&#34;uri&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;My #GitHubUnwrapped 2023!&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;iframe src=&#34;https://drive.google.com/file/d/1bhdY7FPgmYJo_loqIChBJOZ8vdm2mEpA/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;Made with 
+&lt;a href=&#34;https://www.githubunwrapped.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -530,28 +527,32 @@ And tada your app will now use this icon!&lt;/li&gt;
       <link>https://remlapmot.github.io/post/2023/stata-reproducibility/</link>
       <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2023/stata-reproducibility/</guid>
-      <description>
-
-
-&lt;p&gt;Most proficient Stata users have come across the &lt;code&gt;version&lt;/code&gt; command. This is an incredibly powerful command, which simply by issuing say&lt;/p&gt;
-&lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;version 18&lt;/code&gt;&lt;/pre&gt;
+      <description>&lt;p&gt;Most proficient Stata users have come across the &lt;code&gt;version&lt;/code&gt; command. This is an incredibly powerful command, which simply by issuing say&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-stata&#34;&gt;version 18
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;at the top of a do-file or within a program (typically in an ado-file) means that you have pretty much guaranteed your code will run in the same way when you come to run it later (most likely in a newer version of Stata). But it turns out there’s a subtle difference between issuing &lt;code&gt;version&lt;/code&gt; in a do-file/interactively compared to within a program or ado-file.&lt;/p&gt;
-&lt;p&gt;Several years ago I wrote the &lt;strong&gt;reffadjust&lt;/strong&gt; package &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-palmer-sj-2014&#34;&gt;Palmer et al. 2014&lt;/a&gt;)&lt;/span&gt; as part of some work using random effects models &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-mcdw-sim-2012&#34;&gt;Macdonald-Wallis et al. 2012&lt;/a&gt;)&lt;/span&gt;. It has two programs &lt;code&gt;reffadjustsim&lt;/code&gt; and &lt;code&gt;reffadjust4nlcom&lt;/code&gt; which use the output of various random effects commands, including those from MLwiN, run from Stata using the user-written &lt;code&gt;runmlwin&lt;/code&gt; command &lt;span class=&#34;citation&#34;&gt;(&lt;a href=&#34;#ref-leckie-jss-2013&#34;&gt;Leckie and Charlton 2013&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Several years ago I wrote the &lt;strong&gt;reffadjust&lt;/strong&gt; package (
+&lt;a href=&#34;#ref-palmer-sj-2014&#34;&gt;Palmer et al. 2014&lt;/a&gt;) as part of some work using random effects models (
+&lt;a href=&#34;#ref-mcdw-sim-2012&#34;&gt;Macdonald-Wallis et al. 2012&lt;/a&gt;). It has two programs &lt;code&gt;reffadjustsim&lt;/code&gt; and &lt;code&gt;reffadjust4nlcom&lt;/code&gt; which use the output of various random effects commands, including those from MLwiN, run from Stata using the user-written &lt;code&gt;runmlwin&lt;/code&gt; command (
+&lt;a href=&#34;#ref-leckie-jss-2013&#34;&gt;Leckie and Charlton 2013&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;The &lt;strong&gt;reffadjust&lt;/strong&gt; package doesn’t have many users and over the years I hadn’t regularly checked if the programs were still working. But in the ado-files I had set &lt;code&gt;version 13&lt;/code&gt;, which gave me some residual confidence that the programs might still work.&lt;/p&gt;
 &lt;p&gt;However, a few years ago, when I eventually did run some test code I saw that the &lt;code&gt;reffadjustsim&lt;/code&gt; tests were failing for MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models. I didn’t have time to investigate further at this point, and I didn’t have any intuition whether the error resulted from a change in MLwiN, &lt;code&gt;runmlwin&lt;/code&gt;, or Stata.&lt;/p&gt;
 &lt;p&gt;At the beginning of this year one of my colleagues mentioned that they were using &lt;strong&gt;reffadjust&lt;/strong&gt; in their work and had observed the same error with &lt;code&gt;reffadjustsim&lt;/code&gt;. My guilt kicked in, and I eventually found some time to investigate. I discovered that since I wrote the package, Stata processes matrix row and column stripes (essentially the row and column names) in a more advanced way. This meant that the row and column stripes for covariance elements in the &lt;code&gt;e(V)&lt;/code&gt; matrix (the variance-covariance matrix of parameter estimates) from MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models were being renamed when I hadn’t intended them to be, which caused the error.&lt;/p&gt;
 &lt;p&gt;But wait … I had specified &lt;code&gt;version 13&lt;/code&gt; at the top of my program, so why was this update in later versions of Stata taking effect?&lt;/p&gt;
 &lt;p&gt;I couldn’t work it out, so I had to ask Stata Technical Support. They were kind enough to tell me that there’s an additional method of invoking the &lt;code&gt;version&lt;/code&gt; command which controls what is known as the “user version”. There are some modifications in new versions of Stata which are exempt from the basic invocation of the &lt;code&gt;version&lt;/code&gt; command (but only in programs and ado-files). In do-files issuing &lt;code&gt;version&lt;/code&gt; sets both the version and the user version, however, in programs and ado-files the “user version”, is set by &lt;code&gt;version #, user&lt;/code&gt;, and holds these additional modifications in Stata to the required version.&lt;/p&gt;
-&lt;p&gt;Naturally, this is explained in the &lt;code&gt;version&lt;/code&gt; helpfile and &lt;a href=&#34;https://www.stata.com/manuals/pversion.pdf&#34;&gt;manual entry&lt;/a&gt;, which I admit I had not read until this point. Hence, simply editing the top of my program to&lt;/p&gt;
-&lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;version 13
-version 13, user&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Naturally, this is explained in the &lt;code&gt;version&lt;/code&gt; helpfile and 
+&lt;a href=&#34;https://www.stata.com/manuals/pversion.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;manual entry&lt;/a&gt;, which I admit I had not read until this point. Hence, simply editing the top of my program to&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-stata&#34;&gt;version 13
+version 13, user
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;fixed my error. So in a program or ado-file, we require both lines, whereas in a do-file we’d only require &lt;code&gt;version 13&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;We can see the different operation of &lt;code&gt;version&lt;/code&gt; by the following short example.&lt;/p&gt;
-&lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;/* Do-file/interactive code to set both the version and the user version */
+&lt;pre&gt;&lt;code class=&#34;language-stata&#34;&gt;/* Do-file/interactive code to set both the version and the user version */
 version 13
 display c(version), c(userversion), c(stata_version)
-// 13 13 17&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;stata&#34;&gt;&lt;code&gt;/* Ado-file/program code to set both the version and the user version */
+// 13 13 18.5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-stata&#34;&gt;/* Ado-file/program code to set both the version and the user version */
 program mytest
 version 13
 display c(version), c(userversion), c(stata_version)
@@ -560,21 +561,24 @@ display c(version), c(userversion), c(stata_version)
 end
 
 mytest
-// 13 17 17
-// 13 13 17&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In summary, my &lt;code&gt;reffadjustsim&lt;/code&gt; command works again for MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models. The updated version is available from &lt;a href=&#34;https://github.com/remlapmot/reffadjust&#34;&gt;its GitHub repo&lt;/a&gt;. And if you ever need &lt;em&gt;fuller&lt;/em&gt; reproducibility in your Stata ado-file or program remember to set both the version and the user version.&lt;/p&gt;
-&lt;div id=&#34;references&#34; class=&#34;section level2 unnumbered&#34;&gt;
-&lt;h2&gt;References&lt;/h2&gt;
-&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34;&gt;
+// 13 18.5 18.5
+// 13 13 18.5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In summary, my &lt;code&gt;reffadjustsim&lt;/code&gt; command works again for MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models. The updated version is available from 
+&lt;a href=&#34;https://github.com/remlapmot/reffadjust&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;its GitHub repo&lt;/a&gt;. And if you ever need &lt;em&gt;fuller&lt;/em&gt; reproducibility in your Stata ado-file or program remember to set both the version and the user version.&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34; entry-spacing=&#34;0&#34;&gt;
 &lt;div id=&#34;ref-leckie-jss-2013&#34; class=&#34;csl-entry&#34;&gt;
-Leckie, George, and Chris Charlton. 2013. &lt;span&gt;“&lt;span class=&#34;nocase&#34;&gt;runmlwin: A Program to Run the MLwiN Multilevel Modeling Software from within Stata&lt;/span&gt;.”&lt;/span&gt; &lt;em&gt;Journal of Statistical Software&lt;/em&gt; 52 (11): 1–40. &lt;a href=&#34;https://doi.org/10.18637/jss.v052.i11&#34;&gt;https://doi.org/10.18637/jss.v052.i11&lt;/a&gt;.
+&lt;p&gt;Leckie, George, and Chris Charlton. 2013. “&lt;span class=&#34;nocase&#34;&gt;runmlwin: A Program to Run the MLwiN Multilevel Modeling Software from within Stata&lt;/span&gt;.” &lt;em&gt;Journal of Statistical Software&lt;/em&gt; 52 (11): 1–40. 
+&lt;a href=&#34;https://doi.org/10.18637/jss.v052.i11&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://doi.org/10.18637/jss.v052.i11&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-mcdw-sim-2012&#34; class=&#34;csl-entry&#34;&gt;
-Macdonald-Wallis, Corrie, Debbie A. Lawlor, Tom Palmer, and Kate Tilling. 2012. &lt;span&gt;“Multivariate Multilevel Spline Models for Parallel Growth Processes: Application to Weight and Mean Arterial Pressure in Pregnancy.”&lt;/span&gt; &lt;em&gt;Statistics in Medicine&lt;/em&gt; 31 (26): 3147–64. &lt;a href=&#34;https://doi.org/doi.org/10.1002/sim.5385&#34;&gt;https://doi.org/doi.org/10.1002/sim.5385&lt;/a&gt;.
+&lt;p&gt;Macdonald-Wallis, Corrie, Debbie A. Lawlor, Tom Palmer, and Kate Tilling. 2012. “Multivariate Multilevel Spline Models for Parallel Growth Processes: Application to Weight and Mean Arterial Pressure in Pregnancy.” &lt;em&gt;Statistics in Medicine&lt;/em&gt; 31 (26): 3147–64. 
+&lt;a href=&#34;https://doi.org/doi.org/10.1002/sim.5385&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://doi.org/doi.org/10.1002/sim.5385&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;ref-palmer-sj-2014&#34; class=&#34;csl-entry&#34;&gt;
-Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 2014. &lt;span&gt;“&lt;span class=&#34;nocase&#34;&gt;Estimating adjusted associations between random effects from multilevel models: The reffadjust package&lt;/span&gt;.”&lt;/span&gt; &lt;em&gt;The Stata Journal&lt;/em&gt; 14 (1): 119–40. &lt;a href=&#34;https://doi.org/10.1177/1536867X1401400109&#34;&gt;https://doi.org/10.1177/1536867X1401400109&lt;/a&gt;.
-&lt;/div&gt;
+&lt;p&gt;Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 2014. “&lt;span class=&#34;nocase&#34;&gt;Estimating adjusted associations between random effects from multilevel models: The reffadjust package&lt;/span&gt;.” &lt;em&gt;The Stata Journal&lt;/em&gt; 14 (1): 119–40. 
+&lt;a href=&#34;https://doi.org/10.1177/1536867X1401400109&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://doi.org/10.1177/1536867X1401400109&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
@@ -585,15 +589,10 @@ Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 
       <link>https://remlapmot.github.io/post/2023/github-unwrapped-2022/</link>
       <pubDate>Sat, 07 Jan 2023 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2023/github-unwrapped-2022/</guid>
-      <description>
-
-
-&lt;p&gt;My #GitHubUnwrapped 2022!&lt;/p&gt;
-&lt;p align=&#34;center&#34;&gt;
-&lt;iframe src=&#34;https://drive.google.com/file/d/1VVoFQK5aUrgkCppcJXlDMoEPcCKVPW84/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;
-&lt;/iframe&gt;
-&lt;/p&gt;
-&lt;p&gt;Made with &lt;a href=&#34;https://www.githubunwrapped.com/&#34; class=&#34;uri&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;My #GitHubUnwrapped 2022!&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;iframe src=&#34;https://drive.google.com/file/d/1VVoFQK5aUrgkCppcJXlDMoEPcCKVPW84/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;Made with 
+&lt;a href=&#34;https://www.githubunwrapped.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -602,61 +601,54 @@ Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 
       <link>https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/</link>
       <pubDate>Wed, 30 Nov 2022 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/</guid>
-      <description>
-
-
-&lt;style type=&#34;text/css&#34;&gt;
+      <description>&lt;style type=&#34;text/css&#34;&gt;
 .lineheightone {
   line-height: 1.29;
   font-variant-ligatures: normal;
   font-feature-settings: normal;
 }
 &lt;/style&gt;
-&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions CRAN does not provide binary packages for Linux. Therefore, installing R packages on Linux can be slow because the bundled source packages need to be built on users machines.&lt;/p&gt;
-&lt;p&gt;But let’s install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
+&lt;p&gt;But let&amp;rsquo;s install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
 &lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-tidyverse-rspm-linux-binary.png&#34; alt=&#34;Installing binary Linux tidyverse package using Posit Package Manager.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Woah!&lt;/em&gt;&lt;/strong&gt; Something magical just happened, we installed a binary R package on Linux! How did that happen, let’s find out.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;building-bundled-source-and-binary-packages&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Building bundled source and binary packages&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Woah!&lt;/em&gt;&lt;/strong&gt; Something magical just happened, we installed a binary R package on Linux! How did that happen, let&amp;rsquo;s find out.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&#34;building-bundled-source-and-binary-packages&#34;&gt;Building bundled source and binary packages&lt;/h2&gt;
 &lt;p&gt;I will use an example of one of my own packages &lt;strong&gt;OneSampleMR&lt;/strong&gt;. I am running RStudio server on Ubuntu Linux, Focal Fossa through Windows Subsystem for Linux.&lt;/p&gt;
-&lt;p&gt;The package sources are in a Git repository hosted on GitHub, &lt;a href=&#34;https://github.com/remlapmot/OneSampleMR&#34;&gt;here&lt;/a&gt;. There is an &lt;code&gt;.Rproj&lt;/code&gt; file, which we open in RStudio as a project.&lt;/p&gt;
+&lt;p&gt;The package sources are in a Git repository hosted on GitHub, 
+&lt;a href=&#34;https://github.com/remlapmot/OneSampleMR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. There is an &lt;code&gt;.Rproj&lt;/code&gt; file, which we open in RStudio as a project.&lt;/p&gt;
 &lt;p&gt;To build an R package we require all of its dependency packages are installed, so we install those with &lt;code&gt;devtools::install_dev_deps()&lt;/code&gt; and if your package requires any system libraries those must be installed too.&lt;/p&gt;
 &lt;p&gt;The Build pane gives us two convenient options, which will build either the bundled source package or binary package through calls to &lt;code&gt;devtools::build()&lt;/code&gt;.
 &lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-pane-build-options.png&#34; alt=&#34;Screenshot of build pane options for building bundled source and binary packages.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Clicking on both in turn we see the following.
 &lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-source-package.png&#34; alt=&#34;Screenshot of building a bundled source package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-binary-package.png&#34; alt=&#34;Screenshot of building a binary package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-binary-package.png&#34; alt=&#34;Screenshot of building a binary package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;The bundled source package has been built as &lt;code&gt;OneSampleMR_0.1.2.tar.gz&lt;/code&gt; and the binary package has been built as &lt;code&gt;OneSampleMR_0.1.2_R_x86_64-pc-linux-gnu.tar.gz&lt;/code&gt;. Both files are in the directory above the project.&lt;/p&gt;
 &lt;p&gt;We can achieve the same output by making direct calls to &lt;code&gt;R CMD build&lt;/code&gt; and &lt;code&gt;R CMD install --build&lt;/code&gt; in a shell if preferred. We can test that these install as follows.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-source-package.png&#34; alt=&#34;Screenshot of installing a bundled source package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-binary-package.png&#34; alt=&#34;Screenshot of installing a binary package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;cran-structure-for-bundled-source-package-files&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;CRAN structure for bundled source package files&lt;/h2&gt;
-&lt;p&gt;In two excellent blog posts Marks Sellors describes how to make a CRAN-like repository.&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; There is also the &lt;a href=&#34;https://cran.r-project.org/package=miniCRAN&#34;&gt;&lt;strong&gt;miniCRAN&lt;/strong&gt;&lt;/a&gt; package to help do this, but we don’t need to use this for the following explanation.&lt;/p&gt;
-&lt;p&gt;To host bundled source packages, such as our &lt;code&gt;OneSampleMR_0.1.2.tar.gz&lt;/code&gt; file, we require the following directory structure (noting that the &lt;code&gt;latest&lt;/code&gt; directory is optional, but allows us to add snapshot directories if we wanted to).
+&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-source-package.png&#34; alt=&#34;Screenshot of installing a bundled source package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-binary-package.png&#34; alt=&#34;Screenshot of installing a binary package in RStudio.&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h2 id=&#34;cran-structure-for-bundled-source-package-files&#34;&gt;CRAN structure for bundled source package files&lt;/h2&gt;
+&lt;p&gt;In two excellent blog posts Marks Sellors describes how to make a CRAN-like repository.&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;To host bundled source packages, such as our &lt;code&gt;OneSampleMR_0.1.2.tar.gz&lt;/code&gt; file, we require the following directory structure (noting that the &lt;code&gt;latest&lt;/code&gt; directory is optional, but allows us to add snapshot directories if we wanted to).&lt;/p&gt;
 &lt;!-- # brew install tree --&gt;
-&lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;__linux__|bin&#39; --noreport --&gt;&lt;/p&gt;
-&lt;pre class=&#34;plaintext lineheightone&#34;&gt;&lt;code&gt;/mycran
+&lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;__linux__|bin&#39; --noreport --&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext{.lineheightone}&#34;&gt;/mycran
 └── latest
     └── src
         └── contrib
             └── 4.3.0
-                └── Recommended&lt;/code&gt;&lt;/pre&gt;
+                └── Recommended
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Specifically, we place the &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt; files into the &lt;code&gt;.../src/contrib&lt;/code&gt; directory. In that directory we then run&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tools::write_PACKAGES(type = &amp;quot;source&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;tools::write_PACKAGES(type = &amp;quot;source&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;which generates 3 additional files (&lt;code&gt;PACKAGES&lt;/code&gt;, &lt;code&gt;PACKAGES.gz&lt;/code&gt;, and &lt;code&gt;PACKAGES.rds&lt;/code&gt;) which R will use to query what packages are available in our repository when its served on the web.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;adding-windows-and-macos-binary-r-packages&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Adding Windows and macOS binary R packages&lt;/h2&gt;
+&lt;h2 id=&#34;adding-windows-and-macos-binary-r-packages&#34;&gt;Adding Windows and macOS binary R packages&lt;/h2&gt;
 &lt;p&gt;We saw above how to build a binary Linux package. The same process, when repeated on Windows will generate a file called &lt;code&gt;{package}_{version}.zip&lt;/code&gt; and &lt;code&gt;{package}_{version}.tgz&lt;/code&gt; on macOS (on Macs with both Intel and Apple Silicon processors).&lt;/p&gt;
-&lt;p&gt;Assuming that we have some of these files we need to know where to put them. Since CRAN distributes binary packages for Windows and macOS we follow their directory structure, which is as follows.
+&lt;p&gt;Assuming that we have some of these files we need to know where to put them. Since CRAN distributes binary packages for Windows and macOS we follow their directory structure, which is as follows.&lt;/p&gt;
 &lt;!-- brew install tree --&gt;
-&lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;__linux__&#39; --noreport --&gt;&lt;/p&gt;
-&lt;pre class=&#34;plaintext lineheightone&#34;&gt;&lt;code&gt;/mycran
+&lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;__linux__&#39; --noreport --&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext{.lineheightone}&#34;&gt;/mycran
 └── latest
     ├── bin
     │   ├── macosx
@@ -671,38 +663,40 @@ Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 
     └── src
         └── contrib
             └── 4.3.0
-                └── Recommended&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Noting that the current version of R is 4.2.2 and that the relevant directory name with the minor version number changes when R’s current minor version number changes, we place&lt;/p&gt;
+                └── Recommended
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Noting that the current version of R is 4.2.2 and that the relevant directory name with the minor version number changes when R&amp;rsquo;s current minor version number changes, we place&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;macOS arm64 binary packages (for Macs with Apple Silicon processors) into the &lt;code&gt;.../bin/macosx/big-sur-arm64/contrib/4.2/&lt;/code&gt; directory&lt;/li&gt;
 &lt;li&gt;macOS x86_64 binary packages (for Macs with Intel processors) into the &lt;code&gt;.../bin/macosx/contrib/4.2/&lt;/code&gt; directory, and&lt;/li&gt;
 &lt;li&gt;Windows binary packages into the &lt;code&gt;.../bin/windows/contrib/4.2/&lt;/code&gt; directory.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;We then run &lt;code&gt;tools::write_PACKAGES(type = &#34;mac.binary&#34;)&lt;/code&gt; (changing to &lt;code&gt;type = &#34;win.binary&#34;&lt;/code&gt; as required) in each of these directories to generate the 3 &lt;code&gt;PACKAGES&lt;/code&gt; files.&lt;/p&gt;
+&lt;p&gt;We then run &lt;code&gt;tools::write_PACKAGES(type = &amp;quot;mac.binary&amp;quot;)&lt;/code&gt; (changing to &lt;code&gt;type = &amp;quot;win.binary&amp;quot;&lt;/code&gt; as required) in each of these directories to generate the 3 &lt;code&gt;PACKAGES&lt;/code&gt; files.&lt;/p&gt;
 &lt;p&gt;We can confirm this directory structure using the &lt;code&gt;contrib.url()&lt;/code&gt; function (the last command below was run on an Apple Silicon Mac).&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;source&amp;quot;)
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;source&amp;quot;)
 ## [1] &amp;quot;/src/contrib&amp;quot;
 contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;win.binary&amp;quot;)
 ## [1] &amp;quot;/bin/windows/contrib/4.2&amp;quot;
 contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;mac.binary&amp;quot;)
 ## [1] &amp;quot;/bin/macosx/contrib/4.2&amp;quot;
 contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;binary&amp;quot;)
-## [1] &amp;quot;/bin/macosx/big-sur-arm64/contrib/4.2&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And they are also listed in the R Installation and Administration manual.&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+## [1] &amp;quot;/bin/macosx/big-sur-arm64/contrib/4.2&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And they are also listed in the R Installation and Administration manual.&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;On Apple Silicon Macs the &lt;code&gt;big-sur-arm64&lt;/code&gt; filepath corresponds to the end of &lt;code&gt;.Platform$pkgType&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;.Platform$pkgType
-## [1] &amp;quot;mac.binary.big-sur-arm64&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;where-to-store-and-how-to-name-linux-binary-r-packages&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Where to store and how to name Linux binary R packages?&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;.Platform$pkgType
+## [1] &amp;quot;mac.binary.big-sur-arm64&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;where-to-store-and-how-to-name-linux-binary-r-packages&#34;&gt;Where to store and how to name Linux binary R packages?&lt;/h2&gt;
 &lt;p&gt;CRAN does not distribute Linux binary packages and so there is no directory structure from them to copy.&lt;/p&gt;
-&lt;p&gt;However both the Posit Package Manager and the &lt;a href=&#34;https://r4pi.org/&#34;&gt;R4Pi&lt;/a&gt; project achieve this in a very clever way.&lt;a href=&#34;#fn4&#34; class=&#34;footnote-ref&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;However both the Posit Package Manager and the 
+&lt;a href=&#34;https://r4pi.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R4Pi&lt;/a&gt; project achieve this in a very clever way.&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;We saw above that on Linux bundled source packages have filenames of the form &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt; whereas the binary package filenames are of the form &lt;code&gt;{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz&lt;/code&gt; (the text after &lt;code&gt;{package}_{version}_&lt;/code&gt; may be different depending on your machine and distro).&lt;/p&gt;
 &lt;p&gt;To distribute the Linux binary packages we create a parallel directory structure, which takes the same form as for the bundled source packages. In the case of Ubuntu Focal Fossa the Posit Package Manager uses &lt;code&gt;__linux__/focal/latest/src/contrib&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;They then rename the &lt;code&gt;{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz&lt;/code&gt; files to the same form as the bundled source package files, i.e., to &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt;. And they put them in this new &lt;code&gt;src/contrib&lt;/code&gt; directory.&lt;/p&gt;
-&lt;p&gt;The structure of our CRAN-like repository (well in fact our 2 parallel repositories) is now.
-&lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;jammy&#39; --noreport --&gt;&lt;/p&gt;
-&lt;pre class=&#34;plaintext lineheightone&#34;&gt;&lt;code&gt;/mycran
+&lt;p&gt;The structure of our CRAN-like repository (well in fact our 2 parallel repositories) is now.&lt;/p&gt;
+&lt;!-- tree ~/Documents/GitHub/cran/site -d -I &#39;jammy&#39; --noreport --&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext{.lineheightone}&#34;&gt;/mycran
 ├── __linux__
 │   └── focal
 │       └── latest
@@ -724,34 +718,49 @@ contrib.url(&amp;quot;&amp;quot;, type = &amp;quot;binary&amp;quot;)
     └── src
         └── contrib
             └── 4.3.0
-                └── Recommended&lt;/code&gt;&lt;/pre&gt;
+                └── Recommended
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We then run&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tools::write_PACKAGES(type = &amp;quot;source&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;tools::write_PACKAGES(type = &amp;quot;source&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;in the &lt;code&gt;.../__linux__/distro-name/src/contrib&lt;/code&gt; directory for each Linux distribution to generate the &lt;code&gt;PACKAGES&lt;/code&gt; files.&lt;/p&gt;
 &lt;p&gt;Once this directory structure is served we can set our repository in R to &lt;code&gt;.../__linux__/focal/latest&lt;/code&gt; and R will find the binary package &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt; files in the &lt;code&gt;...__linux__/focal/src/contrib/&lt;/code&gt; directory, as per the first figure in this post.&lt;/p&gt;
-&lt;p&gt;Note that the &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt; files within &lt;code&gt;__linux__/focal/latest/src/contrib&lt;/code&gt; do not all have to be of binary packages. They can be a mix of bundled source and binary packages, which is helpful if you haven’t had time to build all your binary package files.&lt;/p&gt;
+&lt;p&gt;Note that the &lt;code&gt;{package}_{version}.tar.gz&lt;/code&gt; files within &lt;code&gt;__linux__/focal/latest/src/contrib&lt;/code&gt; do not all have to be of binary packages. They can be a mix of bundled source and binary packages, which is helpful if you haven&amp;rsquo;t had time to build all your binary package files.&lt;/p&gt;
 &lt;p&gt;We can also confirm that on Ubuntu Focal Fossa&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;.Platform$pkgType
-## [1] &amp;quot;source&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;therefore, on Linux, &lt;code&gt;utils:::resolvePkgType()&lt;/code&gt; always returns &lt;code&gt;&#34;source&#34;&lt;/code&gt;. Hence, on Linux, &lt;code&gt;contrib.url()&lt;/code&gt; always returns &lt;code&gt;/src/contrib&lt;/code&gt; regardless of its &lt;code&gt;type&lt;/code&gt; argument.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;testing-your-cran-like-repositories-locally&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Testing your CRAN-like repositories locally&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;.Platform$pkgType
+## [1] &amp;quot;source&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;therefore, on Linux, &lt;code&gt;utils:::resolvePkgType()&lt;/code&gt; always returns &lt;code&gt;&amp;quot;source&amp;quot;&lt;/code&gt;. Hence, on Linux, &lt;code&gt;contrib.url()&lt;/code&gt; always returns &lt;code&gt;/src/contrib&lt;/code&gt; regardless of its &lt;code&gt;type&lt;/code&gt; argument.&lt;/p&gt;
+&lt;h2 id=&#34;testing-your-cran-like-repositories-locally&#34;&gt;Testing your CRAN-like repositories locally&lt;/h2&gt;
 &lt;p&gt;You can either run a local web server or use the &lt;code&gt;file://...&lt;/code&gt; URL notation as your &lt;code&gt;repos&lt;/code&gt; global options setting (set with &lt;code&gt;option(repos = ...)&lt;/code&gt; or as the &lt;code&gt;repos&lt;/code&gt; argument to &lt;code&gt;install.packages()&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;Here’s a screenshot of installing a binary package on Ubuntu Focal Fossa.
+&lt;p&gt;Here&amp;rsquo;s a screenshot of installing a binary package on Ubuntu Focal Fossa.
 &lt;img src=&#34;https://remlapmot.github.io/post/2022/make-linux-binary-cran-like-repo/img/cran-like-focal-example.png&#34; alt=&#34;Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa.&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;We have taken a look at the structure of a CRAN-like repository and built bundled source and binary package files. We saw that the trick for distributing Linux binary packages is to make a parallel directory with the same structure as that required for bundled source packages and that we need to rename the binary package files to have the same filename format as the bundled source package files.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;footnotes footnotes-end-of-document&#34;&gt;
-&lt;hr /&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Note that there are other approaches to distributing binary R packages on Linux, see &lt;a href=&#34;https://cran.r-project.org/bin/linux/&#34; class=&#34;uri&#34;&gt;https://cran.r-project.org/bin/linux/&lt;/a&gt; and links therein, &lt;a href=&#34;https://eddelbuettel.github.io/r2u/&#34; class=&#34;uri&#34;&gt;https://eddelbuettel.github.io/r2u/&lt;/a&gt;, and &lt;a href=&#34;https://enchufa2.github.io/bspm/&#34; class=&#34;uri&#34;&gt;https://enchufa2.github.io/bspm/&lt;/a&gt;&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;&lt;a href=&#34;https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/&#34; class=&#34;uri&#34;&gt;https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/&lt;/a&gt; and &lt;a href=&#34;https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/&#34; class=&#34;uri&#34;&gt;https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/&lt;/a&gt;&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;See &lt;a href=&#34;https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository&#34; class=&#34;uri&#34;&gt;https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository&lt;/a&gt;.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;See &lt;a href=&#34;https://packagemanager.rstudio.com/client/#/repos/2/overview&#34; class=&#34;uri&#34;&gt;https://packagemanager.rstudio.com/client/#/repos/2/overview&lt;/a&gt; and &lt;a href=&#34;https://pkgs.r4pi.org/&#34; class=&#34;uri&#34;&gt;https://pkgs.r4pi.org/&lt;/a&gt;&lt;a href=&#34;#fnref4&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;Note that there are other approaches to distributing binary R packages on Linux, see 
+&lt;a href=&#34;https://cran.r-project.org/bin/linux/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://cran.r-project.org/bin/linux/&lt;/a&gt; and links therein, 
+&lt;a href=&#34;https://eddelbuettel.github.io/r2u/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://eddelbuettel.github.io/r2u/&lt;/a&gt;, and 
+&lt;a href=&#34;https://enchufa2.github.io/bspm/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://enchufa2.github.io/bspm/&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/&lt;/a&gt; and 
+&lt;a href=&#34;https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/&lt;/a&gt;] There is also the 
+&lt;a href=&#34;https://cran.r-project.org/package=miniCRAN&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;miniCRAN&lt;/strong&gt;&lt;/a&gt; package to help do this, but we don&amp;rsquo;t need to use this for the following explanation.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;See 
+&lt;a href=&#34;https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;
+&lt;p&gt;See 
+&lt;a href=&#34;https://packagemanager.rstudio.com/client/#/repos/2/overview&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://packagemanager.rstudio.com/client/#/repos/2/overview&lt;/a&gt; and 
+&lt;a href=&#34;https://pkgs.r4pi.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://pkgs.r4pi.org/&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>

@@ -308,7 +308,7 @@
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="dark">
+<body id="top" data-spy="scroll" data-offset="70" data-bs-target="#TableOfContents" class="dark">
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -360,8 +360,8 @@
     
 
     
-    <button type="button" class="navbar-toggler" data-toggle="collapse"
-            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+            data-bs-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
     <span><i class="fas fa-bars"></i></span>
     </button>
     
@@ -433,7 +433,7 @@
 
         
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>Blog</span><span class="caret"></span>
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"><span>Blog</span><span class="caret"></span>
           </a>
           <div class="dropdown-menu">
             
@@ -553,7 +553,7 @@
 
       
       <li class="nav-item dropdown theme-dropdown">
-        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
+        <a href="#" class="nav-link js-theme-selector" data-bs-toggle="dropdown" aria-haspopup="true">
           <i class="fas fa-palette" aria-hidden="true"></i>
         </a>
         <div class="dropdown-menu">
@@ -578,9 +578,23 @@
 </nav>
 
 
-  <article class="article">
-
   
+<div class="container-fluid docs">
+    <div class="row flex-xl-nowrap">
+      <div class="d-none d-xl-block col-xl-2 docs-toc">
+        <ul class="nav toc-top">
+          <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+        </ul>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+      </div>
+      <main class="col-12 col-md-0 col-xl-10 py-md-3 pl-md-5 docs-content" role="main">
+
+        <article class="article">
+            
 
 
 
@@ -673,32 +687,34 @@
 </div>
 
 
-
-  <div class="article-container">
-
-    <div class="article-style">
-      
-
-
-<p>Most proficient Stata users have come across the <code>version</code> command. This is an incredibly powerful command, which simply by issuing say</p>
-<pre class="stata"><code>version 18</code></pre>
+            <div class="article-container">
+              <div class="article-style">
+                <p>Most proficient Stata users have come across the <code>version</code> command. This is an incredibly powerful command, which simply by issuing say</p>
+<pre><code class="language-stata">version 18
+</code></pre>
 <p>at the top of a do-file or within a program (typically in an ado-file) means that you have pretty much guaranteed your code will run in the same way when you come to run it later (most likely in a newer version of Stata). But it turns out there’s a subtle difference between issuing <code>version</code> in a do-file/interactively compared to within a program or ado-file.</p>
-<p>Several years ago I wrote the <strong>reffadjust</strong> package <span class="citation">(<a href="#ref-palmer-sj-2014">Palmer et al. 2014</a>)</span> as part of some work using random effects models <span class="citation">(<a href="#ref-mcdw-sim-2012">Macdonald-Wallis et al. 2012</a>)</span>. It has two programs <code>reffadjustsim</code> and <code>reffadjust4nlcom</code> which use the output of various random effects commands, including those from MLwiN, run from Stata using the user-written <code>runmlwin</code> command <span class="citation">(<a href="#ref-leckie-jss-2013">Leckie and Charlton 2013</a>)</span>.</p>
+<p>Several years ago I wrote the <strong>reffadjust</strong> package (
+<a href="#ref-palmer-sj-2014">Palmer et al. 2014</a>) as part of some work using random effects models (
+<a href="#ref-mcdw-sim-2012">Macdonald-Wallis et al. 2012</a>). It has two programs <code>reffadjustsim</code> and <code>reffadjust4nlcom</code> which use the output of various random effects commands, including those from MLwiN, run from Stata using the user-written <code>runmlwin</code> command (
+<a href="#ref-leckie-jss-2013">Leckie and Charlton 2013</a>).</p>
 <p>The <strong>reffadjust</strong> package doesn’t have many users and over the years I hadn’t regularly checked if the programs were still working. But in the ado-files I had set <code>version 13</code>, which gave me some residual confidence that the programs might still work.</p>
 <p>However, a few years ago, when I eventually did run some test code I saw that the <code>reffadjustsim</code> tests were failing for MLwiN/<code>runmlwin</code> models. I didn’t have time to investigate further at this point, and I didn’t have any intuition whether the error resulted from a change in MLwiN, <code>runmlwin</code>, or Stata.</p>
 <p>At the beginning of this year one of my colleagues mentioned that they were using <strong>reffadjust</strong> in their work and had observed the same error with <code>reffadjustsim</code>. My guilt kicked in, and I eventually found some time to investigate. I discovered that since I wrote the package, Stata processes matrix row and column stripes (essentially the row and column names) in a more advanced way. This meant that the row and column stripes for covariance elements in the <code>e(V)</code> matrix (the variance-covariance matrix of parameter estimates) from MLwiN/<code>runmlwin</code> models were being renamed when I hadn’t intended them to be, which caused the error.</p>
 <p>But wait … I had specified <code>version 13</code> at the top of my program, so why was this update in later versions of Stata taking effect?</p>
 <p>I couldn’t work it out, so I had to ask Stata Technical Support. They were kind enough to tell me that there’s an additional method of invoking the <code>version</code> command which controls what is known as the “user version”. There are some modifications in new versions of Stata which are exempt from the basic invocation of the <code>version</code> command (but only in programs and ado-files). In do-files issuing <code>version</code> sets both the version and the user version, however, in programs and ado-files the “user version”, is set by <code>version #, user</code>, and holds these additional modifications in Stata to the required version.</p>
-<p>Naturally, this is explained in the <code>version</code> helpfile and <a href="https://www.stata.com/manuals/pversion.pdf">manual entry</a>, which I admit I had not read until this point. Hence, simply editing the top of my program to</p>
-<pre class="stata"><code>version 13
-version 13, user</code></pre>
+<p>Naturally, this is explained in the <code>version</code> helpfile and 
+<a href="https://www.stata.com/manuals/pversion.pdf" target="_blank" rel="noopener">manual entry</a>, which I admit I had not read until this point. Hence, simply editing the top of my program to</p>
+<pre><code class="language-stata">version 13
+version 13, user
+</code></pre>
 <p>fixed my error. So in a program or ado-file, we require both lines, whereas in a do-file we’d only require <code>version 13</code>.</p>
 <p>We can see the different operation of <code>version</code> by the following short example.</p>
-<pre class="stata"><code>/* Do-file/interactive code to set both the version and the user version */
+<pre><code class="language-stata">/* Do-file/interactive code to set both the version and the user version */
 version 13
 display c(version), c(userversion), c(stata_version)
-// 13 13 17</code></pre>
-<pre class="stata"><code>/* Ado-file/program code to set both the version and the user version */
+// 13 13 18.5
+</code></pre>
+<pre><code class="language-stata">/* Ado-file/program code to set both the version and the user version */
 program mytest
 version 13
 display c(version), c(userversion), c(stata_version)
@@ -707,27 +723,29 @@ display c(version), c(userversion), c(stata_version)
 end
 
 mytest
-// 13 17 17
-// 13 13 17</code></pre>
-<p>In summary, my <code>reffadjustsim</code> command works again for MLwiN/<code>runmlwin</code> models. The updated version is available from <a href="https://github.com/remlapmot/reffadjust">its GitHub repo</a>. And if you ever need <em>fuller</em> reproducibility in your Stata ado-file or program remember to set both the version and the user version.</p>
-<div id="references" class="section level2 unnumbered">
-<h2>References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
+// 13 18.5 18.5
+// 13 13 18.5
+</code></pre>
+<p>In summary, my <code>reffadjustsim</code> command works again for MLwiN/<code>runmlwin</code> models. The updated version is available from 
+<a href="https://github.com/remlapmot/reffadjust" target="_blank" rel="noopener">its GitHub repo</a>. And if you ever need <em>fuller</em> reproducibility in your Stata ado-file or program remember to set both the version and the user version.</p>
+<h2 id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-leckie-jss-2013" class="csl-entry">
-Leckie, George, and Chris Charlton. 2013. <span>“<span class="nocase">runmlwin: A Program to Run the MLwiN Multilevel Modeling Software from within Stata</span>.”</span> <em>Journal of Statistical Software</em> 52 (11): 1–40. <a href="https://doi.org/10.18637/jss.v052.i11">https://doi.org/10.18637/jss.v052.i11</a>.
+<p>Leckie, George, and Chris Charlton. 2013. “<span class="nocase">runmlwin: A Program to Run the MLwiN Multilevel Modeling Software from within Stata</span>.” <em>Journal of Statistical Software</em> 52 (11): 1–40. 
+<a href="https://doi.org/10.18637/jss.v052.i11" target="_blank" rel="noopener">https://doi.org/10.18637/jss.v052.i11</a>.</p>
 </div>
 <div id="ref-mcdw-sim-2012" class="csl-entry">
-Macdonald-Wallis, Corrie, Debbie A. Lawlor, Tom Palmer, and Kate Tilling. 2012. <span>“Multivariate Multilevel Spline Models for Parallel Growth Processes: Application to Weight and Mean Arterial Pressure in Pregnancy.”</span> <em>Statistics in Medicine</em> 31 (26): 3147–64. <a href="https://doi.org/doi.org/10.1002/sim.5385">https://doi.org/doi.org/10.1002/sim.5385</a>.
+<p>Macdonald-Wallis, Corrie, Debbie A. Lawlor, Tom Palmer, and Kate Tilling. 2012. “Multivariate Multilevel Spline Models for Parallel Growth Processes: Application to Weight and Mean Arterial Pressure in Pregnancy.” <em>Statistics in Medicine</em> 31 (26): 3147–64. 
+<a href="https://doi.org/doi.org/10.1002/sim.5385" target="_blank" rel="noopener">https://doi.org/doi.org/10.1002/sim.5385</a>.</p>
 </div>
 <div id="ref-palmer-sj-2014" class="csl-entry">
-Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 2014. <span>“<span class="nocase">Estimating adjusted associations between random effects from multilevel models: The reffadjust package</span>.”</span> <em>The Stata Journal</em> 14 (1): 119–40. <a href="https://doi.org/10.1177/1536867X1401400109">https://doi.org/10.1177/1536867X1401400109</a>.
-</div>
+<p>Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 2014. “<span class="nocase">Estimating adjusted associations between random effects from multilevel models: The reffadjust package</span>.” <em>The Stata Journal</em> 14 (1): 119–40. 
+<a href="https://doi.org/10.1177/1536867X1401400109" target="_blank" rel="noopener">https://doi.org/10.1177/1536867X1401400109</a>.</p>
 </div>
 </div>
 
-    </div>
-
-    
+              </div>
+              
 
 
 
@@ -965,9 +983,13 @@ Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 
 
 
 
-
+            </div>
+        </article>
+  
+      </main>
+    </div>
   </div>
-</article>
+  
 
       
 
@@ -1090,7 +1112,7 @@ Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 
     
     
     
-    <script src="/js/academic.min.c18541c811ce86c256076a7e9e0266c2.js"></script>
+    <script src="/js/academic.min.6a440ec9db0a7a29df3d23963a43971c.js"></script>
 
     
 

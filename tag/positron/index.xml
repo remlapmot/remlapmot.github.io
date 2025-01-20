@@ -17,31 +17,30 @@
       <link>https://remlapmot.github.io/post/2024/finder-toolbar-apps/</link>
       <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2024/finder-toolbar-apps/</guid>
-      <description>
-
-
-&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Have you ever wanted to be able to quickly open a Data Science app, say RStudio Desktop or Positron in the current Finder window at the click of a button? We’ll see how to achieve this by creating Automator apps. Here’s a screenshot of what we’ll end up with.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/finder-window-with-toolbar-apps.png&#34; alt=&#34;Screenshot of a Finder window with app icons in its toolbar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;creating-the-automator-apps&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Creating the Automator apps&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Have you ever wanted to be able to quickly open a Data Science app, say RStudio Desktop or Positron in the current Finder window at the click of a button? We&amp;rsquo;ll see how to achieve this by creating Automator apps. Here&amp;rsquo;s a screenshot of what we&amp;rsquo;ll end up with.&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/finder-window-with-toolbar-apps.png&#34; alt=&#34;Screenshot of a Finder window with app icons in its toolbar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h2 id=&#34;creating-the-automator-apps&#34;&gt;Creating the Automator apps&lt;/h2&gt;
 &lt;p&gt;Open Automator and select &lt;em&gt;New&lt;/em&gt; then &lt;em&gt;Application&lt;/em&gt; and click &lt;em&gt;Choose&lt;/em&gt;. Then in the top left search bar enter &lt;em&gt;applescript&lt;/em&gt; and drag and drop the &lt;em&gt;Run Applescript&lt;/em&gt; action onto the main window.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/automator-run-applescript.png&#34; alt=&#34;Screenshot of the Automator app.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use &lt;a href=&#34;https://wezfurlong.org/wezterm/&#34;&gt;WezTerm&lt;/a&gt; for my terminal emulator, &lt;a href=&#34;https://zed.dev/&#34;&gt;Zed&lt;/a&gt; as my main text editor, &lt;a href=&#34;https://posit.co/products/open-source/rstudio/&#34;&gt;RStudio Desktop&lt;/a&gt; for most of my R/R Markdown/Quarto coding, &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; for other text editing tasks, and I have been starting to try out &lt;a href=&#34;https://positron.posit.co/&#34;&gt;Positron&lt;/a&gt;. My AppleScript code for each app is as follows.&lt;/p&gt;
-&lt;div id=&#34;rstudio-desktop&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;RStudio Desktop&lt;/h3&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/automator-run-applescript.png&#34; alt=&#34;Screenshot of the Automator app.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;p&gt;We then need to enter the relevant AppleScript code for launching each app in the current Finder window. Currently, I use 
+&lt;a href=&#34;https://wezfurlong.org/wezterm/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;WezTerm&lt;/a&gt; for my terminal emulator, 
+&lt;a href=&#34;https://zed.dev/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Zed&lt;/a&gt; as my main text editor, 
+&lt;a href=&#34;https://posit.co/products/open-source/rstudio/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RStudio Desktop&lt;/a&gt; for most of my R/R Markdown/Quarto coding, 
+&lt;a href=&#34;https://code.visualstudio.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Visual Studio Code&lt;/a&gt; for other text editing tasks, and I have been starting to try out 
+&lt;a href=&#34;https://positron.posit.co/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Positron&lt;/a&gt;. My AppleScript code for each app is as follows.&lt;/p&gt;
+&lt;h3 id=&#34;rstudio-desktop&#34;&gt;RStudio Desktop&lt;/h3&gt;
 &lt;p&gt;It is worth noting that RStudio automatically detects whether there is an &lt;em&gt;.Rproj&lt;/em&gt; file in the directory and opens in project mode if one is found (note this only works if RStudio is not already open).&lt;/p&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &amp;quot;/Applications/RStudio.app/Contents/MacOS/RStudio &amp;quot; &amp;amp; thePath
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
+end run
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can create an alternative app which specifically opens RStudio project (&lt;em&gt;.Rproj&lt;/em&gt;) files as follows.&lt;/p&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     try
       set currentFolder to (folder of window 1) as alias
@@ -59,43 +58,41 @@ end run&lt;/code&gt;&lt;/pre&gt;
         display dialog &amp;quot;No Finder window is open.&amp;quot;
       end try
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;wezterm&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;WezTerm&lt;/h3&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+end run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;wezterm&#34;&gt;WezTerm&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &amp;quot;/opt/homebrew/bin/wezterm-gui start --cwd &amp;quot; &amp;amp; thePath
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;zed&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Zed&lt;/h3&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+end run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;zed&#34;&gt;Zed&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &amp;quot;/usr/local/bin/zed -n &amp;quot; &amp;amp; thePath
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;r-launched-in-a-wezterm-terminal-session&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;R launched in a WezTerm terminal session&lt;/h3&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+end run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;r-launched-in-a-wezterm-terminal-session&#34;&gt;R launched in a WezTerm terminal session&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
     do shell script &amp;quot;/opt/homebrew/bin/wezterm-gui start --cwd &amp;quot; &amp;amp; thePath &amp;amp; &amp;quot; -- /usr/local/bin/R&amp;quot;
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;visual-studio-code-and-positron&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Visual Studio Code and Positron&lt;/h3&gt;
-&lt;p&gt;First enable the ability to launch these apps with &lt;code&gt;code&lt;/code&gt; and &lt;code&gt;positron&lt;/code&gt; from a Terminal in each app, see &lt;a href=&#34;https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://positron.posit.co/add-to-path.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This script is more involved because we first check for any &lt;em&gt;.code-workspace&lt;/em&gt; files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this. If we didn’t explicitly open the &lt;em&gt;.code-workspace&lt;/em&gt; file and if one is present in the directory Visual Studio Code/Positron will detect it and pop up a dialogue box asking if we want to reopen the directory as a workspace (I just prefer to skip this step).&lt;/p&gt;
-&lt;pre class=&#34;applescript&#34;&gt;&lt;code&gt;on run {input, parameters}
+end run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;visual-studio-code-and-positron&#34;&gt;Visual Studio Code and Positron&lt;/h3&gt;
+&lt;p&gt;First enable the ability to launch these apps with &lt;code&gt;code&lt;/code&gt; and &lt;code&gt;positron&lt;/code&gt; from a Terminal in each app, see 
+&lt;a href=&#34;https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; and 
+&lt;a href=&#34;https://positron.posit.co/add-to-path.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This script is more involved because we first check for any &lt;em&gt;.code-workspace&lt;/em&gt; files and open one if found. My AppleScript coding is not very proficient, so there may more efficient approaches to coding this. If we didn&amp;rsquo;t explicitly open the &lt;em&gt;.code-workspace&lt;/em&gt; file and if one is present in the directory Visual Studio Code/Positron will detect it and pop up a dialogue box asking if we want to reopen the directory as a workspace (I just prefer to skip this step).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-applescript&#34;&gt;on run {input, parameters}
   tell application &amp;quot;Finder&amp;quot;
     try
       set currentFolder to (folder of window 1) as alias
@@ -114,25 +111,18 @@ end run&lt;/code&gt;&lt;/pre&gt;
         display dialog &amp;quot;No Finder window is open.&amp;quot;
       end try
   end tell
-end run&lt;/code&gt;&lt;/pre&gt;
+end run
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;(For your Visual Studio Code app simply replace &lt;code&gt;positron&lt;/code&gt; with &lt;code&gt;code&lt;/code&gt;.)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;saving-and-adding-icons&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Saving and adding icons&lt;/h3&gt;
+&lt;h3 id=&#34;saving-and-adding-icons&#34;&gt;Saving and adding icons&lt;/h3&gt;
 &lt;p&gt;After adding the AppleScript code save each app. I call mine, e.g., &lt;em&gt;RStudio-openhere.app&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Next it is helpful to give each app the relevant icon. To do this in Finder bring up the Info boxes for the original app and your &lt;em&gt;-openhere&lt;/em&gt; version by selecting each app and pressing &lt;kbd&gt;Cmd&lt;/kbd&gt;+&lt;kbd&gt;I&lt;/kbd&gt;. Next drag the large icon from the original app onto the small icon of your &lt;em&gt;-openhere&lt;/em&gt; app.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/updating-icon.png&#34; alt=&#34;Screenshot of copying the Positron icon onto our openhere app.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;adding-the-apps-to-the-finder-toolbar&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Adding the apps to the Finder toolbar&lt;/h3&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/updating-icon.png&#34; alt=&#34;Screenshot of copying the Positron icon onto our openhere app.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h3 id=&#34;adding-the-apps-to-the-finder-toolbar&#34;&gt;Adding the apps to the Finder toolbar&lt;/h3&gt;
 &lt;p&gt;Finally, we need to place shortcuts of these apps onto the Finder toolbar. To do this first hold down &lt;kbd&gt;Cmd&lt;/kbd&gt; then drag the app from Finder onto the toolbar to the location you would like. On release the app should now be in the toolbar. (And to remove an icon from the toolbar, again hold &lt;kbd&gt;Cmd&lt;/kbd&gt; then drag it off the toolbar.)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/add-app-to-toolbar.png&#34; alt=&#34;Screenshot of moving our Positron-openhere app onto the Finder toolbar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;summary&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2024/finder-toolbar-apps/img/add-app-to-toolbar.png&#34; alt=&#34;Screenshot of moving our Positron-openhere app onto the Finder toolbar.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;I have shown how to create Automator apps to open RStudio Desktop, Positron, and several other Data Science apps from the current Finder window.&lt;/p&gt;
-&lt;/div&gt;
 </description>
     </item>
     

@@ -308,7 +308,7 @@
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="dark">
+<body id="top" data-spy="scroll" data-offset="70" data-bs-target="#TableOfContents" class="dark">
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -360,8 +360,8 @@
     
 
     
-    <button type="button" class="navbar-toggler" data-toggle="collapse"
-            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+            data-bs-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
     <span><i class="fas fa-bars"></i></span>
     </button>
     
@@ -433,7 +433,7 @@
 
         
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"><span>Blog</span><span class="caret"></span>
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"><span>Blog</span><span class="caret"></span>
           </a>
           <div class="dropdown-menu">
             
@@ -553,7 +553,7 @@
 
       
       <li class="nav-item dropdown theme-dropdown">
-        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
+        <a href="#" class="nav-link js-theme-selector" data-bs-toggle="dropdown" aria-haspopup="true">
           <i class="fas fa-palette" aria-hidden="true"></i>
         </a>
         <div class="dropdown-menu">
@@ -578,9 +578,25 @@
 </nav>
 
 
-  <article class="article">
-
   
+<div class="container-fluid docs">
+    <div class="row flex-xl-nowrap">
+      <div class="d-none d-xl-block col-xl-2 docs-toc">
+        <ul class="nav toc-top">
+          <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+        </ul>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#helpful-google-chrome-site-search-shortcuts-for-r-and-statistics">Helpful Google Chrome site search shortcuts for R and statistics</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+      </div>
+      <main class="col-12 col-md-0 col-xl-10 py-md-3 pl-md-5 docs-content" role="main">
+
+        <article class="article">
+            
 
 
 
@@ -673,78 +689,77 @@
 </div>
 
 
-
-  <div class="article-container">
-
-    <div class="article-style">
-      
-
-
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>Have you ever typed <code>Amazon</code> into the Google Chrome address bar and seen the address bar indicate that it’s now searching the Amazon site? It turns out this is a feature in Google Chrome called site search shortcuts.</p>
+            <div class="article-container">
+              <div class="article-style">
+                <h2 id="introduction">Introduction</h2>
+<p>Have you ever typed <code>Amazon</code> into the Google Chrome address bar and seen the address bar indicate that it&rsquo;s now searching the Amazon site? It turns out this is a feature in Google Chrome called site search shortcuts.</p>
 <p>We can see what default shortcuts Chrome provides by in the Chrome address bar going to <code>chrome://settings/searchEngines</code> and scrolling to the <em>Site Search</em> section.</p>
-<p>From here we can see that we can define our own shortcuts, so let’s define some helpful ones related to R and statistics.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-</div>
-<div id="helpful-google-chrome-site-search-shortcuts-for-r-and-statistics" class="section level2">
-<h2>Helpful Google Chrome site search shortcuts for R and statistics</h2>
-<p><a href="https://r-pkg.org/">METACRAN</a> provides several amazingly useful services around CRAN.</p>
+<p>From here we can see that we can define our own shortcuts, so let&rsquo;s define some helpful ones related to R and statistics.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h2 id="helpful-google-chrome-site-search-shortcuts-for-r-and-statistics">Helpful Google Chrome site search shortcuts for R and statistics</h2>
+<p>
+<a href="https://r-pkg.org/" target="_blank" rel="noopener">METACRAN</a> provides several amazingly useful services around CRAN.</p>
 <ul>
 <li>A shortcut for searching the METACRAN CRAN mirror on GitHub</li>
 </ul>
-<pre class="plaintext"><code>Name: CRAN mirror on GitHub
+<pre><code class="language-plaintext">Name: CRAN mirror on GitHub
 Shortcut: @cran
 URL with %s in place of query:
-https://github.com/search?q=user%3Acran%20%s&amp;ref=opensearch&amp;type=code</code></pre>
+https://github.com/search?q=user%3Acran%20%s&amp;ref=opensearch&amp;type=code
+</code></pre>
 <p>On the Chrome settings page click add and enter the information. To use this simply type <code>@cran</code> into the address bar</p>
-<p><img src="/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step1.png" alt="Screenshot of a site search shortcut in the Google Chrome address bar." width="630" style="display: block; margin: auto;"></p>
+<img src="/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step1.png" alt="Screenshot of a site search shortcut in the Google Chrome address bar." width="630" style="display: block; margin: auto;">
 <p>and then type your search term</p>
-<p><img src="/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step2.png" alt="Screenshot of a site search shortcut in the Google Chrome address bar." width="630" style="display: block; margin: auto;"></p>
+<img src="/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step2.png" alt="Screenshot of a site search shortcut in the Google Chrome address bar." width="630" style="display: block; margin: auto;">
 <p>Here are some other shortcuts.</p>
 <ul>
 <li>A shortcut for searching for a package description on METACRAN</li>
 </ul>
-<pre class="plaintext"><code>Name: METACRAN
+<pre><code class="language-plaintext">Name: METACRAN
 Shortcut: @metacran
 URL with %s in place of query:
-https://r-pkg.org/search.html/?q=%s</code></pre>
+https://r-pkg.org/search.html/?q=%s
+</code></pre>
 <ul>
-<li>A shortcut for searching using <a href="https://rseek.org/">Rseek</a></li>
+<li>A shortcut for searching using 
+<a href="https://rseek.org/" target="_blank" rel="noopener">Rseek</a></li>
 </ul>
-<pre class="plaintext"><code>Name: Rseek
+<pre><code class="language-plaintext">Name: Rseek
 Shortcut: @rseek
 URL with %s in place of query:
-https://rseek.org/?q=%s</code></pre>
+https://rseek.org/?q=%s
+</code></pre>
 <ul>
-<li>A shortcut for searching <a href="https://r-universe.dev/">R-universe</a></li>
+<li>A shortcut for searching 
+<a href="https://r-universe.dev/" target="_blank" rel="noopener">R-universe</a></li>
 </ul>
-<pre class="plaintext"><code>Name: R-universe
+<pre><code class="language-plaintext">Name: R-universe
 Shortcut: @runi
 URL with %s in place of query:
-https://r-universe.dev/search/?q=%s</code></pre>
+https://r-universe.dev/search/?q=%s
+</code></pre>
 <ul>
 <li>A shortcut for searching the third edition of the Oxford Dictionary of Statistics</li>
 </ul>
-<pre class="plaintext"><code>Name: Oxford Dictionary of Statistics
+<pre><code class="language-plaintext">Name: Oxford Dictionary of Statistics
 Shortcut: @stats
 URL with %s in place of query:
-https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188.001.0001%2Facref-9780199679188&amp;q=%s</code></pre>
+https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188.001.0001%2Facref-9780199679188&amp;q=%s
+</code></pre>
 <p>And we could define many more.</p>
-</div>
-<div id="summary" class="section level2">
-<h2>Summary</h2>
+<h2 id="summary">Summary</h2>
 <p>In summary we have defined several Google Chrome site search shortcuts related to R and statistics.</p>
-</div>
-<div class="footnotes footnotes-end-of-document">
-<hr />
+<div class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn1"><p>I am following an excellent <a href="https://chromeunboxed.com/chrome-site-search-shortcuts">blogpost</a> by Chrome Unboxed.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn:1">
+<p>I am following an excellent 
+<a href="https://chromeunboxed.com/chrome-site-search-shortcuts" target="_blank" rel="noopener">blogpost</a> by Chrome Unboxed.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
 </div>
 
-    </div>
-
-    
+              </div>
+              
 
 
 
@@ -984,9 +999,13 @@ https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188
 
 
 
-
+            </div>
+        </article>
+  
+      </main>
+    </div>
   </div>
-</article>
+  
 
       
 
@@ -1109,7 +1128,7 @@ https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188
     
     
     
-    <script src="/js/academic.min.c18541c811ce86c256076a7e9e0266c2.js"></script>
+    <script src="/js/academic.min.6a440ec9db0a7a29df3d23963a43971c.js"></script>
 
     
 
