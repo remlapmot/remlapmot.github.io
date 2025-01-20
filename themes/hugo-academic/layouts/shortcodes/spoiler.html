@@ -1,7 +1,7 @@
 {{- $id := printf "spoiler-%d" .Ordinal -}}
 <div class="spoiler {{ .Get "class" }}" {{ with .Get "style" }}style="{{ . | safeCSS }}"{{ end }}>
   <p>
-    <a class="btn btn-primary" data-toggle="collapse" href="#{{$id}}" role="button" aria-expanded="false" aria-controls="{{$id}}">
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#{{$id}}" role="button" aria-expanded="false" aria-controls="{{$id}}">
       {{ .Get "text" | emojify }}
     </a>
   </p>
