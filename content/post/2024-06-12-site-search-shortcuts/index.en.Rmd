@@ -28,7 +28,9 @@ Have you ever typed `Amazon` into the Google Chrome address bar and seen the add
 
 We can see what default shortcuts Chrome provides by in the Chrome address bar going to `chrome://settings/searchEngines` and scrolling to the *Site Search* section.
 
-From here we can see that we can define our own shortcuts, so let's define some helpful ones related to R and statistics.^[I am following an excellent [blogpost](https://chromeunboxed.com/chrome-site-search-shortcuts) by Chrome Unboxed.]
+From here we can see that we can define our own shortcuts, so let's define some helpful ones related to R and statistics.[^1]
+
+[^1]: I am following an excellent [blogpost](https://chromeunboxed.com/chrome-site-search-shortcuts) by Chrome Unboxed.
 
 ## Helpful Google Chrome site search shortcuts for R and statistics
 
