@@ -1,0 +1,208 @@
+---
+title: Make your own CRAN-like repository with Linux binary R packages
+author: Tom Palmer
+date: '2022-11-30'
+slug: make-linux-binary-cran-like-repo
+categories:
+  - Blog
+tags:
+  - R
+  - CRAN
+  - Linux
+  - Ubuntu
+subtitle: ''
+summary: 'Make your own CRAN-like repository serving not only bundled source packages and Windows and macOS binary packages but also Linux binary packages.'
+authors: []
+lastmod: '2022-11-30T15:07:01Z'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa.'
+projects: []
+---
+
+
+
+<style type="text/css">
+.lineheightone {
+  line-height: 1.29;
+  font-variant-ligatures: normal;
+  font-feature-settings: normal;
+}
+</style>
+
+## Introduction
+
+CRAN is a fantastic resource, in particular because it provides binary packages for Windows and macOS (for both Intel and Apple Silicon Macs). Because there are so many Linux distributions CRAN does not provide binary packages for Linux. Therefore, installing R packages on Linux can be slow because the bundled source packages need to be built on users machines.
+
+But let's install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-tidyverse-rspm-linux-binary.png" alt="Installing binary Linux tidyverse package using Posit Package Manager." style="display: block; margin: auto;">
+
+**_Woah!_** Something magical just happened, we installed a binary R package on Linux! How did that happen, let's find out.^[Note that there are other approaches to distributing binary R packages on Linux, see <https://cran.r-project.org/bin/linux/> and links therein, <https://eddelbuettel.github.io/r2u/>, and <https://enchufa2.github.io/bspm/>]
+
+## Building bundled source and binary packages
+
+I will use an example of one of my own packages **OneSampleMR**. I am running RStudio server on Ubuntu Linux, Focal Fossa through Windows Subsystem for Linux.
+
+The package sources are in a Git repository hosted on GitHub, [here](https://github.com/remlapmot/OneSampleMR). There is an `.Rproj` file, which we open in RStudio as a project.
+
+To build an R package we require all of its dependency packages are installed, so we install those with `devtools::install_dev_deps()` and if your package requires any system libraries those must be installed too.
+
+The Build pane gives us two convenient options, which will build either the bundled source package or binary package through calls to `devtools::build()`.
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-pane-build-options.png" alt="Screenshot of build pane options for building bundled source and binary packages." style="display: block; margin: auto;">
+
+Clicking on both in turn we see the following.
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-source-package.png" alt="Screenshot of building a bundled source package in RStudio." style="display: block; margin: auto;">
+
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-build-binary-package.png" alt="Screenshot of building a binary package in RStudio." style="display: block; margin: auto;">
+
+The bundled source package has been built as `OneSampleMR_0.1.2.tar.gz` and the binary package has been built as `OneSampleMR_0.1.2_R_x86_64-pc-linux-gnu.tar.gz`. Both files are in the directory above the project.
+
+We can achieve the same output by making direct calls to `R CMD build` and `R CMD install --build` in a shell if preferred. We can test that these install as follows.
+
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-source-package.png" alt="Screenshot of installing a bundled source package in RStudio." style="display: block; margin: auto;">
+
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-binary-package.png" alt="Screenshot of installing a binary package in RStudio." style="display: block; margin: auto;">
+
+## CRAN structure for bundled source package files
+
+In two excellent blog posts Marks Sellors describes how to make a CRAN-like repository.^[<https://blog.sellorm.com/2019/03/29/lifting-the-lid-on-cran/> and <https://blog.sellorm.com/2019/03/30/build-your-own-cran-like-repo/>] There is also the [**miniCRAN**](https://cran.r-project.org/package=miniCRAN) package to help do this, but we don't need to use this for the following explanation.
+
+To host bundled source packages, such as our `OneSampleMR_0.1.2.tar.gz` file, we require the following directory structure (noting that the `latest` directory is optional, but allows us to add snapshot directories if we wanted to).
+<!-- # brew install tree -->
+<!-- tree ~/Documents/GitHub/cran/site -d -I '__linux__|bin' --noreport -->
+```plaintext{.lineheightone}
+/mycran
+└── latest
+    └── src
+        └── contrib
+            └── 4.3.0
+                └── Recommended
+```
+
+Specifically, we place the `{package}_{version}.tar.gz` files into the `.../src/contrib` directory. In that directory we then run 
+```r
+tools::write_PACKAGES(type = "source")
+```
+which generates 3 additional files (`PACKAGES`, `PACKAGES.gz`, and `PACKAGES.rds`) which R will use to query what packages are available in our repository when its served on the web.
+
+## Adding Windows and macOS binary R packages
+
+We saw above how to build a binary Linux package. The same process, when repeated on Windows will generate a file called `{package}_{version}.zip` and `{package}_{version}.tgz` on macOS (on Macs with both Intel and Apple Silicon processors).
+
+Assuming that we have some of these files we need to know where to put them. Since CRAN distributes binary packages for Windows and macOS we follow their directory structure, which is as follows.
+<!-- brew install tree -->
+<!-- tree ~/Documents/GitHub/cran/site -d -I '__linux__' --noreport -->
+```plaintext{.lineheightone}
+/mycran
+└── latest
+    ├── bin
+    │   ├── macosx
+    │   │   ├── big-sur-arm64
+    │   │   │   └── contrib
+    │   │   │       └── 4.2
+    │   │   └── contrib
+    │   │       └── 4.2
+    │   └── windows
+    │       └── contrib
+    │           └── 4.2
+    └── src
+        └── contrib
+            └── 4.3.0
+                └── Recommended
+```
+Noting that the current version of R is 4.2.2 and that the relevant directory name with the minor version number changes when R's current minor version number changes, we place
+
+* macOS arm64 binary packages (for Macs with Apple Silicon processors) into the `.../bin/macosx/big-sur-arm64/contrib/4.2/` directory
+* macOS x86_64 binary packages (for Macs with Intel processors) into the `.../bin/macosx/contrib/4.2/` directory, and
+* Windows binary packages into the `.../bin/windows/contrib/4.2/` directory.
+
+We then run `tools::write_PACKAGES(type = "mac.binary")` (changing to `type = "win.binary"` as required) in each of these directories to generate the 3 `PACKAGES` files.
+
+We can confirm this directory structure using the `contrib.url()` function (the last command below was run on an Apple Silicon Mac).
+``` r
+contrib.url("", type = "source")
+## [1] "/src/contrib"
+contrib.url("", type = "win.binary")
+## [1] "/bin/windows/contrib/4.2"
+contrib.url("", type = "mac.binary")
+## [1] "/bin/macosx/contrib/4.2"
+contrib.url("", type = "binary")
+## [1] "/bin/macosx/big-sur-arm64/contrib/4.2"
+```
+And they are also listed in the R Installation and Administration manual.^[See <https://cran.r-project.org/doc/manuals/R-admin.html#Setting-up-a-package-repository>.]
+
+On Apple Silicon Macs the `big-sur-arm64` filepath corresponds to the end of `.Platform$pkgType`.
+``` r
+.Platform$pkgType
+## [1] "mac.binary.big-sur-arm64"
+```
+
+## Where to store and how to name Linux binary R packages?
+
+CRAN does not distribute Linux binary packages and so there is no directory structure from them to copy.
+
+However both the Posit Package Manager and the [R4Pi](https://r4pi.org/) project achieve this in a very clever way.^[See <https://packagemanager.rstudio.com/client/#/repos/2/overview> and <https://pkgs.r4pi.org/>]
+
+We saw above that on Linux bundled source packages have filenames of the form `{package}_{version}.tar.gz` whereas the binary package filenames are of the form `{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz` (the text after `{package}_{version}_` may be different depending on your machine and distro).
+
+To distribute the Linux binary packages we create a parallel directory structure, which takes the same form as for the bundled source packages. In the case of Ubuntu Focal Fossa the Posit Package Manager uses `__linux__/focal/latest/src/contrib`.
+
+They then rename the `{package}_{version}_R_x86_64-pc-linux-gnu.tar.gz` files to the same form as the bundled source package files, i.e., to `{package}_{version}.tar.gz`. And they put them in this new `src/contrib` directory.
+
+The structure of our CRAN-like repository (well in fact our 2 parallel repositories) is now.
+<!-- tree ~/Documents/GitHub/cran/site -d -I 'jammy' --noreport -->
+```plaintext{.lineheightone}
+/mycran
+├── __linux__
+│   └── focal
+│       └── latest
+│           └── src
+│               └── contrib
+│                   └── 4.3.0
+│                       └── Recommended
+└── latest
+    ├── bin
+    │   ├── macosx
+    │   │   ├── big-sur-arm64
+    │   │   │   └── contrib
+    │   │   │       └── 4.2
+    │   │   └── contrib
+    │   │       └── 4.2
+    │   └── windows
+    │       └── contrib
+    │           └── 4.2
+    └── src
+        └── contrib
+            └── 4.3.0
+                └── Recommended
+```
+We then run 
+```r
+tools::write_PACKAGES(type = "source")
+```
+in the `.../__linux__/distro-name/src/contrib` directory for each Linux distribution to generate the `PACKAGES` files.
+
+Once this directory structure is served we can set our repository in R to `.../__linux__/focal/latest` and R will find the binary package `{package}_{version}.tar.gz` files in the `...__linux__/focal/src/contrib/` directory, as per the first figure in this post.
+
+Note that the `{package}_{version}.tar.gz` files within `__linux__/focal/latest/src/contrib` do not all have to be of binary packages. They can be a mix of bundled source and binary packages, which is helpful if you haven't had time to build all your binary package files.
+
+We can also confirm that on Ubuntu Focal Fossa
+``` r
+.Platform$pkgType
+## [1] "source"
+```
+therefore, on Linux, `utils:::resolvePkgType()` always returns `"source"`. Hence, on Linux, `contrib.url()` always returns `/src/contrib` regardless of its `type` argument.
+
+## Testing your CRAN-like repositories locally
+
+You can either run a local web server or use the `file://...` URL notation as your `repos` global options setting (set with `option(repos = ...)` or as the `repos` argument to `install.packages()`).
+
+Here's a screenshot of installing a binary package on Ubuntu Focal Fossa.
+<img src="/post/2022/make-linux-binary-cran-like-repo/img/cran-like-focal-example.png" alt="Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa." style="display: block; margin: auto;">
+
+## Summary
+
+We have taken a look at the structure of a CRAN-like repository and built bundled source and binary package files. We saw that the trick for distributing Linux binary packages is to make a parallel directory with the same structure as that required for bundled source packages and that we need to rename the binary package files to have the same filename format as the bundled source package files.
