@@ -583,7 +583,7 @@
     // Initialise code highlighting if enabled for this page.
     // Note: this block should be processed after the Mermaid code-->div conversion.
     if (code_highlighting) {
-      hljs.initHighlighting();
+      hljs.highlightAll();
     }
 
     // Initialize theme variation.
