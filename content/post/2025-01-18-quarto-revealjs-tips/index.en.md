@@ -20,9 +20,6 @@ image:
   preview_only: no
   alt_text: 'Screenshot of a Mentimeter presentation embedded in a Quarto revealjs html slide.'
 projects: []
-output:
-  blogdown::html_page:
-    toc: true
 ---
 
 ## Introduction
