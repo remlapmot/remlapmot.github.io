@@ -54,7 +54,9 @@ In the main window on the right, leave the shell as zsh and replace the `cat` te
 Then press <kbd>Cmd</kbd> + <kbd>S</kbd> or *File | Save* and save your application in your Applications folder.
 Give the app a distinct name such as *RStudio-new-instance.app* or whatever you prefer and then quit Automator.
 
-Next we would like our app to have a nice icon.^[I follow the approach detailed on [this](https://www.idownloadblog.com/2023/01/19/how-to-change-app-icons-mac/) blog and on the [README](https://github.com/amirmasoudabdol/rstudio-icons/tree/main?tab=readme-ov-file#usage) where I obtained the icon.]
+Next we would like our app to have a nice icon.[^1]
+
+[^1]: I follow the approach detailed on [this](https://www.idownloadblog.com/2023/01/19/how-to-change-app-icons-mac/) blog and on the [README](https://github.com/amirmasoudabdol/rstudio-icons/tree/main?tab=readme-ov-file#usage) where I obtained the icon.
 
 * First download a nice icon from say [this](https://github.com/amirmasoudabdol/rstudio-icons/tree/main/Icons/macOS/Rectangle) repo of logos kindly designed for RStudio (I chose the dark one).
 * Then navigate to the our new app in Finder and press <kbd>Cmd</kbd> + <kbd>I</kbd>.
