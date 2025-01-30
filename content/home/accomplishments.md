@@ -19,6 +19,14 @@ date_format = "Jan 2006"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 
 [[item]]
+  title = "Blog post included as a highlight in R Weekly blog and podcast"
+  organization = "R Weekly"
+  organization_url = "https://rweekly.org/"
+  date_start = "2025-01-29"
+  url = "https://rweekly.org/2025-W05.html"
+  description = "My blog post on [Seven tips for creating Quarto revealjs presentations](https://remlapmot.github.io/post/2025/quarto-revealjs-tips/) was included as a highlight in the R Weekly [blogpost](https://rweekly.org/2025-W05.html) and [podcast (episode 193)](https://serve.podhome.fm/episodepage/r-weekly-highlights/issue-2025-w05-highlights_638737249045054386). Thanks to Eric Nantz, Mike Thomas, Jon Calder, and the R Weekly team."
+
+[[item]]
   organization = "Prof. Ben Goldacre's Bennett Institute for Applied Data Science in the Nuffield Department of Primary Care Health Sciences, University of Oxford"
   organization_url = "https://www.bennett.ox.ac.uk/"
   title = "Secondment to software development team at the Bennett Institute"
