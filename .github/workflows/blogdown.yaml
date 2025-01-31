@@ -31,9 +31,6 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache-version: 2
-          dependencies: '"hard"'
       
       - name: Install hugo
         run: blogdown::install_hugo(version = "0.142.0")
