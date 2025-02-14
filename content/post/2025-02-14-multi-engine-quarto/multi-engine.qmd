@@ -1,0 +1,37 @@
+---
+title: An effectively multi-engine Quarto document
+format:
+  html:
+    embed-resources: true
+engine: knitr
+---
+
+::: {.panel-tabset}
+## R
+
+```{r}
+fizz_buzz <- function(fbnums = 1:50) {
+  output <- dplyr::case_when(
+    fbnums %% 15 == 0 ~ "FizzBuzz",
+    fbnums %% 3 == 0 ~ "Fizz",
+    fbnums %% 5 == 0 ~ "Buzz",
+    TRUE ~ as.character(fbnums)
+  )
+  print(output)
+}
+fizz_buzz()
+```
+
+## Python
+
+\{\{< embed _python-code.qmd >}}
+
+## Stata
+
+{{< embed _stata-code.qmd >}}
+
+## Julia
+
+{{< embed _julia-code.qmd >}}
+
+:::
