@@ -1,0 +1,29 @@
+---
+title: '(Effectively) Multi-engine Quarto documents using Quarto's embed shortcode'
+author: Package Build
+date: '2025-02-16'
+slug: multi-engine-quarto
+categories:
+  - Blog
+tags:
+  - Quarto
+  - R
+  - Stata
+  - Python
+  - Julia
+  - Jupyter
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2025-02-16T12:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of a tabset showing code and output in different languages.'
+projects: []
+toc: true
+---
+
+## Introduction
