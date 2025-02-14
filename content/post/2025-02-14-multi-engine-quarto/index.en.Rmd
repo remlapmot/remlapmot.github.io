@@ -1,5 +1,5 @@
 ---
-title: "Creating effectively multi-engine Quarto documents using the embed shortcode"
+title: "Creating effectively multi-engine Quarto documents using Quarto's embed shortcode"
 author: Package Build
 date: '2025-02-14'
 slug: multi-engine-quarto
@@ -30,25 +30,26 @@ toc: true
 
 Have you ever needed to present the code and output for several languages in the same document or website? A Quarto document can only run a single engine. But of course there are already several work around solutions even within Quarto available. Those include:
 
-* simply writing out the different language code cells but making them not evaluated, one could even include saved plots from the different languages (this is done alot on the Quarto website);
-* if you had a combination of languages from which you can call one from the other, such as using **reticulate** from within R to run Python, or using Statamarkdown from within R to run Stata, then these can be combined in a Quarto document.
+* simply writing out the different language code cells but making them unevaluated/not executed chunks (this is done alot on the Quarto website). One could even include saved plots from the different languages;
+* if you had a combination of languages from which you can call one from the other, such as using **reticulate** from within R to run Python, or using **Statamarkdown** from within R to run Stata, then these can be combined in a Quarto document;
+* or for some languages like R and Python we could even embed full WebAssembly implementations of the language (webR and Pyodide respectively) within a webpage (but that seems a little overkill for my work).
 
-The other day I stumbled across [Quarto's embed shortcode](https://quarto.org/docs/authoring/notebook-embed.html). This allows another (or selected cells from another) Quarto document to be included/embedded in a Quarto document. A thought occurred to me, what if the embedded Quarto document/s used a different engine? Would that work? Remarkably the answer turns out to be that it does!
+I recently stumbled across [Quarto's embed shortcode](https://quarto.org/docs/authoring/notebook-embed.html). This allows another (or selected cells from another) Quarto document to be included/embedded in a Quarto document. A thought occurred to me, what if the embedded Quarto document/s used a different engine? Would that work? Remarkably (to me) the answer turns out to be that it does!
 
-## Using the embed shortcode to make a effectively multi-engine Quarto document
+## Using the embed shortcode to create an effectively multi-engine Quarto document
 
-We start our Quarto document using either the knitr or Jupyter python3 engine then we can embed the documents using the alternative engines as follows (here I'm using a [tabset](https://quarto.org/docs/output-formats/html-basics.html#tabsets) in a html document).
+In the example below I'm using I'm using a [tabset](https://quarto.org/docs/output-formats/html-basics.html#tabsets) in a html document using the knitr engine. We embed the documents using the alternative engines using the `{{</* embed */>}}` shortcode as follows.
 
 ````{verbatim, file="multi-engine.qmd", lang="markdown"}
 ````
 
-* *python-code.qmd* uses `jupyter: python3` ([documentation for using Python in Quarto](https://quarto.org/docs/computations/python.html))
-* *stata-code.qmd* uses `jupyter: nbstata` ([documentation for nbstata](https://hugetim.github.io/nbstata/))
-* *julia-code.qmd* uses `engine: julia` or the IJulia Jupyter kernel via e.g., `jupyter: julia-1.11` ([documentation for using Julia in Quarto](https://quarto.org/docs/computations/julia.html))
+* *python-code.qmd* uses the `jupyter: python3` engine ([documentation for using Python in Quarto](https://quarto.org/docs/computations/python.html));
+* *stata-code.qmd* uses the `jupyter: nbstata` engine ([documentation for nbstata](https://hugetim.github.io/nbstata/));
+* and *julia-code.qmd* uses `engine: julia` or the IJulia Jupyter kernel via e.g., `jupyter: julia-1.11` ([documentation for using Julia in Quarto](https://quarto.org/docs/computations/julia.html))
 
 I am assuming that you have setup each engine beforehand.
 
-And voila rendering the master Quarto document results in the embedded documents being executed and embedded within it.
+Rendering the master Quarto document results in the embedded documents being executed and embedded within it.
 
 ## Summary
 
