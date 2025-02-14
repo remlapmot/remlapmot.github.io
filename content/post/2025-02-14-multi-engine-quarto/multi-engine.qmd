@@ -24,14 +24,14 @@ fizz_buzz()
 
 ## Python
 
-\{\{< embed _python-code.qmd >}}
+{{</* embed _python-code.qmd */>}}
 
 ## Stata
 
-{{< embed _stata-code.qmd >}}
+{{</* embed _stata-code.qmd */>}}
 
 ## Julia
 
-{{< embed _julia-code.qmd >}}
+{{</* embed _julia-code.qmd */>}}
 
 :::
