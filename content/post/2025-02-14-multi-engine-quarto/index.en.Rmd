@@ -1,7 +1,7 @@
 ---
-title: '(Effectively) Multi-engine Quarto documents using Quarto's embed shortcode'
+title: "(Effectively) Multi-engine Quarto documents using Quarto's embed shortcode"
 author: Package Build
-date: '2025-02-16'
+date: '2025-02-14'
 slug: multi-engine-quarto
 categories:
   - Blog
@@ -39,45 +39,8 @@ The other day I stumbled across [Quarto's embed shortcode](https://quarto.org/do
 
 We start our Quarto document using either the knitr or Jupyter python3 engine then we can embed the documents using the alternative engines as follows (here I'm using a [tabset](https://quarto.org/docs/output-formats/html-basics.html#tabsets) in a html document).
 
-````{verbatim, lang="markdown"}
----
-title: An effectively multi-engine Quarto document
-format:
-  html:
-    embed-resources: true
-engine: knitr
----
-
-::: {.panel-tabset}
-## R
-
-```{r}
-fizz_buzz <- function(fbnums = 1:50) {
-  output <- dplyr::case_when(
-    fbnums %% 15 == 0 ~ "FizzBuzz",
-    fbnums %% 3 == 0 ~ "Fizz",
-    fbnums %% 5 == 0 ~ "Buzz",
-    TRUE ~ as.character(fbnums)
-  )
-  print(output)
-}
-fizz_buzz()
+```{verbatim, file="multi-engine.qmd"}
 ```
-
-## Python
-
-{{< embed _python-code.qmd >}}
-
-## Stata
-
-{{< embed _stata-code.qmd >}}
-
-## Julia
-
-{{< embed _julia-code.qmd >}}
-
-:::
-````
 
 * *_python-code.qmd* uses `jupyter: python3` ([documentation for using Python in Quarto](https://quarto.org/docs/computations/python.html))
 * *_stata-code.qmd* uses `jupyter: nbstata` ([documentation for nbstata](https://hugetim.github.io/nbstata/))
