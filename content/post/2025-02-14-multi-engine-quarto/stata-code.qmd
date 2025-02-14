@@ -3,5 +3,5 @@ jupyter: nbstata
 ---
 
 ```{stata}
-
+display "Hello World from Stata"
 ```
