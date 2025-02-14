@@ -47,13 +47,19 @@ format:
 engine: knitr
 ---
 
-Here's some code in different languages.
-
 ::: {.panel-tabset}
 ## R
 
 ```{r}
-
+fizz_buzz <- function(fbnums = 1:50) {
+  output <- dplyr::case_when(
+    fbnums %% 15 == 0 ~ "FizzBuzz",
+    fbnums %% 3 == 0 ~ "Fizz",
+    fbnums %% 5 == 0 ~ "Buzz",
+    TRUE ~ as.character(fbnums)
+  )
+  print(output)
+}
 ```
 
 ## Python
