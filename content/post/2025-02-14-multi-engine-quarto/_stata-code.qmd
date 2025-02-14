@@ -1,0 +1,7 @@
+---
+jupyter: nbstata
+---
+
+```{stata}
+
+```
