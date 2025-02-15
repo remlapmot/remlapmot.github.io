@@ -27,10 +27,10 @@
   
     
   
-  <meta name="description" content="My #GitHubUnwrapped 2023!">
+  <meta name="description" content="Have you ever wanted to include different language engines within the same Quarto document such that the code chunks are executed when the document is rendered? I describe how to achieve this using Quarto&#39;s embed shortcode.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2024/github-unwrapped-2023/">
+  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2025/multi-engine-quarto/">
 
   
 
@@ -215,7 +215,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu_12bf607bd6d196d.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu_5e536419af3743e2.png">
 
-  <link rel="canonical" href="https://remlapmot.github.io/post/2024/github-unwrapped-2023/">
+  <link rel="canonical" href="https://remlapmot.github.io/post/2025/multi-engine-quarto/">
 
   
   
@@ -230,15 +230,15 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Dr Tom Palmer">
-  <meta property="og:url" content="https://remlapmot.github.io/post/2024/github-unwrapped-2023/">
-  <meta property="og:title" content="My #GitHubUnwrapped 2023! | Dr Tom Palmer">
-  <meta property="og:description" content="My #GitHubUnwrapped 2023!"><meta property="og:image" content="https://remlapmot.github.io/post/2024/github-unwrapped-2023/featured.png">
-  <meta property="twitter:image" content="https://remlapmot.github.io/post/2024/github-unwrapped-2023/featured.png"><meta property="og:locale" content="en-us">
+  <meta property="og:url" content="https://remlapmot.github.io/post/2025/multi-engine-quarto/">
+  <meta property="og:title" content="Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode | Dr Tom Palmer">
+  <meta property="og:description" content="Have you ever wanted to include different language engines within the same Quarto document such that the code chunks are executed when the document is rendered? I describe how to achieve this using Quarto&#39;s embed shortcode."><meta property="og:image" content="https://remlapmot.github.io/post/2025/multi-engine-quarto/featured.png">
+  <meta property="twitter:image" content="https://remlapmot.github.io/post/2025/multi-engine-quarto/featured.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2024-01-07T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2025-02-15T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2024-01-07T09:58:00&#43;00:00">
+    <meta property="article:modified_time" content="2025-02-16T12:00:00&#43;00:00">
   
 
   
@@ -262,16 +262,16 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://remlapmot.github.io/post/2024/github-unwrapped-2023/"
+    "@id": "https://remlapmot.github.io/post/2025/multi-engine-quarto/"
   },
-  "headline": "My #GitHubUnwrapped 2023!",
+  "headline": "Creating effectively multi-engine Quarto documents using Quarto's embed shortcode",
   
   "image": [
-    "https://remlapmot.github.io/post/2024/github-unwrapped-2023/featured.png"
+    "https://remlapmot.github.io/post/2025/multi-engine-quarto/featured.png"
   ],
   
-  "datePublished": "2024-01-07T00:00:00Z",
-  "dateModified": "2024-01-07T09:58:00Z",
+  "datePublished": "2025-02-15T00:00:00Z",
+  "dateModified": "2025-02-16T12:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -286,7 +286,7 @@
       "url": "https://remlapmot.github.io/images/icon_hu_5e536419af3743e2.png"
     }
   },
-  "description": "My #GitHubUnwrapped 2023!"
+  "description": "Have you ever wanted to include different language engines within the same Quarto document such that the code chunks are executed when the document is rendered? I describe how to achieve this using Quarto's embed shortcode."
 }
 </script>
 
@@ -304,7 +304,7 @@
 
 
 
-  <title>My #GitHubUnwrapped 2023! | Dr Tom Palmer</title>
+  <title>Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode | Dr Tom Palmer</title>
 
 </head>
 
@@ -579,6 +579,22 @@
 
 
   
+<div class="container-fluid docs">
+    <div class="row flex-xl-nowrap">
+      <div class="d-none d-xl-block col-xl-2 docs-toc">
+        <ul class="nav toc-top">
+          <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+        </ul>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#using-the-embed-shortcode-to-create-an-effectively-multi-engine-quarto-document">Using the embed shortcode to create an effectively multi-engine Quarto document</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+      </div>
+      <main class="col-12 col-md-0 col-xl-10 py-md-3 pl-md-5 docs-content" role="main">
+
         <article class="article">
             
 
@@ -606,7 +622,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>My #GitHubUnwrapped 2023!</h1>
+  <h1>Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode</h1>
 
   
 
@@ -626,7 +642,7 @@
           Last updated on
       
     
-    Jan 7, 2024
+    Feb 16, 2025
   </span>
   
 
@@ -665,9 +681,9 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 372px; max-height: 709px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 654px; max-height: 352px;">
   <div style="position: relative">
-    <img src="/post/2024/github-unwrapped-2023/featured.png" alt="Image showing statistics from my GitHub unwrapped 2023 video." class="featured-image">
+    <img src="/post/2025/multi-engine-quarto/featured.png" alt="Screenshot of a tabset showing code and output in different languages." class="featured-image">
     
   </div>
 </div>
@@ -675,10 +691,79 @@
 
             <div class="article-container">
               <div class="article-style">
-                <p>My #GitHubUnwrapped 2023!</p>
-<p align="center"><iframe src="https://drive.google.com/file/d/1bhdY7FPgmYJo_loqIChBJOZ8vdm2mEpA/preview" width="640" height="480" allow="autoplay"></iframe></p>
-<p>Made with 
-<a href="https://www.githubunwrapped.com/" target="_blank" rel="noopener">https://www.githubunwrapped.com/</a>.</p>
+                <h2 id="introduction">Introduction</h2>
+<p>Have you ever needed to present the code and output for several languages in the same document or website? I work in (non-infectious disease) Epidemiology and so it is common that researchers would like to present R and Stata code in the same document. However, a Quarto document can only run a single engine. There are already several work around solutions, which include:</p>
+<ul>
+<li>writing out the different language code cells but making them unevaluated/not executed chunks (this is done alot on the 
+<a href="https://quarto.org/docs/reference/" target="_blank" rel="noopener">Quarto documentation website</a>). One can also include saved plots from the different languages;</li>
+<li>if your document has a combination of languages from which you can call one from the other, such as using 
+<a href="https://rstudio.github.io/reticulate/" target="_blank" rel="noopener"><strong>reticulate</strong></a> from within R to run Python, or using 
+<a href="https://cran.r-project.org/package=Statamarkdown" target="_blank" rel="noopener"><strong>Statamarkdown</strong></a> from within R to run Stata, or using 
+<a href="https://cran.r-project.org/package=JuliaCall" target="_blank" rel="noopener"><strong>JuliaCall</strong></a> from within R to run Julia, then these can be combined in a Quarto document;</li>
+<li>or for some languages like R and Python we could even embed full WebAssembly implementations of the language (
+<a href="https://docs.r-wasm.org/webr/latest/" target="_blank" rel="noopener">WebR</a> and 
+<a href="https://pyodide.org/en/stable/#" target="_blank" rel="noopener">Pyodide</a> respectively) within a webpage (which admittedly seems a little overkill for my work).</li>
+</ul>
+<p>I&rsquo;ve found an alternative solution allowing you to use the native engines for each language. I recently stumbled across 
+<a href="https://quarto.org/docs/authoring/notebook-embed.html" target="_blank" rel="noopener">Quarto&rsquo;s embed shortcode</a>. This allows another (or selected cells from another) Quarto document to be embedded in a Quarto document. A thought occurred to me, what if the embedded Quarto document/s used a different engine? Would that work? This isn&rsquo;t explicitly mentioned on the documentation page, so I gave it a go. Remarkably, the answer turns out to be that it works! Let&rsquo;s find out what to do.</p>
+<h2 id="using-the-embed-shortcode-to-create-an-effectively-multi-engine-quarto-document">Using the embed shortcode to create an effectively multi-engine Quarto document</h2>
+<p>In the example below I&rsquo;m using a 
+<a href="https://quarto.org/docs/output-formats/html-basics.html#tabsets" target="_blank" rel="noopener">tabset</a> in a html document using the knitr engine. We embed the documents using the alternative engines for Python, Stata, and Julia using the <code>{{&lt; embed &gt;}}</code> shortcode as shown below. For each language I just show printing a string and a basic plot.</p>
+<pre><code class="language-markdown">---
+title: An effectively multi-engine Quarto document using the embed shortcode
+format:
+  html:
+    embed-resources: true
+engine: knitr
+---
+
+::: {.panel-tabset .nav-pills}
+## R
+
+```{r}
+print(&quot;Hello World, from R&quot;)
+```
+
+```{r}
+#| fig-align: &quot;center&quot;
+x &lt;- seq(-10,10, by = 0.1)
+y &lt;- x ^ 3
+plot(x, y, type = &quot;l&quot;)
+```
+
+## Python
+
+{{&lt; embed python-code-using-jupyter-python3-engine.qmd echo=true &gt;}}
+
+## Stata
+
+{{&lt; embed stata-code-using-jupyter-nbstata-engine.qmd echo=true &gt;}}
+
+## Julia
+
+{{&lt; embed julia-code-using-julia-engine.qmd echo=true &gt;}}
+
+:::
+</code></pre>
+<ul>
+<li>the <em>python-code-using-jupyter-python3-engine.qmd</em> document uses the <code>jupyter: python3</code> engine (
+<a href="https://quarto.org/docs/computations/python.html" target="_blank" rel="noopener">documentation for using Python in Quarto</a>);</li>
+<li>the <em>stata-code-using-jupyter-nbstata-engine.qmd</em> document uses the <code>jupyter: nbstata</code> engine (
+<a href="https://hugetim.github.io/nbstata/" target="_blank" rel="noopener">documentation for nbstata</a>);</li>
+<li>and the <em>julia-code-using-julia-engine.qmd</em> uses <code>engine: julia</code>. Alternatively, it should be possible to use the 
+<a href="https://julialang.github.io/IJulia.jl/stable/" target="_blank" rel="noopener">IJulia</a> Jupyter kernel (
+<a href="https://quarto.org/docs/computations/julia.html" target="_blank" rel="noopener">documentation for using Julia in Quarto</a>)</li>
+</ul>
+<p>Of course, I assume that you have setup each engine beforehand.</p>
+<p>Rendering the Quarto document above results in the embedded documents being executed and embedded within it. I&rsquo;ve included the output below (and the full source code is in 
+<a href="https://github.com/remlapmot/quarto-multi-engine-using-embed-example" target="_blank" rel="noopener">this repository</a>). Click the tabs to show the code and output for each language.</p>
+<p align="center">
+<iframe src="https://remlapmot.github.io/quarto-multi-engine-using-embed-example/" height="750" width="700">
+</iframe>
+</p>
+<p>In the code above, in each case, I embed the whole Quarto document but you can also specify a specific code block id (or if the embedded document is a Jupyter Notebook, <em>.ipynb</em> file, you can specify a cell id, label, or tag).</p>
+<h2 id="summary">Summary</h2>
+<p>I have shown how to use the Quarto embed shortcode to embed Quarto documents using alternative engines to create an effectively multi-engine Quarto document.</p>
 
               </div>
               
@@ -690,7 +775,17 @@
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tag/github/">GitHub</a>
+  <a class="badge badge-light" href="/tag/quarto/">Quarto</a>
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+  <a class="badge badge-light" href="/tag/stata/">Stata</a>
+  
+  <a class="badge badge-light" href="/tag/python/">Python</a>
+  
+  <a class="badge badge-light" href="/tag/julia/">Julia</a>
+  
+  <a class="badge badge-light" href="/tag/jupyter/">Jupyter</a>
   
 </div>
 
@@ -902,15 +997,15 @@
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/2025/github-unwrapped-2024/">My #GitHubUnwrapped 2024!</a></li>
-      
-      <li><a href="/post/2023/github-unwrapped-2022/">My #GitHubUnwrapped 2022!</a></li>
-      
-      <li><a href="/post/2025/multi-engine-quarto/">Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode</a></li>
-      
       <li><a href="/post/2025/quarto-revealjs-tips/">Seven tips for creating Quarto revealjs presentations</a></li>
       
       <li><a href="/post/2024/finder-toolbar-apps/">Launch RStudio, Positron, and other Data Science apps from your Finder Toolbar</a></li>
+      
+      <li><a href="/post/2024/chrome-site-search-shortcuts/">Supercharge your #rstats web searching in Google Chrome with Site Search Shortcuts</a></li>
+      
+      <li><a href="/post/2024/mlnscript-r2mlwin-apple-silicon/">Running MLwiN using mlnscript via the R2MLwiN R package on Apple Silicon Macs </a></li>
+      
+      <li><a href="/post/2024/macos-rstudio-another/">Creating a simple Automator app to launch a new instance of RStudio Desktop on macOS</a></li>
       
     </ul>
   </div>
@@ -921,6 +1016,10 @@
 
             </div>
         </article>
+  
+      </main>
+    </div>
+  </div>
   
 
       

@@ -5,12 +5,93 @@
     <link>https://remlapmot.github.io/post/</link>
       <atom:link href="https://remlapmot.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 19 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 15 Feb 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
       <title>Posts</title>
       <link>https://remlapmot.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode</title>
+      <link>https://remlapmot.github.io/post/2025/multi-engine-quarto/</link>
+      <pubDate>Sat, 15 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/multi-engine-quarto/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Have you ever needed to present the code and output for several languages in the same document or website? I work in (non-infectious disease) Epidemiology and so it is common that researchers would like to present R and Stata code in the same document. However, a Quarto document can only run a single engine. There are already several work around solutions, which include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;writing out the different language code cells but making them unevaluated/not executed chunks (this is done alot on the 
+&lt;a href=&#34;https://quarto.org/docs/reference/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quarto documentation website&lt;/a&gt;). One can also include saved plots from the different languages;&lt;/li&gt;
+&lt;li&gt;if your document has a combination of languages from which you can call one from the other, such as using 
+&lt;a href=&#34;https://rstudio.github.io/reticulate/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;reticulate&lt;/strong&gt;&lt;/a&gt; from within R to run Python, or using 
+&lt;a href=&#34;https://cran.r-project.org/package=Statamarkdown&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Statamarkdown&lt;/strong&gt;&lt;/a&gt; from within R to run Stata, or using 
+&lt;a href=&#34;https://cran.r-project.org/package=JuliaCall&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;JuliaCall&lt;/strong&gt;&lt;/a&gt; from within R to run Julia, then these can be combined in a Quarto document;&lt;/li&gt;
+&lt;li&gt;or for some languages like R and Python we could even embed full WebAssembly implementations of the language (
+&lt;a href=&#34;https://docs.r-wasm.org/webr/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;WebR&lt;/a&gt; and 
+&lt;a href=&#34;https://pyodide.org/en/stable/#&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Pyodide&lt;/a&gt; respectively) within a webpage (which admittedly seems a little overkill for my work).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I&amp;rsquo;ve found an alternative solution allowing you to use the native engines for each language. I recently stumbled across 
+&lt;a href=&#34;https://quarto.org/docs/authoring/notebook-embed.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quarto&amp;rsquo;s embed shortcode&lt;/a&gt;. This allows another (or selected cells from another) Quarto document to be embedded in a Quarto document. A thought occurred to me, what if the embedded Quarto document/s used a different engine? Would that work? This isn&amp;rsquo;t explicitly mentioned on the documentation page, so I gave it a go. Remarkably, the answer turns out to be that it works! Let&amp;rsquo;s find out what to do.&lt;/p&gt;
+&lt;h2 id=&#34;using-the-embed-shortcode-to-create-an-effectively-multi-engine-quarto-document&#34;&gt;Using the embed shortcode to create an effectively multi-engine Quarto document&lt;/h2&gt;
+&lt;p&gt;In the example below I&amp;rsquo;m using a 
+&lt;a href=&#34;https://quarto.org/docs/output-formats/html-basics.html#tabsets&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tabset&lt;/a&gt; in a html document using the knitr engine. We embed the documents using the alternative engines for Python, Stata, and Julia using the &lt;code&gt;{{&amp;lt; embed &amp;gt;}}&lt;/code&gt; shortcode as shown below. For each language I just show printing a string and a basic plot.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;---
+title: An effectively multi-engine Quarto document using the embed shortcode
+format:
+  html:
+    embed-resources: true
+engine: knitr
+---
+
+::: {.panel-tabset .nav-pills}
+## R
+
+```{r}
+print(&amp;quot;Hello World, from R&amp;quot;)
+```
+
+```{r}
+#| fig-align: &amp;quot;center&amp;quot;
+x &amp;lt;- seq(-10,10, by = 0.1)
+y &amp;lt;- x ^ 3
+plot(x, y, type = &amp;quot;l&amp;quot;)
+```
+
+## Python
+
+{{&amp;lt; embed python-code-using-jupyter-python3-engine.qmd echo=true &amp;gt;}}
+
+## Stata
+
+{{&amp;lt; embed stata-code-using-jupyter-nbstata-engine.qmd echo=true &amp;gt;}}
+
+## Julia
+
+{{&amp;lt; embed julia-code-using-julia-engine.qmd echo=true &amp;gt;}}
+
+:::
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;em&gt;python-code-using-jupyter-python3-engine.qmd&lt;/em&gt; document uses the &lt;code&gt;jupyter: python3&lt;/code&gt; engine (
+&lt;a href=&#34;https://quarto.org/docs/computations/python.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation for using Python in Quarto&lt;/a&gt;);&lt;/li&gt;
+&lt;li&gt;the &lt;em&gt;stata-code-using-jupyter-nbstata-engine.qmd&lt;/em&gt; document uses the &lt;code&gt;jupyter: nbstata&lt;/code&gt; engine (
+&lt;a href=&#34;https://hugetim.github.io/nbstata/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation for nbstata&lt;/a&gt;);&lt;/li&gt;
+&lt;li&gt;and the &lt;em&gt;julia-code-using-julia-engine.qmd&lt;/em&gt; uses &lt;code&gt;engine: julia&lt;/code&gt;. Alternatively, it should be possible to use the 
+&lt;a href=&#34;https://julialang.github.io/IJulia.jl/stable/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IJulia&lt;/a&gt; Jupyter kernel (
+&lt;a href=&#34;https://quarto.org/docs/computations/julia.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation for using Julia in Quarto&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Of course, I assume that you have setup each engine beforehand.&lt;/p&gt;
+&lt;p&gt;Rendering the Quarto document above results in the embedded documents being executed and embedded within it. I&amp;rsquo;ve included the output below (and the full source code is in 
+&lt;a href=&#34;https://github.com/remlapmot/quarto-multi-engine-using-embed-example&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this repository&lt;/a&gt;). Click the tabs to show the code and output for each language.&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;
+&lt;iframe src=&#34;https://remlapmot.github.io/quarto-multi-engine-using-embed-example/&#34; height=&#34;750&#34; width=&#34;700&#34;&gt;
+&lt;/iframe&gt;
+&lt;/p&gt;
+&lt;p&gt;In the code above, in each case, I embed the whole Quarto document but you can also specify a specific code block id (or if the embedded document is a Jupyter Notebook, &lt;em&gt;.ipynb&lt;/em&gt; file, you can specify a cell id, label, or tag).&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to use the Quarto embed shortcode to embed Quarto documents using alternative engines to create an effectively multi-engine Quarto document.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Seven tips for creating Quarto revealjs presentations</title>
