@@ -13,6 +13,13 @@ engine: knitr
 print("Hello World, from R")
 ```
 
+```{r}
+#| fig-align: "center"
+x <- seq(-10,10, by = 0.1)
+y <- x ^ 3
+plot(x, y, type = "l")
+```
+
 ## Python
 
 {{</* embed python-code-using-jupyter-python3-engine.qmd echo=true */>}}
