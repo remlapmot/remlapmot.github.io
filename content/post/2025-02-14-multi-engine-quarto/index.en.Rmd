@@ -60,4 +60,4 @@ In the code above, in each case, I embed the whole Quarto document but you can a
 
 ## Summary
 
-In summary, I have shown how to use the Quarto embed shortcode to embed Quarto documents using alternative engines to create an effectively multi-engine Quarto document.
+I have shown how to use the Quarto embed shortcode to embed Quarto documents using alternative engines to create an effectively multi-engine Quarto document.
