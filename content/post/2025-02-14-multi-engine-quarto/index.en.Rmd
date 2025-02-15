@@ -34,7 +34,7 @@ Have you ever needed to present the code and output for several languages in the
 * if your document has a combination of languages from which you can call one from the other, such as using [**reticulate**](https://rstudio.github.io/reticulate/) from within R to run Python, or using [**Statamarkdown**](https://cran.r-project.org/package=Statamarkdown) from within R to run Stata, or using [**JuliaCall**](https://cran.r-project.org/package=JuliaCall) from within R to run Julia, then these can be combined in a Quarto document;
 * or for some languages like R and Python we could even embed full WebAssembly implementations of the language ([WebR](https://docs.r-wasm.org/webr/latest/) and [Pyodide](https://pyodide.org/en/stable/#) respectively) within a webpage (which admittedly seems a little overkill for my work).
 
-I recently stumbled across [Quarto's embed shortcode](https://quarto.org/docs/authoring/notebook-embed.html). This allows another (or selected cells from another) Quarto document to be embedded in a Quarto document. A thought occurred to me, what if the embedded Quarto document/s used a different engine? Would that work? This isn't explicitly mentioned on the documentation page, so I gave it a go. Remarkably, the answer turns out to be that it works! Let's find out what to do.
+I've found an alternative solution allowing you to use the native engines for each language. I recently stumbled across [Quarto's embed shortcode](https://quarto.org/docs/authoring/notebook-embed.html). This allows another (or selected cells from another) Quarto document to be embedded in a Quarto document. A thought occurred to me, what if the embedded Quarto document/s used a different engine? Would that work? This isn't explicitly mentioned on the documentation page, so I gave it a go. Remarkably, the answer turns out to be that it works! Let's find out what to do.
 
 ## Using the embed shortcode to create an effectively multi-engine Quarto document
 
@@ -49,7 +49,7 @@ In the example below I'm using a [tabset](https://quarto.org/docs/output-formats
 
 Of course, I assume that you have setup each engine beforehand.
 
-Rendering the Quarto document above results in the embedded documents being executed and embedded within it. I've included the output below. Click the tabs to show the code and output for each language.
+Rendering the Quarto document above results in the embedded documents being executed and embedded within it. I've included the output below (and the full source code is in [this repository](https://github.com/remlapmot/quarto-multi-engine-using-embed-example)). Click the tabs to show the code and output for each language.
 
 <p align="center">
 <iframe src="https://remlapmot.github.io/quarto-multi-engine-using-embed-example/" height="750" width="700">
