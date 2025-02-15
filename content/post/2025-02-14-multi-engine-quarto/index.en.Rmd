@@ -1,7 +1,7 @@
 ---
 title: "Creating effectively multi-engine Quarto documents using Quarto's embed shortcode"
 author: Package Build
-date: '2025-02-14'
+date: '2025-02-15'
 slug: multi-engine-quarto
 categories:
   - Blog
@@ -31,8 +31,8 @@ toc: true
 Have you ever needed to present the code and output for several languages in the same document or website? A Quarto document can only run a single engine. But of course there are already several work around solutions even within Quarto available. Those include:
 
 * simply writing out the different language code cells but making them unevaluated/not executed chunks (this is done alot on the Quarto website). One could even include saved plots from the different languages;
-* if you had a combination of languages from which you can call one from the other, such as using **reticulate** from within R to run Python, or using **Statamarkdown** from within R to run Stata, then these can be combined in a Quarto document;
-* or for some languages like R and Python we could even embed full WebAssembly implementations of the language (webR and Pyodide respectively) within a webpage (but that seems a little overkill for my work).
+* if you had a combination of languages from which you can call one from the other, such as using [**reticulate**](https://rstudio.github.io/reticulate/) from within R to run Python, or using [**Statamarkdown**](https://cran.r-project.org/package=Statamarkdown) from within R to run Stata, or using [**JuliaCall**](https://cran.r-project.org/package=JuliaCall) from within R to run Julia, then these can be combined in a Quarto document;
+* or for some languages like R and Python we could even embed full WebAssembly implementations of the language ([WebR](https://docs.r-wasm.org/webr/latest/) and [Pyodide](https://pyodide.org/en/stable/#) respectively) within a webpage (but that seems a little overkill for my work).
 
 I recently stumbled across [Quarto's embed shortcode](https://quarto.org/docs/authoring/notebook-embed.html). This allows another (or selected cells from another) Quarto document to be included/embedded in a Quarto document. A thought occurred to me, what if the embedded Quarto document/s used a different engine? Would that work? This isn't explicitly mentioned on the documentation page so I gave it a go. Remarkably, the answer turns out to be that it works!
 
@@ -49,7 +49,14 @@ In the example below I'm using I'm using a [tabset](https://quarto.org/docs/outp
 
 I am assuming that you have setup each engine beforehand.
 
-Rendering the master Quarto document results in the embedded documents being executed and embedded within it. In the code above, in each case, I embed the whole Quarto document but you can also specify a code block id (or if the embedded document is a Jupyter Notebook, *.ipynb* file, you can specify a cell id, label, or tag).
+Rendering the master Quarto document results in the embedded documents being executed and embedded within it. I've included the output below.
+
+<p align="center">
+<iframe src="https://remlapmot.github.io/quarto-multi-engine-using-embed-example/" height="750" width="700">
+</iframe>
+</p>
+
+In the code above, in each case, I embed the whole Quarto document but you can also specify a code block id (or if the embedded document is a Jupyter Notebook, *.ipynb* file, you can specify a cell id, label, or tag).
 
 ## Summary
 
