@@ -1,5 +1,5 @@
 ---
-title: An effectively multi-engine Quarto document
+title: An effectively multi-engine Quarto document using the embed shortcode
 format:
   html:
     embed-resources: true
