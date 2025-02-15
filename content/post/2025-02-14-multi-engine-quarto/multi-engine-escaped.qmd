@@ -15,14 +15,14 @@ print("Hello World, from R")
 
 ## Python
 
-{{</* embed python-code-using-jupyter-python3-engine.qmd */>}}
+{{</* embed python-code-using-jupyter-python3-engine.qmd echo=true */>}}
 
 ## Stata
 
-{{</* embed stata-code-using-jupyter-nbstata-engine.qmd */>}}
+{{</* embed stata-code-using-jupyter-nbstata-engine.qmd echo=true */>}}
 
 ## Julia
 
-{{</* embed julia-code-using-julia-engine.qmd */>}}
+{{</* embed julia-code-using-julia-engine.qmd echo=true */>}}
 
 :::
