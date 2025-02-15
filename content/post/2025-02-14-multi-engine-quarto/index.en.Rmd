@@ -34,13 +34,13 @@ Have you ever needed to present the code and output for several languages in the
 * if you had a combination of languages from which you can call one from the other, such as using **reticulate** from within R to run Python, or using **Statamarkdown** from within R to run Stata, then these can be combined in a Quarto document;
 * or for some languages like R and Python we could even embed full WebAssembly implementations of the language (webR and Pyodide respectively) within a webpage (but that seems a little overkill for my work).
 
-I recently stumbled across [Quarto's embed shortcode](https://quarto.org/docs/authoring/notebook-embed.html). This allows another (or selected cells from another) Quarto document to be included/embedded in a Quarto document. A thought occurred to me, what if the embedded Quarto document/s used a different engine? Would that work? Remarkably (to me) the answer turns out to be that it does!
+I recently stumbled across [Quarto's embed shortcode](https://quarto.org/docs/authoring/notebook-embed.html). This allows another (or selected cells from another) Quarto document to be included/embedded in a Quarto document. A thought occurred to me, what if the embedded Quarto document/s used a different engine? Would that work? This isn't explicitly mentioned on the documentation page so I gave it a go. Remarkably, the answer turns out to be that it works!
 
 ## Using the embed shortcode to create an effectively multi-engine Quarto document
 
 In the example below I'm using I'm using a [tabset](https://quarto.org/docs/output-formats/html-basics.html#tabsets) in a html document using the knitr engine. We embed the documents using the alternative engines using the `{{</* embed */>}}` shortcode as follows.
 
-````{verbatim, file="multi-engine.qmd", lang="markdown"}
+````{verbatim, file="multi-engine-escaped.qmd", lang="markdown"}
 ````
 
 * *python-code.qmd* uses the `jupyter: python3` engine ([documentation for using Python in Quarto](https://quarto.org/docs/computations/python.html));
@@ -49,7 +49,7 @@ In the example below I'm using I'm using a [tabset](https://quarto.org/docs/outp
 
 I am assuming that you have setup each engine beforehand.
 
-Rendering the master Quarto document results in the embedded documents being executed and embedded within it.
+Rendering the master Quarto document results in the embedded documents being executed and embedded within it. In the code above, in each case, I embed the whole Quarto document but you can also specify a code block id (or if the embedded document is a Jupyter Notebook, *.ipynb* file, you can specify a cell id, label, or tag).
 
 ## Summary
 
