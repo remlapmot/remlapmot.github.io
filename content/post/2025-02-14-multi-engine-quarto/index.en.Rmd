@@ -52,7 +52,7 @@ Of course, I assume that you have setup each engine beforehand.
 Rendering the Quarto document above results in the embedded documents being executed and embedded within it. I've included the output below (and the full source code is in [this repository](https://github.com/remlapmot/quarto-multi-engine-using-embed-example)). Click the tabs to show the code and output for each language.
 
 <p align="center">
-<iframe src="https://remlapmot.github.io/quarto-multi-engine-using-embed-example/" height="750" width="700">
+<iframe src="https://remlapmot.github.io/quarto-multi-engine-using-embed-example/" height="750" width="800">
 </iframe>
 </p>
 
