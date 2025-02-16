@@ -29,6 +29,56 @@ toc: true
 
 ## Introduction
 
+Inline code has been a feature of knitr/rmarkdown for a while. Yihui Xie and Christophe Devreux have used it to pull off some fantastic tricks. My favourite is using it to write out R Markdown/Markdown code within an R Markdown document. The following example is from the R Markdown Cookbook (TODO: find example, add URL).
+
+````{verbatim, lang="markdown"}
+`r if knitr::is_pdf_output() some_code_to_run_when_rendering_to_pdf`
+````
+
+My interest in this lies in creating tutoral/exercises to students in which my aim is to have a single R Markdown file which can render both the questions document and a document with the solutions.
+
+I wrote a little package, [**knitexercise**](https://remlapmot.github.io/knitexercise/) to help with this.
+
+## Conditional content in Quarto
+
+### R: knitr
+
+Yihui Xie and Christophe Devreux style approach. We toggle
+
+````{verbatim, lang="markdown"}
+---
+title: "Example exercise"
+author: "My Name"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = FALSE) # change to TRUE when knitting solutions
+```
+
+1. This is question 1. Which might have some R code you always want to show.
+   ```{r, include=TRUE}
+   # example code for the question
+   ```
+
+   ```{asis}
+   Paragraph text for the solution can be kept in the document in an `asis` chunk.
+   And solution R code in an `r` chunk.
+   Both of these will use the `include` value from the `setup` chunk.
+   ```
+    
+   ```{r}
+   # example code for the solution
+   ```
+
+2. This is question 2.
+````
+
+### R: Quarto
+
+[Nicola Rennie approach](https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/):
+
+
 
 ### Python
 
@@ -121,3 +171,19 @@ println("Hidden")
 println("Shown")
 ```
 ````
+
+## Parameterised reports
+
+An amazing feature of **knitr** is that chunk options can be R expressions.
+
+Remarkably we can also do this with a pure Quarto approach with the `! expr ...` notation.
+
+As far as I am aware, this is not yet possible for any other Quarto engine. However, passing the parameter values to our inline code above means that we can effectively achieve parameterised conditional content in a Quarto document for the jupyter python3 engine.
+
+````{verbatim, lang="markdown"}
+TODO
+```` 
+
+## Summary
+
+I have shown how to programmatically include conditional content for several different Quarto engines using inline code. I have also shown how the jupyter python3 engine can use this with parameterised Quarto documents.
