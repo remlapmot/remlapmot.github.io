@@ -8,6 +8,7 @@ categories:
 tags:
   - Quarto
   - R
+  - R Markdown
   - Stata
   - Python
   - Julia
