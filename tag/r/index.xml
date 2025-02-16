@@ -84,7 +84,7 @@ plot(x, y, type = &amp;quot;l&amp;quot;)
 &lt;p&gt;Rendering the Quarto document above results in the embedded documents being executed and embedded within it. I&amp;rsquo;ve included the output below (and the full source code is in 
 &lt;a href=&#34;https://github.com/remlapmot/quarto-multi-engine-using-embed-example&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this repository&lt;/a&gt;). Click the tabs to show the code and output for each language.&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;
-&lt;iframe src=&#34;https://remlapmot.github.io/quarto-multi-engine-using-embed-example/&#34; height=&#34;750&#34; width=&#34;800&#34;&gt;
+&lt;iframe src=&#34;https://remlapmot.github.io/quarto-multi-engine-using-embed-example/&#34; height=&#34;1075&#34; width=&#34;800&#34;&gt;
 &lt;/iframe&gt;
 &lt;/p&gt;
 &lt;p&gt;In the code above, in each case, I embed the whole Quarto document but you can also specify a specific code block id (or if the embedded document is a Jupyter Notebook, &lt;em&gt;.ipynb&lt;/em&gt; file, you can specify a cell id, label, or tag).&lt;/p&gt;
