@@ -1,0 +1,29 @@
+---
+title: "Programmatically conditional content inclusion and exclusion for Quarto documents using any language allowing inline code"
+author: Package Build
+date: '2025-02-16'
+slug: quarto-conditional-content
+categories:
+  - Blog
+tags:
+  - Quarto
+  - R
+  - Stata
+  - Python
+  - Julia
+  - Jupyter
+subtitle: ''
+summary: ""
+authors: []
+lastmod: '2025-02-16T12:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of programmatically including conditional content in a Quarto document using the Jupyter python3 engine.'
+projects: []
+toc: true
+---
+
+## Introduction
