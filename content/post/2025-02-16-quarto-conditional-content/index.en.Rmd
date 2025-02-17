@@ -186,7 +186,7 @@ println("Shown")
 
 An amazing feature of **knitr** is that chunk options can be R expressions.
 
-Remarkably we can also do this with a pure Quarto approach with the `! expr ...` notation.
+Remarkably we can also do this with a pure Quarto approach with the [`! expr ...` YAML tag literal](https://quarto.org/docs/tools/rstudio.html#knitr-engine). This can be followed by R code which evaluates to a single YAML flow scalar.
 
 [Quarto parameters](https://quarto.org/docs/computations/parameters.html)
 
