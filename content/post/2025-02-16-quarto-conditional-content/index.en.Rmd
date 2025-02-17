@@ -196,6 +196,11 @@ As far as I am aware, this is not yet possible for any other Quarto engine. Howe
 TODO
 ```` 
 
+Summary about parameterised reports:
+
+* for the knitr engine, parameterisation works as expected;
+* 
+
 ## Summary
 
 I have shown how to programmatically include conditional content for several different Quarto engines using inline code. I have also shown how the jupyter python3 engine can use this with parameterised Quarto documents.
