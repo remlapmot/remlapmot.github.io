@@ -199,7 +199,11 @@ TODO
 Summary about parameterised reports:
 
 * for the knitr engine, parameterisation works as expected;
-* 
+* for the `jupyter: python3` engine:
+  * parameterisation works, but in Quarto 1.6.40 the _Parameters injected_ message is needlessly displayed
+  * passing environment variables to Python seems to be broken, after a first render the value of the variable seems cached and difficult to change on subsequent renders
+* for `engine: julia` parameterisation works as expected
+* for `jupyter: nbstata` environment variables can be read by Stata as expected
 
 ## Summary
 
