@@ -76,9 +76,20 @@ knitr::opts_chunk$set(include = FALSE) # change to TRUE when knitting solutions
 
 ### R: Quarto
 
-[Nicola Rennie approach](https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/):
+[Nicola Rennie approach](https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/) is to use the inline code to write out Quarto's [conditional content classes](https://quarto.org/docs/authoring/conditional.html).
 
+````{verbatim, lang="markdown"}
+---
+params: 
+  hide_answers: true
+---
 
+`r if (params$hide_answers) "::: {.content-hidden}"`
+
+Text and code for answer
+
+`r if (params$hide_answers) ":::"`
+````
 
 ### Python
 
