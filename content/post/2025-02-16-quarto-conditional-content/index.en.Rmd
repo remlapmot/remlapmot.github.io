@@ -99,28 +99,27 @@ format: html
 ---
 
 ```{python}
+#| tags: [parameters]
+hide_answers = True
+```
+
+```{python}
 #| include: false
 from IPython.display import Markdown
 ```
 
-```{python}
-hide_some_things = True
-```
-
-`{python} Markdown("::: {.content-hidden}") if hide_some_things else None`
+`{python} Markdown("::: {.content-hidden}") if hide_answers else None`
 
 ```{python}
 print("Hidden")
 ```
 
-`{python} Markdown(":::") if hide_some_things else None`
-
-```{python}
-print("Shown")
-```
+`{python} Markdown(":::") if hide_answers else None`
 ````
 
 ### Stata
+
+The Stata case is trickier. The nbstata Jupyter kernel allows inline code, however this must be a `display` command, so we cannot write the if statement within the inline code. This is overcome by saving the different strings at the top of the document. Also we cannot use local macros within inline code, so we use scalars.
 
 ````{verbatim, lang="markdown"}
 ---
@@ -188,6 +187,8 @@ println("Shown")
 An amazing feature of **knitr** is that chunk options can be R expressions.
 
 Remarkably we can also do this with a pure Quarto approach with the `! expr ...` notation.
+
+[Quarto parameters](https://quarto.org/docs/computations/parameters.html)
 
 As far as I am aware, this is not yet possible for any other Quarto engine. However, passing the parameter values to our inline code above means that we can effectively achieve parameterised conditional content in a Quarto document for the jupyter python3 engine.
 
