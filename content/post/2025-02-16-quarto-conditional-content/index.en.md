@@ -1,5 +1,5 @@
 ---
-title: "Programmatically including conditional content for Quarto engines that allow inline code"
+title: "Creating R, Python, Stata, and Julia tutorial worksheets (with and without solutions) using Quarto"
 author: Package Build
 date: '2025-02-18'
 slug: quarto-conditional-content
@@ -13,7 +13,7 @@ tags:
   - Python
   - Julia
   - Jupyter
-subtitle: ''
+subtitle: 'Programmatically including conditional content for Quarto engines that allow inline code'
 summary: "How to programmatically include conditional content for several Quarto engines (knitr, jupyter: python3, jupyter: nbstata, and engine: julia) using parameters or environment variables to toggle inline code to write Markdown in the Quarto documents. I use this to write exercise/tutorial documents in which a single Quarto document is used to output both the questions and solutions documents."
 authors: []
 lastmod: '2025-02-18T11:00:00+00:00'
