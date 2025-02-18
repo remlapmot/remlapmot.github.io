@@ -259,4 +259,4 @@ I found that passing environment variables, to the Jupyter python3 and the Julia
 
 ## Summary
 
-I have shown how to programmatically include conditional content for several different Quarto engines using parameters or environment variables to toggle inline code to write Quarto Markdown.
+I have shown how to programmatically include conditional content for several different Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents.
