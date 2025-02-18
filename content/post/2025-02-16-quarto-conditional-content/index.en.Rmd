@@ -120,6 +120,13 @@ Note that if you use the curly braces around the `r`, \`{r} \`, to write you inl
 `{r} if (params$hide_answers) I("::: {.content-hidden}")`
 ````
 
+Then we can have a shell script to render our questions and solutions documents as follows.
+
+```sh
+quarto render exercise-r.qmd -P hide_answers:TRUE -o exercise-r-questions.html
+quarto render exercise-r.qmd -P hide_answers:FALSE -o exercise-r-solutions.html
+```
+
 ### Python
 
 I realised I could adapt Nicola Rennie's approach for other engines. For the `jupyter: python3` engine we can do so as follows.
@@ -149,11 +156,11 @@ print("Hidden")
 `{python} Markdown(":::") if hide_answers else None`
 ````
 
-And then we can have a shell script to render our questions and solutions documents with the following two commands.
+The shell script to render our questions and solutions documents is as follows.
 
 ```sh
-quarto render exercise.qmd -P hide_answers:True -o exercise-questions.html
-quarto render exercise.qmd -P hide_answers:False -o exercise-solutions.html
+quarto render exercise-python.qmd -P hide_answers:True -o exercise-python-questions.html
+quarto render exercise-python.qmd -P hide_answers:False -o exercise-python-solutions.html
 ```
 
 The only problem with this is that currently the Papermill output cell about the parameters is printed in the document. 
@@ -197,8 +204,8 @@ display "Hidden"
 The shell script to render the documents is then as follows.
 
 ```sh
-HIDE_ANSWERS_STATA=1 quarto render exercise.qmd -o exercise-questions.html
-HIDE_ANSWERS_STATA=0 quarto render exercise.qmd -o exercise-solutions.html
+HIDE_ANSWERS_STATA=1 quarto render exercise-stata.qmd -o exercise-stata-questions.html
+HIDE_ANSWERS_STATA=0 quarto render exercise-stata.qmd -o exercise-stata-solutions.html
 ```
 
 ### Julia
