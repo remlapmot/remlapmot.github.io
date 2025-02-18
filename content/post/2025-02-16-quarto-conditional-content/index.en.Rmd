@@ -31,7 +31,7 @@ toc: true
 
 I regularly need to produce exercises/tutorials for my students. One fantastic feature of R Markdown is that it allows me to create one R Markdown document which can be rendered to both the question document and the solutions document. This is achieved by toggling knitr chunk options such as eval, echo, and include, and using asis chunks to include the text for the solutions. I wrote a little package, [**knitexercise**](https://remlapmot.github.io/knitexercise/) to help with this.
 
-Additionally, the toggling of the knitr chunk options can be parameterised and so it is possible to have an R script which contains the code to conveniently produce both questions and solutions documents. An example R Markdown file, _exercise.Rmd_, might look like the following.
+The toggling of the knitr chunk options can be parameterised making it possible to have an R script which contains the code to conveniently produce both questions and solutions documents. An example R Markdown file, _exercise.Rmd_, might look like the following.
 
 ````{verbatim, lang="plaintext"}
 ---
@@ -68,7 +68,7 @@ knitr::opts_chunk$set(include = params$solutions)
 And the rendering script might look like this.
 
 ```r
-rmarkdown::render("exercise.Rmd", 
+rmarkdown::render("exercise.Rmd",
   output_file = "exercise-questions",
   params = list(solutions = FALSE, title = "Example exercise: Questions")
 )
@@ -80,7 +80,7 @@ rmarkdown::render("exercise.Rmd",
 
 ### Inline code
 
-Inline code has been a feature of knitr for a while. Yihui Xie and Christophe Dervieux have used it to pull off some fantastic tricks. My favourite trick is using it to programmatically write out R Markdown/Markdown code within an R Markdown document when a certain condition is met.
+Inline code has been a [feature of R Markdown](https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html) for a while. Yihui Xie and Christophe Dervieux have used it to pull off some fantastic tricks. My favourite trick is using it to programmatically write out R Markdown/Markdown code within an R Markdown document when a certain condition is met.
 
 ````{verbatim, lang="plaintext"}
 `r if (knitr::is_latex_output()) "...some_Markdown_to_include_when_rendering_to_pdf..."`
@@ -88,7 +88,7 @@ Inline code has been a feature of knitr for a while. Yihui Xie and Christophe De
 
 ### The problem
 
-knitr is incredibly flexible because we can include R objects as document and chunk options. When translating this to a pure Quarto version we can do this in a document using the knitr engine using the [`! expr ...` YAML tag literal](https://quarto.org/docs/tools/rstudio.html#knitr-engine). As far as I am aware, this is not yet possible for any other Quarto engine. Despite this my aim was to see whether I could achieve parameterised conditional content inclusion/exclusion in a Quarto document using other engines.
+R Markdown is incredibly flexible because we can include R objects as document and chunk options. When translating this to a pure Quarto version we can do this in a document using in the knitr engine using the [`! expr ...` YAML tag literal](https://quarto.org/docs/tools/rstudio.html#knitr-engine). As far as I am aware, this is not yet possible for any other Quarto engine. Despite this my aim was to see whether I could achieve parameterised conditional content inclusion/exclusion in a Quarto document using other engines.
 
 ## Programmatically including conditional content in Quarto documents
 
@@ -96,17 +96,18 @@ knitr is incredibly flexible because we can include R objects as document and ch
 
 I have already shown the R Markdown approach above.
 
-For Quarto, [Nicola Rennie](https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/) used inline code to write out Quarto's [conditional content classes](https://quarto.org/docs/authoring/conditional.html).
+For Quarto using the knitr engine, in a blog post [Nicola Rennie](https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/) used inline code to write out Quarto's [conditional content classes](https://quarto.org/docs/authoring/conditional.html).
 
 ````{verbatim, lang="plaintext"}
 ---
-params: 
+format: html
+params:
   hide_answers: true
 ---
 
 `r if (params$hide_answers) "::: {.content-hidden}"`
 
-Text and code for answer
+Text and code for answers.
 
 `r if (params$hide_answers) ":::"`
 ````
@@ -147,7 +148,7 @@ from IPython.display import Markdown
 `{python} Markdown("::: {.content-hidden}") if hide_answers else None`
 
 ```{python}
-print("Hidden")
+print("Hidden in questions")
 ```
 
 `{python} Markdown(":::") if hide_answers else None`
@@ -168,7 +169,7 @@ In Jupyter this can apparently be suppressed by passing the `--report-mode` flag
 
 ### Stata
 
-The Stata case involved two additional tricks. First, the [nbstata Jupyter kernel](https://hugetim.github.io/nbstata/) allows inline code, however this must be a `display` command, so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can't use local macros) at the top of the document as follows. Second, I didn't try but I suspect the nbstata kernel doesn't support parameters, and so I achieved the toggling of the code using an environmental variable, e.g. `HIDE_ANSWERS_STATA`.
+The Stata case involved two additional tricks. First, the [nbstata Jupyter kernel](https://hugetim.github.io/nbstata/) allows inline code, however this must be a [`display` command](https://www.stata.com/manuals/pdisplay.pdf), so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can't use local macros) at the top of the document as follows. Second, I didn't try but I suspect the nbstata kernel doesn't support parameters, and so I achieved the toggling of the code using an environmental variable, e.g. `HIDE_ANSWERS_STATA`.
 
 ````{verbatim, lang="plaintext"}
 ---
@@ -192,7 +193,7 @@ else {
 `{stata} scalar(hide_answers_open)`
 
 ```{stata}
-display "Hidden"
+display "Hidden in questions"
 ```
 
 `{stata} scalar(hide_answers_close)`
@@ -207,7 +208,7 @@ HIDE_ANSWERS_STATA=0 quarto render exercise-stata.qmd -o exercise-stata-solution
 
 ### Julia
 
-For the native Julia engine I found that Quarto's parameterisation worked and that I could avoid the inclusion of the injected parameters cell output by leaving the chunk with the `[parameters]` tag empty.
+For the native Julia engine I found that Quarto's parameterisation worked and that I could avoid the inclusion of the injected parameters cell output by leaving the chunk with the `parameters` tag empty.
 
 ````{verbatim, lang="plaintext"}
 ---
@@ -227,7 +228,7 @@ using Markdown
 `{julia} hide_answers ? md"::: {.content-hidden}" : md""`
 
 ```{julia}
-println("Hidden")
+println("Hidden in questions")
 ```
 
 `{julia} hide_answers ? md":::" : md""`
@@ -244,9 +245,9 @@ quarto render exercise-julia.qmd -P hide_answers:false -o exercise-julia-solutio
 
 I found that passing environment variables, to the Jupyter python3 and the Julia engine is unreliable/broken. Admittedly, I was not using Quarto in project mode with an [*_environment* file](https://quarto.org/docs/projects/environment.html), but honestly it doesn't feel to me I should need to do that for a single document. 
 
-The problem I found was that after a first render the value of the environment variable seems to be cached and difficult to change on subsequent renders. And using the **dotenv** package to access environment variables was broken in the same way.
+The problem I found was that after a first render the value of the environment variable seems to be cached within the Quarto output document and it is difficult to change on subsequent renders. And using the [**dotenv** package](https://pypi.org/project/python-dotenv/) to access environment variables was broken in the same way.
 
-For `engine: julia` I also found that passing environment variables is unreliable and like for the python3 engine I experienced environment variable values being stuck after the first render. Using the Julia **DotEnv** package did seem to be reliable.
+For `engine: julia` I also found that passing environment variables is unreliable and like for the python3 engine I experienced environment variable values being stuck after the first render. Using the Julia [**DotEnv** package](https://juliapackages.com/p/dotenv) did seem to be reliable.
 
 ## Summary
 
