@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Programmatically including conditional content for Quarto engines that allow inline code</title>
+      <title>Creating R, Python, Stata, and Julia tutorial worksheets (with and without solutions) using Quarto</title>
       <link>https://remlapmot.github.io/post/2025/quarto-conditional-content/</link>
       <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2025/quarto-conditional-content/</guid>
