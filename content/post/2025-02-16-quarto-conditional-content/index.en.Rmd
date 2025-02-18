@@ -39,7 +39,21 @@ My interest in this lies in creating tutoral/exercises to students in which my a
 
 I wrote a little package, [**knitexercise**](https://remlapmot.github.io/knitexercise/) to help with this.
 
-## Conditional content in Quarto
+### Parameterised reports
+
+An amazing feature of **knitr** is that chunk options can be R expressions.
+
+Remarkably we can also do this with a pure Quarto approach with the [`! expr ...` YAML tag literal](https://quarto.org/docs/tools/rstudio.html#knitr-engine). This can be followed by R code which evaluates to a single YAML flow scalar.
+
+[Quarto parameters](https://quarto.org/docs/computations/parameters.html)
+
+As far as I am aware, this is not yet possible for any other Quarto engine. However, passing the parameter values to our inline code above means that we can effectively achieve parameterised conditional content in a Quarto document for the jupyter python3 engine.
+
+````{verbatim, lang="markdown"}
+TODO
+```` 
+
+## Programmatically including conditional content in Quarto documents
 
 ### R: knitr
 
@@ -182,29 +196,20 @@ println("Shown")
 ```
 ````
 
-## Parameterised reports
+## Problems I encountered
 
-An amazing feature of **knitr** is that chunk options can be R expressions.
-
-Remarkably we can also do this with a pure Quarto approach with the [`! expr ...` YAML tag literal](https://quarto.org/docs/tools/rstudio.html#knitr-engine). This can be followed by R code which evaluates to a single YAML flow scalar.
-
-[Quarto parameters](https://quarto.org/docs/computations/parameters.html)
-
-As far as I am aware, this is not yet possible for any other Quarto engine. However, passing the parameter values to our inline code above means that we can effectively achieve parameterised conditional content in a Quarto document for the jupyter python3 engine.
-
-````{verbatim, lang="markdown"}
-TODO
-```` 
-
-Summary about parameterised reports:
+I found that passing environment variables, to the Jupyter python3 and the Julia engine is unreliable/broken. Here is a summary of what I experienced.
 
 * for the knitr engine, parameterisation works as expected;
 * for the `jupyter: python3` engine:
-  * parameterisation works, but in Quarto 1.6.40 the _Parameters injected_ message is needlessly displayed
-  * passing environment variables to Python seems to be broken, after a first render the value of the variable seems cached and difficult to change on subsequent renders
+  * parameterisation works, but in Quarto 1.6.40 the output of the _Parameters injected_ cell is needlessly displayed
+  * passing environment variables to Python seems to be broken, in that after a first render the value of the environment variable seems cached and difficult to change on subsequent renders
+  * even using the **dotenv** package was unreliable
 * for `engine: julia` parameterisation works as expected
+  * however, passing environment variables is also unreliable and like for the python3 engine I experience environment variable values being stuck after the first render
+  * using the Julia **DotEnv** package did seem to be reliable
 * for `jupyter: nbstata` environment variables can be read by Stata as expected
 
 ## Summary
 
-I have shown how to programmatically include conditional content for several different Quarto engines using inline code. I have also shown how the jupyter python3 engine can use this with parameterised Quarto documents.
+I have shown how to programmatically include conditional content for several different Quarto engines using parameters or environment variables to toggle inline code to write Quarto Markdown.
