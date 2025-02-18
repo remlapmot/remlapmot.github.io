@@ -14,7 +14,7 @@ tags:
   - Julia
   - Jupyter
 subtitle: ''
-summary: "How to programmatically include conditional content for several Quarto engines (knitr, jupyter: python3, jupyter: nbstata, and engine: julia) using parameters or environment variables to toggle inline code to write Markdown in the Quarto documents."
+summary: "How to programmatically include conditional content for several Quarto engines (knitr, jupyter: python3, jupyter: nbstata, and engine: julia) using parameters or environment variables to toggle inline code to write Markdown in the Quarto documents. I use this to write exercise/tutorial documents in which a single Quarto document is used to output both the questions and solutions documents."
 authors: []
 lastmod: '2025-02-18T11:00:00+00:00'
 featured: no
@@ -249,12 +249,12 @@ quarto render exercise-julia.qmd -P hide_answers:false -o exercise-julia-solutio
 
 ## Problems with environment variables
 
-I found that passing environment variables, to the Jupyter python3 and the Julia engine is unreliable/broken. Admittedly, I was not using Quarto in project mode with an [*_environment* file](https://quarto.org/docs/projects/environment.html), but honestly it doesn't feel to me I should need to do that for a single document. 
+I found that passing environment variables, to the `jupyter: python3` and `engine: julia` is unreliable/broken. Admittedly, I was not using Quarto in project mode with an [*_environment* file](https://quarto.org/docs/projects/environment.html), but honestly it doesn't feel to me I should need to do that for a single document. 
 
-The problem I found was that after a first render the value of the environment variable seems to be cached within the Quarto output document and it is difficult to change on subsequent renders. And using the [**dotenv** package](https://pypi.org/project/python-dotenv/) to access environment variables was broken in the same way.
+The problem I found was that after a first render the value of the environment variable seems to be cached within the Quarto output document and I couldn't change it on subsequent renders. I also found that using the [**dotenv** package](https://pypi.org/project/python-dotenv/) to access was broken in the same way.
 
-For `engine: julia` I also found that passing environment variables is unreliable and like for the python3 engine I experienced environment variable values being stuck after the first render. Using the Julia [**DotEnv** package](https://juliapackages.com/p/dotenv) did seem to be reliable.
+For `engine: julia` I also found that passing environment variables is unreliable and like for the `jupyter: python3` engine I experienced environment variable values being stuck after the first render. However, using the Julia [**DotEnv** package](https://juliapackages.com/p/dotenv) did seem to be reliable.
 
 ## Summary
 
-I have shown how to programmatically include conditional content for several Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents.
+I have shown how to programmatically include conditional content for several Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents. I use this to write exercise/tutorial documents in which a single Quarto document is used to output both the questions and solutions documents.
