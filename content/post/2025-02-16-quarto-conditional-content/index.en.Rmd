@@ -105,6 +105,11 @@ params:
   hide_answers: true
 ---
 
+```{r}
+#| include: false
+# An R code chunk, so inline code is not first in document.
+```
+
 `r if (params$hide_answers) "::: {.content-hidden}"`
 
 Text and code for answers.
@@ -121,8 +126,8 @@ Note that if you use the curly braces around the `r` to write you inline code th
 Then we can have a shell script to render our questions and solutions documents as follows.
 
 ```sh
-quarto render exercise-r.qmd -P hide_answers:TRUE -o exercise-r-questions.html
-quarto render exercise-r.qmd -P hide_answers:FALSE -o exercise-r-solutions.html
+quarto render exercise-r.qmd -o exercise-r-questions.html
+quarto render exercise-r.qmd -P hide_answers:false -o exercise-r-solutions.html
 ```
 
 ### Python
@@ -136,6 +141,7 @@ jupyter: python3
 ---
 
 ```{python}
+#| include: false
 #| tags: [parameters]
 hide_answers = True
 ```
@@ -145,19 +151,19 @@ hide_answers = True
 from IPython.display import Markdown
 ```
 
-`{python} Markdown("::: {.content-hidden}") if hide_answers else None`
+`{python} Markdown("::: {.content-hidden}") if hide_answers else Markdown(" ")`
 
 ```{python}
 print("Hidden in questions")
 ```
 
-`{python} Markdown(":::") if hide_answers else None`
+`{python} Markdown(":::") if hide_answers else Markdown(" ")`
 ````
 
 The shell script to render our questions and solutions documents is as follows.
 
 ```sh
-quarto render exercise-python.qmd -P hide_answers:True -o exercise-python-questions.html
+quarto render exercise-python.qmd -o exercise-python-questions.html
 quarto render exercise-python.qmd -P hide_answers:False -o exercise-python-solutions.html
 ```
 
