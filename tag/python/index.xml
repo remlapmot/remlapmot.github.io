@@ -5,12 +5,208 @@
     <link>https://remlapmot.github.io/tag/python/</link>
       <atom:link href="https://remlapmot.github.io/tag/python/index.xml" rel="self" type="application/rss+xml" />
     <description>Python</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 15 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 18 Feb 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
       <title>Python</title>
       <link>https://remlapmot.github.io/tag/python/</link>
     </image>
+    
+    <item>
+      <title>Programmatically including conditional content for Quarto engines that allow inline code</title>
+      <link>https://remlapmot.github.io/post/2025/quarto-conditional-content/</link>
+      <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/quarto-conditional-content/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I regularly need to produce exercises/tutorials for my students. One fantastic feature of R Markdown is that it allows me to create one R Markdown document which can be rendered to both the question document and the solutions document. This is achieved by toggling knitr chunk options such as eval, echo, and include, and using asis chunks to include the text for the solutions. I wrote a little package, 
+&lt;a href=&#34;https://remlapmot.github.io/knitexercise/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;knitexercise&lt;/strong&gt;&lt;/a&gt; to help with this.&lt;/p&gt;
+&lt;p&gt;The toggling of the knitr chunk options can be parameterised making it possible to have an R script which contains the code to conveniently produce both questions and solutions documents. An example R Markdown file, &lt;em&gt;exercise.Rmd&lt;/em&gt;, might look like the following.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+title: &amp;quot;`r params$title`&amp;quot;
+output: html_document
+params:
+  solutions: TRUE
+  title: &amp;quot;Example exercise: Solutions&amp;quot;
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = params$solutions)
+```
+
+1. This is question 1. Which might have some R code you always want to show.
+
+   ```{r, include=TRUE}
+   # example code for the question
+   ```
+
+   ```{asis}
+   Paragraph text for the solution can be kept in the document in an `asis` chunk.
+   And solution R code in an `r` chunk.
+   Both of these will use the `include` value from the `setup` chunk.
+   ```
+    
+   ```{r}
+   # example code for the solution
+   ```
+
+2. This is question 2 ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And the rendering script might look like this.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;rmarkdown::render(&amp;quot;exercise.Rmd&amp;quot;,
+  output_file = &amp;quot;exercise-questions&amp;quot;,
+  params = list(solutions = FALSE, title = &amp;quot;Example exercise: Questions&amp;quot;)
+)
+
+rmarkdown::render(&amp;quot;exercise.Rmd&amp;quot;,
+  output_file = &amp;quot;exercise-solutions&amp;quot;
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;inline-code&#34;&gt;Inline code&lt;/h3&gt;
+&lt;p&gt;Inline code has been a 
+&lt;a href=&#34;https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;feature of R Markdown&lt;/a&gt; for a while. Yihui Xie and Christophe Dervieux have used it to pull off some fantastic tricks. My favourite trick is using it to programmatically write out R Markdown/Markdown code within an R Markdown document when a certain condition is met.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;`r if (knitr::is_latex_output()) &amp;quot;...some_Markdown_to_include_when_rendering_to_pdf...&amp;quot;`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;the-problem&#34;&gt;The problem&lt;/h3&gt;
+&lt;p&gt;R Markdown is incredibly flexible because we can include R objects as document and chunk options. When translating this to a pure Quarto version we can do this in a document using in the knitr engine using the 
+&lt;a href=&#34;https://quarto.org/docs/tools/rstudio.html#knitr-engine&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;! expr ...&lt;/code&gt; YAML tag literal&lt;/a&gt;. As far as I am aware, this is not yet possible for any other Quarto engine. Despite this my aim was to see whether I could achieve parameterised conditional content inclusion/exclusion in a Quarto document using other engines.&lt;/p&gt;
+&lt;h2 id=&#34;programmatically-including-conditional-content-in-quarto-documents&#34;&gt;Programmatically including conditional content in Quarto documents&lt;/h2&gt;
+&lt;h3 id=&#34;r-knitr-and-quarto&#34;&gt;R: knitr and Quarto&lt;/h3&gt;
+&lt;p&gt;I have already shown the R Markdown approach above.&lt;/p&gt;
+&lt;p&gt;For Quarto using the knitr engine, in a blog post 
+&lt;a href=&#34;https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nicola Rennie&lt;/a&gt; used inline code to write out Quarto&amp;rsquo;s 
+&lt;a href=&#34;https://quarto.org/docs/authoring/conditional.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;conditional content classes&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+format: html
+params:
+  hide_answers: true
+---
+
+```{r}
+#| include: false
+# An R code chunk, so inline code is not first in document.
+```
+
+`r if (params$hide_answers) &amp;quot;::: {.content-hidden}&amp;quot;`
+
+Text and code for answers.
+
+`r if (params$hide_answers) &amp;quot;:::&amp;quot;`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that if you use the curly braces around the &lt;code&gt;r&lt;/code&gt; to write you inline code then you need to enclose the output string in the 
+&lt;a href=&#34;https://quarto.org/docs/computations/inline-code.html#markdown-output&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;I()&lt;/code&gt; function&lt;/a&gt; as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;`{r} if (params$hide_answers) I(&amp;quot;::: {.content-hidden}&amp;quot;)`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we can have a shell script to render our questions and solutions documents as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;quarto render exercise-r.qmd -o exercise-r-questions.html
+quarto render exercise-r.qmd -P hide_answers:false -o exercise-r-solutions.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;python&#34;&gt;Python&lt;/h3&gt;
+&lt;p&gt;I realised I could adapt Nicola Rennie&amp;rsquo;s approach for other engines. For the &lt;code&gt;jupyter: python3&lt;/code&gt; engine we can do so as follows, the following code uses 
+&lt;a href=&#34;https://quarto.org/docs/computations/parameters.html#jupyter&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quarto&amp;rsquo;s parameters feature&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+format: html
+jupyter: python3
+---
+
+```{python}
+#| include: false
+#| tags: [parameters]
+hide_answers = True
+```
+
+```{python}
+#| include: false
+from IPython.display import Markdown
+```
+
+`{python} Markdown(&amp;quot;::: {.content-hidden}&amp;quot;) if hide_answers else Markdown(&amp;quot; &amp;quot;)`
+
+```{python}
+print(&amp;quot;Hidden in questions&amp;quot;)
+```
+
+`{python} Markdown(&amp;quot;:::&amp;quot;) if hide_answers else Markdown(&amp;quot; &amp;quot;)`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The shell script to render our questions and solutions documents is as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;quarto render exercise-python.qmd -o exercise-python-questions.html
+quarto render exercise-python.qmd -P hide_answers:False -o exercise-python-solutions.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The only problem with this is that currently the Papermill output cell about the injected parameters is printed in the document.&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-conditional-content/img/injected-parameters-cell.png&#34; alt=&#34;Screenshot of the injected parameters cell in a Quarto document.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;p&gt;In Jupyter this can apparently be suppressed by passing the &lt;code&gt;--report-mode&lt;/code&gt; flag, but I couldn&amp;rsquo;t work out how to do that in Quarto. I believe it will be possible to suppress this output in future versions of Quarto (I&amp;rsquo;m using the current latest release version of Quarto 1.6.40).&lt;/p&gt;
+&lt;h3 id=&#34;stata&#34;&gt;Stata&lt;/h3&gt;
+&lt;p&gt;The Stata case involved two additional tricks. First, the 
+&lt;a href=&#34;https://hugetim.github.io/nbstata/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nbstata Jupyter kernel&lt;/a&gt; allows inline code, however this must be a 
+&lt;a href=&#34;https://www.stata.com/manuals/pdisplay.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;display&lt;/code&gt; command&lt;/a&gt;, so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can&amp;rsquo;t use local macros) at the top of the document as follows. Second, I didn&amp;rsquo;t try but I suspect the nbstata kernel doesn&amp;rsquo;t support parameters, and so I achieved the toggling of the code using an environmental variable, e.g. &lt;code&gt;HIDE_ANSWERS_STATA&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+format: html
+jupyter: nbstata
+---
+
+```{stata}
+*| include: false
+local hide_answers : env HIDE_ANSWERS_STATA
+if (`hide_answers&#39;) {
+    scalar hide_answers_open = &amp;quot;::: {.content-hidden}&amp;quot;
+    scalar hide_answers_close = &amp;quot;:::&amp;quot;     
+}
+else {
+    scalar hide_answers_open = &amp;quot; &amp;quot;
+    scalar hide_answers_close = &amp;quot; &amp;quot;
+}
+```
+
+`{stata} scalar(hide_answers_open)`
+
+```{stata}
+display &amp;quot;Hidden in questions&amp;quot;
+```
+
+`{stata} scalar(hide_answers_close)`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The shell script to render the documents is then as follows, here we define the environment variable before the call to &lt;code&gt;quarto&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;HIDE_ANSWERS_STATA=1 quarto render exercise-stata.qmd -o exercise-stata-questions.html
+HIDE_ANSWERS_STATA=0 quarto render exercise-stata.qmd -o exercise-stata-solutions.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;julia&#34;&gt;Julia&lt;/h3&gt;
+&lt;p&gt;For the native Julia engine I found that Quarto&amp;rsquo;s parameterisation worked and that I could avoid the inclusion of the injected parameters cell output by leaving the chunk with the &lt;code&gt;parameters&lt;/code&gt; tag empty.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+format: html
+engine: julia
+---
+
+```{julia}
+#| tags: [parameters]
+```
+
+```{julia}
+#| include: false
+using Markdown
+```
+
+`{julia} hide_answers ? md&amp;quot;::: {.content-hidden}&amp;quot; : md&amp;quot;&amp;quot;`
+
+```{julia}
+println(&amp;quot;Hidden in questions&amp;quot;)
+```
+
+`{julia} hide_answers ? md&amp;quot;:::&amp;quot; : md&amp;quot;&amp;quot;`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The shell script to render the documents is then as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;quarto render exercise-julia.qmd -P hide_answers:true -o exercise-julia-questions.html
+quarto render exercise-julia.qmd -P hide_answers:false -o exercise-julia-solutions.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;problems-with-environment-variables&#34;&gt;Problems with environment variables&lt;/h2&gt;
+&lt;p&gt;I found that passing environment variables, to the &lt;code&gt;jupyter: python3&lt;/code&gt; and &lt;code&gt;engine: julia&lt;/code&gt; is unreliable/broken. Admittedly, I was not using Quarto in project mode with an 
+&lt;a href=&#34;https://quarto.org/docs/projects/environment.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;_environment&lt;/em&gt; file&lt;/a&gt;, but honestly it doesn&amp;rsquo;t feel to me I should need to do that for a single document.&lt;/p&gt;
+&lt;p&gt;The problem I found was that after a first render the value of the environment variable seems to be cached within the Quarto output document and I couldn&amp;rsquo;t change it on subsequent renders. I also found that using the 
+&lt;a href=&#34;https://pypi.org/project/python-dotenv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;dotenv&lt;/strong&gt; package&lt;/a&gt; to access was broken in the same way.&lt;/p&gt;
+&lt;p&gt;For &lt;code&gt;engine: julia&lt;/code&gt; I also found that passing environment variables is unreliable and like for the &lt;code&gt;jupyter: python3&lt;/code&gt; engine I experienced environment variable values being stuck after the first render. However, using the Julia 
+&lt;a href=&#34;https://juliapackages.com/p/dotenv&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;DotEnv&lt;/strong&gt; package&lt;/a&gt; did seem to be reliable.&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to programmatically include conditional content for several Quarto engines (&lt;code&gt;knitr&lt;/code&gt;, &lt;code&gt;jupyter: python3&lt;/code&gt;, &lt;code&gt;jupyter: nbstata&lt;/code&gt;, and &lt;code&gt;engine: julia&lt;/code&gt;) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents. I use this to write exercise/tutorial documents in which a single Quarto document is used to output both the questions and solutions documents.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode</title>
