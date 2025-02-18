@@ -129,7 +129,7 @@ Note that if you use the curly braces around the `r` to write you inline code th
 
 Then we can have a shell script to render our questions and solutions documents as follows.
 
-```sh
+```plaintext
 quarto render exercise-r.qmd -o exercise-r-questions.html
 quarto render exercise-r.qmd -P hide_answers:false -o exercise-r-solutions.html
 ```
@@ -167,7 +167,7 @@ print("Hidden in questions")
 
 The shell script to render our questions and solutions documents is as follows.
 
-```sh
+```plaintext
 quarto render exercise-python.qmd -o exercise-python-questions.html
 quarto render exercise-python.qmd -P hide_answers:False -o exercise-python-solutions.html
 ```
@@ -213,7 +213,7 @@ display "Hidden in questions"
 
 The shell script to render the documents is then as follows, here we define the environment variable before the call to `quarto`.
 
-```sh
+```plaintext
 HIDE_ANSWERS_STATA=1 quarto render exercise-stata.qmd -o exercise-stata-questions.html
 HIDE_ANSWERS_STATA=0 quarto render exercise-stata.qmd -o exercise-stata-solutions.html
 ```
@@ -249,7 +249,7 @@ println("Hidden in questions")
 
 The shell script to render the documents is then as follows.
 
-```sh
+```plaintext
 quarto render exercise-julia.qmd -P hide_answers:true -o exercise-julia-questions.html
 quarto render exercise-julia.qmd -P hide_answers:false -o exercise-julia-solutions.html
 ```
