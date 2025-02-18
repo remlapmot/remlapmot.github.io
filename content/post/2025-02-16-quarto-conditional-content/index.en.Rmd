@@ -1,5 +1,5 @@
 ---
-title: "Programmatically conditional content inclusion and exclusion for Quarto documents using any language allowing inline code"
+title: "Programmatically conditional content inclusion and exclusion for Quarto documents using any language engine allowing inline code"
 author: Package Build
 date: '2025-02-16'
 slug: quarto-conditional-content
@@ -29,48 +29,25 @@ toc: true
 
 ## Introduction
 
-Inline code has been a feature of knitr/rmarkdown for a while. Yihui Xie and Christophe Devreux have used it to pull off some fantastic tricks. My favourite is using it to write out R Markdown/Markdown code within an R Markdown document. The following example is from the R Markdown Cookbook (TODO: find example, add URL).
+I regularly need to produce exercises/tutorials for my students. One fantastic feature of R Markdown is that it allows me to create one R Markdown document which can be rendered to both the question document and the solutions document. This is achieved by toggling knitr chunk options such as eval, echo, and include, and using asis chunks to include the text for the solutions. I wrote a little package, [**knitexercise**](https://remlapmot.github.io/knitexercise/) to help with this.
 
-````{verbatim, lang="markdown"}
-`r if knitr::is_pdf_output() some_code_to_run_when_rendering_to_pdf`
-````
-
-My interest in this lies in creating tutoral/exercises to students in which my aim is to have a single R Markdown file which can render both the questions document and a document with the solutions.
-
-I wrote a little package, [**knitexercise**](https://remlapmot.github.io/knitexercise/) to help with this.
-
-### Parameterised reports
-
-An amazing feature of **knitr** is that chunk options can be R expressions.
-
-Remarkably we can also do this with a pure Quarto approach with the [`! expr ...` YAML tag literal](https://quarto.org/docs/tools/rstudio.html#knitr-engine). This can be followed by R code which evaluates to a single YAML flow scalar.
-
-[Quarto parameters](https://quarto.org/docs/computations/parameters.html)
-
-As far as I am aware, this is not yet possible for any other Quarto engine. However, passing the parameter values to our inline code above means that we can effectively achieve parameterised conditional content in a Quarto document for the jupyter python3 engine.
-
-````{verbatim, lang="markdown"}
-TODO
-```` 
-
-## Programmatically including conditional content in Quarto documents
-
-### R: knitr
-
-Yihui Xie and Christophe Devreux style approach. We toggle
+Additionally, the toggling of the knitr chunk options can be parameterised and so it is possible to have an R script which contains the code to conveniently produce both questions and solutions documents. An example R Markdown file, _exercise.Rmd_, might look like the following.
 
 ````{verbatim, lang="markdown"}
 ---
-title: "Example exercise"
-author: "My Name"
+title: "`r params$title`"
 output: html_document
+params:
+  solutions: TRUE
+  title: "Example exercise: Solutions"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(include = FALSE) # change to TRUE when knitting solutions
+knitr::opts_chunk$set(include = params$solutions)
 ```
 
 1. This is question 1. Which might have some R code you always want to show.
+
    ```{r, include=TRUE}
    # example code for the question
    ```
@@ -85,12 +62,44 @@ knitr::opts_chunk$set(include = FALSE) # change to TRUE when knitting solutions
    # example code for the solution
    ```
 
-2. This is question 2.
+2. This is question 2 ...
 ````
 
-### R: Quarto
+And the rendering script might look like this.
 
-[Nicola Rennie approach](https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/) is to use the inline code to write out Quarto's [conditional content classes](https://quarto.org/docs/authoring/conditional.html).
+```r
+rmarkdown::render("exercise.Rmd", 
+  output_file = "exercise-questions",
+  params = list(solutions = FALSE, title = "Example exercise: Questions")
+)
+
+rmarkdown::render("exercise.Rmd",
+  output_file = "exercise-solutions",
+  params = list(solutions = TRUE)
+)
+```
+
+### Inline code
+
+Inline code has been a feature of knitr for a while. Yihui Xie and Christophe Devreux have used it to pull off some fantastic tricks. My favourite is using it to programmatically write out R Markdown/Markdown code within an R Markdown document when a certain condition is met.
+
+````{verbatim, lang="markdown"}
+`r if knitr::is_latex_output() "...some_Markdown_to_include_when_rendering_to_pdf..."`
+````
+
+### The problem
+
+knitr is incredibly flexible because we can include R objects as document and chunk options. When translating this to a pure Quarto version we can do this in a document using the knitr using the [`! expr ...` YAML tag literal](https://quarto.org/docs/tools/rstudio.html#knitr-engine). As far as I am aware, this is not yet possible for any other Quarto engine.
+
+My aim was to see whether I could achieve parameterised conditional content inclusion/exclusion in a Quarto document using other engines.
+
+## Programmatically including conditional content in Quarto documents
+
+### R: knitr and Quarto
+
+I have already shown the R Markdown approach above.
+
+For Quarto, [Nicola Rennie](https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/) used inline code to write out Quarto's [conditional content classes](https://quarto.org/docs/authoring/conditional.html).
 
 ````{verbatim, lang="markdown"}
 ---
@@ -105,11 +114,20 @@ Text and code for answer
 `r if (params$hide_answers) ":::"`
 ````
 
+Note that if you use the curly braces around the `r`, \`{r} \`, to write you inline code then you need to enclose the output string in the [`I()` function](https://quarto.org/docs/computations/inline-code.html#markdown-output) as follows. 
+
+````{verbatim, lang="markdown"}
+`{r} if (params$hide_answers) I("::: {.content-hidden}")`
+````
+
 ### Python
+
+I realised I could adapt Nicola Rennie's approach for other engines. For the `jupyter: python3` engine we can do so as follows.
 
 ````{verbatim, lang="markdown"}
 ---
 format: html
+jupyter: python3
 ---
 
 ```{python}
@@ -131,49 +149,63 @@ print("Hidden")
 `{python} Markdown(":::") if hide_answers else None`
 ````
 
+And then we can have a shell script to render our questions and solutions documents with the following two commands.
+
+```sh
+quarto render exercise.qmd -P hide_answers:True -o exercise-questions.html
+quarto render exercise.qmd -P hide_answers:False -o exercise-solutions.html
+```
+
+The only problem with this is that currently the Papermill output cell about the parameters is printed in the document. 
+
+<img src="/post/2025/quarto-conditional-content/img/injected-parameters-cell.png" alt="Screenshot of the injected parameters cell in a Quarto document." width="630" style="display: block; margin: auto;">
+
+In Jupyter this can apparently be suppressed by passing the `--report-mode` flag, but I couldn't work out how to do that in Quarto. I believe it will be possible to suppress this output in future versions of Quarto.
+
 ### Stata
 
-The Stata case is trickier. The nbstata Jupyter kernel allows inline code, however this must be a `display` command, so we cannot write the if statement within the inline code. This is overcome by saving the different strings at the top of the document. Also we cannot use local macros within inline code, so we use scalars.
+The Stata case involved two additional tricks. First, the [nbstata Jupyter kernel](https://hugetim.github.io/nbstata/) allows inline code, however this must be a `display` command, so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can't use local macros) at the top of the document as follows. Second, I didn't try but I suspect the nbstata kernel doesn't support parameters, and so I achieved the toggling of the code using an environmental variable, e.g. `HIDE_ANSWERS_STATA`.
 
 ````{verbatim, lang="markdown"}
 ---
-format:
-  html:
-    embed-resources: true
+format: html
 jupyter: nbstata
 ---
 
 ```{stata}
 *| include: false
-scalar hide_solutions_open = "::: {.content-hidden}"
-scalar hide_solutions_close = ":::"
-scalar show_solutions = " "
+local hide_answers : env HIDE_ANSWERS_STATA
+if (`hide_answers') {
+    scalar hide_answers_open = "::: {.content-hidden}"
+    scalar hide_answers_close = ":::"     
+}
+else {
+    scalar hide_answers_open = " "
+    scalar hide_answers_close = " "
+}
 ```
 
-`{stata} scalar(hide_solutions_open)`
+`{stata} scalar(hide_answers_open)`
 
 ```{stata}
 display "Hidden"
 ```
 
-`{stata} scalar(hide_solutions_close)`
-
-`{stata} scalar(show_solutions)`
-
-```{stata}
-display "Shown"
-```
-
-`{stata} scalar(show_solutions)`
+`{stata} scalar(hide_answers_close)`
 ````
+
+The shell script to render the documents is then as follows.
+
+```sh
+HIDE_ANSWERS_STATA=1 quarto render exercise.qmd -o exercise-questions.html
+HIDE_ANSWERS_STATA=0 quarto render exercise.qmd -o exercise-solutions.html
+```
 
 ### Julia
 
 ````{verbatim, lang="markdown"}
 ---
-format:
-  html:
-    embed-resources: true
+format: html
 engine: julia
 ---
 
