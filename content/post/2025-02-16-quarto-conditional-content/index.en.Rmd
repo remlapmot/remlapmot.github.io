@@ -74,14 +74,13 @@ rmarkdown::render("exercise.Rmd",
 )
 
 rmarkdown::render("exercise.Rmd",
-  output_file = "exercise-solutions",
-  params = list(solutions = TRUE)
+  output_file = "exercise-solutions"
 )
 ```
 
 ### Inline code
 
-Inline code has been a feature of knitr for a while. Yihui Xie and Christophe Devreux have used it to pull off some fantastic tricks. My favourite is using it to programmatically write out R Markdown/Markdown code within an R Markdown document when a certain condition is met.
+Inline code has been a feature of knitr for a while. Yihui Xie and Christophe Dervieux have used it to pull off some fantastic tricks. My favourite is using it to programmatically write out R Markdown/Markdown code within an R Markdown document when a certain condition is met.
 
 ````{verbatim, lang="plaintext"}
 `r if knitr::is_latex_output() "...some_Markdown_to_include_when_rendering_to_pdf..."`
