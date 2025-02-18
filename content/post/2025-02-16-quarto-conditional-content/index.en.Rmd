@@ -1,5 +1,5 @@
 ---
-title: "How to programmatically include conditional content for several different Quarto engines"
+title: "How to programmatically include conditional content for several Quarto engines"
 author: Package Build
 date: '2025-02-16'
 slug: quarto-conditional-content
@@ -14,7 +14,7 @@ tags:
   - Julia
   - Jupyter
 subtitle: ''
-summary: "How to programmatically include conditional content for several different Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents."
+summary: "How to programmatically include conditional content for several Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents."
 authors: []
 lastmod: '2025-02-16T12:00:00+00:00'
 featured: no
@@ -80,17 +80,15 @@ rmarkdown::render("exercise.Rmd",
 
 ### Inline code
 
-Inline code has been a feature of knitr for a while. Yihui Xie and Christophe Dervieux have used it to pull off some fantastic tricks. My favourite is using it to programmatically write out R Markdown/Markdown code within an R Markdown document when a certain condition is met.
+Inline code has been a feature of knitr for a while. Yihui Xie and Christophe Dervieux have used it to pull off some fantastic tricks. My favourite trick is using it to programmatically write out R Markdown/Markdown code within an R Markdown document when a certain condition is met.
 
 ````{verbatim, lang="plaintext"}
-`r if knitr::is_latex_output() "...some_Markdown_to_include_when_rendering_to_pdf..."`
+`r if (knitr::is_latex_output()) "...some_Markdown_to_include_when_rendering_to_pdf..."`
 ````
 
 ### The problem
 
-knitr is incredibly flexible because we can include R objects as document and chunk options. When translating this to a pure Quarto version we can do this in a document using the knitr using the [`! expr ...` YAML tag literal](https://quarto.org/docs/tools/rstudio.html#knitr-engine). As far as I am aware, this is not yet possible for any other Quarto engine.
-
-My aim was to see whether I could achieve parameterised conditional content inclusion/exclusion in a Quarto document using other engines.
+knitr is incredibly flexible because we can include R objects as document and chunk options. When translating this to a pure Quarto version we can do this in a document using the knitr engine using the [`! expr ...` YAML tag literal](https://quarto.org/docs/tools/rstudio.html#knitr-engine). As far as I am aware, this is not yet possible for any other Quarto engine. Despite this my aim was to see whether I could achieve parameterised conditional content inclusion/exclusion in a Quarto document using other engines.
 
 ## Programmatically including conditional content in Quarto documents
 
@@ -113,7 +111,7 @@ Text and code for answer
 `r if (params$hide_answers) ":::"`
 ````
 
-Note that if you use the curly braces around the `r`, \`{r} \`, to write you inline code then you need to enclose the output string in the [`I()` function](https://quarto.org/docs/computations/inline-code.html#markdown-output) as follows. 
+Note that if you use the curly braces around the `r` to write you inline code then you need to enclose the output string in the [`I()` function](https://quarto.org/docs/computations/inline-code.html#markdown-output) as follows. 
 
 ````{verbatim, lang="plaintext"}
 `{r} if (params$hide_answers) I("::: {.content-hidden}")`
@@ -128,7 +126,7 @@ quarto render exercise-r.qmd -P hide_answers:FALSE -o exercise-r-solutions.html
 
 ### Python
 
-I realised I could adapt Nicola Rennie's approach for other engines. For the `jupyter: python3` engine we can do so as follows.
+I realised I could adapt Nicola Rennie's approach for other engines. For the `jupyter: python3` engine we can do so as follows, the following code uses [Quarto's parameters feature](https://quarto.org/docs/computations/parameters.html#jupyter).
 
 ````{verbatim, lang="plaintext"}
 ---
@@ -162,7 +160,7 @@ quarto render exercise-python.qmd -P hide_answers:True -o exercise-python-questi
 quarto render exercise-python.qmd -P hide_answers:False -o exercise-python-solutions.html
 ```
 
-The only problem with this is that currently the Papermill output cell about the parameters is printed in the document. 
+The only problem with this is that currently the Papermill output cell about the injected parameters is printed in the document. 
 
 <img src="/post/2025/quarto-conditional-content/img/injected-parameters-cell.png" alt="Screenshot of the injected parameters cell in a Quarto document." width="630" style="display: block; margin: auto;">
 
@@ -200,7 +198,7 @@ display "Hidden"
 `{stata} scalar(hide_answers_close)`
 ````
 
-The shell script to render the documents is then as follows.
+The shell script to render the documents is then as follows, here we define the environment variable before the call to `quarto`.
 
 ```sh
 HIDE_ANSWERS_STATA=1 quarto render exercise-stata.qmd -o exercise-stata-questions.html
@@ -209,7 +207,7 @@ HIDE_ANSWERS_STATA=0 quarto render exercise-stata.qmd -o exercise-stata-solution
 
 ### Julia
 
-For the native Julia engine I found that parameterisation worked and that I could avoid the inclusion of the injected parameters cell output by leaving the chunk with the `[parameters]` tag empty.
+For the native Julia engine I found that Quarto's parameterisation worked and that I could avoid the inclusion of the injected parameters cell output by leaving the chunk with the `[parameters]` tag empty.
 
 ````{verbatim, lang="plaintext"}
 ---
@@ -244,18 +242,12 @@ quarto render exercise-julia.qmd -P hide_answers:false -o exercise-julia-solutio
 
 ## Problems I encountered along the way
 
-I found that passing environment variables, to the Jupyter python3 and the Julia engine is unreliable/broken. Admittedly, I was not using Quarto in project mode with an [*_environment* file](https://quarto.org/docs/projects/environment.html), but honestly it doesn't feel to me I should need to do that for a single document. Here is a summary of what I experienced.
+I found that passing environment variables, to the Jupyter python3 and the Julia engine is unreliable/broken. Admittedly, I was not using Quarto in project mode with an [*_environment* file](https://quarto.org/docs/projects/environment.html), but honestly it doesn't feel to me I should need to do that for a single document. 
 
-* for the knitr engine, parameterisation works as expected;
-* for the `jupyter: python3` engine:
-  * parameterisation works, but in Quarto 1.6.40 the output of the _Parameters injected_ cell is needlessly displayed
-  * passing environment variables to Python seems to be broken, in that after a first render the value of the environment variable seems to be cached and difficult to change on subsequent renders
-  * using the **dotenv** package to access environment variables was broken in the same way
-* for `engine: julia` parameterisation works as expected
-  * however, passing environment variables is also unreliable and like for the python3 engine I experienced environment variable values being stuck after the first render
-  * using the Julia **DotEnv** package did seem to be reliable
-* for `jupyter: nbstata` environment variables can be read by Stata as expected
+The problem I found was that after a first render the value of the environment variable seems to be cached and difficult to change on subsequent renders. And using the **dotenv** package to access environment variables was broken in the same way.
+
+For `engine: julia` I also found that passing environment variables is unreliable and like for the python3 engine I experienced environment variable values being stuck after the first render. Using the Julia **DotEnv** package did seem to be reliable.
 
 ## Summary
 
-I have shown how to programmatically include conditional content for several different Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents.
+I have shown how to programmatically include conditional content for several Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents.
