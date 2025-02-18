@@ -203,6 +203,8 @@ HIDE_ANSWERS_STATA=0 quarto render exercise.qmd -o exercise-solutions.html
 
 ### Julia
 
+For the native Julia engine I found that parameterisation worked and that I could avoid the inclusion of the injected parameters cell output by leaving the chunk with the `[parameters]` tag empty.
+
 ````{verbatim, lang="markdown"}
 ---
 format: html
@@ -210,35 +212,41 @@ engine: julia
 ---
 
 ```{julia}
-#| include: false
-using Markdown
-hide_solutions = true
+#| tags: [parameters]
 ```
 
-`{julia} hide_solutions ? md"::: {.content-hidden}" : md""`
+```{julia}
+#| include: false
+using Markdown
+```
+
+`{julia} hide_answers ? md"::: {.content-hidden}" : md""`
 
 ```{julia}
 println("Hidden")
 ```
 
-`{julia} hide_solutions ? md":::" : md""`
-
-```{julia}
-println("Shown")
-```
+`{julia} hide_answers ? md":::" : md""`
 ````
 
-## Problems I encountered
+The shell script to render the documents is then as follows.
 
-I found that passing environment variables, to the Jupyter python3 and the Julia engine is unreliable/broken. Here is a summary of what I experienced.
+```sh
+quarto render exercise-julia.qmd -P hide_answers:true -o exercise-julia-questions.html
+quarto render exercise-julia.qmd -P hide_answers:false -o exercise-julia-solutions.html
+```
+
+## Problems I encountered along the way
+
+I found that passing environment variables, to the Jupyter python3 and the Julia engine is unreliable/broken. Admittedly, I was not using Quarto in project mode with an [*_environment* file](https://quarto.org/docs/projects/environment.html), but honestly it doesn't feel to me I should need to do that for a single document. Here is a summary of what I experienced.
 
 * for the knitr engine, parameterisation works as expected;
 * for the `jupyter: python3` engine:
   * parameterisation works, but in Quarto 1.6.40 the output of the _Parameters injected_ cell is needlessly displayed
-  * passing environment variables to Python seems to be broken, in that after a first render the value of the environment variable seems cached and difficult to change on subsequent renders
-  * even using the **dotenv** package was unreliable
+  * passing environment variables to Python seems to be broken, in that after a first render the value of the environment variable seems to be cached and difficult to change on subsequent renders
+  * using the **dotenv** package to access environment variables was broken in the same way
 * for `engine: julia` parameterisation works as expected
-  * however, passing environment variables is also unreliable and like for the python3 engine I experience environment variable values being stuck after the first render
+  * however, passing environment variables is also unreliable and like for the python3 engine I experienced environment variable values being stuck after the first render
   * using the Julia **DotEnv** package did seem to be reliable
 * for `jupyter: nbstata` environment variables can be read by Stata as expected
 
