@@ -1,7 +1,7 @@
 ---
-title: "How to programmatically include conditional content for several Quarto engines"
+title: "Programmatically including conditional content for Quarto engines that allow inline code"
 author: Package Build
-date: '2025-02-16'
+date: '2025-02-18'
 slug: quarto-conditional-content
 categories:
   - Blog
@@ -14,9 +14,9 @@ tags:
   - Julia
   - Jupyter
 subtitle: ''
-summary: "How to programmatically include conditional content for several Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents."
+summary: "How to programmatically include conditional content for several Quarto engines (knitr, jupyter: python3, jupyter: nbstata, and engine: julia) using parameters or environment variables to toggle inline code to write Markdown in the Quarto documents."
 authors: []
-lastmod: '2025-02-16T12:00:00+00:00'
+lastmod: '2025-02-18T11:00:00+00:00'
 featured: no
 image:
   caption: ''
