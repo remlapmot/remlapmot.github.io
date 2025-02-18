@@ -1,5 +1,5 @@
 ---
-title: "Programmatically conditional content inclusion and exclusion for Quarto documents using any language engine allowing inline code"
+title: "How to programmatically include conditional content for several different Quarto engines"
 author: Package Build
 date: '2025-02-16'
 slug: quarto-conditional-content
@@ -14,7 +14,7 @@ tags:
   - Julia
   - Jupyter
 subtitle: ''
-summary: ""
+summary: "How to programmatically include conditional content for several different Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents."
 authors: []
 lastmod: '2025-02-16T12:00:00+00:00'
 featured: no
@@ -33,7 +33,7 @@ I regularly need to produce exercises/tutorials for my students. One fantastic f
 
 Additionally, the toggling of the knitr chunk options can be parameterised and so it is possible to have an R script which contains the code to conveniently produce both questions and solutions documents. An example R Markdown file, _exercise.Rmd_, might look like the following.
 
-````{verbatim, lang="markdown"}
+````{verbatim, lang="plaintext"}
 ---
 title: "`r params$title`"
 output: html_document
@@ -83,7 +83,7 @@ rmarkdown::render("exercise.Rmd",
 
 Inline code has been a feature of knitr for a while. Yihui Xie and Christophe Devreux have used it to pull off some fantastic tricks. My favourite is using it to programmatically write out R Markdown/Markdown code within an R Markdown document when a certain condition is met.
 
-````{verbatim, lang="markdown"}
+````{verbatim, lang="plaintext"}
 `r if knitr::is_latex_output() "...some_Markdown_to_include_when_rendering_to_pdf..."`
 ````
 
@@ -101,7 +101,7 @@ I have already shown the R Markdown approach above.
 
 For Quarto, [Nicola Rennie](https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/) used inline code to write out Quarto's [conditional content classes](https://quarto.org/docs/authoring/conditional.html).
 
-````{verbatim, lang="markdown"}
+````{verbatim, lang="plaintext"}
 ---
 params: 
   hide_answers: true
@@ -116,7 +116,7 @@ Text and code for answer
 
 Note that if you use the curly braces around the `r`, \`{r} \`, to write you inline code then you need to enclose the output string in the [`I()` function](https://quarto.org/docs/computations/inline-code.html#markdown-output) as follows. 
 
-````{verbatim, lang="markdown"}
+````{verbatim, lang="plaintext"}
 `{r} if (params$hide_answers) I("::: {.content-hidden}")`
 ````
 
@@ -131,7 +131,7 @@ quarto render exercise-r.qmd -P hide_answers:FALSE -o exercise-r-solutions.html
 
 I realised I could adapt Nicola Rennie's approach for other engines. For the `jupyter: python3` engine we can do so as follows.
 
-````{verbatim, lang="markdown"}
+````{verbatim, lang="plaintext"}
 ---
 format: html
 jupyter: python3
@@ -173,7 +173,7 @@ In Jupyter this can apparently be suppressed by passing the `--report-mode` flag
 
 The Stata case involved two additional tricks. First, the [nbstata Jupyter kernel](https://hugetim.github.io/nbstata/) allows inline code, however this must be a `display` command, so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can't use local macros) at the top of the document as follows. Second, I didn't try but I suspect the nbstata kernel doesn't support parameters, and so I achieved the toggling of the code using an environmental variable, e.g. `HIDE_ANSWERS_STATA`.
 
-````{verbatim, lang="markdown"}
+````{verbatim, lang="plaintext"}
 ---
 format: html
 jupyter: nbstata
@@ -212,7 +212,7 @@ HIDE_ANSWERS_STATA=0 quarto render exercise-stata.qmd -o exercise-stata-solution
 
 For the native Julia engine I found that parameterisation worked and that I could avoid the inclusion of the injected parameters cell output by leaving the chunk with the `[parameters]` tag empty.
 
-````{verbatim, lang="markdown"}
+````{verbatim, lang="plaintext"}
 ---
 format: html
 engine: julia
