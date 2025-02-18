@@ -171,7 +171,7 @@ The only problem with this is that currently the Papermill output cell about the
 
 <img src="/post/2025/quarto-conditional-content/img/injected-parameters-cell.png" alt="Screenshot of the injected parameters cell in a Quarto document." width="630" style="display: block; margin: auto;">
 
-In Jupyter this can apparently be suppressed by passing the `--report-mode` flag, but I couldn't work out how to do that in Quarto. I believe it will be possible to suppress this output in future versions of Quarto.
+In Jupyter this can apparently be suppressed by passing the `--report-mode` flag, but I couldn't work out how to do that in Quarto. I believe it will be possible to suppress this output in future versions of Quarto (I'm using the current latest release version of Quarto 1.6.40).
 
 ### Stata
 
@@ -247,7 +247,7 @@ quarto render exercise-julia.qmd -P hide_answers:true -o exercise-julia-question
 quarto render exercise-julia.qmd -P hide_answers:false -o exercise-julia-solutions.html
 ```
 
-## Problems I encountered along the way
+## Problems with environment variables
 
 I found that passing environment variables, to the Jupyter python3 and the Julia engine is unreliable/broken. Admittedly, I was not using Quarto in project mode with an [*_environment* file](https://quarto.org/docs/projects/environment.html), but honestly it doesn't feel to me I should need to do that for a single document. 
 
