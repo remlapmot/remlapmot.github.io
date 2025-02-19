@@ -89,8 +89,8 @@ Text and code for answers.
 `r if (params$hide_answers) &amp;quot;:::&amp;quot;`
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note that if you use the curly braces around the &lt;code&gt;r&lt;/code&gt; to write you inline code then you need to enclose the output string in the 
-&lt;a href=&#34;https://quarto.org/docs/computations/inline-code.html#markdown-output&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;I()&lt;/code&gt; function&lt;/a&gt; as follows.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;`{r} if (params$hide_answers) I(&amp;quot;::: {.content-hidden}&amp;quot;)`
+&lt;a href=&#34;https://quarto.org/docs/computations/inline-code.html#markdown-output&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;I()&lt;/code&gt; function&lt;/a&gt; and include the &lt;code&gt;else&lt;/code&gt; statement as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;`{r} if (params$hide_answers) I(&amp;quot;::: {.content-hidden}&amp;quot;) else &amp;quot;&amp;quot;`
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Then we can have a shell script to render our questions and solutions documents as follows.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;quarto render exercise-r.qmd -o exercise-r-questions.html

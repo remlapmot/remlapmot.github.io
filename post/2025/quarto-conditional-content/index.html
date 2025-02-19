@@ -778,8 +778,8 @@ Text and code for answers.
 `r if (params$hide_answers) &quot;:::&quot;`
 </code></pre>
 <p>Note that if you use the curly braces around the <code>r</code> to write you inline code then you need to enclose the output string in the 
-<a href="https://quarto.org/docs/computations/inline-code.html#markdown-output" target="_blank" rel="noopener"><code>I()</code> function</a> as follows.</p>
-<pre><code class="language-plaintext">`{r} if (params$hide_answers) I(&quot;::: {.content-hidden}&quot;)`
+<a href="https://quarto.org/docs/computations/inline-code.html#markdown-output" target="_blank" rel="noopener"><code>I()</code> function</a> and include the <code>else</code> statement as follows.</p>
+<pre><code class="language-plaintext">`{r} if (params$hide_answers) I(&quot;::: {.content-hidden}&quot;) else &quot;&quot;`
 </code></pre>
 <p>Then we can have a shell script to render our questions and solutions documents as follows.</p>
 <pre><code class="language-plaintext">quarto render exercise-r.qmd -o exercise-r-questions.html
