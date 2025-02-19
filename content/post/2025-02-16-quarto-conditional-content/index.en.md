@@ -116,11 +116,11 @@ Text and code for answers.
 `r if (params$hide_answers) ":::"`
 ```
 
-Note that if you use the curly braces around the `r` to write you inline code then you need to enclose the output string in the [`I()` function](https://quarto.org/docs/computations/inline-code.html#markdown-output) as follows. 
+Note that if you use the curly braces around the `r` to write you inline code then you need to enclose the output string in the [`I()` function](https://quarto.org/docs/computations/inline-code.html#markdown-output) and include the `else` statement as follows. 
 
 
 ``` plaintext
-`{r} if (params$hide_answers) I("::: {.content-hidden}")`
+`{r} if (params$hide_answers) I("::: {.content-hidden}") else ""`
 ```
 
 Then we can have a shell script to render our questions and solutions documents as follows.
