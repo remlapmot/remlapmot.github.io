@@ -768,12 +768,8 @@ rmarkdown::render(&quot;exercise.Rmd&quot;,
 format: html
 params:
   hide_answers: true
+engine: knitr
 ---
-
-```{r}
-#| include: false
-# An R code chunk, so inline code is not first in document.
-```
 
 `r if (params$hide_answers) &quot;::: {.content-hidden}&quot;`
 
