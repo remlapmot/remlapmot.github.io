@@ -101,24 +101,20 @@ I have already shown the R Markdown approach above.
 For Quarto using the knitr engine, in a blog post [Nicola Rennie](https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/) used inline code to write out Quarto's [conditional content classes](https://quarto.org/docs/authoring/conditional.html).
 
 
-```` plaintext
+``` plaintext
 ---
 format: html
 params:
   hide_answers: true
+engine: knitr
 ---
-
-```{r}
-#| include: false
-# An R code chunk, so inline code is not first in document.
-```
 
 `r if (params$hide_answers) "::: {.content-hidden}"`
 
 Text and code for answers.
 
 `r if (params$hide_answers) ":::"`
-````
+```
 
 Note that if you use the curly braces around the `r` to write you inline code then you need to enclose the output string in the [`I()` function](https://quarto.org/docs/computations/inline-code.html#markdown-output) as follows. 
 
