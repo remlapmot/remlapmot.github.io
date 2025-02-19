@@ -103,12 +103,8 @@ For Quarto using the knitr engine, in a blog post [Nicola Rennie](https://nrenni
 format: html
 params:
   hide_answers: true
+engine: knitr
 ---
-
-```{r}
-#| include: false
-# An R code chunk, so inline code is not first in document.
-```
 
 `r if (params$hide_answers) "::: {.content-hidden}"`
 
