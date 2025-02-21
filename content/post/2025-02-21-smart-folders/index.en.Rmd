@@ -1,0 +1,37 @@
+---
+title: "Setting up a Finder Smart Folder of your RStudio Project files to enable super fast project launching"
+author: Package Build
+date: '2025-02-21'
+slug: smart-folders
+categories:
+  - Blog
+tags:
+  - R
+  - RStudio
+  - Positron
+  - VScode
+  - macOS
+subtitle:
+summary:
+authors: []
+lastmod: '2025-02-21T12:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of macOS Finder window showing the saved Smart Folder of RStudio project files.'
+projects: []
+toc: true
+---
+
+## Introduction
+
+Somehow when I'm switching projects I naturally start with Finder. I'm sure if I became a Terminal warrior there are faster ways of searching for files (e.g. TODO). I know there are many ways to avoid this, e.g., using Alfred; and indeed I do have this fantastic tip that allows Alfred to find .Rproj files setup (and I would guess Raycast can do the same, but I'm not a Raycast user). Navigating through my mess of nested directories wastes time and clicks.
+
+I realised that Finder on macOS has a helpful feature called Smart Folders. We can use this to setup a saved search of _.Rproj_ files (and/or _.code-workspace_ files) to allow us to see all the _.Rproj_ files on our computer making finding and opening projects from within Finder convenient and fast.
+
+## Setting up a Smart Folder of your RStudio project files
+
+
+## Summary
