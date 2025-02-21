@@ -14,7 +14,7 @@ tags:
 subtitle:
 summary: Create a Finder Smart Folder showing all your RStudio (and/or your VSCode/Positron) project files so you can switch between your projects fast and conveniently.
 authors: []
-lastmod: '2025-02-21T12:00:00+00:00'
+lastmod: '2025-02-21T08:00:00+00:00'
 featured: no
 image:
   caption: ''
