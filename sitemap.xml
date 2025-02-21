@@ -3,15 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://remlapmot.github.io/category/blog/</loc>
-    <lastmod>2025-02-18T11:00:00+00:00</lastmod>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/categories/</loc>
-    <lastmod>2025-02-18T11:00:00+00:00</lastmod>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://remlapmot.github.io/post/2025/quarto-conditional-content/</loc>
-    <lastmod>2025-02-18T11:00:00+00:00</lastmod>
+    <loc>https://remlapmot.github.io/post/2025/smart-folders/</loc>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/</loc>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/macos/</loc>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/positron/</loc>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/post/</loc>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/r/</loc>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/rstudio/</loc>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tags/</loc>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/vscode/</loc>
+    <lastmod>2025-02-21T08:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/post/2025/quarto-conditional-content/</loc>
     <lastmod>2025-02-18T11:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/julia/</loc>
@@ -20,25 +44,16 @@
     <loc>https://remlapmot.github.io/tag/jupyter/</loc>
     <lastmod>2025-02-18T11:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://remlapmot.github.io/post/</loc>
-    <lastmod>2025-02-18T11:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://remlapmot.github.io/tag/python/</loc>
     <lastmod>2025-02-18T11:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/quarto/</loc>
     <lastmod>2025-02-18T11:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://remlapmot.github.io/tag/r/</loc>
-    <lastmod>2025-02-18T11:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://remlapmot.github.io/tag/r-markdown/</loc>
     <lastmod>2025-02-18T11:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/stata/</loc>
-    <lastmod>2025-02-18T11:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/tags/</loc>
     <lastmod>2025-02-18T11:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/post/2025/multi-engine-quarto/</loc>
@@ -57,12 +72,6 @@
     <lastmod>2025-01-08T10:23:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/post/2024/finder-toolbar-apps/</loc>
-    <lastmod>2024-12-23T09:15:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/tag/positron/</loc>
-    <lastmod>2024-12-23T09:15:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/tag/rstudio/</loc>
     <lastmod>2024-12-23T09:15:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/authors/</loc>
@@ -90,9 +99,6 @@
     <lastmod>2024-04-01T20:18:00+01:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/post/2024/macos-rstudio-another/</loc>
-    <lastmod>2024-03-30T18:54:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/tag/macos/</loc>
     <lastmod>2024-03-30T18:54:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/talk/2024_mrcieu-r-universe/</loc>
