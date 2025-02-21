@@ -27,7 +27,7 @@ toc: true
 
 ## Introduction
 
-When I'm switching projects I naturally start with Finder. I'm sure if I became a Terminal warrior there are faster ways of searching for files (e.g. the [Television](https://github.com/alexpasmantier/television) fuzzy finder TUI). And I know there are other ways to avoid using Finder, e.g., using Spotlight, [Alfred](https://www.alfredapp.com/), or [Raycast](https://www.raycast.com/); and indeed I do have [this fantastic tip](https://rstats.wtf/projects#tricks-for-opening-projects) that allows Alfred to find RStudio project files setup. But something to do with how I learnt to use a computer just naturally means I'm wedded to Finder, but navigating through my mess of nested directories wastes time and clicks.
+When I'm switching projects I naturally start with Finder. I'm sure if I became a Terminal warrior there are faster ways of searching for files (e.g. the [Television](https://github.com/alexpasmantier/television) fuzzy finder TUI). And I know there are other ways to avoid using Finder, e.g., using Spotlight, [Alfred](https://www.alfredapp.com/), or [Raycast](https://www.raycast.com/); and indeed I do have [this fantastic tip](https://rstats.wtf/projects#tricks-for-opening-projects) that allows Alfred to find RStudio project files setup. But something to do with how I learnt to use a computer just naturally means I'm wedded to Finder, but navigating through my mess of nested directories wastes time and energy.
 
 I realised that Finder on macOS has a helpful feature called Smart Folders. We can use this to setup a saved search of RStudio Project _.Rproj_ files (and/or VSCode/Positron _.code-workspace_ files) to allow us to see all the _.Rproj_ files on our computer. This makes finding and opening projects from within Finder fast and convenient.
 
@@ -64,7 +64,7 @@ And you'll see the new virtual folder appear on the left Finder sidebar - [see t
 
 You can create additional Smart Folders for other useful file extensions, for example, VSCode/Positron project files (_.code-workspace_ files).
 
-I don't believe that there is an exact equivalent of a Smart Folder on Windows. I think that the closest you can get is to save a search in File Explorer. However, I find that in recent years File Explorer on Windows 11 has become incredibly slow and regularly crashes. Searching in [Files](https://files.community/) or [File Pilot](https://filepilot.tech/) is now much faster and more reliable. 
+On Windows, I don't believe that there is an exact equivalent of a Smart Folder. I think that the closest you can get is to save a search in File Explorer. However, I find that in recent years File Explorer on Windows 11 has become incredibly slow and regularly crashes. Searching in [Files](https://files.community/) or [File Pilot](https://filepilot.tech/) is now much faster and more reliable. 
 
 ## Summary
 
