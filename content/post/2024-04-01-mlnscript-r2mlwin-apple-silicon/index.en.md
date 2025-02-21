@@ -8,6 +8,7 @@ categories:
 tags:
   - R
   - MLwiN
+  - macOS
 subtitle: ''
 summary: 'How to run MLwiN natively on Apple Silicon Macs via R and the R2MLwiN package.'
 authors: []

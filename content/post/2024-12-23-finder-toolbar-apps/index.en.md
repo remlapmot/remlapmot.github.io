@@ -10,6 +10,7 @@ tags:
   - R
   - RStudio
   - VSCode
+  - macOS
 subtitle: ''
 summary: 'Create Automator Apps to launch Data Science apps open in the current Finder window on macOS.'
 authors: []
