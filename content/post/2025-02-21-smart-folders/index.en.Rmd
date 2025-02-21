@@ -33,5 +33,37 @@ I realised that Finder on macOS has a helpful feature called Smart Folders. We c
 
 ## Setting up a Smart Folder of your RStudio project files
 
+In Finder;
+
+* navigate to the folder you want your search to start in, either your home folder or your Documents folder are obvious candidates
+* click File | New Smart Folder
+
+<img src="/post/2025/smart-folders/img/new-smart-folder.png" alt="Screenshot of creating a new Smart Folder in macOS Finder." width="630" style="display: block; margin: auto;">
+
+* near the top right corner click the plus button next to the _Save_ button.
+
+<img src="/post/2025/smart-folders/img/plus-to-right-of-save.png" alt="Screenshot of creating a new condition as part for a new Smart Folder in macOS Finder." width="630" style="display: block; margin: auto;">
+
+* Now we need to add the _File extension_ option to the choices, click _Name_ near the top left, then _Other..._
+
+<img src="/post/2025/smart-folders/img/name-other.png" alt="Screenshot of adding a new attribute as part for a new Smart Folder in macOS Finder." width="630" style="display: block; margin: auto;">
+
+* Then search for File extension and check the box on the right handside
+
+<img src="/post/2025/smart-folders/img/adding-file-extension-attribute.png" alt="Screenshot of adding the file extension attribute as part for a new Smart Folder in macOS Finder." width="630" style="display: block; margin: auto;">
+
+* enter Rproj in the box (it doesn't seem to matter if you include the . first)
+
+<img src="/post/2025/smart-folders/img/entering-file-extension.png" alt="Screenshot of adding the file extension condition as part for a new Smart Folder in macOS Finder." width="630" style="display: block; margin: auto;">
+
+* click save and give it a sensible name, e.g., _Rproj_
+
+<img src="/post/2025/smart-folders/img/saving.png" alt="Screenshot of saving the new Smart Folder in macOS Finder." width="630" style="display: block; margin: auto;">
+
+And you'll see the new virtual folder appear on the left Finder sidebar.
+
+You can repeat for other useful file extensions, for example VSCode/Positron project files (_.code-workspace_ files).
 
 ## Summary
+
+I have shown how to create a Smart Folder of your RStudio Project files for convenient and fast project launching.
