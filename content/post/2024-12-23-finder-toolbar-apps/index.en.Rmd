@@ -9,6 +9,7 @@ tags:
   - Positron
   - R
   - RStudio
+  - VSCode
 subtitle: ''
 summary: 'Create Automator Apps to launch Data Science apps open in the current Finder window on macOS.'
 authors: []
