@@ -64,6 +64,8 @@ And you'll see the new virtual folder appear on the left Finder sidebar - [see t
 
 You can create additional Smart Folders for other useful file extensions, for example, VSCode/Positron project files (_.code-workspace_ files).
 
+I don't believe that there is an exact equivalent of a Smart Folder on Windows. I think that the closest you can get is to save a search in File Explorer. However, I find that in recent years File Explorer on Windows 11 has become incredibly slow and regularly crashes. Searching in [Files](https://files.community/) or [File Pilot](https://filepilot.tech/) is now much faster and more reliable. 
+
 ## Summary
 
-I have shown how to create a Smart Folder of your RStudio Project files for fast and convenient project launching.
+I have shown how to create a Smart Folder of your RStudio Project files for fast and convenient project launching on macOS.
