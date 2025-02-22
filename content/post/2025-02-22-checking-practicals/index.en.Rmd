@@ -1,0 +1,33 @@
+---
+title: "Checking your practicals run throughout the year with GitHub Actions"
+author: Package Build
+date: '2025-02-22'
+slug: checking-practicals
+categories:
+  - Blog
+tags:
+  - R
+  - R Markdown
+  - Quarto
+  - GitHub
+  - GitHub Actions
+subtitle:
+summary: 
+authors: []
+lastmod: '2025-02-22T08:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of '
+projects: []
+toc: true
+---
+
+## Introduction
+
+
+## Summary
+
+I have shown
