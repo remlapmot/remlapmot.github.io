@@ -27,6 +27,15 @@ toc: true
 
 ## Introduction
 
+Do you have a R package that's just on GitHub? Therefore, unlike when a package is on CRAN checks are not being run on that package on a regular basis. CRAN is rolling release, so any day one of your packages's dependency packages could be updated breaking your package.
+
+Or maybe you teach a course that runs once a year and it has some R practical sessions? The slightly annoying thing can be when you come to rerun your practical after a year several R packages have been updated and now you have to work out how to fix the situation.
+
+We'll see how to use GitHub Actions to run checks on an automated regular basis.
+
+## Checking packages on a schedule
+
+## Checking practicals on a schedule
 
 ## Summary
 
