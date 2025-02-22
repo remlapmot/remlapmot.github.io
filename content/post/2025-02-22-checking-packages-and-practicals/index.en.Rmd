@@ -27,13 +27,18 @@ toc: true
 
 ## Introduction
 
-Do you have a R package that's just on GitHub? Therefore, unlike when a package is on CRAN checks are not being run on that package on a regular basis unless you run them locally. CRAN is rolling release, so any day one of your packages's dependency packages could be updated - breaking your package.
+Do you have a R package that's just on GitHub? Therefore, unlike when a package is on CRAN checks are not being run on that package on a regular basis unless you run them locally. CRAN follows a rolling release model, so any day one of your packages's dependency packages could be updated - breaking your package!
 
-Or maybe you teach a course that runs once a year and it has some R practical sessions? It can annoy when you come to rerun your practical after a year and find that several R packages have been updated and now you have to work out how to fix the situation. Of course for this situation we could use renv to record the packages and their versions. But the issue with this is that your course participants will then need to use renv and also be wondering why you use packages that are a year out of date. Alternatively you might install all your packages from a single date, meaning you can restore them using the a snapshot date from the Public Posit Package Manager (now the only snapshot)
+Or maybe you teach a course that runs once a year and it has some R practical sessions? It can be very frustrating when you come to rerun your practical after a year and find that several R packages have been updated and now you have to work out how to fix things. Of course for this situation we could use [**renv**](https://rstudio.github.io/renv/index.html) to record the packages and their versions. But the issue with this is that your course participants will then need to use **renv** which might lead to a room full of 30 students all having **renv** problems. Alternatively you might install all your packages from a single date, meaning you can restore them using the a snapshot date from the Public Posit Package Manager (now the only snapshot) but you might find your course participants why you use packages that are a year out of date.
 
-We'll see how to use GitHub Actions to run checks on an automated regular basis.
+My solution to these problems is to regularly run `R CMD check` on your package/run your practical with the latest versions of the required packages. This way you'll hopefully pick up any changes in your dependencies long before the next running of your course.
+
+If I had a server I could suggest setting up a [`cron`](https://linux.die.net/man/8/cron) job to check the package or practical. However, most of us don't have a server. Luckily if your package or practical is in a public GitHub repository then we can run GitHub Actions on it. It turns out GitHub Actions has a [scheduling facility that uses `cron` syntax](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule).
+
+next I'll show how to run R code on a schedule on GitHub Actions for the two cases.
 
 ## Checking packages on a schedule
+
 
 ## Checking practicals on a schedule
 
