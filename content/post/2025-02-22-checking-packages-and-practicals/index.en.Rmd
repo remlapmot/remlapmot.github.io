@@ -58,15 +58,23 @@ on:
     - cron: "00 9 * * TUE"
 ```
 
-What does this syntax mean? Luckily there are many websites which will decipher that for us, such as [crontab guru](https://crontab.guru/).
+What does this syntax mean? Luckily there are many websites which will decipher that for us, such as [crontab guru](https://crontab.guru/). (Nb. you can see a full version of this file in [one of my repositories](https://github.com/remlapmot/OneSampleMR/blob/main/.github/workflows/R-CMD-check.yaml))
 
-TODO cron-tab-guru-screen
+<img src="/post/2025/checking-packages-and-practicals/img/cron-tab-guru-screenshot.png" alt="Screenshot from the crontab guru website." width="630" style="display: block; margin: auto;">
 
 We see this means run a 9:00 am (UTC) on Tuesdays. Once you have committed this file to your repo and pushed it to GitHub on your main/master branch then your automated checking is taken care of.
 
 ## Running practicals on a schedule
 
+Let's say we have prepared our practical in a Quarto document. In this case we'll use the actions and examples in the [quarto-dev/quarto-actions](https://github.com/quarto-dev/quarto-actions) repository.
+
 My opinion is that running the practical once per month is about the sweetspot.
+
+Recommend running on Windows, macOS, and maybe Linux. 
+
+## GitHub Actions woes
+
+At this point I acknowledge that sometimes GitHub Actions can be more trouble than they are worth because they can often fail for reasons which are not problems with your code. For example, I had one repository in which the Windows runner would regularly lose internet connection half way through installing the R dependency packages and hence would notify me of a failed check. Also you need to keep the code in your workflow file up-to-date. Usually a quick comparison back to the current version of the file in the r-lib/actions repo is enough to show you what you need to change.
 
 ## Summary
 
