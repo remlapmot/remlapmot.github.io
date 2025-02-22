@@ -1,8 +1,8 @@
 ---
-title: "Checking your practicals run throughout the year with GitHub Actions"
+title: "Checking your packages and practicals run throughout the year with GitHub Actions"
 author: Package Build
 date: '2025-02-22'
-slug: checking-practicals
+slug: checking-packages-and-practicals
 categories:
   - Blog
 tags:
