@@ -39,9 +39,35 @@ next I'll show how to run R code on a schedule on GitHub Actions for the two cas
 
 ## Checking packages on a schedule
 
+I use the actions and example workflows from the [r-lib/actions](https://github.com/r-lib/actions) repository. For checking a package there are several examples, in the _examples_ directory of that repository, that we can copy then amend. Let's use the [check-full.yaml](https://github.com/r-lib/actions/blob/v2-branch/examples/check-full.yaml) example.
 
-## Checking practicals on a schedule
+Copy this file into a _.github/workflows_ directory in the repository for your package. Now we need to enable scheduled running. Amend the first `on:` block to include the two lines I have inserted below.
+
+```yaml
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+#
+# NOTE: This workflow is overkill for most R packages and
+# check-standard.yaml is likely a better choice.
+# usethis::use_github_action("check-standard") will install it.
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    - cron: "00 9 * * TUE"
+```
+
+What does this syntax mean? Luckily there are many websites which will decipher that for us, such as [crontab guru](https://crontab.guru/).
+
+TODO cron-tab-guru-screen
+
+We see this means run a 9:00 am (UTC) on Tuesdays. Once you have committed this file to your repo and pushed it to GitHub on your main/master branch then your automated checking is taken care of.
+
+## Running practicals on a schedule
+
+My opinion is that running the practical once per month is about the sweetspot.
 
 ## Summary
 
-I have shown
+I have shown how to use GitHub Actions scheduling feature to automatically run scheduled checks on packages and R scripts/R Markdown/Quarto documents for practicals.
