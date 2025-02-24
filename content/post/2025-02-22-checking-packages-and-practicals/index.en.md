@@ -1,5 +1,5 @@
 ---
-title: "Automate checking that your R packages and practicals run throughout the year with GitHub Actions"
+title: "Automating checking your R packages and practicals run throughout the year using GitHub Actions"
 author: Package Build
 date: '2025-02-24'
 slug: checking-packages-and-practicals
