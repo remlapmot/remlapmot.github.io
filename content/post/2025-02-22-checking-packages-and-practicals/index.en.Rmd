@@ -153,6 +153,8 @@ Crikey, that's alot, let's break that down.
 
 Phew!
 
+It's worth pointing out that instead of a Quarto document our practical could be in an R Markdown document or an R script (we'd just need to make the relevant changes in the workflow file above such as adding Pandoc and amending the render commands).
+
 Note, GitHub Actions only works for free in a public repository; so obviously this can't be used for any material that is assessed.
 
 ## GitHub Actions woes
