@@ -27,15 +27,15 @@ toc: true
 
 ## Introduction
 
-Do you have a R package that's just on GitHub? Unlike when a package is on CRAN checks are not being run on that package on a regular basis unless you run them locally. CRAN follows a rolling release model, so any day one of your packages's dependency packages could be updated - breaking your package!
+Do you have a R package that's just on GitHub? How often do you check it? CRAN follows a rolling release model, so any day one of your package's dependency packages could be updated - breaking your package!
 
-Or maybe you teach a course that runs once a year and it has some R practical sessions? It can be very frustrating when you come to rerun your practical after a year and find that several of the R packages it uses have been updated and now you have to work out how to fix things. Of course for this situation we could use [**renv**](https://rstudio.github.io/renv/index.html) to record the packages and their versions. But the issue with this is that your course participants will then need to use **renv** which might lead to a room full of 30 students all having **renv** problems. Alternatively you might install all your packages from a single date, meaning you can restore them using the a snapshot date from the [Public Posit Package Manager](https://packagemanager.posit.co/client/#/repos/cran/setup) but you might find your course participants wondering why you use packages that are a year out of date.
+Or maybe you teach a course that runs once a year and it has some R practical sessions? It can be very frustrating when you rerun your practical after a year to find that several of the R packages it uses have been updated, and now you have to work out how to fix things. For this situation we might use [**renv**](https://rstudio.github.io/renv/index.html) to record the packages and their versions. But then your course participants will need to use **renv** which might lead to a room full of 30 students all having **renv** problems. Alternatively, you might install all your packages from a single date, meaning you can restore them using the a snapshot date from the [Public Posit Package Manager](https://packagemanager.posit.co/client/#/repos/cran/setup) but you might find your course participants wondering why you use packages that are a year out of date. Another superb solution is to provide course participants with an R environment you have defined and tested your practical works in. Such a solution is offered by creating the practical as a project in a [Posit Cloud](https://posit.cloud/) workspace, indeed Posit Cloud is so good it almost makes running R practicals boring.
 
-My solution to these problems is to regularly run `R CMD check` on your package/run your practical with the latest versions of the required packages throughout the year. This way you'll hopefully pick up any changes in dependency packages long before the next running of your course.
+My solution to these problems is to regularly run `R CMD check` on your package/run your practical with the latest versions of the required packages throughout the year. This way you'll hopefully pick up any changes in dependency packages long before the next running of your course (although you might still be unlucky).
 
-If I had a server I could suggest setting up a [`cron`](https://linux.die.net/man/8/cron) job to check the package or practical. However, most of us don't have a server. Luckily if your package or practical is in a public GitHub repository then we can run GitHub Actions on it and it turns out GitHub Actions has a [scheduling facility that uses `cron` syntax](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule).
+If I had a server I could suggest setting up a [`cron`](https://linux.die.net/man/8/cron) job to check the package or practical. However, most of us don't have a server. Luckily if your package or practical is in a public GitHub repository then we can run GitHub Actions on it. It turns out GitHub Actions has a [scheduling facility that uses `cron` syntax](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule).
 
-Next I'll show how to run R code on a schedule on GitHub Actions for the two cases.
+Next I'll show how to run R code on a schedule on GitHub Actions for these two cases.
 
 ## Checking packages on a schedule
 
@@ -54,7 +54,7 @@ What does this syntax mean? Luckily there are many websites which will decipher 
 
 <img src="/post/2025/checking-packages-and-practicals/img/cron-tab-guru-screenshot.png" alt="Screenshot from the crontab guru website." width="630" style="display: block; margin: auto;">
 
-From the crontab guru screenshot above, we see this means run a 9:00 am (UTC) on Tuesdays. Once you have committed this file to your repo and pushed it to GitHub on your main/master branch then your automated checking is taken care of.
+From the crontab guru screenshot above, we see this means run at 9:00 am (UTC) on Tuesdays. Once you have committed this file to your repo and pushed it to GitHub on your main/master branch then your automated checking is taken care of. If a check fails GitHub will send a notification and you can then investigate further.
 
 ## Running practicals on a schedule
 
@@ -135,10 +135,10 @@ Crikey, that's alot, let's break that down.
   * we will run this on 3 different operating systems, Windows (most of my students/course participants have Windows laptops, followed by macOS), macOS, and Ubuntu Linux. [More info about GitHub Actions runners is available](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners);
   * `max-parallel: 1` says that each job will run in turn (this isn't really needed but just to be safe since I will commit the output documents back into the repository)
   * `env:` specifies that we grant the jobs permission with out GitHub token
-  * `steps:` defines the what will run
+  * `steps:` defines what will run, which is
     * we checkout the repo
     * we then install R and Quarto using the relevant actions
-    * we setup the R dependency packages. I am not using **renv**, so the action knows how to do this because I have included a _DESCRIPTION_ file in the repo (yes to the action we are faking that the repo is an R package - this is an old trick from Hadley Wickham). The [full file is in the repository](https://github.com/remlapmot/example-exercise-to-run-on-schedule/blob/main/DESCRIPTION) but the key entry is the _Imports_ list of hard depdenency packages.
+    * we setup the R dependency packages. I am not using **renv**, so the action knows how to do this because I have included a _DESCRIPTION_ file in the repo (to the action we are faking that the repo is an R package - this is a trick from Hadley Wickham). The [full file is in the repository](https://github.com/remlapmot/example-exercise-to-run-on-schedule/blob/main/DESCRIPTION) but the key entry is the _Imports_ list of hard depdenency packages.
 
       ```plaintext
       ...
@@ -157,9 +157,13 @@ It's worth pointing out that instead of a Quarto document our practical could be
 
 Note, GitHub Actions only works for free in a public repository; so obviously this can't be used for any material that is assessed.
 
+## Surprise benefits
+
+A nice side effect of using the `r-lib/actions/setup-r` and `quarto-dev/quarto-actions/setup` actions is that they update to the release version of R/Quarto as updates are released. So you don't have to worry about updating the version of R/Quarto.
+
 ## GitHub Actions woes
 
-At this point I acknowledge that sometimes GitHub Actions can be more trouble than they are worth. This is because they often fail for reasons which are not problems with your code. For example, I had one repository in which the Windows runner would regularly lose internet connection (I have no idea why) half way through installing the R dependency packages and hence would regularly notify me of a failed check. Also you need to keep the code in your workflow file up-to-date. Usually a quick comparison back to the current version of the example in the r-lib/actions repo is enough to show you what you need to change.
+At this point I acknowledge that sometimes GitHub Actions can be more trouble than they are worth. This is because they often fail for reasons which are not problems with your code. For example, I had one repository in which the Windows runner would regularly lose internet connection (I have no idea why) half way through installing the R dependency packages and hence would regularly notify me of a failed check. Also you need to keep the code in your workflow file up-to-date. Usually a quick comparison to the current version of the example in the r-lib/actions repo is enough to show you what you need to change.
 
 ## Summary
 
