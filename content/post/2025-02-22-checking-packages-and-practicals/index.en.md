@@ -167,4 +167,4 @@ At this point I acknowledge that sometimes GitHub Actions can be more trouble th
 
 ## Summary
 
-I have shown how to use GitHub Actions scheduling feature to automatically run scheduled checks on R packages and R scripts/R Markdown/Quarto documents for practicals enabling you to keep on top of any changes in your dependency packages and indeed in any changes in the release version of R itself.
+I have shown how to use GitHub Actions scheduling feature to automatically run scheduled checks on R packages and R scripts/R Markdown/Quarto documents for practicals enabling you to keep on top of any changes in your dependency packages and indeed in any changes in the release versions of R and Quarto.
