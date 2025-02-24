@@ -1,5 +1,5 @@
 ---
-title: "Automating checking your R packages and practicals run throughout the year using GitHub Actions"
+title: "Checking your R packages and practicals on a schedule using GitHub Actions"
 author: Package Build
 date: '2025-02-24'
 slug: checking-packages-and-practicals
@@ -149,7 +149,7 @@ Crikey, that's alot, let's break that down.
       ...
       ```
    * we specify `upgrade: 'TRUE'` to always install the latest version of the dependency packages.
-   * then we finally render the two versions of our Quarto document. Here we append the operating system name into the output document filenames and we commit these files back into the repository for our records. We have to specify `shell: bash` because otherwise the Windows runner will use Powershell and the environment variable syntax in the `git config` commands would be incorrect.
+   * then we finally render the two versions of our Quarto document. Here we append the operating system name into the output document filenames and we commit these files back into the repository for our records. We have to specify `shell: bash` because otherwise the Windows runner will use Powershell and the environment variable syntax in the `git config` commands would be incorrect. Also we need a `git pull` before making the commit because we have 3 jobs running in series, so there will new/amended files in the repo after the first and second jobs.
 
 Phew!
 
