@@ -1,5 +1,5 @@
 ---
-title: "Checking your packages and practicals run throughout the year with GitHub Actions"
+title: "Automate checking that your R packages and practicals run throughout the year with GitHub Actions"
 author: Package Build
 date: '2025-02-24'
 slug: checking-packages-and-practicals
@@ -27,7 +27,7 @@ toc: true
 
 ## Introduction
 
-Do you have a R package that's just on GitHub? Therefore, unlike when a package is on CRAN checks are not being run on that package on a regular basis unless you run them locally. CRAN follows a rolling release model, so any day one of your packages's dependency packages could be updated - breaking your package!
+Do you have a R package that's just on GitHub? Unlike when a package is on CRAN checks are not being run on that package on a regular basis unless you run them locally. CRAN follows a rolling release model, so any day one of your packages's dependency packages could be updated - breaking your package!
 
 Or maybe you teach a course that runs once a year and it has some R practical sessions? It can be very frustrating when you come to rerun your practical after a year and find that several R packages have been updated and now you have to work out how to fix things. Of course for this situation we could use [**renv**](https://rstudio.github.io/renv/index.html) to record the packages and their versions. But the issue with this is that your course participants will then need to use **renv** which might lead to a room full of 30 students all having **renv** problems. Alternatively you might install all your packages from a single date, meaning you can restore them using the a snapshot date from the Public Posit Package Manager (now the only snapshot) but you might find your course participants why you use packages that are a year out of date.
 
