@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>GitHub | Dr Tom Palmer</title>
-    <link>https://remlapmot.github.io/tag/github/</link>
-      <atom:link href="https://remlapmot.github.io/tag/github/index.xml" rel="self" type="application/rss+xml" />
-    <description>GitHub</description>
+    <title>GitHub Actions | Dr Tom Palmer</title>
+    <link>https://remlapmot.github.io/tag/github-actions/</link>
+      <atom:link href="https://remlapmot.github.io/tag/github-actions/index.xml" rel="self" type="application/rss+xml" />
+    <description>GitHub Actions</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 24 Feb 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
-      <title>GitHub</title>
-      <link>https://remlapmot.github.io/tag/github/</link>
+      <title>GitHub Actions</title>
+      <link>https://remlapmot.github.io/tag/github-actions/</link>
     </image>
     
     <item>
@@ -160,42 +160,6 @@ Imports:
 &lt;p&gt;At this point I acknowledge that sometimes GitHub Actions can be more trouble than they are worth. This is because they often fail for reasons which are not problems with your code. For example, I had one repository in which the Windows runner would regularly lose internet connection (I have no idea why) half way through installing the R dependency packages and hence would regularly notify me of a failed check. Also you need to keep the code in your workflow file up-to-date. Usually a quick comparison to the current version of the example in the r-lib/actions repo is enough to show you what you need to change.&lt;/p&gt;
 &lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;I have shown how to use GitHub Actions scheduling feature to automatically run scheduled checks on R packages and R scripts/R Markdown/Quarto documents for practicals enabling you to keep on top of any changes in your dependency packages and indeed in any changes in the release version of R itself.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>My #GitHubUnwrapped 2024!</title>
-      <link>https://remlapmot.github.io/post/2025/github-unwrapped-2024/</link>
-      <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>https://remlapmot.github.io/post/2025/github-unwrapped-2024/</guid>
-      <description>&lt;p&gt;My #GitHubUnwrapped 2024!&lt;/p&gt;
-&lt;p align=&#34;center&#34;&gt;&lt;iframe src=&#34;https://drive.google.com/file/d/10zFAtzcEFhxLNSRDZDXUgnafU4GDVepZ/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;p&gt;Made with 
-&lt;a href=&#34;https://www.githubunwrapped.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>My #GitHubUnwrapped 2023!</title>
-      <link>https://remlapmot.github.io/post/2024/github-unwrapped-2023/</link>
-      <pubDate>Sun, 07 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://remlapmot.github.io/post/2024/github-unwrapped-2023/</guid>
-      <description>&lt;p&gt;My #GitHubUnwrapped 2023!&lt;/p&gt;
-&lt;p align=&#34;center&#34;&gt;&lt;iframe src=&#34;https://drive.google.com/file/d/1bhdY7FPgmYJo_loqIChBJOZ8vdm2mEpA/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;p&gt;Made with 
-&lt;a href=&#34;https://www.githubunwrapped.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>My #GitHubUnwrapped 2022!</title>
-      <link>https://remlapmot.github.io/post/2023/github-unwrapped-2022/</link>
-      <pubDate>Sat, 07 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>https://remlapmot.github.io/post/2023/github-unwrapped-2022/</guid>
-      <description>&lt;p&gt;My #GitHubUnwrapped 2022!&lt;/p&gt;
-&lt;p align=&#34;center&#34;&gt;&lt;iframe src=&#34;https://drive.google.com/file/d/1VVoFQK5aUrgkCppcJXlDMoEPcCKVPW84/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;p&gt;Made with 
-&lt;a href=&#34;https://www.githubunwrapped.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
