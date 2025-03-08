@@ -5,12 +5,69 @@
     <link>https://remlapmot.github.io/tag/r/</link>
       <atom:link href="https://remlapmot.github.io/tag/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 24 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 08 Mar 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
       <title>R</title>
       <link>https://remlapmot.github.io/tag/r/</link>
     </image>
+    
+    <item>
+      <title>Amending the Git commit message of a previous commit (that isn&#39;t the most recent) in GitHub Desktop without performing an interactive rebase</title>
+      <link>https://remlapmot.github.io/post/2025/amend-commit-messages/</link>
+      <pubDate>Sat, 08 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/amend-commit-messages/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;As R developers I think we can all agree that Git is hard. There won&amp;rsquo;t be many of us who at some time haven&amp;rsquo;t broken a Git repository in some way or other, I know that I have (several times &amp;hellip; ahem).&lt;/p&gt;
+&lt;p&gt;A task I sometimes need to achieve when working on a branch is amending a commit message. I use 
+&lt;a href=&#34;https://github.com/apps/desktop&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub Desktop&lt;/a&gt; to help me with Git, and I recommend it to all my students. If the commit you want to amend the message of is the most recent commit you can simply right click on it and select &lt;em&gt;Amend Commit&amp;hellip;&lt;/em&gt;.&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/amend-commit-messages/img/01-right-click-amend-commit.png&#34; alt=&#34;Screenshot of amending a commit in GitHub Desktop.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;p&gt;This is providing a user friendly interface to running&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git commit --amend
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in the terminal for us. This is all covered in the 
+&lt;a href=&#34;https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/changing-a-commit-message&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;However, what if the commit is not the most recent. If your commits after your target commit don&amp;rsquo;t touch the same lines in the same file/s you could reorder your commits such that your target commit is the most recent and then right click and &lt;em&gt;Amend Commit&amp;hellip;&lt;/em&gt; again. However, what if you can&amp;rsquo;t easily or don&amp;rsquo;t want to reorder your commits. The proper answer is to perform an interactive rebase, however, I have a simple trick in GitHub Desktop to avoid this.&lt;/p&gt;
+&lt;h2 id=&#34;the-trick-squashing-an-empty-commit-onto-the-target-commit&#34;&gt;The trick: squashing an empty commit onto the target commit&lt;/h2&gt;
+&lt;p&gt;GitHub Desktop allows us to squash to commits together. When it does this it allows us to amend the commit message of the resulting commit. Therefore, to achieve our goal of amending previous commit messages we need to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Identify the commit you want to amend the message of. Here I have made a typo and want to fix the message to say &lt;em&gt;Use test-rcpp.R&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/amend-commit-messages/img/02-commit-to-amend.png&#34; alt=&#34;Screenshot of squashing commits GitHub Desktop.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Create an empty commit&lt;/p&gt;
+&lt;p&gt;For this you will need command line 
+&lt;a href=&#34;https://git-scm.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Git&lt;/a&gt; installed (GitHub Desktop has a version of Git bundled within it, so not everyone who has GitHub Desktop installed has Git installed separately). Run the following (you don&amp;rsquo;t have to include the message).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git commit --allow-empty -m &amp;quot;Empty commit for purposes of trick&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Drag and drop the empty commit onto your target commit. See the screenshot at the 
+&lt;a href=&#34;#top&#34;&gt;top&lt;/a&gt; of this post.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Enter your amended commit message and delete the text in the &lt;em&gt;Description&lt;/em&gt; box.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/amend-commit-messages/img/06-squashing-commits.png&#34; alt=&#34;Screenshot of squashing commits GitHub Desktop.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Click &lt;em&gt;Squash 2 Commits&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/amend-commit-messages/img/07-new-commit-message.png&#34; alt=&#34;Screenshot of finalising squashed commit in GitHub Desktop.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt; 
+&lt;ul&gt;
+&lt;li&gt;That&amp;rsquo;s it, we&amp;rsquo;re finished! You can now push your branch upto GitHub (or in my case in the screenshot force push because I had previously pushed this branch to the remote).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/amend-commit-messages/img/08-final-state.png&#34; alt=&#34;Screenshot of your amend Git history ready to the pushed to GitHub in GitHub Desktop.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h2 id=&#34;the-proper-method-performing-an-interactive-rebase&#34;&gt;The proper method: performing an interactive rebase&lt;/h2&gt;
+&lt;p&gt;If you want to do achieve this the proper way or amend the contents of previous commits you&amp;rsquo;ll need to perform an interactive rebase. That is a little bit tricky to perform in the terminal, although there are lots of helpful YouTube videos and blogposts showing how to do it.&lt;/p&gt;
+&lt;p&gt;If you ever need to do this I recommend using the 
+&lt;a href=&#34;https://github.com/jesseduffield/lazygit&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Lazygit&lt;/a&gt; terminal user interface, which has the best interface to interactive rebasing I&amp;rsquo;ve seen. To start the process, navigate to the &lt;em&gt;Reflog&lt;/em&gt; pane (by pressing &lt;kbd&gt;Tab&lt;/kbd&gt; twice), then use your up and down arrows to select your target commit, and press &lt;kbd&gt;Shift&lt;/kbd&gt;+&lt;kbd&gt;A&lt;/kbd&gt;.&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/amend-commit-messages/img/09-lazygit.png&#34; alt=&#34;Screenshot of starting to amend a commit message in the Lazygit TUI.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to amend commit messages for commits that aren&amp;rsquo;t the most recent commit in GitHub Desktop without performing an interactive rebase.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Checking your R packages and practicals on a schedule using GitHub Actions</title>
