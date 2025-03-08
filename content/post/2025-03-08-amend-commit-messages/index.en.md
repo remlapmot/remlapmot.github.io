@@ -75,7 +75,7 @@ GitHub Desktop allows us to squash to commits together. When it does this it all
 
 If you want to do achieve this the proper way or amend the contents of previous commits you'll need to perform an interactive rebase. That is a little bit tricky to perform in the terminal, although there are lots of helpful YouTube videos and blogposts showing how to do it.
 
-If you ever need to do this I recommend using the [Lazygit](https://github.com/jesseduffield/lazygit) terminal user interface, which has the best interface to interactive rebasing I've seen. To start the process, navigate to the _Reflog_ pane (by pressing <kbd>Tab</kbd> twice), then use your up and down arrows to select your target commit, and press <kbd>Shift</kbd>+<kbd>A</kbd>.
+If you ever need to do this I recommend using the [Lazygit](https://github.com/jesseduffield/lazygit) terminal user interface, which has the best interface to interactive rebasing I've seen. To start the process, navigate to the _Reflog_ pane (by pressing <kbd>Tab</kbd> twice), then use your up and down arrows to select your target commit, and either press <kbd>r</kbd> to reword (i.e., amend the commit message) or <kbd>e</kbd> to edit the commit itself (or choose one of the other options listed at the bottom).
 
 <img src="/post/2025/amend-commit-messages/img/09-lazygit.png" alt="Screenshot of starting to amend a commit message in the Lazygit TUI." width="630" style="display: block; margin: auto;">
 
