@@ -39,7 +39,9 @@ git commit --amend
 
 in the terminal for us. This is all covered in the [GitHub documentation](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/changing-a-commit-message).
 
-However, what if the commit is not the most recent. If your commits after your target commit don't touch the same lines in the same file/s you could reorder your commits such that your target commit is the most recent and then right click and _Amend Commit..._ again. However, what if you can't easily or don't want to reorder your commits? At this point you might start questioning your life choices; how did I end up using the same tools as the Linux kernel developers! Anyway, the proper answer is to perform an interactive rebase, but that is relatively advanced and not without stress. Luckily I have a simple trick in GitHub Desktop to achieve our goal without performing an interactive rebase.
+However, what if the commit is not the most recent -- when you right click those commits the option to amend them is not available. If your commits after your target commit don't touch the same lines in the same file/s you could reorder your commits such that your target commit is the most recent and then right click and _Amend Commit..._ again. 
+
+What if you can't easily or don't want to reorder your commits? At this point you might start questioning your life choices; how did I end up using the same tools as the Linux kernel developers? All I want to do is amend a commit message! Anyway, the proper answer is to perform an interactive rebase, but that is relatively advanced and not without stress. Luckily I have a simple trick in GitHub Desktop to achieve our goal without performing an interactive rebase.
 
 ## The trick: squashing an empty commit onto the target commit
 
@@ -57,7 +59,9 @@ GitHub Desktop allows us to squash to commits together. When it does this it all
   git commit --allow-empty -m "Empty commit for purposes of trick"
   ```
 
-* Perform a squash in GitHub Desktop by dragging and dropping the empty commit onto your target commit. See the screenshot at the [top](#top) of this post. Of course the empty commit has no content, so it does not affect the content of your target commit.
+* Perform a squash in GitHub Desktop by dragging and dropping the empty commit onto your target commit as per the screenshot below (and in the screenshot at the [top](#top) of this post). The empty commit has no content, so it does not affect the content of your target commit.
+
+<img src="/post/2025/amend-commit-messages/img/03-drag-and-drop.png" alt="Screenshot of dragging the empty commit onto the target commit in GitHub Desktop." width="630" style="display: block; margin: auto;">
 
 * Enter your amended commit message in the _Summary_ box and delete the text in the _Description_ box.
 
