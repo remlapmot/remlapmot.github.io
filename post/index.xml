@@ -27,7 +27,8 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;in the terminal for us. This is all covered in the 
 &lt;a href=&#34;https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/changing-a-commit-message&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;However, what if the commit is not the most recent. If your commits after your target commit don&amp;rsquo;t touch the same lines in the same file/s you could reorder your commits such that your target commit is the most recent and then right click and &lt;em&gt;Amend Commit&amp;hellip;&lt;/em&gt; again. However, what if you can&amp;rsquo;t easily or don&amp;rsquo;t want to reorder your commits? At this point you might start questioning your life choices; how did I end up using the same tools as the Linux kernel developers! Anyway, the proper answer is to perform an interactive rebase, but that is relatively advanced and not without stress. Luckily I have a simple trick in GitHub Desktop to achieve our goal without performing an interactive rebase.&lt;/p&gt;
+&lt;p&gt;However, what if the commit is not the most recent &amp;ndash; when you right click those commits the option to amend them is not available. If your commits after your target commit don&amp;rsquo;t touch the same lines in the same file/s you could reorder your commits such that your target commit is the most recent and then right click and &lt;em&gt;Amend Commit&amp;hellip;&lt;/em&gt; again.&lt;/p&gt;
+&lt;p&gt;What if you can&amp;rsquo;t easily or don&amp;rsquo;t want to reorder your commits? At this point you might start questioning your life choices; how did I end up using the same tools as the Linux kernel developers? All I want to do is amend a commit message! Anyway, the proper answer is to perform an interactive rebase, but that is relatively advanced and not without stress. Luckily I have a simple trick in GitHub Desktop to achieve our goal without performing an interactive rebase.&lt;/p&gt;
 &lt;h2 id=&#34;the-trick-squashing-an-empty-commit-onto-the-target-commit&#34;&gt;The trick: squashing an empty commit onto the target commit&lt;/h2&gt;
 &lt;p&gt;GitHub Desktop allows us to squash to commits together. When it does this it allows us to amend the commit message of the resulting commit. Therefore, to achieve our goal of amending previous commit messages we need to:&lt;/p&gt;
 &lt;ul&gt;
@@ -43,12 +44,13 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Perform a squash in GitHub Desktop by dragging and dropping the empty commit onto your target commit. See the screenshot at the 
-&lt;a href=&#34;#top&#34;&gt;top&lt;/a&gt; of this post. Of course the empty commit has no content, so it does not affect the content of your target commit.&lt;/p&gt;
+&lt;p&gt;Perform a squash in GitHub Desktop by dragging and dropping the empty commit onto your target commit as per the screenshot below (and in the screenshot at the 
+&lt;a href=&#34;#top&#34;&gt;top&lt;/a&gt; of this post). The empty commit has no content, so it does not affect the content of your target commit.&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Enter your amended commit message in the &lt;em&gt;Summary&lt;/em&gt; box and delete the text in the &lt;em&gt;Description&lt;/em&gt; box.&lt;/p&gt;
-&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2025/amend-commit-messages/img/03-drag-and-drop.png&#34; alt=&#34;Screenshot of dragging the empty commit onto the target commit in GitHub Desktop.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Enter your amended commit message in the &lt;em&gt;Summary&lt;/em&gt; box and delete the text in the &lt;em&gt;Description&lt;/em&gt; box.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://remlapmot.github.io/post/2025/amend-commit-messages/img/06-squashing-commits.png&#34; alt=&#34;Screenshot of squashing commits GitHub Desktop.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;ul&gt;
