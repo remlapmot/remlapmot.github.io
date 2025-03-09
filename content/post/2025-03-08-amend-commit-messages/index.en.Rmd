@@ -25,7 +25,7 @@ toc: true
 
 ## Introduction
 
-As R developers I think we can all agree that Git is hard. There won't be many of us who at some time haven't broken a Git repository in some way or other, I know that I have (several times ... ahem).
+As R developers I think we can all agree that Git is hard. There won't be many of us who at some time haven't broken a Git repository in some way or other or lost some work, I know that I have (several times ... ahem).
 
 A task I sometimes need to achieve when working on a branch is amending a commit message. I use [GitHub Desktop](https://github.com/apps/desktop) to help me with Git, and I recommend it to all my students. If the commit you want to amend the message of is the most recent commit you can simply right click on it and select _Amend Commit..._.
 
