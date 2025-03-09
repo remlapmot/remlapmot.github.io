@@ -94,7 +94,7 @@ This repo contains the source files and built site for my personal [website](htt
   
      ```r
      blogdown::build_site()
-     # or: rmarkdown::render_site(encoding = 'UTF-8')
+     # or for a post/page: rmarkdown::render_site('/Users/tom/Documents/GitHub/remlapmot.github.io/content/post/2025-03-08-amend-commit-messages/index.en.Rmd',  encoding = 'UTF-8')
      ```
   
    - This creates the `docs` directory (instead of `public`) with the contents of the site. Note, this will not render correctly when opened locally in browser because it needs a web server running. Commit the `docs` folder into the repo. Delete the `public` folder if you have previously created that.
