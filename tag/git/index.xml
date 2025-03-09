@@ -18,7 +18,7 @@
       <pubDate>Sat, 08 Mar 2025 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2025/amend-commit-messages/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;As R developers I think we can all agree that Git is hard. There won&amp;rsquo;t be many of us who at some time haven&amp;rsquo;t broken a Git repository in some way or other, I know that I have (several times &amp;hellip; ahem).&lt;/p&gt;
+&lt;p&gt;As R developers I think we can all agree that Git is hard. There won&amp;rsquo;t be many of us who at some time haven&amp;rsquo;t broken a Git repository in some way or other or lost some work, I know that I have (several times &amp;hellip; ahem).&lt;/p&gt;
 &lt;p&gt;A task I sometimes need to achieve when working on a branch is amending a commit message. I use 
 &lt;a href=&#34;https://github.com/apps/desktop&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub Desktop&lt;/a&gt; to help me with Git, and I recommend it to all my students. If the commit you want to amend the message of is the most recent commit you can simply right click on it and select &lt;em&gt;Amend Commit&amp;hellip;&lt;/em&gt;.&lt;/p&gt;
 &lt;img src=&#34;https://remlapmot.github.io/post/2025/amend-commit-messages/img/01-right-click-amend-commit.png&#34; alt=&#34;Screenshot of amending a commit in GitHub Desktop.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
