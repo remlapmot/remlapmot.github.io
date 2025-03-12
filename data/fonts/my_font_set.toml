@@ -2,10 +2,10 @@
 name = "My-Font-Set"
 
 # Optional Google font URL
-google_fonts = "Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono|Fira+Code"
+google_fonts = "Montserrat:400,700|Roboto+Flex:400,400italic,700|Roboto:400,400italic,700|Roboto+Mono|Fira+Code"
 
 # Font families
-heading_font = "Montserrat"
-body_font = "Roboto"
-nav_font = "Roboto"
+heading_font = "Roboto Flex"
+body_font = "Roboto Flex"
+nav_font = "Roboto Flex"
 mono_font = "Fira Code"
