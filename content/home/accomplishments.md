@@ -19,6 +19,14 @@ date_format = "Jan 2006"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 
 [[item]]
+  title = "Version 2 of the OpenSAFELY R image released"
+  organization = "Bennett Institute, University of Oxford"
+  organization_url = "https://www.bennett.ox.ac.uk/"
+  url = ""
+  date_start = "2025-04-01"
+  description = "My version 2 of the R image for the OpenSAFELY platform has been released. You can read more about it [here](https://www.opensafely.org/changelog/#2025-03-19) and [here](https://www.bennett.ox.ac.uk/blog/2025/04/opensafely-but-new-r/)."
+
+[[item]]
   title = "Blog post included as a highlight in R Weekly blog and podcast"
   organization = "R Weekly"
   organization_url = "https://rweekly.org/"
