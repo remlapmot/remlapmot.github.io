@@ -25,7 +25,7 @@ toc: true
 
 ## Introduction
 
-GitHub 
+GitHub has announced that Windows ARM64 runners are [now available](https://github.blog/changelog/2025-04-14-windows-arm64-hosted-runners-now-available-in-public-preview/) under the `windows-11-arm` label.
 
 We are now in the interesting position in that GitHub Actions has Windows, macOS, and Ubuntu Linux available on both x86_64 and ARM.
 
