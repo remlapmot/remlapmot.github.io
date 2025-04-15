@@ -1,7 +1,7 @@
 ---
 title: "Running R on Windows on ARM on GitHub Actions"
 author: Package Build
-date: '2025-03-08'
+date: '2025-04-15'
 slug: win-11-arm-gha
 categories:
   - Blog
@@ -24,6 +24,10 @@ toc: true
 ---
 
 ## Introduction
+
+GitHub 
+
+We are now in the interesting position in that GitHub Actions has Windows, macOS, and Ubuntu Linux available on both x86_64 and ARM.
 
 
 <img src="/post/2025/win-11-arm-gha/img/.png" alt="Screenshot of ." width="630" style="display: block; margin: auto;">
