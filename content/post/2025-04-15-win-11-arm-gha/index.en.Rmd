@@ -32,6 +32,12 @@ We are now in the interesting position in that GitHub Actions has Windows, macOS
 
 <img src="/post/2025/win-11-arm-gha/img/.png" alt="Screenshot of ." width="630" style="display: block; margin: auto;">
 
+## Setting up R on ARM
+
+R 4.4.2 x86_64
+
+https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md
+
 ## Summary
 
 I have shown how to .
