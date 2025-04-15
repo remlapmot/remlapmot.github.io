@@ -1,0 +1,33 @@
+---
+title: "Running R on Windows on ARM on GitHub Actions"
+author: Package Build
+date: '2025-03-08'
+slug: win-11-arm-gha
+categories:
+  - Blog
+tags:
+  - GitHub
+  - R
+  - Quarto
+subtitle:
+summary: "How to setup and run R on Windows on ARM on GitHub Actions"
+authors: []
+lastmod: '2025-04-15T12:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of .'
+projects: []
+toc: true
+---
+
+## Introduction
+
+
+<img src="/post/2025/win-11-arm-gha/img/.png" alt="Screenshot of ." width="630" style="display: block; margin: auto;">
+
+## Summary
+
+I have shown how to .
