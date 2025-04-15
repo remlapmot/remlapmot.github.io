@@ -90,9 +90,35 @@ Breaking down the final section of this;
 * we define a variable containing the arguments we want to pass to _Rscript_;
 * we then invoke _Rscript_ using our two variables and the `&` call operator.
 
+Then we navigate to our GitHub repo and view the output in the Actions tab under the relevant run.
+
+To confirm we really have launched the AARCH64 version of R we see the output of `R.version` is as follows.
+
+```r
+print(R.version)
+
+``` r
+print(R.version)
+#>                _                           
+#> platform       aarch64-w64-mingw32              
+#> arch           aarch64                          
+#> os             mingw32                          
+#> crt            ucrt                             
+#> system         aarch64, mingw32                 
+#> status                                          
+#> major          4                                
+#> minor          5.0                              
+#> year           2025                             
+#> month          04                               
+#> day            11                               
+#> svn rev        88135                            
+#> language       R                                
+#> version.string R version 4.5.0 (2025-04-11 ucrt)
+#> nickname       How About a Twenty-Six 
+```
 
 ## Summary
 
-I have shown how to .
+I have shown how to install the AARCH64 version of R and RTools45 on Windows on ARM within GitHub Actions.
 
-We are now in the interesting position in that GitHub Actions has Windows, macOS, and Ubuntu Linux all available on both x86_64 and ARM.
+As an aside, I note that we are now in the interesting position in that GitHub Actions now has Windows, macOS, and Ubuntu Linux all available on both x86_64 and ARM architectures.
