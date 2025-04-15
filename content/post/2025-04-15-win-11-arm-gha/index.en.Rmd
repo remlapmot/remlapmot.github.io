@@ -27,19 +27,68 @@ toc: true
 
 GitHub has announced that Windows ARM64 runners are [now available](https://github.blog/changelog/2025-04-14-windows-arm64-hosted-runners-now-available-in-public-preview/) under the `windows-11-arm` label.
 
-I help maintain an R package, TwoSampleMR, which has quite alot of users. The package is not on CRAN because several of its dependencies are only on GitHub, and for a package to be on CRAN essentially all of its dependencies must also be on CRAN. So I am always interested to try installing the package on new operating systems and architectures.
+I help maintain an R package, [TwoSampleMR](https://mrcieu.github.io/TwoSampleMR/), which has quite alot of users. The package is not on CRAN because several of its dependencies are only on GitHub, and for a package to be on CRAN essentially all of its dependencies must also be on CRAN. So I am always interested to try installing the package on new operating systems and architectures.
 
 ## Setting up R AARCH64 on Windows on ARM
 
 ### Avoiding confusion with the default runner software
 
-First of all it is important to mention that the x86_64 version of R 4.4.2 and Rtools 4.4 are included in the [default software set](https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md) for the `windows-latest` GitHub Actions runner. And its binaries are on the `PATH` environment variable. As a result if you run `R`, `Rscript`, or `R CMD batch` etc. in a shell in the runner you will obtain the x86_64 version of R. Let's say this is not what we want.
+First of all it is important to mention that the x86_64 version of R 4.4.2 and RTools44 are included in the [default software set](https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md) for the `windows-latest` GitHub Actions runner. And the directory including its binaries are on the `PATH` environment variable (specifically _C:\Program Files (x86)\R\R-4.4.2\bin\x64_). As a result if you run `R`, `Rscript`, or `R CMD batch` etc. in a shell in the runner you will obtain the x86_64 version of R. Let's say this is not what we want.
 
 So to setup the ARM version of R we need to install it ourselves.
 
+### Installing AARCH64 R and RTools45
 
+I came up with the following workflow file - amended from r-lib/actions to install R 4.5.0 and RTools45.
 
+```yaml
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
 
+name: Check-install-win-11-arm
+
+permissions: read-all
+
+jobs:
+  R-CMD-check:
+    runs-on: windows-11-arm
+
+    name: windows-11-arm
+
+    strategy:
+      fail-fast: false
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
+    steps:
+      - name: Install R and RTools for Windows on ARM and install TwoSampleMR
+        run: |
+          $url = "https://www.r-project.org/nosvn/winutf8/aarch64/R-4-signed/R-4.5.0-aarch64.exe"
+          Invoke-WebRequest -Uri "$url" -OutFile R-4.5.0-aarch64.exe -UseBasicParsing -UserAgent "NativeHost"
+          Start-Process -FilePath R-4.5.0-aarch64.exe -ArgumentList "/install /norestart /verysilent /SUPPRESSMSGBOXES" -NoNewWindow -Wait
+          $url = "https://cran.r-project.org/bin/windows/Rtools/rtools45/files/rtools45-aarch64-6536-6492.exe"
+          Invoke-WebRequest -Uri "$url" -OutFile rtools45-aarch64-6536-6492.exe -UseBasicParsing -UserAgent "NativeHost"
+          Start-Process -FilePath rtools45-aarch64-6536-6492.exe -ArgumentList "/install /norestart /verysilent /SUPPRESSMSGBOXES" -NoNewWindow -Wait
+          $rscript = "C:\Program Files\R-aarch64\R-4.5.0\bin\Rscript.exe"
+          $arguments = "-e", "print(R.version); install.packages('TwoSampleMR', dependencies = TRUE, repos = c('https://cloud.r-project.org/', 'https://mrcieu.r-universe.dev')); library(TwoSampleMR)"
+          & $rscript $arguments
+```
+
+Breaking down the final section of this;
+
+* we define the url of the R 4.5.0 aarch64 installer;
+* we then download the installer using `Invoke-WebRequest` (note that the default shell in Windows is Powershell);
+* we then run the installer using `Start-Process`. I am not sure if I need all of the arguments I have specified here but it seems to work.
+* We then do the same for RTools45.
+* We then define a variable for the path to the _Rscript.exe_ binary;
+* we define a variable containing the arguments we want to pass to _Rscript_;
+* we then invoke _Rscript_ using our two variables and the `&` call operator.
 
 
 ## Summary
