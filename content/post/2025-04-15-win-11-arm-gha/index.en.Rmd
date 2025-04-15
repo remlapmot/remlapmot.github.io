@@ -27,17 +27,23 @@ toc: true
 
 GitHub has announced that Windows ARM64 runners are [now available](https://github.blog/changelog/2025-04-14-windows-arm64-hosted-runners-now-available-in-public-preview/) under the `windows-11-arm` label.
 
-We are now in the interesting position in that GitHub Actions has Windows, macOS, and Ubuntu Linux available on both x86_64 and ARM.
+I help maintain an R package, TwoSampleMR, which has quite alot of users. The package is not on CRAN because several of its dependencies are only on GitHub, and for a package to be on CRAN essentially all of its dependencies must also be on CRAN. So I am always interested to try installing the package on new operating systems and architectures.
+
+## Setting up R AARCH64 on Windows on ARM
+
+### Avoiding confusion with the default runner software
+
+First of all it is important to mention that the x86_64 version of R 4.4.2 and Rtools 4.4 are included in the [default software set](https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md) for the `windows-latest` GitHub Actions runner. And its binaries are on the `PATH` environment variable. As a result if you run `R`, `Rscript`, or `R CMD batch` etc. in a shell in the runner you will obtain the x86_64 version of R. Let's say this is not what we want.
+
+So to setup the ARM version of R we need to install it ourselves.
 
 
-<img src="/post/2025/win-11-arm-gha/img/.png" alt="Screenshot of ." width="630" style="display: block; margin: auto;">
 
-## Setting up R on ARM
 
-R 4.4.2 x86_64
 
-https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md
 
 ## Summary
 
 I have shown how to .
+
+We are now in the interesting position in that GitHub Actions has Windows, macOS, and Ubuntu Linux all available on both x86_64 and ARM.
