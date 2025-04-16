@@ -18,28 +18,28 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'Screenshot of .'
+  alt_text: 'Screenshot of the Windows on ARM runner label in a GitHub Actions workflow file.'
 projects: []
 toc: true
 ---
 
 ## Introduction
 
-GitHub has announced that Windows ARM64 runners are [now available](https://github.blog/changelog/2025-04-14-windows-arm64-hosted-runners-now-available-in-public-preview/) under the `windows-11-arm` label.
+GitHub has recently announced that Windows ARM64 runners are [now available](https://github.blog/changelog/2025-04-14-windows-arm64-hosted-runners-now-available-in-public-preview/) under the `windows-11-arm` label.
 
-I help maintain an R package, [TwoSampleMR](https://mrcieu.github.io/TwoSampleMR/), which has quite alot of users. The package is not on CRAN because several of its dependencies are only on GitHub, and for a package to be on CRAN essentially all of its dependencies must also be on CRAN. So I am always interested to try installing the package on new operating systems and architectures.
+I help maintain an R package, [TwoSampleMR](https://mrcieu.github.io/TwoSampleMR/), which has quite alot of users. The package is not on CRAN because several of its dependencies are only on GitHub, and for a package to be on CRAN essentially all of its dependencies must also be on CRAN. As a result I am always interested to try installing the package on new operating systems and architectures.
+
+(In this post I will use ARM and AARCH64 interchangeably.)
 
 ## Setting up R AARCH64 on Windows on ARM
 
 ### Avoiding confusion with the default runner software
 
-First of all it is important to mention that the x86_64 version of R 4.4.2 and RTools44 are included in the [default software set](https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md) for the `windows-latest` GitHub Actions runner. And the directory including its binaries are on the `PATH` environment variable (specifically _C:\Program Files (x86)\R\R-4.4.2\bin\x64_). As a result if you run `R`, `Rscript`, or `R CMD batch` etc. in a shell in the runner you will obtain the x86_64 version of R. Let's say this is not what we want.
-
-So to setup the ARM version of R we need to install it ourselves.
+It is important to mention that the x86_64 version of R 4.4.2 and RTools44 are included in the [default software set](https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md) for the `windows-latest` GitHub Actions runner. And the directory including its binaries are on the `PATH` environment variable (specifically _C:\Program Files (x86)\R\R-4.4.2\bin\x64_). As a result if you run `R`, `Rscript`, or `R CMD batch` etc. in a shell in the runner you will obtain the x86_64 version of R (which runs under emulation on the ARM runner). Let's say this is not what we want, so to setup the ARM version of R we need to install it ourselves.
 
 ### Installing AARCH64 R and RTools45
 
-I came up with the following workflow file - amended from r-lib/actions to install R 4.5.0 and RTools45.
+The r-hub API does not yet provide the installer information for the AARCH64 version of R, so I came up with the following workflow file - amended from r-lib/actions to install R 4.5.0 and RTools45.
 
 ```yaml
 on:
@@ -54,7 +54,7 @@ name: Check-install-win-11-arm
 permissions: read-all
 
 jobs:
-  R-CMD-check:
+  windows-11-on-arm:
     runs-on: windows-11-arm
 
     name: windows-11-arm
@@ -80,7 +80,7 @@ jobs:
           & $rscript $arguments
 ```
 
-Breaking down the final section of this;
+Breaking down the final `steps` section of this;
 
 * we define the url of the R 4.5.0 aarch64 installer;
 * we then download the installer using `Invoke-WebRequest` (note that the default shell in Windows is Powershell);
@@ -95,9 +95,6 @@ Then we navigate to our GitHub repo and view the output in the Actions tab under
 To confirm we really have launched the AARCH64 version of R we see the output of `R.version` is as follows.
 
 ```r
-print(R.version)
-
-``` r
 print(R.version)
 #>                _                           
 #> platform       aarch64-w64-mingw32              
