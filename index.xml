@@ -5,12 +5,106 @@
     <link>https://remlapmot.github.io/</link>
       <atom:link href="https://remlapmot.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Dr Tom Palmer</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 08 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 16 Apr 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
       <title>Dr Tom Palmer</title>
       <link>https://remlapmot.github.io/</link>
     </image>
+    
+    <item>
+      <title>Running R on Windows on ARM on GitHub Actions</title>
+      <link>https://remlapmot.github.io/post/2025/win-11-arm-gha/</link>
+      <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/win-11-arm-gha/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;GitHub has recently announced that Windows ARM64 runners are 
+&lt;a href=&#34;https://github.blog/changelog/2025-04-14-windows-arm64-hosted-runners-now-available-in-public-preview/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;now available&lt;/a&gt; under the &lt;code&gt;windows-11-arm&lt;/code&gt; label.&lt;/p&gt;
+&lt;p&gt;I help maintain an R package, 
+&lt;a href=&#34;https://mrcieu.github.io/TwoSampleMR/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TwoSampleMR&lt;/a&gt;, which has quite alot of users. The package is not on CRAN because several of its dependencies are only on GitHub, and for a package to be on CRAN essentially all of its dependencies must also be on CRAN. As a result I am always interested to try installing the package on new operating systems and architectures.&lt;/p&gt;
+&lt;p&gt;(In this post I will use ARM and AARCH64 interchangeably.)&lt;/p&gt;
+&lt;h2 id=&#34;setting-up-r-aarch64-on-windows-on-arm&#34;&gt;Setting up R AARCH64 on Windows on ARM&lt;/h2&gt;
+&lt;h3 id=&#34;avoiding-confusion-with-the-default-runner-software&#34;&gt;Avoiding confusion with the default runner software&lt;/h3&gt;
+&lt;p&gt;It is important to mention that the x86_64 version of R 4.4.2 and RTools44 are included in the 
+&lt;a href=&#34;https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;default software set&lt;/a&gt; for the &lt;code&gt;windows-latest&lt;/code&gt; GitHub Actions runner. And the directory including its binaries are on the &lt;code&gt;PATH&lt;/code&gt; environment variable (specifically &lt;em&gt;C:\Program Files (x86)\R\R-4.4.2\bin\x64&lt;/em&gt;). As a result if you run &lt;code&gt;R&lt;/code&gt;, &lt;code&gt;Rscript&lt;/code&gt;, or &lt;code&gt;R CMD batch&lt;/code&gt; etc. in a shell in the runner you will obtain the x86_64 version of R (which runs under emulation on the ARM runner). Let&amp;rsquo;s say this is not what we want, so to setup the ARM version of R we need to install it ourselves.&lt;/p&gt;
+&lt;h3 id=&#34;installing-aarch64-r-and-rtools45&#34;&gt;Installing AARCH64 R and RTools45&lt;/h3&gt;
+&lt;p&gt;Tomas Kalibera from the R Core Team has provided several excellent posts (
+&lt;a href=&#34;https://blog.r-project.org/2023/08/23/will-r-work-on-64-bit-arm-windows/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; and 
+&lt;a href=&#34;https://blog.r-project.org/2024/04/23/r-on-64-bit-arm-windows/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;) about R for Windows on ARM, and installers for it have been available for some time.&lt;/p&gt;
+&lt;p&gt;The r-hub API does not yet provide the installer information for the AARCH64 version of R, so I came up with the following workflow file - amended from r-lib/actions to install R 4.5.0 and RTools45. Place such a (GitHub Actions workflow) file in a public GitHub repo in a &lt;em&gt;.github/workflows&lt;/em&gt; directory, and enable GitHub Actions in the repo settings.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+name: Check-install-win-11-arm
+
+permissions: read-all
+
+jobs:
+  windows-11-on-arm:
+    runs-on: windows-11-arm
+
+    name: windows-11-arm
+
+    strategy:
+      fail-fast: false
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
+    steps:
+      - name: Install R and RTools for Windows on ARM and install TwoSampleMR
+        run: |
+          $url = &amp;quot;https://www.r-project.org/nosvn/winutf8/aarch64/R-4-signed/R-4.5.0-aarch64.exe&amp;quot;
+          Invoke-WebRequest -Uri &amp;quot;$url&amp;quot; -OutFile R-4.5.0-aarch64.exe -UseBasicParsing -UserAgent &amp;quot;NativeHost&amp;quot;
+          Start-Process -FilePath R-4.5.0-aarch64.exe -ArgumentList &amp;quot;/install /norestart /verysilent /SUPPRESSMSGBOXES&amp;quot; -NoNewWindow -Wait
+          $url = &amp;quot;https://cran.r-project.org/bin/windows/Rtools/rtools45/files/rtools45-aarch64-6536-6492.exe&amp;quot;
+          Invoke-WebRequest -Uri &amp;quot;$url&amp;quot; -OutFile rtools45-aarch64-6536-6492.exe -UseBasicParsing -UserAgent &amp;quot;NativeHost&amp;quot;
+          Start-Process -FilePath rtools45-aarch64-6536-6492.exe -ArgumentList &amp;quot;/install /norestart /verysilent /SUPPRESSMSGBOXES&amp;quot; -NoNewWindow -Wait
+          $rscript = &amp;quot;C:\Program Files\R-aarch64\R-4.5.0\bin\Rscript.exe&amp;quot;
+          $arguments = &amp;quot;-e&amp;quot;, &amp;quot;print(R.version); # the rest of your R code goes here ...&amp;quot;
+          &amp;amp; $rscript $arguments
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Breaking down the final &lt;code&gt;steps&lt;/code&gt; section of this;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;we define the url of the R 4.5.0 aarch64 installer;&lt;/li&gt;
+&lt;li&gt;we then download the installer using &lt;code&gt;Invoke-WebRequest&lt;/code&gt; (note that the default shell in Windows is Powershell);&lt;/li&gt;
+&lt;li&gt;we then run the installer using &lt;code&gt;Start-Process&lt;/code&gt;. I am not sure if I need all of the arguments I have specified here but it seems to work.&lt;/li&gt;
+&lt;li&gt;We then do the same for RTools45.&lt;/li&gt;
+&lt;li&gt;We then define a variable for the path to the &lt;em&gt;Rscript.exe&lt;/em&gt; binary;&lt;/li&gt;
+&lt;li&gt;we define a variable containing the arguments we want to pass to &lt;em&gt;Rscript&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;we then invoke &lt;em&gt;Rscript&lt;/em&gt; using our two variables and the &lt;code&gt;&amp;amp;&lt;/code&gt; call operator.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Then we navigate to our GitHub repo and view the output in the Actions tab under the relevant run.&lt;/p&gt;
+&lt;p&gt;Of course if you want to run your own R script you&amp;rsquo;ll need an initial step to checkout your repo.&lt;/p&gt;
+&lt;p&gt;To confirm that we really have launched the AARCH64 version of R we see the output of &lt;code&gt;print(R.version)&lt;/code&gt; is as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;print(R.version)
+#&amp;gt;                _                           
+#&amp;gt; platform       aarch64-w64-mingw32              
+#&amp;gt; arch           aarch64                          
+#&amp;gt; os             mingw32                          
+#&amp;gt; crt            ucrt                             
+#&amp;gt; system         aarch64, mingw32                 
+#&amp;gt; status                                          
+#&amp;gt; major          4                                
+#&amp;gt; minor          5.0                              
+#&amp;gt; year           2025                             
+#&amp;gt; month          04                               
+#&amp;gt; day            11                               
+#&amp;gt; svn rev        88135                            
+#&amp;gt; language       R                                
+#&amp;gt; version.string R version 4.5.0 (2025-04-11 ucrt)
+#&amp;gt; nickname       How About a Twenty-Six 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to install the AARCH64 version of R and RTools45 on the recently released Windows on ARM runner in GitHub Actions.&lt;/p&gt;
+&lt;p&gt;As an aside, I note that we are now in the interesting position in that GitHub Actions now has Windows, macOS, and Ubuntu Linux all available on both x86_64 and ARM architectures.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Amending the Git commit message of a previous commit (that isn&#39;t the most recent) in GitHub Desktop without performing an interactive rebase</title>

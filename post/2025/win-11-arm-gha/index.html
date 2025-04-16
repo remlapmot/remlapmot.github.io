@@ -27,10 +27,10 @@
   
     
   
-  <meta name="description" content="Google Chrome site search shortcuts for R and statistics to enable convenient #rstats web searching.">
+  <meta name="description" content="How to setup and run the AARCH64/ARM version R on Windows on ARM on GitHub Actions">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/">
+  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2025/win-11-arm-gha/">
 
   
 
@@ -213,7 +213,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu_12bf607bd6d196d.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu_5e536419af3743e2.png">
 
-  <link rel="canonical" href="https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/">
+  <link rel="canonical" href="https://remlapmot.github.io/post/2025/win-11-arm-gha/">
 
   
   
@@ -228,15 +228,15 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Dr Tom Palmer">
-  <meta property="og:url" content="https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/">
-  <meta property="og:title" content="Supercharge your #rstats web searching in Google Chrome with Site Search Shortcuts | Dr Tom Palmer">
-  <meta property="og:description" content="Google Chrome site search shortcuts for R and statistics to enable convenient #rstats web searching."><meta property="og:image" content="https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/featured.png">
-  <meta property="twitter:image" content="https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/featured.png"><meta property="og:locale" content="en-us">
+  <meta property="og:url" content="https://remlapmot.github.io/post/2025/win-11-arm-gha/">
+  <meta property="og:title" content="Running R on Windows on ARM on GitHub Actions | Dr Tom Palmer">
+  <meta property="og:description" content="How to setup and run the AARCH64/ARM version R on Windows on ARM on GitHub Actions"><meta property="og:image" content="https://remlapmot.github.io/post/2025/win-11-arm-gha/featured.png">
+  <meta property="twitter:image" content="https://remlapmot.github.io/post/2025/win-11-arm-gha/featured.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2024-06-14T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2025-04-16T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2024-06-14T09:15:00&#43;01:00">
+    <meta property="article:modified_time" content="2025-04-16T07:00:00&#43;00:00">
   
 
   
@@ -260,16 +260,16 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/"
+    "@id": "https://remlapmot.github.io/post/2025/win-11-arm-gha/"
   },
-  "headline": "Supercharge your #rstats web searching in Google Chrome with Site Search Shortcuts",
+  "headline": "Running R on Windows on ARM on GitHub Actions",
   
   "image": [
-    "https://remlapmot.github.io/post/2024/chrome-site-search-shortcuts/featured.png"
+    "https://remlapmot.github.io/post/2025/win-11-arm-gha/featured.png"
   ],
   
-  "datePublished": "2024-06-14T00:00:00Z",
-  "dateModified": "2024-06-14T09:15:00+01:00",
+  "datePublished": "2025-04-16T00:00:00Z",
+  "dateModified": "2025-04-16T07:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -284,7 +284,7 @@
       "url": "https://remlapmot.github.io/images/icon_hu_5e536419af3743e2.png"
     }
   },
-  "description": "Google Chrome site search shortcuts for R and statistics to enable convenient #rstats web searching."
+  "description": "How to setup and run the AARCH64/ARM version R on Windows on ARM on GitHub Actions"
 }
 </script>
 
@@ -302,7 +302,7 @@
 
 
 
-  <title>Supercharge your #rstats web searching in Google Chrome with Site Search Shortcuts | Dr Tom Palmer</title>
+  <title>Running R on Windows on ARM on GitHub Actions | Dr Tom Palmer</title>
 
 </head>
 
@@ -586,7 +586,12 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#helpful-google-chrome-site-search-shortcuts-for-r-and-statistics">Helpful Google Chrome site search shortcuts for R and statistics</a></li>
+    <li><a href="#setting-up-r-aarch64-on-windows-on-arm">Setting up R AARCH64 on Windows on ARM</a>
+      <ul>
+        <li><a href="#avoiding-confusion-with-the-default-runner-software">Avoiding confusion with the default runner software</a></li>
+        <li><a href="#installing-aarch64-r-and-rtools45">Installing AARCH64 R and RTools45</a></li>
+      </ul>
+    </li>
     <li><a href="#summary">Summary</a></li>
   </ul>
 </nav>
@@ -620,7 +625,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>Supercharge your #rstats web searching in Google Chrome with Site Search Shortcuts</h1>
+  <h1>Running R on Windows on ARM on GitHub Actions</h1>
 
   
 
@@ -640,7 +645,7 @@
           Last updated on
       
     
-    Jun 14, 2024
+    Apr 16, 2025
   </span>
   
 
@@ -679,9 +684,9 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 439px; max-height: 180px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 490px; max-height: 76px;">
   <div style="position: relative">
-    <img src="/post/2024/chrome-site-search-shortcuts/featured.png" alt="Screenshot of a Google Chrome site search shortcut for the METACRAN CRAN mirror." class="featured-image">
+    <img src="/post/2025/win-11-arm-gha/featured.png" alt="Screenshot of the Windows on ARM runner label in a GitHub Actions workflow file." class="featured-image">
     
   </div>
 </div>
@@ -690,71 +695,91 @@
             <div class="article-container">
               <div class="article-style">
                 <h2 id="introduction">Introduction</h2>
-<p>Have you ever typed <code>Amazon</code> into the Google Chrome address bar and seen the address bar indicate that it&rsquo;s now searching the Amazon site? It turns out this is a feature in Google Chrome called site search shortcuts.</p>
-<p>We can see what default shortcuts Chrome provides by in the Chrome address bar going to <code>chrome://settings/searchEngines</code> and scrolling to the <em>Site Search</em> section.</p>
-<p>From here we can see that we can define our own shortcuts, so let&rsquo;s define some helpful ones related to R and statistics.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-<h2 id="helpful-google-chrome-site-search-shortcuts-for-r-and-statistics">Helpful Google Chrome site search shortcuts for R and statistics</h2>
-<p>
-<a href="https://r-pkg.org/" target="_blank" rel="noopener">METACRAN</a> provides several amazingly useful services around CRAN.</p>
-<ul>
-<li>A shortcut for searching the METACRAN CRAN mirror on GitHub</li>
-</ul>
-<pre><code class="language-plaintext">Name: CRAN mirror on GitHub
-Shortcut: @cran
-URL with %s in place of query:
-https://github.com/search?q=user%3Acran%20%s&amp;ref=opensearch&amp;type=code
+<p>GitHub has recently announced that Windows ARM64 runners are 
+<a href="https://github.blog/changelog/2025-04-14-windows-arm64-hosted-runners-now-available-in-public-preview/" target="_blank" rel="noopener">now available</a> under the <code>windows-11-arm</code> label.</p>
+<p>I help maintain an R package, 
+<a href="https://mrcieu.github.io/TwoSampleMR/" target="_blank" rel="noopener">TwoSampleMR</a>, which has quite alot of users. The package is not on CRAN because several of its dependencies are only on GitHub, and for a package to be on CRAN essentially all of its dependencies must also be on CRAN. As a result I am always interested to try installing the package on new operating systems and architectures.</p>
+<p>(In this post I will use ARM and AARCH64 interchangeably.)</p>
+<h2 id="setting-up-r-aarch64-on-windows-on-arm">Setting up R AARCH64 on Windows on ARM</h2>
+<h3 id="avoiding-confusion-with-the-default-runner-software">Avoiding confusion with the default runner software</h3>
+<p>It is important to mention that the x86_64 version of R 4.4.2 and RTools44 are included in the 
+<a href="https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md" target="_blank" rel="noopener">default software set</a> for the <code>windows-latest</code> GitHub Actions runner. And the directory including its binaries are on the <code>PATH</code> environment variable (specifically <em>C:\Program Files (x86)\R\R-4.4.2\bin\x64</em>). As a result if you run <code>R</code>, <code>Rscript</code>, or <code>R CMD batch</code> etc. in a shell in the runner you will obtain the x86_64 version of R (which runs under emulation on the ARM runner). Let&rsquo;s say this is not what we want, so to setup the ARM version of R we need to install it ourselves.</p>
+<h3 id="installing-aarch64-r-and-rtools45">Installing AARCH64 R and RTools45</h3>
+<p>Tomas Kalibera from the R Core Team has provided several excellent posts (
+<a href="https://blog.r-project.org/2023/08/23/will-r-work-on-64-bit-arm-windows/index.html" target="_blank" rel="noopener">here</a> and 
+<a href="https://blog.r-project.org/2024/04/23/r-on-64-bit-arm-windows/index.html" target="_blank" rel="noopener">here</a>) about R for Windows on ARM, and installers for it have been available for some time.</p>
+<p>The r-hub API does not yet provide the installer information for the AARCH64 version of R, so I came up with the following workflow file - amended from r-lib/actions to install R 4.5.0 and RTools45. Place such a (GitHub Actions workflow) file in a public GitHub repo in a <em>.github/workflows</em> directory, and enable GitHub Actions in the repo settings.</p>
+<pre><code class="language-yaml">on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+name: Check-install-win-11-arm
+
+permissions: read-all
+
+jobs:
+  windows-11-on-arm:
+    runs-on: windows-11-arm
+
+    name: windows-11-arm
+
+    strategy:
+      fail-fast: false
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
+    steps:
+      - name: Install R and RTools for Windows on ARM and install TwoSampleMR
+        run: |
+          $url = &quot;https://www.r-project.org/nosvn/winutf8/aarch64/R-4-signed/R-4.5.0-aarch64.exe&quot;
+          Invoke-WebRequest -Uri &quot;$url&quot; -OutFile R-4.5.0-aarch64.exe -UseBasicParsing -UserAgent &quot;NativeHost&quot;
+          Start-Process -FilePath R-4.5.0-aarch64.exe -ArgumentList &quot;/install /norestart /verysilent /SUPPRESSMSGBOXES&quot; -NoNewWindow -Wait
+          $url = &quot;https://cran.r-project.org/bin/windows/Rtools/rtools45/files/rtools45-aarch64-6536-6492.exe&quot;
+          Invoke-WebRequest -Uri &quot;$url&quot; -OutFile rtools45-aarch64-6536-6492.exe -UseBasicParsing -UserAgent &quot;NativeHost&quot;
+          Start-Process -FilePath rtools45-aarch64-6536-6492.exe -ArgumentList &quot;/install /norestart /verysilent /SUPPRESSMSGBOXES&quot; -NoNewWindow -Wait
+          $rscript = &quot;C:\Program Files\R-aarch64\R-4.5.0\bin\Rscript.exe&quot;
+          $arguments = &quot;-e&quot;, &quot;print(R.version); # the rest of your R code goes here ...&quot;
+          &amp; $rscript $arguments
 </code></pre>
-<p>On the Chrome settings page click add and enter the information. To use this simply type <code>@cran</code> into the address bar</p>
-<img src="/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step1.png" alt="Screenshot of a site search shortcut in the Google Chrome address bar." width="630" style="display: block; margin: auto;">
-<p>and then type your search term</p>
-<img src="/post/2024/chrome-site-search-shortcuts/img/cran-shortcut-step2.png" alt="Screenshot of a site search shortcut in the Google Chrome address bar." width="630" style="display: block; margin: auto;">
-<p>Here are some other shortcuts.</p>
+<p>Breaking down the final <code>steps</code> section of this;</p>
 <ul>
-<li>A shortcut for searching for a package description on METACRAN</li>
+<li>we define the url of the R 4.5.0 aarch64 installer;</li>
+<li>we then download the installer using <code>Invoke-WebRequest</code> (note that the default shell in Windows is Powershell);</li>
+<li>we then run the installer using <code>Start-Process</code>. I am not sure if I need all of the arguments I have specified here but it seems to work.</li>
+<li>We then do the same for RTools45.</li>
+<li>We then define a variable for the path to the <em>Rscript.exe</em> binary;</li>
+<li>we define a variable containing the arguments we want to pass to <em>Rscript</em>;</li>
+<li>we then invoke <em>Rscript</em> using our two variables and the <code>&amp;</code> call operator.</li>
 </ul>
-<pre><code class="language-plaintext">Name: METACRAN
-Shortcut: @metacran
-URL with %s in place of query:
-https://r-pkg.org/search.html/?q=%s
+<p>Then we navigate to our GitHub repo and view the output in the Actions tab under the relevant run.</p>
+<p>Of course if you want to run your own R script you&rsquo;ll need an initial step to checkout your repo.</p>
+<p>To confirm that we really have launched the AARCH64 version of R we see the output of <code>print(R.version)</code> is as follows.</p>
+<pre><code class="language-r">print(R.version)
+#&gt;                _                           
+#&gt; platform       aarch64-w64-mingw32              
+#&gt; arch           aarch64                          
+#&gt; os             mingw32                          
+#&gt; crt            ucrt                             
+#&gt; system         aarch64, mingw32                 
+#&gt; status                                          
+#&gt; major          4                                
+#&gt; minor          5.0                              
+#&gt; year           2025                             
+#&gt; month          04                               
+#&gt; day            11                               
+#&gt; svn rev        88135                            
+#&gt; language       R                                
+#&gt; version.string R version 4.5.0 (2025-04-11 ucrt)
+#&gt; nickname       How About a Twenty-Six 
 </code></pre>
-<ul>
-<li>A shortcut for searching using 
-<a href="https://rseek.org/" target="_blank" rel="noopener">Rseek</a></li>
-</ul>
-<pre><code class="language-plaintext">Name: Rseek
-Shortcut: @rseek
-URL with %s in place of query:
-https://rseek.org/?q=%s
-</code></pre>
-<ul>
-<li>A shortcut for searching 
-<a href="https://r-universe.dev/" target="_blank" rel="noopener">R-universe</a></li>
-</ul>
-<pre><code class="language-plaintext">Name: R-universe
-Shortcut: @runi
-URL with %s in place of query:
-https://r-universe.dev/search/?q=%s
-</code></pre>
-<ul>
-<li>A shortcut for searching the third edition of the Oxford Dictionary of Statistics</li>
-</ul>
-<pre><code class="language-plaintext">Name: Oxford Dictionary of Statistics
-Shortcut: @stats
-URL with %s in place of query:
-https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188.001.0001%2Facref-9780199679188&amp;q=%s
-</code></pre>
-<p>And we could define many more.</p>
 <h2 id="summary">Summary</h2>
-<p>In summary we have defined several Google Chrome site search shortcuts related to R and statistics.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>I am following an excellent 
-<a href="https://chromeunboxed.com/chrome-site-search-shortcuts" target="_blank" rel="noopener">blogpost</a> by Chrome Unboxed.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
+<p>I have shown how to install the AARCH64 version of R and RTools45 on the recently released Windows on ARM runner in GitHub Actions.</p>
+<p>As an aside, I note that we are now in the interesting position in that GitHub Actions now has Windows, macOS, and Ubuntu Linux all available on both x86_64 and ARM architectures.</p>
 
               </div>
               
@@ -766,9 +791,11 @@ https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188
 
 <div class="article-tags">
   
+  <a class="badge badge-light" href="/tag/github/">GitHub</a>
+  
   <a class="badge badge-light" href="/tag/r/">R</a>
   
-  <a class="badge badge-light" href="/tag/chrome/">Chrome</a>
+  <a class="badge badge-light" href="/tag/quarto/">Quarto</a>
   
 </div>
 
@@ -980,15 +1007,15 @@ https://www.oxfordreference.com/search?source=%2F10.1093%2Facref%2F9780199679188
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/2025/win-11-arm-gha/">Running R on Windows on ARM on GitHub Actions</a></li>
-      
-      <li><a href="/post/2025/amend-commit-messages/">Amending the Git commit message of a previous commit (that isn&#39;t the most recent) in GitHub Desktop without performing an interactive rebase</a></li>
-      
       <li><a href="/post/2025/checking-packages-and-practicals/">Checking your R packages and practicals on a schedule using GitHub Actions</a></li>
       
-      <li><a href="/post/2025/smart-folders/">Creating a Finder Smart Folder of your RStudio Project files to enable super fast project launching</a></li>
-      
       <li><a href="/post/2025/quarto-conditional-content/">Creating R, Python, Stata, and Julia tutorial worksheets (with and without solutions) using Quarto</a></li>
+      
+      <li><a href="/post/2025/multi-engine-quarto/">Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode</a></li>
+      
+      <li><a href="/post/2025/quarto-revealjs-tips/">Seven tips for creating Quarto revealjs presentations</a></li>
+      
+      <li><a href="/post/2025/amend-commit-messages/">Amending the Git commit message of a previous commit (that isn&#39;t the most recent) in GitHub Desktop without performing an interactive rebase</a></li>
       
     </ul>
   </div>
