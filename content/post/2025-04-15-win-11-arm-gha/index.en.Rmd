@@ -1,7 +1,7 @@
 ---
 title: "Running R on Windows on ARM on GitHub Actions"
 author: Package Build
-date: '2025-04-15'
+date: '2025-04-16'
 slug: win-11-arm-gha
 categories:
   - Blog
@@ -10,9 +10,9 @@ tags:
   - R
   - Quarto
 subtitle:
-summary: "How to setup and run R on Windows on ARM on GitHub Actions"
+summary: "How to setup and run the AARCH64/ARM version R on Windows on ARM on GitHub Actions"
 authors: []
-lastmod: '2025-04-15T12:00:00+00:00'
+lastmod: '2025-04-16T07:00:00+00:00'
 featured: no
 image:
   caption: ''
@@ -96,7 +96,7 @@ Then we navigate to our GitHub repo and view the output in the Actions tab under
 
 Of course if you want to run your own R script you'll need an initial step to checkout your repo.
 
-To confirm that we really have launched the AARCH64 version of R we see the output of `R.version` is as follows.
+To confirm that we really have launched the AARCH64 version of R we see the output of `print(R.version)` is as follows.
 
 ```r
 print(R.version)
