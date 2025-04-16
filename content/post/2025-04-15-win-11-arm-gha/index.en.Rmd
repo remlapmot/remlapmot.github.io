@@ -39,7 +39,7 @@ It is important to mention that the x86_64 version of R 4.4.2 and RTools44 are i
 
 ### Installing AARCH64 R and RTools45
 
-The r-hub API does not yet provide the installer information for the AARCH64 version of R, so I came up with the following workflow file - amended from r-lib/actions to install R 4.5.0 and RTools45.
+The r-hub API does not yet provide the installer information for the AARCH64 version of R, so I came up with the following workflow file - amended from r-lib/actions to install R 4.5.0 and RTools45. Place such a (GitHub Actions workflow) file in a public GitHub repo in a _.github/workflows_ directory, and enable GitHub Actions in the repo settings.
 
 ```yaml
 on:
@@ -76,7 +76,7 @@ jobs:
           Invoke-WebRequest -Uri "$url" -OutFile rtools45-aarch64-6536-6492.exe -UseBasicParsing -UserAgent "NativeHost"
           Start-Process -FilePath rtools45-aarch64-6536-6492.exe -ArgumentList "/install /norestart /verysilent /SUPPRESSMSGBOXES" -NoNewWindow -Wait
           $rscript = "C:\Program Files\R-aarch64\R-4.5.0\bin\Rscript.exe"
-          $arguments = "-e", "print(R.version); install.packages('TwoSampleMR', dependencies = TRUE, repos = c('https://cloud.r-project.org/', 'https://mrcieu.r-universe.dev')); library(TwoSampleMR)"
+          $arguments = "-e", "print(R.version); # the rest of your R code goes here ..."
           & $rscript $arguments
 ```
 
@@ -91,6 +91,8 @@ Breaking down the final `steps` section of this;
 * we then invoke _Rscript_ using our two variables and the `&` call operator.
 
 Then we navigate to our GitHub repo and view the output in the Actions tab under the relevant run.
+
+Of course if you want to run your own R script you'll need an initial step to checkout your repo.
 
 To confirm we really have launched the AARCH64 version of R we see the output of `R.version` is as follows.
 
@@ -116,6 +118,6 @@ print(R.version)
 
 ## Summary
 
-I have shown how to install the AARCH64 version of R and RTools45 on Windows on ARM within GitHub Actions.
+I have shown how to install the AARCH64 version of R and RTools45 on the recently released Windows on ARM runner in GitHub Actions.
 
 As an aside, I note that we are now in the interesting position in that GitHub Actions now has Windows, macOS, and Ubuntu Linux all available on both x86_64 and ARM architectures.
