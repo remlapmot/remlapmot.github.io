@@ -27,8 +27,25 @@ toc: true
 
 ## Introduction
 
+Any new project using Python or Jupyter now needs to use a virtual environment. This is just a directory within your project which will contain the dependency Python packages.
 
-## A setup shell script
+There are many Python project managers, the new and extremly fast project manager is [uv](https://docs.astral.sh/uv/).
+
+In this post I will explain how to use the [nbstata](https://hugetim.github.io/nbstata/) Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux.
+
+I should say at this point that I am a contributor to the excellent [Statamarkdown](https://cran.r-project.org/package=Statamarkdown) R package by Doug Hemken which can also be used in Quarto documents using the knitr engine. But in this post I'll be using nbstata because nbstata uses pystata which is StataCorp's official Python package (included in each Stata installation) and is their official way of integrating Stata in Python. As such pystata and hence nbstata have more features than Statamarkdown can provide.
+
+## Setup basics
+
+On your machine you need to have
+
+* Stata installed and know the location of the installation
+  * and check that within the installation their is the utilities directory containing the pystata directory
+* uv must be installed, see [its docs for more info](https://docs.astral.sh/uv/getting-started/installation/)
+* and of course a text editor and a terminal
+* On Windows I would recommend using Git Bash (which is bundled with [Git for Windows](https://git-scm.com/downloads/win)) for running the setup script in the next section.
+
+## A shell script to setup the virtual environment
 
 ```bash
 # On Linux we need to ensure that the directory containing our stata-mp binary is on PATH
