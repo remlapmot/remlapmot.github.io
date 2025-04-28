@@ -1,0 +1,67 @@
+---
+title: "Running the nbstata Jupyter kernel within a uv virtual environment"
+author: Package Build
+date: '2025-04-29'
+slug: nbstata-uv-venv
+categories:
+  - Blog
+tags:
+  - GitHub
+  - Stata
+  - Jupyter
+  - nbstata
+  - Quarto
+subtitle:
+summary: "How to setup a uv virtual environment to run the nbstata Jupyter kernel."
+authors: []
+lastmod: '2025-04-29T07:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of ...'
+projects: []
+toc: true
+---
+
+## Introduction
+
+
+## A setup shell script
+
+```bash
+# On Linux we need to ensure that the directory containing our stata-mp binary is on PATH
+# export PATH=$PATH:/usr/local/stata18
+
+# Required so nbstata can find pystata package
+export PYTHONPATH=/Applications/Stata/utilities
+# Linux: export PYTHONPATH=/usr/local/stata18/utilities
+# Windows: export PYTHONPATH="C:/Program Files/Stata18/utilities"
+
+# Setup the virtual environment
+uv venv --python 3.13
+
+# Activate the virtual environment
+source .venv/bin/activate
+# Windows: source .venv/Scripts/activate
+
+# Instal nbstata dependency Python packages
+uv pip install jupyterlab nbstata jupyterlab_stata_highlight2
+
+# Additional Python packages if using parameterised Quarto documents
+# uv pip install papermill python-dotenv jupyter-cache
+
+# Setup the nbstata kernel
+python -m nbstata.install
+
+# Commands for running Quarto documents go here
+quarto render index.qmd --execute --execute-daemon-restart
+
+deactivate
+```
+
+
+## Summary
+
+I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment.
