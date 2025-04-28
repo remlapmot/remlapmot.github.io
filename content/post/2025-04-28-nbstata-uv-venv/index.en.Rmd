@@ -109,6 +109,21 @@ The nbstata docs states that the --sys-prefix flag may be required in a virutal 
 quarto render index.qmd --execute --execute-daemon-restart
 ```
 
+An example _index.qmd_ document could be:
+
+````{verbatim, lang="plaintext"}
+---
+title: My example nbstata document
+jupyter: nbstata
+---
+
+```{stata}
+display "Hello, World!"
+```
+````
+
+Note that Quarto documents using the nbstata kernel can also be embedded within other documents, [as I have described in a previous post](https://remlapmot.github.io/post/2025/multi-engine-quarto/).
+
 * And when you have finished your work you can deactivate the virtual environment
 
 ```bash
