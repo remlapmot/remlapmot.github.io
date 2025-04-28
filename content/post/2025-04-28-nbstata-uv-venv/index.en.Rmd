@@ -27,13 +27,17 @@ toc: true
 
 ## Introduction
 
-Any new project using Python or Jupyter now needs to use a virtual environment. This is just a directory within your project which will contain the dependency Python packages.
+Any new project using Python or Jupyter now needs to use a virtual environment. This is just a directory within your project which will contain the dependency Python packages and perhaps the Python installation (or pointers to the Python installation).
 
 There are many Python project managers, the new and extremly fast project manager is [uv](https://docs.astral.sh/uv/).
 
 In this post I will explain how to use the [nbstata](https://hugetim.github.io/nbstata/) Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux.
 
-I should say at this point that I am a contributor to the excellent [Statamarkdown](https://cran.r-project.org/package=Statamarkdown) R package by Doug Hemken which can also be used in Quarto documents using the knitr engine. But in this post I'll be using nbstata because nbstata uses pystata which is StataCorp's official Python package (included in each Stata installation) and is their official way of integrating Stata in Python. As such pystata and hence nbstata have more features than Statamarkdown can provide.
+I am a contributor to the excellent [Statamarkdown](https://cran.r-project.org/package=Statamarkdown) R package by Doug Hemken which can also be used in Quarto documents using the knitr engine. But in this post I'll be using nbstata because nbstata uses pystata which is StataCorp's official Python package (included in each Stata installation) and is their official way of integrating Stata in Python. As such pystata and hence nbstata have more features than Statamarkdown can provide.
+
+And it is worth emphasising how useful virtual environments are because it is very easy to get oneself in a complete mess on one's computer with regards Python, as you will likely end up with many different versions installed, and then chaos ensues regarding which versions of dependency packages your different projects require.
+
+[XKCD 1987](https://m.xkcd.com/1987/)
 
 ## Setup basics
 
@@ -50,6 +54,8 @@ On your machine you need to have
 What follows are the shell commands we need to run to setup our virtual environment.
 
 It's for macOS but I put comments in the places where amendments are required for either Windows or Linux. 
+
+Note that currently on macOS and Linux there cannot be any spaces in the filepath to your virtual environment.
 
 * On Linux we need to ensure that the directory containing our stata/stata-mp binary is on PATH
 
