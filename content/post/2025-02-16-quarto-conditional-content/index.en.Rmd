@@ -167,7 +167,7 @@ As of Quarto version 1.7.23 it is possible to suppress the injected parameters c
 
 ### Stata
 
-The Stata case involved two additional tricks. First, the [nbstata Jupyter kernel](https://hugetim.github.io/nbstata/) allows inline code, however this must be a [`display` command](https://www.stata.com/manuals/pdisplay.pdf), so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can't use local macros) at the top of the document as follows. Second, I didn't try but I suspect the nbstata kernel doesn't support parameters, and so I achieved the toggling of the code using an environmental variable, e.g. `HIDE_ANSWERS_STATA`.
+The Stata case involved two additional tricks. First, the [nbstata Jupyter kernel](https://hugetim.github.io/nbstata/) allows inline code, however this must be a [`display` command](https://www.stata.com/manuals/pdisplay.pdf), so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can't use local macros) at the top of the document as follows. Second, I didn't try but I suspect the nbstata kernel doesn't support parameters, and so I achieved the toggling of the code using an environment variable, e.g. `HIDE_ANSWERS_STATA`.
 
 ````{verbatim, lang="plaintext"}
 ---
