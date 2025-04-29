@@ -117,10 +117,8 @@ display "Hello, World!"
 ````
 
 ```bash
-quarto render index.qmd --execute --execute-daemon-restart
+quarto render index.qmd
 ```
-
-Here the `--execute` flag is required to instruct Quarto to execute the code chunks in the document.
 
 Note that Quarto documents using the nbstata kernel can also be embedded within other Quarto documents, [as I have described in a previous post](https://remlapmot.github.io/post/2025/multi-engine-quarto/).
 
