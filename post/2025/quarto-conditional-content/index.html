@@ -236,7 +236,7 @@
     
       <meta property="article:published_time" content="2025-02-18T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2025-02-18T11:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2025-04-29T07:00:00&#43;00:00">
   
 
   
@@ -269,7 +269,7 @@
   ],
   
   "datePublished": "2025-02-18T00:00:00Z",
-  "dateModified": "2025-02-18T11:00:00Z",
+  "dateModified": "2025-04-29T07:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -655,7 +655,7 @@
           Last updated on
       
     
-    Feb 18, 2025
+    Apr 29, 2025
   </span>
   
 
@@ -694,7 +694,7 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 342px; max-height: 374px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 376px; max-height: 408px;">
   <div style="position: relative">
     <img src="/post/2025/quarto-conditional-content/featured.png" alt="Screenshot of programmatically including conditional content in a Quarto document using the Jupyter python3 engine." class="featured-image">
     
@@ -814,13 +814,11 @@ print(&quot;Hidden in questions&quot;)
 <pre><code class="language-plaintext">quarto render exercise-python.qmd -o exercise-python-questions.html
 quarto render exercise-python.qmd -P hide_answers:False -o exercise-python-solutions.html
 </code></pre>
-<p>The only problem with this is that currently the Papermill output cell about the injected parameters is printed in the document.</p>
-<img src="/post/2025/quarto-conditional-content/img/injected-parameters-cell.png" alt="Screenshot of the injected parameters cell in a Quarto document." width="630" style="display: block; margin: auto;">
-<p>In Jupyter this can apparently be suppressed by passing the <code>--report-mode</code> flag, but I couldn&rsquo;t work out how to do that in Quarto. I believe it will be possible to suppress this output in future versions of Quarto (I&rsquo;m using the current latest release version of Quarto 1.6.40).</p>
+<p>As of Quarto version 1.7.23 it is possible to suppress the injected parameters cell.</p>
 <h3 id="stata">Stata</h3>
 <p>The Stata case involved two additional tricks. First, the 
 <a href="https://hugetim.github.io/nbstata/" target="_blank" rel="noopener">nbstata Jupyter kernel</a> allows inline code, however this must be a 
-<a href="https://www.stata.com/manuals/pdisplay.pdf" target="_blank" rel="noopener"><code>display</code> command</a>, so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can&rsquo;t use local macros) at the top of the document as follows. Second, I didn&rsquo;t try but I suspect the nbstata kernel doesn&rsquo;t support parameters, and so I achieved the toggling of the code using an environmental variable, e.g. <code>HIDE_ANSWERS_STATA</code>.</p>
+<a href="https://www.stata.com/manuals/pdisplay.pdf" target="_blank" rel="noopener"><code>display</code> command</a>, so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can&rsquo;t use local macros) at the top of the document as follows. Second, I didn&rsquo;t try but I suspect the nbstata kernel doesn&rsquo;t support parameters, and so I achieved the toggling of the code using an environment variable, e.g. <code>HIDE_ANSWERS_STATA</code>.</p>
 <pre><code class="language-plaintext">---
 format: html
 jupyter: nbstata

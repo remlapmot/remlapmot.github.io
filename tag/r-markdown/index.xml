@@ -278,13 +278,11 @@ print(&amp;quot;Hidden in questions&amp;quot;)
 &lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;quarto render exercise-python.qmd -o exercise-python-questions.html
 quarto render exercise-python.qmd -P hide_answers:False -o exercise-python-solutions.html
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The only problem with this is that currently the Papermill output cell about the injected parameters is printed in the document.&lt;/p&gt;
-&lt;img src=&#34;https://remlapmot.github.io/post/2025/quarto-conditional-content/img/injected-parameters-cell.png&#34; alt=&#34;Screenshot of the injected parameters cell in a Quarto document.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
-&lt;p&gt;In Jupyter this can apparently be suppressed by passing the &lt;code&gt;--report-mode&lt;/code&gt; flag, but I couldn&amp;rsquo;t work out how to do that in Quarto. I believe it will be possible to suppress this output in future versions of Quarto (I&amp;rsquo;m using the current latest release version of Quarto 1.6.40).&lt;/p&gt;
+&lt;p&gt;As of Quarto version 1.7.23 it is possible to suppress the injected parameters cell.&lt;/p&gt;
 &lt;h3 id=&#34;stata&#34;&gt;Stata&lt;/h3&gt;
 &lt;p&gt;The Stata case involved two additional tricks. First, the 
 &lt;a href=&#34;https://hugetim.github.io/nbstata/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nbstata Jupyter kernel&lt;/a&gt; allows inline code, however this must be a 
-&lt;a href=&#34;https://www.stata.com/manuals/pdisplay.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;display&lt;/code&gt; command&lt;/a&gt;, so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can&amp;rsquo;t use local macros) at the top of the document as follows. Second, I didn&amp;rsquo;t try but I suspect the nbstata kernel doesn&amp;rsquo;t support parameters, and so I achieved the toggling of the code using an environmental variable, e.g. &lt;code&gt;HIDE_ANSWERS_STATA&lt;/code&gt;.&lt;/p&gt;
+&lt;a href=&#34;https://www.stata.com/manuals/pdisplay.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;display&lt;/code&gt; command&lt;/a&gt;, so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can&amp;rsquo;t use local macros) at the top of the document as follows. Second, I didn&amp;rsquo;t try but I suspect the nbstata kernel doesn&amp;rsquo;t support parameters, and so I achieved the toggling of the code using an environment variable, e.g. &lt;code&gt;HIDE_ANSWERS_STATA&lt;/code&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
 format: html
 jupyter: nbstata
