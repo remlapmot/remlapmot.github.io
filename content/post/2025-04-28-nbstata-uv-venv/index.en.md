@@ -52,7 +52,7 @@ On your machine you need to have
 
 ## A shell script to setup the uv virtual environment
 
-What follows are the shell commands we need to run to setup our virtual environment. The script is for macOS but I have included comments in the places where amendments are required for either Windows or Linux. 
+What follows are the shell commands we need to run to setup our virtual environment. The script is for macOS but I have included comments in the places where amendments are required for either Windows or Linux. I have also included this script [in a repository](https://github.com/remlapmot/nbstata-uv-setup) (in fact I have included a script per operating system).
 
 Note that currently on macOS and Linux there cannot be any spaces in the filepath to your virtual environment.
 
