@@ -47,6 +47,7 @@ On your machine you need to have
 * Stata installed and know the location of the installation
   * and check that within the installation there is the _utilities_ directory containing the _pystata_ directory
 * uv must be installed, see [its docs for installation instructions](https://docs.astral.sh/uv/getting-started/installation/)
+* to render Quarto documents you need [Quarto installed](https://quarto.org/docs/get-started/)
 * and of course a text editor and a terminal.
 * On Windows I would recommend using Git Bash as your shell (this is bundled with [Git for Windows](https://git-scm.com/downloads/win)) for running the setup script in the next section.
 
@@ -102,13 +103,7 @@ python -m nbstata.install
 
 The nbstata docs states that the `--sys-prefix` flag may be required in a virutal environment but I haven't found that to be the case.
 
-* Then we run commands to do our actual work; for example rendering a Quarto document using the `jupyter: nbstata` engine.
-
-```bash
-quarto render index.qmd --execute --execute-daemon-restart
-```
-
-An example Quarto document, say _index.qmd_, could be:
+* Then we run commands to do our actual work; for example rendering a Quarto document using the `jupyter: nbstata` engine. An example Quarto document, say _index.qmd_, could be:
 
 ````{verbatim, lang="plaintext"}
 ---
@@ -120,6 +115,12 @@ jupyter: nbstata
 display "Hello, World!"
 ```
 ````
+
+```bash
+quarto render index.qmd --execute --execute-daemon-restart
+```
+
+Here the `--execute` flag is required to instruct Quarto to execute the code chunks in the document.
 
 Note that Quarto documents using the nbstata kernel can also be embedded within other Quarto documents, [as I have described in a previous post](https://remlapmot.github.io/post/2025/multi-engine-quarto/).
 
