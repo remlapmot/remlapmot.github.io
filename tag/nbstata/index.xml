@@ -5,12 +5,117 @@
     <link>https://remlapmot.github.io/tag/nbstata/</link>
       <atom:link href="https://remlapmot.github.io/tag/nbstata/index.xml" rel="self" type="application/rss+xml" />
     <description>Nbstata</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 18 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 29 Apr 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
       <title>Nbstata</title>
       <link>https://remlapmot.github.io/tag/nbstata/</link>
     </image>
+    
+    <item>
+      <title>Running the nbstata Jupyter kernel within a uv virtual environment</title>
+      <link>https://remlapmot.github.io/post/2025/nbstata-uv-venv/</link>
+      <pubDate>Tue, 29 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/nbstata-uv-venv/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Any new project using Python or Jupyter is very stongly recommended to use a virtual environment. A virtual environment is a directory (usually at the top level; often called either &lt;em&gt;.venv&lt;/em&gt; or &lt;em&gt;venv&lt;/em&gt;) within your project directory which contains the dependency Python packages and perhaps the Python installation (or pointers to the Python installation on your system).&lt;/p&gt;
+&lt;p&gt;There are many Python project managers, in this post I will use the new and extremely fast project manager 
+&lt;a href=&#34;https://docs.astral.sh/uv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;uv&lt;/a&gt;. I will show how to use the 
+&lt;a href=&#34;https://hugetim.github.io/nbstata/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nbstata&lt;/a&gt; Jupyter kernel by Tim Huegerich within a uv virtual environment on macOS, Windows, and Linux. The aim is to be able to conveniently and reproducibly render Quarto documents using the 
+&lt;a href=&#34;https://hugetim.github.io/nbstata/user_guide.html#quarto-tips&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;jupyter: nbstata&lt;/code&gt;&lt;/a&gt; engine from within the virtual environment.&lt;/p&gt;
+&lt;p&gt;At this point it&amp;rsquo;s worth saying that I am a contributor to the excellent 
+&lt;a href=&#34;https://cran.r-project.org/package=Statamarkdown&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Statamarkdown&lt;/a&gt; R package by Doug Hemken. This can be used in Quarto documents using the knitr engine. In this post I&amp;rsquo;ll be using nbstata because nbstata uses 
+&lt;a href=&#34;https://www.stata.com/python/pystata/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;pystata&lt;/a&gt; which is StataCorp&amp;rsquo;s official Python package (included in each Stata installation) and is their official way of integrating Stata in Python. As such pystata and hence nbstata have more features than Statamarkdown can provide.&lt;/p&gt;
+&lt;p&gt;And it is worth emphasizing how useful virtual environments are because it is very easy to get oneself in a complete mess with regards Python, as you will likely end up with many different versions installed. Chaos can then accidentally ensue regarding which versions of dependency packages your different projects require given a certain Python version, as always XKCD have a comic illustrating the problem.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://imgs.xkcd.com/comics/python_environment.png&#34; alt=&#34;XKCD 1987, a diagram showing the chaos of not using Python virtual environments.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;figcaption&gt;XKCD 1987, Python Environment. &lt;a href=&#34;https://xkcd.com/license.html&#34;&gt;XKCD license&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h2 id=&#34;setup-basics&#34;&gt;Setup basics&lt;/h2&gt;
+&lt;p&gt;On your machine you need to have&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Stata installed and know the location of the installation
+&lt;ul&gt;
+&lt;li&gt;and check that within the installation there is the &lt;em&gt;utilities&lt;/em&gt; directory containing the &lt;em&gt;pystata&lt;/em&gt; directory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;uv must be installed, see 
+&lt;a href=&#34;https://docs.astral.sh/uv/getting-started/installation/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;its docs for installation instructions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;to render Quarto documents you need 
+&lt;a href=&#34;https://quarto.org/docs/get-started/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quarto installed&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;and of course a text editor and a terminal.&lt;/li&gt;
+&lt;li&gt;On Windows I would recommend using Git Bash as your shell (this is bundled with 
+&lt;a href=&#34;https://git-scm.com/downloads/win&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Git for Windows&lt;/a&gt;) for running the setup script in the next section.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;a-shell-script-to-setup-the-uv-virtual-environment&#34;&gt;A shell script to setup the uv virtual environment&lt;/h2&gt;
+&lt;p&gt;What follows are the shell commands we need to run to setup our virtual environment. The script is for macOS but I have included comments in the places where amendments are required for either Windows or Linux. I have also included this script 
+&lt;a href=&#34;https://github.com/remlapmot/nbstata-uv-setup&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;in a repository&lt;/a&gt; (in fact I have included a script per operating system).&lt;/p&gt;
+&lt;p&gt;Note that currently on macOS and Linux there cannot be any spaces in the filepath to your virtual environment. And you might need to amend some of the paths, say if you have a different version of Stata or if it&amp;rsquo;s installation location is different.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;On Linux we need to ensure that the directory containing our stata/stata-mp binary is on &lt;code&gt;PATH&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# export PATH=$PATH:/usr/local/stata18
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;We then need to ensure that our Python installation will be able to find the pystata package. We can do this by defining the &lt;code&gt;PYTHONPATH&lt;/code&gt; environment variable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Required so Python can find pystata package
+export PYTHONPATH=/Applications/Stata/utilities
+# Linux: export PYTHONPATH=/usr/local/stata18/utilities
+# Windows: export PYTHONPATH=&amp;quot;C:/Program Files/Stata18/utilities&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;We then setup the virtual environment. This will create a directory in our project called &lt;em&gt;.venv&lt;/em&gt;. I prefer to explicitly set the version of Python I am using.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;uv venv --python 3.13
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;We then activate the virtual environment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;source .venv/bin/activate
+# Windows: source .venv/Scripts/activate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Now we can install the required Python dependency packages as per the 
+&lt;a href=&#34;https://hugetim.github.io/nbstata/user_guide.html#install-nbstata&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nbstata docs&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Install nbstata dependency Python packages
+uv pip install jupyterlab nbstata jupyterlab_stata_highlight2
+
+# Additional Python packages if using parameterised Quarto documents
+# uv pip install papermill python-dotenv jupyter-cache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Then we setup the nbstata Jupyter kernel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;python -m nbstata.install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The nbstata docs states that the &lt;code&gt;--sys-prefix&lt;/code&gt; flag may be required in a virutal environment but I haven&amp;rsquo;t found that to be the case.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Then we run commands to do our actual work; for example rendering a Quarto document using the &lt;code&gt;jupyter: nbstata&lt;/code&gt; engine. An example Quarto document, say &lt;em&gt;index.qmd&lt;/em&gt;, could be:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+title: My example nbstata document
+jupyter: nbstata
+---
+
+```{stata}
+display &amp;quot;Hello, World!&amp;quot;
+```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;quarto render index.qmd
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that Quarto documents using the nbstata kernel can also be embedded within other Quarto documents, 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/multi-engine-quarto/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;as I have described in a previous post&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;And that&amp;rsquo;s it. When you have finished your work you can deactivate the virtual environment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;deactivate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux; in order to conveniently and reproducibly render Quarto documents using the &lt;code&gt;jupyter: nbstata&lt;/code&gt; engine.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Creating R, Python, Stata, and Julia tutorial worksheets (with and without solutions) using Quarto</title>

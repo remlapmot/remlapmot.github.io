@@ -27,10 +27,10 @@
   
     
   
-  <meta name="description" content="My #GitHubUnwrapped 2024!">
+  <meta name="description" content="How to setup a uv virtual environment to run the nbstata Jupyter kernel.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2025/github-unwrapped-2024/">
+  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2025/nbstata-uv-venv/">
 
   
 
@@ -213,7 +213,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu_12bf607bd6d196d.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu_5e536419af3743e2.png">
 
-  <link rel="canonical" href="https://remlapmot.github.io/post/2025/github-unwrapped-2024/">
+  <link rel="canonical" href="https://remlapmot.github.io/post/2025/nbstata-uv-venv/">
 
   
   
@@ -228,15 +228,15 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Dr Tom Palmer">
-  <meta property="og:url" content="https://remlapmot.github.io/post/2025/github-unwrapped-2024/">
-  <meta property="og:title" content="My #GitHubUnwrapped 2024! | Dr Tom Palmer">
-  <meta property="og:description" content="My #GitHubUnwrapped 2024!"><meta property="og:image" content="https://remlapmot.github.io/post/2025/github-unwrapped-2024/featured.png">
-  <meta property="twitter:image" content="https://remlapmot.github.io/post/2025/github-unwrapped-2024/featured.png"><meta property="og:locale" content="en-us">
+  <meta property="og:url" content="https://remlapmot.github.io/post/2025/nbstata-uv-venv/">
+  <meta property="og:title" content="Running the nbstata Jupyter kernel within a uv virtual environment | Dr Tom Palmer">
+  <meta property="og:description" content="How to setup a uv virtual environment to run the nbstata Jupyter kernel."><meta property="og:image" content="https://remlapmot.github.io/post/2025/nbstata-uv-venv/featured.png">
+  <meta property="twitter:image" content="https://remlapmot.github.io/post/2025/nbstata-uv-venv/featured.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2025-01-08T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2025-04-29T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2025-01-08T10:23:00&#43;00:00">
+    <meta property="article:modified_time" content="2025-04-29T07:00:00&#43;00:00">
   
 
   
@@ -260,16 +260,16 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://remlapmot.github.io/post/2025/github-unwrapped-2024/"
+    "@id": "https://remlapmot.github.io/post/2025/nbstata-uv-venv/"
   },
-  "headline": "My #GitHubUnwrapped 2024!",
+  "headline": "Running the nbstata Jupyter kernel within a uv virtual environment",
   
   "image": [
-    "https://remlapmot.github.io/post/2025/github-unwrapped-2024/featured.png"
+    "https://remlapmot.github.io/post/2025/nbstata-uv-venv/featured.png"
   ],
   
-  "datePublished": "2025-01-08T00:00:00Z",
-  "dateModified": "2025-01-08T10:23:00Z",
+  "datePublished": "2025-04-29T00:00:00Z",
+  "dateModified": "2025-04-29T07:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -284,7 +284,7 @@
       "url": "https://remlapmot.github.io/images/icon_hu_5e536419af3743e2.png"
     }
   },
-  "description": "My #GitHubUnwrapped 2024!"
+  "description": "How to setup a uv virtual environment to run the nbstata Jupyter kernel."
 }
 </script>
 
@@ -302,7 +302,7 @@
 
 
 
-  <title>My #GitHubUnwrapped 2024! | Dr Tom Palmer</title>
+  <title>Running the nbstata Jupyter kernel within a uv virtual environment | Dr Tom Palmer</title>
 
 </head>
 
@@ -577,6 +577,23 @@
 
 
   
+<div class="container-fluid docs">
+    <div class="row flex-xl-nowrap">
+      <div class="d-none d-xl-block col-xl-2 docs-toc">
+        <ul class="nav toc-top">
+          <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+        </ul>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#setup-basics">Setup basics</a></li>
+    <li><a href="#a-shell-script-to-setup-the-uv-virtual-environment">A shell script to setup the uv virtual environment</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+      </div>
+      <main class="col-12 col-md-0 col-xl-10 py-md-3 pl-md-5 docs-content" role="main">
+
         <article class="article">
             
 
@@ -601,10 +618,12 @@
 
   
   
+    
+  
 
 
 <div class="article-container pt-3">
-  <h1>My #GitHubUnwrapped 2024!</h1>
+  <h1>Running the nbstata Jupyter kernel within a uv virtual environment</h1>
 
   
 
@@ -624,7 +643,7 @@
           Last updated on
       
     
-    Jan 8, 2025
+    Apr 29, 2025
   </span>
   
 
@@ -663,9 +682,9 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 372px; max-height: 709px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 125px;">
   <div style="position: relative">
-    <img src="/post/2025/github-unwrapped-2024/featured.png" alt="Image showing statistics from my GitHub unwrapped 2024 video." class="featured-image">
+    <img src="/post/2025/nbstata-uv-venv/featured_hu_d3937bfddf76565b.png" alt="Screenshot of a shell script to setup the nbstata Jupyter kernel within a uv virtual environment." class="featured-image">
     
   </div>
 </div>
@@ -673,10 +692,103 @@
 
             <div class="article-container">
               <div class="article-style">
-                <p>My #GitHubUnwrapped 2024!</p>
-<p align="center"><iframe src="https://drive.google.com/file/d/10zFAtzcEFhxLNSRDZDXUgnafU4GDVepZ/preview" width="640" height="480" allow="autoplay"></iframe></p>
-<p>Made with 
-<a href="https://www.githubunwrapped.com/" target="_blank" rel="noopener">https://www.githubunwrapped.com/</a>.</p>
+                <h2 id="introduction">Introduction</h2>
+<p>Any new project using Python or Jupyter is very stongly recommended to use a virtual environment. A virtual environment is a directory (usually at the top level; often called either <em>.venv</em> or <em>venv</em>) within your project directory which contains the dependency Python packages and perhaps the Python installation (or pointers to the Python installation on your system).</p>
+<p>There are many Python project managers, in this post I will use the new and extremely fast project manager 
+<a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener">uv</a>. I will show how to use the 
+<a href="https://hugetim.github.io/nbstata/" target="_blank" rel="noopener">nbstata</a> Jupyter kernel by Tim Huegerich within a uv virtual environment on macOS, Windows, and Linux. The aim is to be able to conveniently and reproducibly render Quarto documents using the 
+<a href="https://hugetim.github.io/nbstata/user_guide.html#quarto-tips" target="_blank" rel="noopener"><code>jupyter: nbstata</code></a> engine from within the virtual environment.</p>
+<p>At this point it&rsquo;s worth saying that I am a contributor to the excellent 
+<a href="https://cran.r-project.org/package=Statamarkdown" target="_blank" rel="noopener">Statamarkdown</a> R package by Doug Hemken. This can be used in Quarto documents using the knitr engine. In this post I&rsquo;ll be using nbstata because nbstata uses 
+<a href="https://www.stata.com/python/pystata/" target="_blank" rel="noopener">pystata</a> which is StataCorp&rsquo;s official Python package (included in each Stata installation) and is their official way of integrating Stata in Python. As such pystata and hence nbstata have more features than Statamarkdown can provide.</p>
+<p>And it is worth emphasizing how useful virtual environments are because it is very easy to get oneself in a complete mess with regards Python, as you will likely end up with many different versions installed. Chaos can then accidentally ensue regarding which versions of dependency packages your different projects require given a certain Python version, as always XKCD have a comic illustrating the problem.</p>
+<figure>
+<img src="https://imgs.xkcd.com/comics/python_environment.png" alt="XKCD 1987, a diagram showing the chaos of not using Python virtual environments." width="630" style="display: block; margin: auto;">
+<figcaption>XKCD 1987, Python Environment. <a href="https://xkcd.com/license.html">XKCD license</a></figcaption>
+</figure>
+<h2 id="setup-basics">Setup basics</h2>
+<p>On your machine you need to have</p>
+<ul>
+<li>Stata installed and know the location of the installation
+<ul>
+<li>and check that within the installation there is the <em>utilities</em> directory containing the <em>pystata</em> directory</li>
+</ul>
+</li>
+<li>uv must be installed, see 
+<a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener">its docs for installation instructions</a></li>
+<li>to render Quarto documents you need 
+<a href="https://quarto.org/docs/get-started/" target="_blank" rel="noopener">Quarto installed</a></li>
+<li>and of course a text editor and a terminal.</li>
+<li>On Windows I would recommend using Git Bash as your shell (this is bundled with 
+<a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">Git for Windows</a>) for running the setup script in the next section.</li>
+</ul>
+<h2 id="a-shell-script-to-setup-the-uv-virtual-environment">A shell script to setup the uv virtual environment</h2>
+<p>What follows are the shell commands we need to run to setup our virtual environment. The script is for macOS but I have included comments in the places where amendments are required for either Windows or Linux. I have also included this script 
+<a href="https://github.com/remlapmot/nbstata-uv-setup" target="_blank" rel="noopener">in a repository</a> (in fact I have included a script per operating system).</p>
+<p>Note that currently on macOS and Linux there cannot be any spaces in the filepath to your virtual environment. And you might need to amend some of the paths, say if you have a different version of Stata or if it&rsquo;s installation location is different.</p>
+<ul>
+<li>On Linux we need to ensure that the directory containing our stata/stata-mp binary is on <code>PATH</code>.</li>
+</ul>
+<pre><code class="language-bash"># export PATH=$PATH:/usr/local/stata18
+</code></pre>
+<ul>
+<li>We then need to ensure that our Python installation will be able to find the pystata package. We can do this by defining the <code>PYTHONPATH</code> environment variable.</li>
+</ul>
+<pre><code class="language-bash"># Required so Python can find pystata package
+export PYTHONPATH=/Applications/Stata/utilities
+# Linux: export PYTHONPATH=/usr/local/stata18/utilities
+# Windows: export PYTHONPATH=&quot;C:/Program Files/Stata18/utilities&quot;
+</code></pre>
+<ul>
+<li>We then setup the virtual environment. This will create a directory in our project called <em>.venv</em>. I prefer to explicitly set the version of Python I am using.</li>
+</ul>
+<pre><code class="language-bash">uv venv --python 3.13
+</code></pre>
+<ul>
+<li>We then activate the virtual environment</li>
+</ul>
+<pre><code class="language-bash">source .venv/bin/activate
+# Windows: source .venv/Scripts/activate
+</code></pre>
+<ul>
+<li>Now we can install the required Python dependency packages as per the 
+<a href="https://hugetim.github.io/nbstata/user_guide.html#install-nbstata" target="_blank" rel="noopener">nbstata docs</a>.</li>
+</ul>
+<pre><code class="language-bash"># Install nbstata dependency Python packages
+uv pip install jupyterlab nbstata jupyterlab_stata_highlight2
+
+# Additional Python packages if using parameterised Quarto documents
+# uv pip install papermill python-dotenv jupyter-cache
+</code></pre>
+<ul>
+<li>Then we setup the nbstata Jupyter kernel</li>
+</ul>
+<pre><code class="language-bash">python -m nbstata.install
+</code></pre>
+<p>The nbstata docs states that the <code>--sys-prefix</code> flag may be required in a virutal environment but I haven&rsquo;t found that to be the case.</p>
+<ul>
+<li>Then we run commands to do our actual work; for example rendering a Quarto document using the <code>jupyter: nbstata</code> engine. An example Quarto document, say <em>index.qmd</em>, could be:</li>
+</ul>
+<pre><code class="language-plaintext">---
+title: My example nbstata document
+jupyter: nbstata
+---
+
+```{stata}
+display &quot;Hello, World!&quot;
+```
+</code></pre>
+<pre><code class="language-bash">quarto render index.qmd
+</code></pre>
+<p>Note that Quarto documents using the nbstata kernel can also be embedded within other Quarto documents, 
+<a href="https://remlapmot.github.io/post/2025/multi-engine-quarto/" target="_blank" rel="noopener">as I have described in a previous post</a>.</p>
+<ul>
+<li>And that&rsquo;s it. When you have finished your work you can deactivate the virtual environment</li>
+</ul>
+<pre><code class="language-bash">deactivate
+</code></pre>
+<h2 id="summary">Summary</h2>
+<p>I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux; in order to conveniently and reproducibly render Quarto documents using the <code>jupyter: nbstata</code> engine.</p>
 
               </div>
               
@@ -688,7 +800,13 @@
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tag/github/">GitHub</a>
+  <a class="badge badge-light" href="/tag/stata/">Stata</a>
+  
+  <a class="badge badge-light" href="/tag/jupyter/">Jupyter</a>
+  
+  <a class="badge badge-light" href="/tag/nbstata/">Nbstata</a>
+  
+  <a class="badge badge-light" href="/tag/quarto/">Quarto</a>
   
 </div>
 
@@ -900,15 +1018,15 @@
     <h3>Related</h3>
     <ul>
       
+      <li><a href="/post/2025/quarto-conditional-content/">Creating R, Python, Stata, and Julia tutorial worksheets (with and without solutions) using Quarto</a></li>
+      
+      <li><a href="/post/2025/multi-engine-quarto/">Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode</a></li>
+      
       <li><a href="/post/2025/win-11-arm-gha/">Running R on Windows on ARM on GitHub Actions</a></li>
       
       <li><a href="/post/2025/checking-packages-and-practicals/">Checking your R packages and practicals on a schedule using GitHub Actions</a></li>
       
-      <li><a href="/post/2024/github-unwrapped-2023/">My #GitHubUnwrapped 2023!</a></li>
-      
-      <li><a href="/post/2023/github-unwrapped-2022/">My #GitHubUnwrapped 2022!</a></li>
-      
-      <li><a href="/post/2025/nbstata-uv-venv/">Running the nbstata Jupyter kernel within a uv virtual environment</a></li>
+      <li><a href="/post/2025/quarto-revealjs-tips/">Seven tips for creating Quarto revealjs presentations</a></li>
       
     </ul>
   </div>
@@ -919,6 +1037,10 @@
 
             </div>
         </article>
+  
+      </main>
+    </div>
+  </div>
   
 
       
