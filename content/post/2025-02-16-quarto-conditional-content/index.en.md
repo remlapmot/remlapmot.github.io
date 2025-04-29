@@ -10,6 +10,7 @@ tags:
   - R
   - R Markdown
   - Stata
+  - nbstata
   - Python
   - Julia
   - Jupyter

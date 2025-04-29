@@ -9,6 +9,7 @@ tags:
   - Quarto
   - R
   - Stata
+  - nbstata
   - Python
   - Julia
   - Jupyter
