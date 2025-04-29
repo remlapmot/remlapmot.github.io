@@ -163,11 +163,7 @@ quarto render exercise-python.qmd -o exercise-python-questions.html
 quarto render exercise-python.qmd -P hide_answers:False -o exercise-python-solutions.html
 ```
 
-The only problem with this is that currently the Papermill output cell about the injected parameters is printed in the document. 
-
-<img src="/post/2025/quarto-conditional-content/img/injected-parameters-cell.png" alt="Screenshot of the injected parameters cell in a Quarto document." width="630" style="display: block; margin: auto;">
-
-In Jupyter this can apparently be suppressed by passing the `--report-mode` flag, but I couldn't work out how to do that in Quarto. I believe it will be possible to suppress this output in future versions of Quarto (I'm using the current latest release version of Quarto 1.6.40).
+As of Quarto version 1.7.23 it is possible to suppress the injected parameters cell.
 
 ### Stata
 
