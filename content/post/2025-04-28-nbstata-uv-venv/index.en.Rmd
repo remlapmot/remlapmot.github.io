@@ -46,7 +46,7 @@ On your machine you need to have
 * Stata installed and know the location of the installation
   * and check that within the installation their is the utilities directory containing the pystata directory
 * uv must be installed, see [its docs for more info](https://docs.astral.sh/uv/getting-started/installation/)
-* and of course a text editor and a terminal
+* and of course a text editor and a terminal.
 * On Windows I would recommend using Git Bash (which is bundled with [Git for Windows](https://git-scm.com/downloads/win)) for running the setup script in the next section.
 
 ## A shell script to setup the virtual environment
