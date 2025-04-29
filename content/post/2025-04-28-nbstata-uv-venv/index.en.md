@@ -6,7 +6,6 @@ slug: nbstata-uv-venv
 categories:
   - Blog
 tags:
-  - GitHub
   - Stata
   - Jupyter
   - nbstata
