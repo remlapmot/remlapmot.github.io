@@ -29,9 +29,9 @@ toc: true
 
 Any new project using Python or Jupyter is very stongly recommended to use a virtual environment. A virtual environment is a directory (usually at the top level; often called either _.venv_ or _venv_) within your project directory which contains the dependency Python packages and perhaps the Python installation (or pointers to the Python installation on your system).
 
-There are many Python project managers, in this post I will use the new and extremely fast project manager [uv](https://docs.astral.sh/uv/). I will show how to use the [nbstata](https://hugetim.github.io/nbstata/) Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux. The aim is so that we can conveniently render Quarto documents using the `jupyter: nbstata` engine from within the virtual environment.
+There are many Python project managers, in this post I will use the new and extremely fast project manager [uv](https://docs.astral.sh/uv/). I will show how to use the [nbstata](https://hugetim.github.io/nbstata/) Jupyter kernel by Tim Huegerich within a uv virtual environment on macOS, Windows, and Linux. The aim is to be able to conveniently and reproducibly render Quarto documents using the [`jupyter: nbstata`](https://hugetim.github.io/nbstata/user_guide.html#quarto-tips) engine from within the virtual environment.
 
-At this point it's worth saying that I am a contributor to the excellent [Statamarkdown](https://cran.r-project.org/package=Statamarkdown) R package by Doug Hemken. This can be used in Quarto documents using the knitr engine. In this post I'll be using nbstata because nbstata uses pystata which is StataCorp's official Python package (included in each Stata installation) and is their official way of integrating Stata in Python. As such pystata and hence nbstata have more features than Statamarkdown can provide.
+At this point it's worth saying that I am a contributor to the excellent [Statamarkdown](https://cran.r-project.org/package=Statamarkdown) R package by Doug Hemken. This can be used in Quarto documents using the knitr engine. In this post I'll be using nbstata because nbstata uses [pystata](https://www.stata.com/python/pystata/) which is StataCorp's official Python package (included in each Stata installation) and is their official way of integrating Stata in Python. As such pystata and hence nbstata have more features than Statamarkdown can provide.
 
 And it is worth emphasizing how useful virtual environments are because it is very easy to get oneself in a complete mess with regards Python, as you will likely end up with many different versions installed. Chaos can then accidentally ensue regarding which versions of dependency packages your different projects require given a certain Python version, as always XKCD have a comic illustrating the problem.
 
@@ -65,7 +65,7 @@ Note that currently on macOS and Linux there cannot be any spaces in the filepat
 * We then need to ensure that our Python installation will be able to find the pystata package. We can do this by defining the `PYTHONPATH` environment variable.
 
 ```bash
-# Required so nbstata can find pystata package
+# Required so Python can find pystata package
 export PYTHONPATH=/Applications/Stata/utilities
 # Linux: export PYTHONPATH=/usr/local/stata18/utilities
 # Windows: export PYTHONPATH="C:/Program Files/Stata18/utilities"
