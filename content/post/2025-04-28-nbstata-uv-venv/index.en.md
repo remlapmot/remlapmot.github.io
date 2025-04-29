@@ -54,7 +54,7 @@ On your machine you need to have
 
 What follows are the shell commands we need to run to setup our virtual environment. The script is for macOS but I have included comments in the places where amendments are required for either Windows or Linux. I have also included this script [in a repository](https://github.com/remlapmot/nbstata-uv-setup) (in fact I have included a script per operating system).
 
-Note that currently on macOS and Linux there cannot be any spaces in the filepath to your virtual environment.
+Note that currently on macOS and Linux there cannot be any spaces in the filepath to your virtual environment. And you might need to amend some of the paths, say if you have a different version of Stata or if it's installation location is different.
 
 * On Linux we need to ensure that the directory containing our stata/stata-mp binary is on `PATH`.
 
