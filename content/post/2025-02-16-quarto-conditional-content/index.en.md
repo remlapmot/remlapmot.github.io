@@ -16,7 +16,7 @@ tags:
 subtitle: 'Programmatically including conditional content for Quarto engines that allow inline code'
 summary: "How to programmatically include conditional content for several Quarto engines (knitr, jupyter: python3, jupyter: nbstata, and engine: julia) using parameters or environment variables to toggle inline code to write Markdown in the Quarto documents. I use this to write exercise/tutorial documents in which a single Quarto document is used to output both the questions and solutions documents."
 authors: []
-lastmod: '2025-02-18T11:00:00+00:00'
+lastmod: '2025-04-29T07:00:00+00:00'
 featured: no
 image:
   caption: ''
@@ -168,15 +168,11 @@ quarto render exercise-python.qmd -o exercise-python-questions.html
 quarto render exercise-python.qmd -P hide_answers:False -o exercise-python-solutions.html
 ```
 
-The only problem with this is that currently the Papermill output cell about the injected parameters is printed in the document. 
-
-<img src="/post/2025/quarto-conditional-content/img/injected-parameters-cell.png" alt="Screenshot of the injected parameters cell in a Quarto document." width="630" style="display: block; margin: auto;">
-
-In Jupyter this can apparently be suppressed by passing the `--report-mode` flag, but I couldn't work out how to do that in Quarto. I believe it will be possible to suppress this output in future versions of Quarto (I'm using the current latest release version of Quarto 1.6.40).
+As of Quarto version 1.7.23 it is possible to suppress the injected parameters cell.
 
 ### Stata
 
-The Stata case involved two additional tricks. First, the [nbstata Jupyter kernel](https://hugetim.github.io/nbstata/) allows inline code, however this must be a [`display` command](https://www.stata.com/manuals/pdisplay.pdf), so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can't use local macros) at the top of the document as follows. Second, I didn't try but I suspect the nbstata kernel doesn't support parameters, and so I achieved the toggling of the code using an environmental variable, e.g. `HIDE_ANSWERS_STATA`.
+The Stata case involved two additional tricks. First, the [nbstata Jupyter kernel](https://hugetim.github.io/nbstata/) allows inline code, however this must be a [`display` command](https://www.stata.com/manuals/pdisplay.pdf), so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can't use local macros) at the top of the document as follows. Second, I didn't try but I suspect the nbstata kernel doesn't support parameters, and so I achieved the toggling of the code using an environment variable, e.g. `HIDE_ANSWERS_STATA`.
 
 
 ```` plaintext
