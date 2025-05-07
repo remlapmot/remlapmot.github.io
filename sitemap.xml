@@ -2,13 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://remlapmot.github.io/authors/</loc>
+    <lastmod>2025-05-07T12:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/</loc>
+    <lastmod>2025-05-07T12:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2025_code-clinic/</loc>
+    <lastmod>2025-05-07T12:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/</loc>
+    <lastmod>2025-05-07T12:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/tom-palmer/</loc>
+    <lastmod>2025-05-07T12:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://remlapmot.github.io/category/blog/</loc>
     <lastmod>2025-04-29T07:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/categories/</loc>
-    <lastmod>2025-04-29T07:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/</loc>
     <lastmod>2025-04-29T07:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/jupyter/</loc>
@@ -98,16 +110,7 @@
     <loc>https://remlapmot.github.io/post/2024/finder-toolbar-apps/</loc>
     <lastmod>2024-12-23T09:15:00+00:00</lastmod>
   </url><url>
-    <loc>https://remlapmot.github.io/authors/</loc>
-    <lastmod>2024-06-19T16:45:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/talk/</loc>
-    <lastmod>2024-06-19T16:45:00+00:00</lastmod>
-  </url><url>
     <loc>https://remlapmot.github.io/talk/2024_mr/</loc>
-    <lastmod>2024-06-19T16:45:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/author/tom-palmer/</loc>
     <lastmod>2024-06-19T16:45:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/chrome/</loc>

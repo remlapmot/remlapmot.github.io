@@ -5,7 +5,7 @@
     <link>https://remlapmot.github.io/author/tom-palmer/</link>
       <atom:link href="https://remlapmot.github.io/author/tom-palmer/index.xml" rel="self" type="application/rss+xml" />
     <description>Tom Palmer</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 19 Jun 2024 16:45:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 07 May 2025 12:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
       <title>Tom Palmer</title>
@@ -13,20 +13,28 @@
     </image>
     
     <item>
-      <title>The MRC IEU R-Universe of Mendelian randomization related R packages 🚀</title>
-      <link>https://remlapmot.github.io/talk/2024_mr/</link>
-      <pubDate>Wed, 19 Jun 2024 16:45:00 +0000</pubDate>
-      <guid>https://remlapmot.github.io/talk/2024_mr/</guid>
+      <title>Some more R, Git, and R Markdown and Quarto tips</title>
+      <link>https://remlapmot.github.io/talk/2025_code-clinic/</link>
+      <pubDate>Wed, 07 May 2025 12:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/talk/2025_code-clinic/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tom Palmer</title>
       <link>https://remlapmot.github.io/author/tom-palmer/</link>
-      <pubDate>Wed, 19 Jun 2024 16:45:00 +0000</pubDate>
+      <pubDate>Wed, 07 May 2025 12:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/author/tom-palmer/</guid>
       <description>&lt;p&gt;Dr Tom Palmer, Senior Lecturer in Biostatistics&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>The MRC IEU R-Universe of Mendelian randomization related R packages 🚀</title>
+      <link>https://remlapmot.github.io/talk/2024_mr/</link>
+      <pubDate>Wed, 19 Jun 2024 16:45:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/talk/2024_mr/</guid>
+      <description></description>
     </item>
     
     <item>
