@@ -112,8 +112,38 @@ display &amp;quot;Hello, World!&amp;quot;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;deactivate
 &lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;recording-this-as-a-project-with-pyprojecttoml-and-uvlock-files&#34;&gt;Recording this as a project with pyproject.toml and uv.lock files&lt;/h2&gt;
+&lt;p&gt;And of course we can go a step further by setting this up as a proper Python project. This will have a &lt;em&gt;pyproject.toml&lt;/em&gt; file to record the dependencies and a &lt;em&gt;uv.lock&lt;/em&gt; file to record their exact versions. To do this run&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;uv init
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can delete the &lt;em&gt;main.py&lt;/em&gt; file that&amp;rsquo;s created here, but commit everything else into your repo. Then add the dependencies with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;uv add jupyterlab nbstata jupyterlab_stata_highlight2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will see these are entered into the &lt;em&gt;pyproject.toml&lt;/em&gt; and &lt;em&gt;uv.lock&lt;/em&gt; files. The &lt;em&gt;pyproject.toml&lt;/em&gt; file will now look something like this (I have edited the &lt;code&gt;description&lt;/code&gt;)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[project]
+name = &amp;quot;nbstata-uv-setup&amp;quot;
+version = &amp;quot;0.1.0&amp;quot;
+description = &amp;quot;This project demonstrates how to use the nbstata Jupyter kernel in a uv virtual environment, so that one can render Quarto documents using this engine.&amp;quot;
+readme = &amp;quot;README.md&amp;quot;
+requires-python = &amp;quot;&amp;gt;=3.13&amp;quot;
+dependencies = [
+    &amp;quot;jupyterlab&amp;gt;=4.4.2&amp;quot;,
+    &amp;quot;jupyterlab-stata-highlight2&amp;gt;=0.1.2&amp;quot;,
+    &amp;quot;nbstata&amp;gt;=0.8.2&amp;quot;,
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Commit these files into your repo.&lt;/p&gt;
+&lt;p&gt;At a later date you can restore this environment by running&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;uv sync
+# which creates the .venv
+# Then activate the virtual environment, etc
+source .venv/bin/activate
+# Windows: source .venv/Scripts/activate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You find out more about uv project commands in its 
+&lt;a href=&#34;https://docs.astral.sh/uv/guides/projects/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
-&lt;p&gt;I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux; in order to conveniently and reproducibly render Quarto documents using the &lt;code&gt;jupyter: nbstata&lt;/code&gt; engine.&lt;/p&gt;
+&lt;p&gt;I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux; in order to conveniently and reproducibly render Quarto documents using the &lt;code&gt;jupyter: nbstata&lt;/code&gt; engine. And I have also shown how to set this up as a Python project.&lt;/p&gt;
 </description>
     </item>
     

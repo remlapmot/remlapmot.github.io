@@ -236,7 +236,7 @@
     
       <meta property="article:published_time" content="2025-04-29T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2025-04-29T07:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2025-05-10T07:00:00&#43;00:00">
   
 
   
@@ -269,7 +269,7 @@
   ],
   
   "datePublished": "2025-04-29T00:00:00Z",
-  "dateModified": "2025-04-29T07:00:00Z",
+  "dateModified": "2025-05-10T07:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -588,6 +588,7 @@
     <li><a href="#introduction">Introduction</a></li>
     <li><a href="#setup-basics">Setup basics</a></li>
     <li><a href="#a-shell-script-to-setup-the-uv-virtual-environment">A shell script to setup the uv virtual environment</a></li>
+    <li><a href="#recording-this-as-a-project-with-pyprojecttoml-and-uvlock-files">Recording this as a project with pyproject.toml and uv.lock files</a></li>
     <li><a href="#summary">Summary</a></li>
   </ul>
 </nav>
@@ -643,7 +644,7 @@
           Last updated on
       
     
-    Apr 29, 2025
+    May 10, 2025
   </span>
   
 
@@ -787,8 +788,38 @@ display &quot;Hello, World!&quot;
 </ul>
 <pre><code class="language-bash">deactivate
 </code></pre>
+<h2 id="recording-this-as-a-project-with-pyprojecttoml-and-uvlock-files">Recording this as a project with pyproject.toml and uv.lock files</h2>
+<p>And of course we can go a step further by setting this up as a proper Python project. This will have a <em>pyproject.toml</em> file to record the dependencies and a <em>uv.lock</em> file to record their exact versions. To do this run</p>
+<pre><code class="language-bash">uv init
+</code></pre>
+<p>You can delete the <em>main.py</em> file that&rsquo;s created here, but commit everything else into your repo. Then add the dependencies with</p>
+<pre><code class="language-bash">uv add jupyterlab nbstata jupyterlab_stata_highlight2
+</code></pre>
+<p>You will see these are entered into the <em>pyproject.toml</em> and <em>uv.lock</em> files. The <em>pyproject.toml</em> file will now look something like this (I have edited the <code>description</code>)</p>
+<pre><code class="language-toml">[project]
+name = &quot;nbstata-uv-setup&quot;
+version = &quot;0.1.0&quot;
+description = &quot;This project demonstrates how to use the nbstata Jupyter kernel in a uv virtual environment, so that one can render Quarto documents using this engine.&quot;
+readme = &quot;README.md&quot;
+requires-python = &quot;&gt;=3.13&quot;
+dependencies = [
+    &quot;jupyterlab&gt;=4.4.2&quot;,
+    &quot;jupyterlab-stata-highlight2&gt;=0.1.2&quot;,
+    &quot;nbstata&gt;=0.8.2&quot;,
+]
+</code></pre>
+<p>Commit these files into your repo.</p>
+<p>At a later date you can restore this environment by running</p>
+<pre><code class="language-bash">uv sync
+# which creates the .venv
+# Then activate the virtual environment, etc
+source .venv/bin/activate
+# Windows: source .venv/Scripts/activate
+</code></pre>
+<p>You find out more about uv project commands in its 
+<a href="https://docs.astral.sh/uv/guides/projects/" target="_blank" rel="noopener">documentation</a>.</p>
 <h2 id="summary">Summary</h2>
-<p>I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux; in order to conveniently and reproducibly render Quarto documents using the <code>jupyter: nbstata</code> engine.</p>
+<p>I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux; in order to conveniently and reproducibly render Quarto documents using the <code>jupyter: nbstata</code> engine. And I have also shown how to set this up as a Python project.</p>
 
               </div>
               
