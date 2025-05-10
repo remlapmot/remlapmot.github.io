@@ -13,7 +13,7 @@ tags:
 subtitle:
 summary: "How to setup a uv virtual environment to run the nbstata Jupyter kernel."
 authors: []
-lastmod: '2025-04-29T07:00:00+00:00'
+lastmod: '2025-05-10T07:00:00+00:00'
 featured: no
 image:
   caption: ''
@@ -127,7 +127,50 @@ Note that Quarto documents using the nbstata kernel can also be embedded within 
 ```bash
 deactivate
 ```
+## Recording this as a project with pyproject.toml and uv.lock files
+
+And of course we can go a step further by setting this up as a proper Python project. This will have a _pyproject.toml_ file to record the dependencies and a _uv.lock_ file to record their exact versions. To do this run
+
+```bash
+uv init
+```
+
+You can delete the _main.py_ file that's created here, but commit everything else into your repo. Then add the dependencies with
+
+```bash
+uv add jupyterlab nbstata jupyterlab_stata_highlight2
+```
+
+You will see these are entered into the _pyproject.toml_ and _uv.lock_ files. The _pyproject.toml_ file will now look something like this (I have edited the `description`)
+
+```toml
+[project]
+name = "nbstata-uv-setup"
+version = "0.1.0"
+description = "This project demonstrates how to use the nbstata Jupyter kernel in a uv virtual environment, so that one can render Quarto documents using this engine."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "jupyterlab>=4.4.2",
+    "jupyterlab-stata-highlight2>=0.1.2",
+    "nbstata>=0.8.2",
+]
+```
+
+Commit these files into your repo.
+
+At a later date you can restore this environment by running
+
+```bash
+uv sync
+# which creates the .venv
+# Then activate the virtual environment, etc
+source .venv/bin/activate
+# Windows: source .venv/Scripts/activate
+```
+
+You find out more about uv project commands in its [documentation](https://docs.astral.sh/uv/guides/projects/).
 
 ## Summary
 
-I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux; in order to conveniently and reproducibly render Quarto documents using the `jupyter: nbstata` engine.
+I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux; in order to conveniently and reproducibly render Quarto documents using the `jupyter: nbstata` engine. And I have also shown how to set this up as a Python project.
