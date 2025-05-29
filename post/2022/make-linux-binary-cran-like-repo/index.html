@@ -236,7 +236,7 @@
     
       <meta property="article:published_time" content="2022-11-30T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2022-11-30T15:07:01&#43;00:00">
+    <meta property="article:modified_time" content="2025-05-29T08:42:00&#43;00:00">
   
 
   
@@ -269,7 +269,7 @@
   ],
   
   "datePublished": "2022-11-30T00:00:00Z",
-  "dateModified": "2022-11-30T15:07:01Z",
+  "dateModified": "2025-05-29T08:42:00Z",
   
   "author": {
     "@type": "Person",
@@ -644,7 +644,7 @@
           Last updated on
       
     
-    Nov 30, 2022
+    May 29, 2025
   </span>
   
 
@@ -705,6 +705,12 @@
 <p>But let&rsquo;s install a package from the Posit (formerly RStudio) Package Manager on Ubuntu Linux.
 <img src="/post/2022/make-linux-binary-cran-like-repo/img/rstudio-install-tidyverse-rspm-linux-binary.png" alt="Installing binary Linux tidyverse package using Posit Package Manager." style="display: block; margin: auto;"></p>
 <p><strong><em>Woah!</em></strong> Something magical just happened, we installed a binary R package on Linux! How did that happen, let&rsquo;s find out.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>Note, obtaining the binary package from the public Posit package manager relies on the R session&rsquo;s <code>HTTPUserAgent</code> option being set. As I understand it, this is set automatically within an RStudio/RStudio Server session. If you are using R in the terminal you can set this with the following code (if you don&rsquo;t have this option set you will obtain the source version of the package).</p>
+<pre><code class="language-r">options(HTTPUserAgent =
+  sprintf(
+    &quot;R/%s R (%s)&quot;, getRversion(), paste(getRversion(),
+    R.version[&quot;platform&quot;], R.version[&quot;arch&quot;], R.version[&quot;os&quot;])))
+</code></pre>
 <h2 id="building-bundled-source-and-binary-packages">Building bundled source and binary packages</h2>
 <p>I will use an example of one of my own packages <strong>OneSampleMR</strong>. I am running RStudio server on Ubuntu Linux, Focal Fossa through Windows Subsystem for Linux.</p>
 <p>The package sources are in a Git repository hosted on GitHub, 
@@ -836,7 +842,7 @@ contrib.url(&quot;&quot;, type = &quot;binary&quot;)
 <p>Note that there are other approaches to distributing binary R packages on Linux, see 
 <a href="https://cran.r-project.org/bin/linux/" target="_blank" rel="noopener">https://cran.r-project.org/bin/linux/</a> and links therein, 
 <a href="https://eddelbuettel.github.io/r2u/" target="_blank" rel="noopener">https://eddelbuettel.github.io/r2u/</a>, and 
-<a href="https://enchufa2.github.io/bspm/" target="_blank" rel="noopener">https://enchufa2.github.io/bspm/</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<a href="https://enchufa2.github.io/bspm/" target="_blank" rel="noopener">https://enchufa2.github.io/bspm/</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2">
 <p>
