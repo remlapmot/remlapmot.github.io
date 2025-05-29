@@ -1417,7 +1417,9 @@ mytest
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;options(HTTPUserAgent =
   sprintf(
     &amp;quot;R/%s R (%s)&amp;quot;, getRversion(), paste(getRversion(),
-    R.version[&amp;quot;platform&amp;quot;], R.version[&amp;quot;arch&amp;quot;], R.version[&amp;quot;os&amp;quot;])))
+    R.version[&amp;quot;platform&amp;quot;], R.version[&amp;quot;arch&amp;quot;], R.version[&amp;quot;os&amp;quot;])
+  )
+)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;building-bundled-source-and-binary-packages&#34;&gt;Building bundled source and binary packages&lt;/h2&gt;
 &lt;p&gt;I will use an example of one of my own packages &lt;strong&gt;OneSampleMR&lt;/strong&gt;. I am running RStudio server on Ubuntu Linux, Focal Fossa through Windows Subsystem for Linux.&lt;/p&gt;

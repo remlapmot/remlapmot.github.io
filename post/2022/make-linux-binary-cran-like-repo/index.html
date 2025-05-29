@@ -709,7 +709,9 @@
 <pre><code class="language-r">options(HTTPUserAgent =
   sprintf(
     &quot;R/%s R (%s)&quot;, getRversion(), paste(getRversion(),
-    R.version[&quot;platform&quot;], R.version[&quot;arch&quot;], R.version[&quot;os&quot;])))
+    R.version[&quot;platform&quot;], R.version[&quot;arch&quot;], R.version[&quot;os&quot;])
+  )
+)
 </code></pre>
 <h2 id="building-bundled-source-and-binary-packages">Building bundled source and binary packages</h2>
 <p>I will use an example of one of my own packages <strong>OneSampleMR</strong>. I am running RStudio server on Ubuntu Linux, Focal Fossa through Windows Subsystem for Linux.</p>
