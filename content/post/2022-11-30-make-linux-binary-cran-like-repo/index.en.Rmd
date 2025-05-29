@@ -13,7 +13,7 @@ tags:
 subtitle: ''
 summary: 'Make your own CRAN-like repository serving not only bundled source packages and Windows and macOS binary packages but also Linux binary packages.'
 authors: []
-lastmod: '2022-11-30T15:07:01Z'
+lastmod: '2025-05-29T08:42:00Z'
 featured: no
 image:
   caption: ''
@@ -46,7 +46,16 @@ But let's install a package from the Posit (formerly RStudio) Package Manager on
 
 **_Woah!_** Something magical just happened, we installed a binary R package on Linux! How did that happen, let's find out.[^1]
 
-[^1]: Note that there are other approaches to distributing binary R packages on Linux, see <https://cran.r-project.org/bin/linux/> and links therein, <https://eddelbuettel.github.io/r2u/>, and <https://enchufa2.github.io/bspm/>
+[^1]: Note that there are other approaches to distributing binary R packages on Linux, see <https://cran.r-project.org/bin/linux/> and links therein, <https://eddelbuettel.github.io/r2u/>, and <https://enchufa2.github.io/bspm/>.
+
+Note, obtaining the binary package from the public Posit package manager relies on the R session's `HTTPUserAgent` option being set. As I understand it, this is set automatically within an RStudio/RStudio Server session. If you are using R in the terminal you can set this with the following code (if you don't have this option set you will obtain the source version of the package).
+
+```r
+options(HTTPUserAgent =
+  sprintf(
+    "R/%s R (%s)", getRversion(), paste(getRversion(),
+    R.version["platform"], R.version["arch"], R.version["os"])))
+```
 
 ## Building bundled source and binary packages
 
