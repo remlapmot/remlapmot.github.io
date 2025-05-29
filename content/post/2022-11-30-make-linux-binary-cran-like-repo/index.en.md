@@ -51,7 +51,9 @@ Note, obtaining the binary package from the public Posit package manager relies 
 options(HTTPUserAgent =
   sprintf(
     "R/%s R (%s)", getRversion(), paste(getRversion(),
-    R.version["platform"], R.version["arch"], R.version["os"])))
+    R.version["platform"], R.version["arch"], R.version["os"])
+  )
+)
 ```
 
 ## Building bundled source and binary packages
