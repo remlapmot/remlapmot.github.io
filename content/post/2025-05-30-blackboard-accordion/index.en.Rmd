@@ -25,11 +25,7 @@ toc: true
 
 ## Introduction
 
-My university uses the Blackboard online learning environment (there are others, e.g., Moodle and Canvas, etc.). On several of the Unit (aka Module) and short course sites we have an accordion containing the table with the timetable of the teaching.
-
-<img src="/post/2025/blackboard-accordion/img/accordion-unexpanded.png" alt="Screenshot of unexpanded accordion." width="630" style="display: block; margin: auto;">
-
-Unfortunately I find the default width too narrow.
+My university uses the Blackboard online learning environment (there are others, e.g., Moodle and Canvas, etc.). On several of the Unit (aka Module) and short course sites we have an accordion containing the table with the timetable of the teaching. Unfortunately I find the default width too narrow.
 
 <img src="/post/2025/blackboard-accordion/img/accordion-expanded.png" alt="Screenshot of expanded accordion." width="630" style="display: block; margin: auto;">
 
@@ -51,14 +47,14 @@ Therefore to modify this we need to write the CSS for this with a larger `max-wi
 }
 ```
 
-We then upload this file to our Blackboard site's _Content_ area. Once uploaded obtain the _Permanent URL_ of the file by clicking the dropdown arrow to the right of the filename and selecting _360° View_.
+We then upload this file to our Blackboard site's _Content_ area. Once uploaded we obtain the _Permanent URL_ of the file by clicking the dropdown arrow to the right of the filename and selecting _360° View_. Copy the permanent URL to the clipboard.
 
 <img src="/post/2025/blackboard-accordion/img/360-degree-view.png" alt="Screenshot of 360° View of our CSS file." width="630" style="display: block; margin: auto;">
 
-Within the content of the item on your Blackboard page which contains the accordion, click edit, then click the `<>` symbol to enter editing source code mode. At the bottom of the code enter the following line - replacing the PERMANENT_URL and save the changes.
+Within the content of the item on your Blackboard page which contains the accordion, click edit, then click the `<>` symbol to enter editing source code mode. At the bottom of the code enter the following line -- replacing the `PERMANENT_URL` with what we just copied and save the changes.
 
 ```html
-<link href="YOUR_FILES_PERMANENT_URL" rel="stylesheet">
+<link href="PERMANENT_URL" rel="stylesheet">
 ```
 
 And you should find that you have a wider accordion.
