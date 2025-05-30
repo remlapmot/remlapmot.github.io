@@ -1,0 +1,31 @@
+---
+title: "How to widen the accordion on a Blackboard page"
+author: Package Build
+date: '2025-05-30'
+slug: blackboard-accordion
+categories:
+  - Blog
+tags:
+  - Blackboard
+  - HTML
+  - CSS
+subtitle:
+summary: "How to make the accordion element on a Blackboard webpage wider."
+authors: []
+lastmod: '2025-05-30T10:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'TODO:Alt text!.'
+projects: []
+toc: true
+---
+
+## Introduction
+
+
+## Summary
+
+I have shown how to widen the accordion on a Blackboard page.
