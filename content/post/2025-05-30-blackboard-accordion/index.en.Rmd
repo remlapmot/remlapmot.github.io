@@ -26,6 +26,23 @@ toc: true
 ## Introduction
 
 
+## Widening the accordion
+
+First we need to work out what type of element it is. To do this in Google Chrome right click on a part of the accordion and click _Inspect_.
+
+```css
+.deo-accordion {
+  max-width: 60em;
+}
+```
+
+It turns out 60em is equivalent to 960 pixels in width, whereas the original width of 40em is only 640 pixels.
+
+```html
+<link href="PERMANENT_URL_FROM_FILE_MORE_INFO" rel="stylesheet">
+```
+
+
 ## Summary
 
 I have shown how to widen the accordion on a Blackboard page.
