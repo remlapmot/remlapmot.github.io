@@ -2,11 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://remlapmot.github.io/authors/</loc>
-    <lastmod>2025-05-07T12:00:00+00:00</lastmod>
+    <loc>https://remlapmot.github.io/tag/blackboard/</loc>
+    <lastmod>2025-05-30T10:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/category/blog/</loc>
+    <lastmod>2025-05-30T10:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/categories/</loc>
+    <lastmod>2025-05-30T10:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/css/</loc>
+    <lastmod>2025-05-30T10:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/</loc>
-    <lastmod>2025-05-29T08:42:00+00:00</lastmod>
+    <lastmod>2025-05-30T10:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/post/2025/blackboard-accordion/</loc>
+    <lastmod>2025-05-30T10:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/html/</loc>
+    <lastmod>2025-05-30T10:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/post/</loc>
+    <lastmod>2025-05-30T10:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tags/</loc>
+    <lastmod>2025-05-30T10:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/authors/</loc>
+    <lastmod>2025-05-07T12:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/talk/2025_code-clinic/</loc>
     <lastmod>2025-05-07T12:00:00+00:00</lastmod>
@@ -17,20 +41,11 @@
     <loc>https://remlapmot.github.io/author/tom-palmer/</loc>
     <lastmod>2025-05-07T12:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://remlapmot.github.io/category/blog/</loc>
-    <lastmod>2025-05-29T08:42:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/categories/</loc>
-    <lastmod>2025-05-29T08:42:00+00:00</lastmod>
-  </url><url>
     <loc>https://remlapmot.github.io/tag/jupyter/</loc>
     <lastmod>2025-05-10T07:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/nbstata/</loc>
     <lastmod>2025-05-10T07:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/post/</loc>
-    <lastmod>2025-05-29T08:42:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/quarto/</loc>
     <lastmod>2025-05-10T07:00:00+00:00</lastmod>
@@ -40,9 +55,6 @@
   </url><url>
     <loc>https://remlapmot.github.io/tag/stata/</loc>
     <lastmod>2025-05-10T07:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/tags/</loc>
-    <lastmod>2025-05-29T08:42:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/github/</loc>
     <lastmod>2025-04-16T07:00:00+00:00</lastmod>
