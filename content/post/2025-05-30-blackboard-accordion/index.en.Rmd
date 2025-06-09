@@ -18,7 +18,7 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'TODO:Alt text!.'
+  alt_text: 'Screenshot of the top of an accordion element on a Blackboard webpage.'
 projects: []
 toc: true
 ---
