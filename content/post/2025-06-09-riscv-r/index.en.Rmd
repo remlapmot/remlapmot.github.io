@@ -100,7 +100,7 @@ qemu-system-riscv64 \
 
 A little bit to my surprise this worked. And I was presented with the login to Ubuntu server. The default username is _ubuntu_ and the default password is _ubuntu_. On login you are immediately prompted to change the password but then you're in.
 
-<img src="/post/2025/riscv-r/img/ubuntu-launch-screen.png" alt="Screenshot of the architectures the r-base package is built for Ubuntu Questing Quokka." width="630" style="display: block; margin: auto;">
+<img src="/post/2025/riscv-r/img/ubuntu-launch-screen.png" alt="Screenshot of the Ubuntu server startup message running on an emulated RISC-V virtual machine." width="630" style="display: block; margin: auto;">
 
 So next it's essentially standard Ubuntu commands to update the system and install r-base. And I also install r-base-dev to obtain the necessary compilers to build any source packages containing code which needs to be compiled.
 
@@ -110,7 +110,9 @@ sudo apt-get upgrade -y
 sudo apt-get install -y r-base r-base-dev
 ```
 
-Then as usual 
+Then as usual we launch R with `R`.
+
+<img src="/post/2025/riscv-r/img/r-startup-message.png" alt="Screenshot of the R startup message running on an emulated RISC-V virtual machine." width="630" style="display: block; margin: auto;">
 
 
 ## Summary
