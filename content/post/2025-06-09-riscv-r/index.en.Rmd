@@ -37,21 +37,41 @@ This got me thinking, instead of having to build R from source maybe the `r-base
 
 My setup is that I'm on an Apple Silicon M4 MacBook Air. I thought this might be promising to use because this has an ARM processor which is also a reduced instruction set architecture.
 
-I wondered whether to try UTM or qemu at the command line. I tried UTM first but I couldn't make any progress. So I found a tip online saying that RISC-V Ubuntu could be launched under Qemu using
+I wondered whether to try UTM or qemu at the command line. I tried UTM first but I couldn't make any progress. So I found a tip online saying that RISC-V Ubuntu could be launched under Qemu on Ubuntu Linux using
 
 ```sh
 qemu-system-riscv64 \
   -machine virt \
   -nographic \
   -m 12288 -smp 4 \
-  -bios fw_jump.elf \
-  -kernel uboot.elf \
+  -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf \
+  -kernel /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf \
   -device virtio-net-pci,netdev=eth0 \
   -netdev user,id=eth0,hostfwd=tcp::2222-:22 \
   -drive file=ubuntu-24.10-preinstalled-server-riscv64.img,format=raw,if=virtio
 ```
 
+Firstly one needs to obtain the Ubuntu img. Following [this incredible guide by Canonical](https://canonical-ubuntu-boards.readthedocs-hosted.com/en/latest/how-to/qemu-riscv/) we can choose one of the three versions of Ubuntu listed (Noble, Oracular, Plucky).
 
+The image downloads as an _.img.xz_ archive, which you can extract by installing `xz`
+
+```sh
+brew install xz
+```
+
+and running
+
+```sh
+xz --decompress ubuntu-24.10-preinstalled-server-riscv64.img.xz
+```
+
+I then realised that I needed qemu on my Mac. Again Homebrew to the rescue with the following command.
+
+```sh
+brew install qemu u-boot-tools
+```
+
+Next I needed the two files; _fw_jump.elf_ and _uboot.elf_.
 
 
 <img src="/post/2025/blackboard-accordion/img/wider-accordion.png" alt="Screenshot of 360° View of our CSS file." width="630" style="display: block; margin: auto;">
