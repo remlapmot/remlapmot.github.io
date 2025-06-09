@@ -65,13 +65,19 @@ and running
 xz --decompress ubuntu-24.10-preinstalled-server-riscv64.img.xz
 ```
 
+The extracted file is about 4GB, but later on I realised I needed a slightly larger harddisk for the virtual machine, so I increased it to 8GB with the following command.
+
+```sh
+qemu-img resize ubuntu-24.10-preinstalled-server-riscv64.img 8G
+```
+
 I then realised that I needed qemu on my Mac. Again Homebrew to the rescue with the following command.
 
 ```sh
 brew install qemu u-boot-tools
 ```
 
-Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives). I then remembered reading a comment that a user had copied them from an Ubuntu installation. I resorted to the same trick thanks to Docker.
+(Admittedly I don't think I ended up using the _u-boot-tools_) Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives). I then remembered reading a comment that a user had copied them from an Ubuntu installation. I resorted to the same trick thanks to Docker.
 
 ```sh
 
