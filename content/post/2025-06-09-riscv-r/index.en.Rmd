@@ -71,7 +71,11 @@ I then realised that I needed qemu on my Mac. Again Homebrew to the rescue with 
 brew install qemu u-boot-tools
 ```
 
-Next I needed the two files; _fw_jump.elf_ and _uboot.elf_.
+Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives). I then remembered reading a comment that a user had copied them from an Ubuntu installation. I resorted to the same trick thanks to Docker.
+
+```sh
+
+```
 
 
 <img src="/post/2025/blackboard-accordion/img/wider-accordion.png" alt="Screenshot of 360° View of our CSS file." width="630" style="display: block; margin: auto;">
