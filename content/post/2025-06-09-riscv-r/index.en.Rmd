@@ -28,7 +28,7 @@ toc: true
 
 I was interested to see whether and how well R would run on the new RISC-V architecture.
 
-I read that RISC-V was now a first class architecture for Ubuntu.
+A while ago I read that RISC-V is now a [first class architecture for Ubuntu](https://ubuntu.com/blog/empowering-risc-v-with-open-source-through-ubuntu).
 
 This got me thinking, instead of having to build R from source maybe the `r-base` package might be available for RISC-V. It turns out that this is indeed the case, the architecture we are interested in is `riscv64`. The launchpad page for r-base is [here](https://launchpad.net/ubuntu/+source/r-base). Clicking through the subpages for each version of Ubuntu I can see that R is available for RISC-V from Ubuntu Focal Fossa onwards (for which the version of R is 3.6.3; and the latest version of Ubuntu has the current version of R of 4.5.0).
 
@@ -98,7 +98,20 @@ qemu-system-riscv64 \
   -drive file=ubuntu-24.10-preinstalled-server-riscv64.img,format=raw,if=virtio
 ```
 
-A little bit to my surprise this worked. And I was presented with the login to Ubuntu server. The default username is _ubuntu_ and the default password is _ubuntu_.
+A little bit to my surprise this worked. And I was presented with the login to Ubuntu server. The default username is _ubuntu_ and the default password is _ubuntu_. On login you are immediately prompted to change the password but then you're in.
+
+<img src="/post/2025/riscv-r/img/ubuntu-launch-screen.png" alt="Screenshot of the architectures the r-base package is built for Ubuntu Questing Quokka." width="630" style="display: block; margin: auto;">
+
+So next it's essentially standard Ubuntu commands to update the system and install r-base. And I also install r-base-dev to obtain the necessary compilers to build any source packages containing code which needs to be compiled.
+
+```bash
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y r-base r-base-dev
+```
+
+Then as usual 
+
 
 ## Summary
 
