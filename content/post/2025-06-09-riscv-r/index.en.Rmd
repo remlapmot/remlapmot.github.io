@@ -30,8 +30,9 @@ I was interested to see whether and how well R would run on the new RISC-V archi
 
 I read that RISC-V was now a first class architecture for Ubuntu.
 
-This got me thinking, instead of having to build R from source maybe the `r-base` package might be available for RISC-V. It turns out that this is indeed the case, the architecture is `riscv64`.
+This got me thinking, instead of having to build R from source maybe the `r-base` package might be available for RISC-V. It turns out that this is indeed the case, the architecture we are interested in is `riscv64`. The launchpad page for r-base is [here](https://launchpad.net/ubuntu/+source/r-base). Clicking through the subpages for each version of Ubuntu I can see that R is available for RISC-V from Ubuntu Focal Fossa onwards (for which the version of R is 3.6.3; and the latest version of Ubuntu has the current version of R of 4.5.0).
 
+<img src="/post/2025/riscv-r/img/questing-r-base-builds.png" alt="Screenshot of the architectures the r-base package is built for Ubuntu Questing Quokka." width="630" style="display: block; margin: auto;">
 
 ## Emulating RISC-V on an Apple Silicon Mac
 
@@ -80,11 +81,24 @@ brew install qemu u-boot-tools
 (Admittedly I don't think I ended up using the _u-boot-tools_) Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives). I then remembered reading a comment that a user had copied them from an Ubuntu installation. I resorted to the same trick thanks to Docker.
 
 ```sh
-
+docker run -it --rm --platform linux/arm64 -v $PWD:/home ubuntu:24.04 sh -c "apt update && apt upgrade -y && apt install -y opensbi qemu-system-misc u-boot-qemu && cp /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf /home/uboot.elf && cp /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf /home/fw_jump.elf"
 ```
 
+This saves the two files to the current working directory, so I could modify my call to `qemu` to be as follows.
 
-<img src="/post/2025/blackboard-accordion/img/wider-accordion.png" alt="Screenshot of 360° View of our CSS file." width="630" style="display: block; margin: auto;">
+```sh
+qemu-system-riscv64 \
+  -machine virt \
+  -nographic \
+  -m 12288 -smp 4 \
+  -bios fw_jump.elf \
+  -kernel uboot.elf \
+  -device virtio-net-pci,netdev=eth0 \
+  -netdev user,id=eth0,hostfwd=tcp::2222-:22 \
+  -drive file=ubuntu-24.10-preinstalled-server-riscv64.img,format=raw,if=virtio
+```
+
+A little bit to my surprise this worked. And I was presented with the login to Ubuntu server. The default username is _ubuntu_ and the default password is _ubuntu_.
 
 ## Summary
 
