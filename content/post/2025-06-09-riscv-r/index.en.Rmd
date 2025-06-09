@@ -30,15 +30,17 @@ I was interested to see whether and how well R would run on the new RISC-V archi
 
 A while ago I read that RISC-V is now a [first class architecture for Ubuntu](https://ubuntu.com/blog/empowering-risc-v-with-open-source-through-ubuntu).
 
-This got me thinking, instead of having to build R from source maybe the `r-base` package might be available for RISC-V. It turns out that this is indeed the case, the architecture we are interested in is `riscv64`. The launchpad page for r-base is [here](https://launchpad.net/ubuntu/+source/r-base). Clicking through the subpages for each version of Ubuntu I can see that R is available for RISC-V from Ubuntu Focal Fossa onwards (for which the version of R is 3.6.3; and the latest version of Ubuntu has the current version of R of 4.5.0).
+This got me thinking, instead of having to build R from source maybe the `r-base` package might be available for RISC-V. It turns out that this is indeed the case, the architecture we are interested in is `riscv64`. The launchpad page for `r-base` is [here](https://launchpad.net/ubuntu/+source/r-base). Clicking through the subpages for each version of Ubuntu I can see that R is available for RISC-V from Ubuntu Focal Fossa onwards (for which the version of R is 3.6.3; and the latest version of Ubuntu has the current version of R of 4.5.0).
 
 <img src="/post/2025/riscv-r/img/questing-r-base-builds.png" alt="Screenshot of the architectures the r-base package is built for Ubuntu Questing Quokka." width="630" style="display: block; margin: auto;">
 
 ## Emulating RISC-V on an Apple Silicon Mac
 
-My setup is that I'm on an Apple Silicon M4 MacBook Air. I thought this might be promising to use because this has an ARM processor which is also a reduced instruction set architecture.
+I don't have a RISC-V computer, although developer boards are now available for a reasonable price, there aren't yet any competitive desktop machines. Therefore, I needed to emulation.
 
-I wondered whether to try UTM or qemu at the command line. I tried UTM first but I couldn't make any progress. So I found a tip online saying that RISC-V Ubuntu could be launched under Qemu on Ubuntu Linux using
+My setup is that I'm on an Apple Silicon M4 MacBook Air. I thought this might be promising to use because this has an ARM processor which is a reduced instruction set architecture, as is RISC-V.
+
+I wondered whether to try [UTM](https://mac.getutm.app/) or [Qemu](https://www.qemu.org/). I tried UTM first but I couldn't make any progress. So I found a tip online saying that RISC-V Ubuntu could be launched under Qemu on Ubuntu Linux using the following command.
 
 ```sh
 qemu-system-riscv64 \
@@ -60,7 +62,7 @@ The image downloads as an _.img.xz_ archive, which you can extract by installing
 brew install xz
 ```
 
-and running
+and decompressing with
 
 ```sh
 xz --decompress ubuntu-24.10-preinstalled-server-riscv64.img.xz
@@ -72,19 +74,29 @@ The extracted file is about 4GB, but later on I realised I needed a slightly lar
 qemu-img resize ubuntu-24.10-preinstalled-server-riscv64.img 8G
 ```
 
-I then realised that I needed qemu on my Mac. Again Homebrew to the rescue with the following command.
+I then realised that I needed Qemu on my Mac. Again Homebrew to the rescue with the following command.
 
 ```sh
 brew install qemu u-boot-tools
 ```
 
-(Admittedly I don't think I ended up using the _u-boot-tools_) Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives). I then remembered reading a comment that a user had copied them from an Ubuntu installation. I resorted to the same trick thanks to Docker.
+(Admittedly I don't think I ended up using the _u-boot-tools_) Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives in some subdirectories). There are some official documentation pages [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) and [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) but I couldn't follow them. I then remembered reading a comment that a user had copied them from an Ubuntu installation. I resorted to the same trick thanks to Docker.
 
 ```sh
-docker run -it --rm --platform linux/arm64 -v $PWD:/home ubuntu:24.04 sh -c "apt update && apt upgrade -y && apt install -y opensbi qemu-system-misc u-boot-qemu && cp /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf /home/uboot.elf && cp /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf /home/fw_jump.elf"
+docker run -it --rm --platform linux/arm64 -v $PWD:/home ubuntu:24.04 bash copy-files.sh
 ```
 
-This saves the two files to the current working directory, so I could modify my call to `qemu` to be as follows.
+where _copy-files.sh_ contains
+
+```sh
+apt update
+apt upgrade -y 
+apt install -y opensbi qemu-system-misc u-boot-qemu
+cp /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf /home/uboot.elf
+cp /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf /home/fw_jump.elf
+```
+
+This saves the two files to the current working directory, so I could modify my call to `qemu-system-riscv64` to be as follows.
 
 ```sh
 qemu-system-riscv64 \
