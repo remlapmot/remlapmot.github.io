@@ -42,7 +42,7 @@ I don't have a RISC-V computer, although developer boards are now available for 
 
 My setup is that I'm on an Apple Silicon M4 MacBook Air. I thought this might be promising to use because this has an ARM processor which is a reduced instruction set architecture, as is RISC-V.
 
-I wondered whether to try [UTM](https://mac.getutm.app/) or [Qemu](https://www.qemu.org/). I tried UTM first but I couldn't make any progress. So I found a [tip online](https://www.reddit.com/r/RISCV/comments/t19dqz/comment/hyfm8s8/) saying that RISC-V Ubuntu could be launched under Qemu on Ubuntu Linux using the following command.
+I wondered whether to try [UTM](https://mac.getutm.app/) or [QEMU](https://www.qemu.org/). I tried UTM first but I couldn't make any progress. So I found a [tip online](https://www.reddit.com/r/RISCV/comments/t19dqz/comment/hyfm8s8/) saying that RISC-V Ubuntu could be launched under QEMU on Ubuntu Linux using the following command.
 
 ```sh
 qemu-system-riscv64 \
@@ -76,7 +76,7 @@ The extracted file is about 4GB, but later on I realised I needed a slightly lar
 qemu-img resize ubuntu-24.10-preinstalled-server-riscv64.img 8G
 ```
 
-I then realised that I needed Qemu on my Mac. Again Homebrew to the rescue with the following command.
+I then realised that I needed QEMU on my Mac. Again Homebrew to the rescue with the following command.
 
 ```sh
 brew install qemu u-boot-tools
@@ -154,4 +154,4 @@ sudo poweroff
 
 ## Summary
 
-I have shown how to install and run R on Ubuntu Server for RISC-V under Qemu emulation. Thanks to Canonical's support for RISC-V and the maintainers of the `r-base` and related packages the experience of running R on RISC-V is already first class.
+I have shown how to install and run R on Ubuntu Server for RISC-V under QEMU emulation. Thanks to Canonical's support for RISC-V and the maintainers of the `r-base` and related packages the experience of running R on RISC-V is already first class.
