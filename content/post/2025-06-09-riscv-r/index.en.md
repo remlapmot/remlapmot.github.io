@@ -1,7 +1,7 @@
 ---
 title: "Investigating running R on RISC-V thanks to r-base on Ubuntu"
 author: Package Build
-date: '2025-06-09'
+date: '2025-06-10'
 slug: riscv-r
 categories:
   - Blog
@@ -13,7 +13,7 @@ tags:
 subtitle:
 summary: "How to run R on RISC-V on Ubuntu Linux."
 authors: []
-lastmod: '2025-06-09T10:00:00+00:00'
+lastmod: '2025-06-10T09:30:00+00:00'
 featured: no
 image:
   caption: ''
