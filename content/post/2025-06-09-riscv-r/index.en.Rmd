@@ -7,7 +7,7 @@ categories:
   - Blog
 tags:
   - R
-  - RISCV
+  - RISC-V
   - Ubuntu
   - Linux
 subtitle:
