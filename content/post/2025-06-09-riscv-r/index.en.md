@@ -85,7 +85,8 @@ brew install qemu u-boot-tools
 (Admittedly I don't think I ended up using the _u-boot-tools_) Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives in some subdirectories). There are some official documentation pages [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) and [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) but I couldn't follow them. I then found a comment that said you can [copy them from an Ubuntu installation](https://www.reddit.com/r/RISCV/comments/t19dqz/comment/hyfaeh4/), which I implemented in Docker.
 
 ```sh
-docker run -it --rm --platform linux/arm64 -v $PWD:/home ubuntu:24.04 bash /home/copy-files.sh
+docker run -it --rm --platform linux/arm64 \
+  -v $PWD:/home ubuntu:24.04 bash /home/copy-files.sh
 ```
 
 where _copy-files.sh_ contains
