@@ -131,10 +131,22 @@ Then as usual we launch R with `R`.
 From this point on everything I tried simply worked. I installed _data.table_ from source. I tried out a trick from Jeroen Ooms who said that if an R package only contains R code then its binary form will install under any architecture. I have a few R packages in my r-universe that only contain R code, my example installed as expected.
 
 ```r
-install.packages('tmsens', repos = 'https://remlapmot.r-universe.dev/bin/linux/noble-x86_64/4.5/')
+install.packages('tmsens', repos =
+  'https://remlapmot.r-universe.dev/bin/linux/noble-x86_64/4.5/')
+#> * installing *binary* package ‘tmsens’ ...
+#> * DONE (tmsens)
+#> 
+#> The downloaded source packages are in
+#> 	‘/tmp/RtmpYqwF8W/downloaded_packages’
+#> > library(tmsens)
+#> Warning message:
+#> package ‘tmsens’ was built under R version 4.5.0
+#> > help(package = 'tmsens')
+#> 
+#>                 Information on package ‘tmsens’
 ```
 
-And to turn off the virtual machine issue
+Then exit R as usual and to turn shutdown the Ubuntu server issue
 
 ```sh
 sudo poweroff
