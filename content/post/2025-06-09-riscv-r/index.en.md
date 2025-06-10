@@ -58,7 +58,7 @@ qemu-system-riscv64 \
 
 Firstly one needs to obtain the Ubuntu img. Following [this incredible guide by Canonical](https://canonical-ubuntu-boards.readthedocs-hosted.com/en/latest/how-to/qemu-riscv/) we can choose one of the three versions of Ubuntu listed (Noble, Oracular, and Plucky).
 
-The image downloads as an _.img.xz_ archive, which you can extract by installing `xz`
+The image downloads as an _.img.xz_ archive, which you can extract by installing `xz` (I use [Homebrew](https://brew.sh/) for system packages on macOS)
 
 ```sh
 brew install xz
