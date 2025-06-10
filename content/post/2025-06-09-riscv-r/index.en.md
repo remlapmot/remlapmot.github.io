@@ -38,7 +38,7 @@ Why do this? I have no immediate need for this. However, there are now quite a f
 
 ## Emulating RISC-V on an Apple Silicon Mac
 
-I don't have a RISC-V computer, although developer boards are now available for a reasonable price, there aren't yet any competitive desktop machines. Therefore, I needed to use emulation.
+I don't have a RISC-V computer, therefore, I needed to use emulation.
 
 My setup is that I'm on an Apple Silicon M4 MacBook Air. I thought this might be promising to use because this has an ARM processor which is a reduced instruction set architecture, as is RISC-V.
 
