@@ -139,10 +139,10 @@ install.packages('tmsens', repos =
 #> 
 #> The downloaded source packages are in
 #> 	‘/tmp/RtmpYqwF8W/downloaded_packages’
-#> > library(tmsens)
+library(tmsens)
 #> Warning message:
 #> package ‘tmsens’ was built under R version 4.5.0
-#> > help(package = 'tmsens')
+help(package = 'tmsens')
 #> 
 #>                 Information on package ‘tmsens’
 ```
