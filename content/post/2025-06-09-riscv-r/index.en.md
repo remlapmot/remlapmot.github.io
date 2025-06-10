@@ -56,7 +56,7 @@ qemu-system-riscv64 \
   -drive file=ubuntu-24.10-preinstalled-server-riscv64.img,format=raw,if=virtio
 ```
 
-Firstly one needs to obtain the Ubuntu img. Following [this incredible guide by Canonical](https://canonical-ubuntu-boards.readthedocs-hosted.com/en/latest/how-to/qemu-riscv/) we can choose one of the three versions of Ubuntu listed (Noble, Oracular, Plucky).
+Firstly one needs to obtain the Ubuntu img. Following [this incredible guide by Canonical](https://canonical-ubuntu-boards.readthedocs-hosted.com/en/latest/how-to/qemu-riscv/) we can choose one of the three versions of Ubuntu listed (Noble, Oracular, and Plucky).
 
 The image downloads as an _.img.xz_ archive, which you can extract by installing `xz`
 
