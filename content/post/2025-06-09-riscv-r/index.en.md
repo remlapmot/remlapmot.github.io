@@ -124,7 +124,7 @@ sudo apt-get upgrade -y
 sudo apt-get install -y r-base r-base-dev
 ```
 
-Then as usual we launch R with `R`.
+Then we launch R.
 
 <img src="/post/2025/riscv-r/img/r-startup-message.png" alt="Screenshot of the R startup message running on an emulated RISC-V virtual machine." width="630" style="display: block; margin: auto;">
 
