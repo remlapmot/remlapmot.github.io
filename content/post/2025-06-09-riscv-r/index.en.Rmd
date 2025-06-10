@@ -112,11 +112,11 @@ qemu-system-riscv64 \
   -drive file=ubuntu-24.10-preinstalled-server-riscv64.img,format=raw,if=virtio
 ```
 
-A little bit to my surprise this worked. And I was presented with the login to Ubuntu server. The default username is _ubuntu_ and the default password is _ubuntu_. On login you are immediately prompted to change the password but then you're in.
+After about 20 seconds of screen output, a little bit to my surprise this worked and I was presented with the login screen to Ubuntu server. The default username is _ubuntu_ and the default password is _ubuntu_. On login you are immediately prompted to change the password but then you're in.
 
 <img src="/post/2025/riscv-r/img/ubuntu-launch-screen.png" alt="Screenshot of the Ubuntu server startup message running on an emulated RISC-V virtual machine." width="630" style="display: block; margin: auto;">
 
-So next it's essentially standard Ubuntu commands to update the system and install r-base. And I also install r-base-dev to obtain the necessary compilers to build any source packages containing code which needs to be compiled.
+So next it's essentially standard Ubuntu commands to update the system and install `r-base`. I also install `r-base-dev` to obtain the necessary compilers to build any source packages containing code which needs to be compiled.
 
 ```bash
 sudo apt-get update
@@ -128,6 +128,18 @@ Then as usual we launch R with `R`.
 
 <img src="/post/2025/riscv-r/img/r-startup-message.png" alt="Screenshot of the R startup message running on an emulated RISC-V virtual machine." width="630" style="display: block; margin: auto;">
 
+From this point on everything I tried simply worked. I installed _data.table_ from source. I tried out a trick from Jeroen Ooms who said that if an R package only contains R code then its binary form will install under any architecture. I have a few R packages in my r-universe that only contain R code, my example installed as expected.
+
+```r
+install.packages('tmsens', repos = 'https://remlapmot.r-universe.dev/bin/linux/noble-x86_64/4.5/')
+```
+
+And to turn off the virtual machine issue
+
+```sh
+sudo poweroff
+```
 
 ## Summary
 
+I have shown how to install and run R on Ubuntu Server for RISC-V under Qemu emulation. Thanks to Canonical's support for RISC-V and the maintainers of the `r-base` and related packages the experience of running R on RISC-V is already first class.
