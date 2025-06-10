@@ -1,0 +1,160 @@
+---
+title: "Investigating running R on RISC-V thanks to r-base on Ubuntu"
+author: Package Build
+date: '2025-06-10'
+slug: riscv-r
+categories:
+  - Blog
+tags:
+  - R
+  - RISC-V
+  - Ubuntu
+  - Linux
+subtitle:
+summary: "How to run R on RISC-V on Ubuntu Linux."
+authors: []
+lastmod: '2025-06-10T09:30:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'R logo next to the RISC-V logo.'
+projects: []
+toc: true
+---
+
+## Introduction
+
+I was interested to see whether and how well R would run on the new RISC-V architecture.
+
+A while ago I read that RISC-V is now a [first class architecture for Ubuntu](https://ubuntu.com/blog/empowering-risc-v-with-open-source-through-ubuntu).
+
+This got me thinking, instead of having to build R from source maybe the `r-base` package might be available for RISC-V. It turns out that this is indeed the case, the architecture we are interested in is `riscv64`. The launchpad page for `r-base` is [here](https://launchpad.net/ubuntu/+source/r-base). Clicking through the subpages for each version of Ubuntu I can see that R is available for RISC-V from Ubuntu Focal Fossa onwards (for which the version of R is 3.6.3; and the latest version of Ubuntu has the current version of R of 4.5.0).
+
+<img src="/post/2025/riscv-r/img/questing-r-base-builds.png" alt="Screenshot of the architectures the r-base package is built for Ubuntu Questing Quokka." width="630" style="display: block; margin: auto;">
+
+Why do this? I have no immediate need for this. However, there are now quite a few affordable RISC-V single board computers available, and so a similar argument holds to that made by [the R4Pi](https://r4pi.org/) (R for the Raspberry Pi project) that running R on such affordable machines is a [great benefit because it opens R up to a whole new user base and whole new set of low power use cases](https://youtu.be/imYEdQ81JPk?si=B97GQJl846WC6zr3).
+
+## Emulating RISC-V on an Apple Silicon Mac
+
+I don't have a RISC-V computer, therefore, I needed to use emulation.
+
+My setup is that I'm on an Apple Silicon M4 MacBook Air. I thought this might be promising to use because this has an ARM processor which is a reduced instruction set architecture, as is RISC-V.
+
+I wondered whether to try [UTM](https://mac.getutm.app/) or [QEMU](https://www.qemu.org/). I tried UTM first but I couldn't make any progress. So I found a [tip online](https://www.reddit.com/r/RISCV/comments/t19dqz/comment/hyfm8s8/) saying that RISC-V Ubuntu could be launched under QEMU on Ubuntu Linux using the following command.
+
+```sh
+qemu-system-riscv64 \
+  -machine virt \
+  -nographic \
+  -m 12288 -smp 4 \
+  -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf \
+  -kernel /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf \
+  -device virtio-net-pci,netdev=eth0 \
+  -netdev user,id=eth0,hostfwd=tcp::2222-:22 \
+  -drive file=ubuntu-24.10-preinstalled-server-riscv64.img,format=raw,if=virtio
+```
+
+Firstly one needs to obtain the Ubuntu img. Following [this incredible guide by Canonical](https://canonical-ubuntu-boards.readthedocs-hosted.com/en/latest/how-to/qemu-riscv/) we can choose one of the three versions of Ubuntu listed (Noble, Oracular, and Plucky).
+
+The image downloads as an _.img.xz_ archive, which you can extract by installing `xz` (I use [Homebrew](https://brew.sh/) for system packages on macOS)
+
+```sh
+brew install xz
+```
+
+and decompressing with
+
+```sh
+xz --decompress ubuntu-24.10-preinstalled-server-riscv64.img.xz
+```
+
+The extracted file is about 4GB, but later on I realised I needed a slightly larger harddisk for the virtual machine, so I increased it to 8GB with the following command.
+
+```sh
+qemu-img resize ubuntu-24.10-preinstalled-server-riscv64.img 8G
+```
+
+I then realised that I needed QEMU on my Mac. Again Homebrew to the rescue with the following command.
+
+```sh
+brew install qemu u-boot-tools
+```
+
+(Admittedly I don't think I ended up using the _u-boot-tools_.) Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives in some subdirectories). There are some official documentation pages [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) and [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) but I couldn't follow them. I then found a comment that said you can [copy them from an Ubuntu installation](https://www.reddit.com/r/RISCV/comments/t19dqz/comment/hyfaeh4/), which I implemented in Docker.
+
+```sh
+docker run -it --rm --platform linux/arm64 \
+  -v $PWD:/home ubuntu:24.04 bash /home/copy-files.sh
+```
+
+where _copy-files.sh_ contains
+
+```sh
+apt update
+apt upgrade -y 
+apt install -y opensbi qemu-system-misc u-boot-qemu
+cp /usr/lib/u-boot/qemu-riscv64_smode/uboot.elf /home/uboot.elf
+cp /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.elf /home/fw_jump.elf
+```
+
+This saves the two files to the current working directory, so I could modify my call to `qemu-system-riscv64` to be as follows.
+
+```sh
+qemu-system-riscv64 \
+  -machine virt \
+  -nographic \
+  -m 12288 -smp 4 \
+  -bios fw_jump.elf \
+  -kernel uboot.elf \
+  -device virtio-net-pci,netdev=eth0 \
+  -netdev user,id=eth0,hostfwd=tcp::2222-:22 \
+  -drive file=ubuntu-24.10-preinstalled-server-riscv64.img,format=raw,if=virtio
+```
+
+After a couple of seconds you obtain a GRUB screen in which you select the default of _Ubuntu_. Then after a further approx. 20 seconds of screen output, a little bit to my surprise this worked and I was presented with the login screen to Ubuntu server. The default username is _ubuntu_ and the default password is _ubuntu_. On login you are immediately prompted to change the password but then you're in.
+
+<img src="/post/2025/riscv-r/img/ubuntu-launch-screen.png" alt="Screenshot of the Ubuntu server startup message running on an emulated RISC-V virtual machine." width="630" style="display: block; margin: auto;">
+
+So next it's essentially standard Ubuntu commands to update the system and install `r-base`. I also install `r-base-dev` to obtain the necessary compilers to build any source packages containing code which needs to be compiled.
+
+```bash
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y r-base r-base-dev
+```
+
+Then we launch R.
+
+<img src="/post/2025/riscv-r/img/r-startup-message.png" alt="Screenshot of the R startup message running on an emulated RISC-V virtual machine." width="630" style="display: block; margin: auto;">
+
+From this point on everything I tried simply worked. I installed _data.table_ from source. Then slightly more obscurely, I tried out a trick from Jeroen Ooms who said that if an R package only contains R code then its binary version will install under any architecture. I have a few R packages in my r-universe that only contain R code, my example installed as expected (note this was built on x86_64 Ubuntu Linux but contains no source code which needs to be compiled).
+
+```r
+install.packages('tmsens', repos =
+  'https://remlapmot.r-universe.dev/bin/linux/noble-x86_64/4.5/')
+#> * installing *binary* package ‘tmsens’ ...
+#> * DONE (tmsens)
+#> 
+#> The downloaded source packages are in
+#> 	‘/tmp/RtmpYqwF8W/downloaded_packages’
+#> > library(tmsens)
+#> Warning message:
+#> package ‘tmsens’ was built under R version 4.5.0
+#> > help(package = 'tmsens')
+#> 
+#>                 Information on package ‘tmsens’
+```
+
+I admit I haven't tried many features here but I am really impressed with Ubuntu packages being available for RISC-V.
+
+Once you are finished using R, exit R as usual and to shutdown the Ubuntu server issue the following.
+
+```sh
+sudo poweroff
+```
+
+## Summary
+
+I have shown how to install and run R on Ubuntu Server for RISC-V under QEMU emulation. Thanks to Canonical's support for RISC-V and the maintainers of the `r-base` and related packages the experience of running R on RISC-V is already excellent.
