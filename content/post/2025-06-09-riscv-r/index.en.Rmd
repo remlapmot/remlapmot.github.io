@@ -1,5 +1,5 @@
 ---
-title: "Investigating running R on RISC-V thanks to Ubuntu"
+title: "Investigating running R on RISC-V thanks to r-base on Ubuntu"
 author: Package Build
 date: '2025-06-09'
 slug: riscv-r
@@ -146,7 +146,9 @@ install.packages('tmsens', repos =
 #>                 Information on package ‘tmsens’
 ```
 
-Then exit R as usual and to turn shutdown the Ubuntu server issue
+I admit I haven't tried many features here but I am really impressed with Ubuntu packages being available for RISC-V.
+
+Then exit R as usual and to shutdown the Ubuntu server issue the following.
 
 ```sh
 sudo poweroff
@@ -154,4 +156,4 @@ sudo poweroff
 
 ## Summary
 
-I have shown how to install and run R on Ubuntu Server for RISC-V under QEMU emulation. Thanks to Canonical's support for RISC-V and the maintainers of the `r-base` and related packages the experience of running R on RISC-V is already first class.
+I have shown how to install and run R on Ubuntu Server for RISC-V under QEMU emulation. Thanks to Canonical's support for RISC-V and the maintainers of the `r-base` and related packages the experience of running R on RISC-V is already excellent.
