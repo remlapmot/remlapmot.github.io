@@ -11,7 +11,7 @@ tags:
   - Ubuntu
   - Linux
 subtitle:
-summary: "How to run R on RISCV on Ubuntu Linux."
+summary: "How to run R on RISC-V on Ubuntu Linux."
 authors: []
 lastmod: '2025-06-09T10:00:00+00:00'
 featured: no
