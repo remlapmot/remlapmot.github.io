@@ -19,7 +19,7 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'TODO:Alt text!.'
+  alt_text: 'R logo next to the RISC-V logo.'
 projects: []
 toc: true
 ---
