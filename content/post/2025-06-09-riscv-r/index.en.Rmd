@@ -42,7 +42,7 @@ I don't have a RISC-V computer, although developer boards are now available for 
 
 My setup is that I'm on an Apple Silicon M4 MacBook Air. I thought this might be promising to use because this has an ARM processor which is a reduced instruction set architecture, as is RISC-V.
 
-I wondered whether to try [UTM](https://mac.getutm.app/) or [Qemu](https://www.qemu.org/). I tried UTM first but I couldn't make any progress. So I found a tip online saying that RISC-V Ubuntu could be launched under Qemu on Ubuntu Linux using the following command.
+I wondered whether to try [UTM](https://mac.getutm.app/) or [Qemu](https://www.qemu.org/). I tried UTM first but I couldn't make any progress. So I found a [tip online](https://www.reddit.com/r/RISCV/comments/t19dqz/comment/hyfm8s8/) saying that RISC-V Ubuntu could be launched under Qemu on Ubuntu Linux using the following command.
 
 ```sh
 qemu-system-riscv64 \
@@ -82,7 +82,7 @@ I then realised that I needed Qemu on my Mac. Again Homebrew to the rescue with 
 brew install qemu u-boot-tools
 ```
 
-(Admittedly I don't think I ended up using the _u-boot-tools_) Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives in some subdirectories). There are some official documentation pages [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) and [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) but I couldn't follow them. I then remembered reading a comment that a user had copied them from an Ubuntu installation. I resorted to the same trick thanks to Docker.
+(Admittedly I don't think I ended up using the _u-boot-tools_) Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives in some subdirectories). There are some official documentation pages [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) and [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) but I couldn't follow them. I then found a comment that said you can [copy them from an Ubuntu installation](https://www.reddit.com/r/RISCV/comments/t19dqz/comment/hyfaeh4/). I implemented the same trick in Docker.
 
 ```sh
 docker run -it --rm --platform linux/arm64 -v $PWD:/home ubuntu:24.04 bash /home/copy-files.sh
