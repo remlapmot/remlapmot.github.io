@@ -82,7 +82,7 @@ I then realised that I needed QEMU on my Mac. Again Homebrew to the rescue with 
 brew install qemu u-boot-tools
 ```
 
-(Admittedly I don't think I ended up using the _u-boot-tools_) Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives in some subdirectories). There are some official documentation pages [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) and [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) but I couldn't follow them. I then found a comment that said you can [copy them from an Ubuntu installation](https://www.reddit.com/r/RISCV/comments/t19dqz/comment/hyfaeh4/), which I implemented in Docker.
+(Admittedly I don't think I ended up using the _u-boot-tools_.) Next I needed the two files; _fw_jump.elf_ and _uboot.elf_. I had a look in _/opt/homebrew/Cellar/qemu/10.0.2/_ but I couldn't work out if they are in there or not (there are some zip archives in some subdirectories). There are some official documentation pages [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) and [here](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html) but I couldn't follow them. I then found a comment that said you can [copy them from an Ubuntu installation](https://www.reddit.com/r/RISCV/comments/t19dqz/comment/hyfaeh4/), which I implemented in Docker.
 
 ```sh
 docker run -it --rm --platform linux/arm64 \
@@ -113,7 +113,7 @@ qemu-system-riscv64 \
   -drive file=ubuntu-24.10-preinstalled-server-riscv64.img,format=raw,if=virtio
 ```
 
-After about 20 seconds of screen output, a little bit to my surprise this worked and I was presented with the login screen to Ubuntu server. The default username is _ubuntu_ and the default password is _ubuntu_. On login you are immediately prompted to change the password but then you're in.
+After a couple of seconds you obtain a GRUB screen in which you select the default of _Ubuntu_. Then after a further approx. 20 seconds of screen output, a little bit to my surprise this worked and I was presented with the login screen to Ubuntu server. The default username is _ubuntu_ and the default password is _ubuntu_. On login you are immediately prompted to change the password but then you're in.
 
 <img src="/post/2025/riscv-r/img/ubuntu-launch-screen.png" alt="Screenshot of the Ubuntu server startup message running on an emulated RISC-V virtual machine." width="630" style="display: block; margin: auto;">
 
@@ -129,7 +129,7 @@ Then we launch R.
 
 <img src="/post/2025/riscv-r/img/r-startup-message.png" alt="Screenshot of the R startup message running on an emulated RISC-V virtual machine." width="630" style="display: block; margin: auto;">
 
-From this point on everything I tried simply worked. I installed _data.table_ from source. I tried out a trick from Jeroen Ooms who said that if an R package only contains R code then its binary form will install under any architecture. I have a few R packages in my r-universe that only contain R code, my example installed as expected.
+From this point on everything I tried simply worked. I installed _data.table_ from source. Then slightly more obscurely, I tried out a trick from Jeroen Ooms who said that if an R package only contains R code then its binary version will install under any architecture. I have a few R packages in my r-universe that only contain R code, my example installed as expected (note this was built on x86_64 Ubuntu Linux but contains no source code which needs to be compiled).
 
 ```r
 install.packages('tmsens', repos =
@@ -149,7 +149,7 @@ install.packages('tmsens', repos =
 
 I admit I haven't tried many features here but I am really impressed with Ubuntu packages being available for RISC-V.
 
-Then exit R as usual and to shutdown the Ubuntu server issue the following.
+Once you are finished using R, exit R as usual and to shutdown the Ubuntu server issue the following.
 
 ```sh
 sudo poweroff
