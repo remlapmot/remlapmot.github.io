@@ -1,0 +1,42 @@
+---
+title: "Creating tutorial worksheets; Quarto profiles for the win!"
+author: Package Build
+date: '2025-07-07'
+slug: quarto-profiles-for-tutorials
+categories:
+  - Blog
+tags:
+  - Quarto
+  - R
+  - R Markdown
+  - Stata
+  - nbstata
+  - Python
+  - Julia
+  - Jupyter
+subtitle: ''
+summary: ""
+authors: []
+lastmod: '2025-07-05T07:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of .'
+projects: []
+toc: true
+---
+
+## Introduction
+
+I previously posted about creating tutorial worksheets for 4 different Quarto engines using the conditional content thingyTODO.
+
+Thanks to a vignette in the quarto R package I realised there is a more convenient (and indeed less hacky) way to create tutorial documents using Quarto profiles.
+
+
+## An honorable mention about dynamic metadata
+
+## Summary
+
+I have shown how to create Quarto profiles for creating tutorial worksheets; one for the questions and one for the solutions from the same Quarto document; for several Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`). I have also shown how additional metadata may be written into your Quarto document in these engines which can be used in conjunction with parameterised documents.
