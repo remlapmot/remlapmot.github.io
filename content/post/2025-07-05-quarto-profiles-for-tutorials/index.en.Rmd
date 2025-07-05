@@ -46,6 +46,70 @@ Profiles documents [on this page](https://quarto.org/docs/projects/profiles.html
 
 And specifically, we shall make use of [conditional content dependent upon profile](https://quarto.org/docs/projects/profiles.html#profile-content).
 
+*_quarto.yml*
+
+```yml
+execute:
+  eval: true
+```
+
+*_quarto-python-questions.yml*
+
+```yml
+title: 'Questions document: Python version'
+execute:
+  eval: false
+```
+
+*_quarto-python-solutions.yml*
+
+```yml
+title: 'Solutions document: Python version'
+```
+
+Then our tutorial Quarto Python document, *tutorial-python.qmd*, will look like the following.
+
+````{verbatim, lang="plaintext"}
+---
+format:
+  html:
+    embed-resources: true
+jupyter: python3
+---
+
+## Question 1
+
+Question text.
+
+```{python}
+print("The code which is echoed in questions and evaluated in solutions.")
+```
+
+::: {.content-visible unless-profile="python-questions"}
+The text for the solutions.
+:::
+
+````
+
+We see the use of the conditional content based upon profile for the text of the solutions, and indeed we could included additional code chunks in these divs.
+
+We repeat this for the other 2 tricky Quarto engines, `engine: julia` and `jupyter: nbstata`, including making profile yaml files for each engine.
+
+Then we make a shell script with our render commands.
+
+```sh
+quarto render tutorial-python.qmd --profile python-questions -o tutorial-python-questions.html
+quarto render tutorial-python.qmd --profile python-solutions -o tutorial-python-solutions.html
+```
+
+And because I have an version using parameters my shell script usually begins.
+
+```sh
+quarto render tutorial-r.qmd -P solutions:false -o tutorial-r-questions.html
+quarto render tutorial-r.qmd -o tutorial-r-solutions.html
+```
+
+And remarkably that's it.
 
 ## An honorable mention about dynamic metadata
 
