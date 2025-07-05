@@ -56,6 +56,9 @@ execute:
 *_quarto-python-questions.yml*
 
 ```yml
+project:
+  render:
+    - tutorial-python.qmd
 title: 'Questions document: Python version'
 execute:
   eval: false
@@ -64,6 +67,9 @@ execute:
 *_quarto-python-solutions.yml*
 
 ```yml
+project:
+  render:
+    - tutorial-python.qmd
 title: 'Solutions document: Python version'
 ```
 
@@ -98,8 +104,8 @@ We repeat this for the other 2 tricky Quarto engines, `engine: julia` and `jupyt
 Then we make a shell script with our render commands.
 
 ```sh
-quarto render tutorial-python.qmd --profile python-questions -o tutorial-python-questions.html
-quarto render tutorial-python.qmd --profile python-solutions -o tutorial-python-solutions.html
+quarto render --profile python-questions -o tutorial-python-questions.html
+quarto render --profile python-solutions -o tutorial-python-solutions.html
 ```
 
 And because I have an version using parameters my shell script usually begins.
