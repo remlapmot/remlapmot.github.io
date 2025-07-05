@@ -77,7 +77,8 @@ title: 'Solutions document: Python version'
 
 Then our tutorial Quarto Python document, *tutorial-python.qmd*, will look like the following.
 
-````{verbatim, lang="plaintext"}
+
+```` plaintext
 ---
 format:
   html:
@@ -127,7 +128,8 @@ For Quarto documents using the knitr engine, the R package vignette shows how to
 
 ### Python (jupyter: python3)
 
-````{verbatim, language='plaintext'}
+
+```` default
 ```{python}
 #| include: false
 #| tags: [parameters]
@@ -160,7 +162,8 @@ print("A solution, which is hidden in questions")
 
 ### Stata (jupyter: nbstata)
 
-````{verbatim, language='plaintext'}
+
+```` default
 ```{stata}
 *| include: false
 local solutions : env SOLUTIONS_STATA
@@ -188,7 +191,8 @@ display "A solution, which is hidden in questions"
 
 ### Julia (engine: julia)
 
-````{verbatim, language='plaintext'}
+
+```` default
 ```{julia}
 #| tags: [parameters]
 ```
