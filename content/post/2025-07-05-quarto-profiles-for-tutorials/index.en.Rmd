@@ -119,11 +119,11 @@ And that's it.
 
 ## An honorable mention about dynamic metadata
 
-When I started reading the quarto R package vignette I began trying to use dynamic metadata to achieve the result above. Dynamic metadata involves writing extra YAML blocks into your Quarto document which can include programmatically specified values of parameters, which can then be used by including conditional content by [matching against them](https://quarto.org/docs/authoring/conditional.html#matching-against-metadata). I found that I could achieve except modifying the `execute` state, as that must be specified in the first YAML header.
+When I started reading the quarto R package vignette I began trying to use dynamic metadata to achieve the result above. Dynamic metadata involves writing extra YAML blocks into your Quarto document which can include programmatically specified values of parameters, which can then be used by including conditional content by [matching against them](https://quarto.org/docs/authoring/conditional.html#matching-against-metadata). I found that I could achieve what I wanted except for modifying the `execute` state, it seems that must be specified in the first YAML header.
 
 For Quarto documents using the knitr engine, the R package vignette shows how to use the new `write_yaml_metadata_block()` function with an R code chunk with output type `asis` to write the YAML block. In case it is useful to anyone, below I show examples of how to write the YAML blocks in each of the three other engines I have been using.
 
-### Python
+### Python (jupyter: python3)
 
 ````{verbatim, language='plaintext'}
 ```{python}
@@ -156,7 +156,7 @@ print("A solution, which is hidden in questions")
 
 ````
 
-### Stata
+### Stata (jupyter: nbstata)
 
 ````{verbatim, language='plaintext'}
 ```{stata}
@@ -184,7 +184,7 @@ display "A solution, which is hidden in questions"
 :::
 ````
 
-### Julia
+### Julia (engine: julia)
 
 ````{verbatim, language='plaintext'}
 ```{julia}
