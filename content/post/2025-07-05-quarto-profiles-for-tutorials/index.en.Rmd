@@ -30,7 +30,7 @@ toc: true
 
 ## Introduction
 
-I previously posted about creating tutorial worksheets for 4 different Quarto engines using the conditional content thingyTODO.
+I [previously posted](https://remlapmot.github.io/post/2025/quarto-conditional-content/) about creating tutorial worksheets for 4 different Quarto engines using the conditional content thingyTODO.
 
 Thanks to a vignette in the quarto R package I realised there is a more convenient (and indeed less hacky) way to create tutorial documents using Quarto profiles.
 
