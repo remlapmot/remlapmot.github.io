@@ -30,12 +30,25 @@ toc: true
 
 ## Introduction
 
-I [previously posted](https://remlapmot.github.io/post/2025/quarto-conditional-content/) about creating tutorial worksheets for 4 different Quarto engines using the conditional content thingyTODO.
+I [previously posted](https://remlapmot.github.io/post/2025/quarto-conditional-content/) about creating tutorial worksheets for 4 different Quarto engines using [conditional content](https://quarto.org/docs/authoring/conditional.html). However, that approach is a bit hacky and I wasn't very happy with it.
 
-Thanks to a vignette in the quarto R package I realised there is a more convenient (and indeed less hacky) way to create tutorial documents using Quarto profiles.
+Thanks to a [vignette by Christophe Devrieux](https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html) in the quarto R package I realised there is a more convenient (and indeed less hacky) way to create tutorial documents using Quarto profiles (I don't use the approach in the vignette but it led me to relevant Quarto documentation page).
+
+My aim is the following
+
+> Have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.
+
+As a reminder this has long been trivial with RMarkdown and knitr because they allow programmtic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also trivial. However, it is other Quarto engines which are problematic because as far as I know they don't allow programmtic chunk options and they don't the equivalent of `!expr`.
+
+
+Profiles documents [on this page](https://quarto.org/docs/projects/profiles.html).
+
+And specifically, we shall make use of [conditional content dependent upon profile](https://quarto.org/docs/projects/profiles.html#profile-content).
 
 
 ## An honorable mention about dynamic metadata
+
+https://quarto.org/docs/authoring/conditional.html#matching-against-metadata
 
 ## Summary
 
