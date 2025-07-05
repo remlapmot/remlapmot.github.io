@@ -38,8 +38,9 @@ My aim is the following
 
 > Have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.
 
-As a reminder this has long been trivial with RMarkdown and knitr because they allow programmtic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also trivial. However, it is other Quarto engines which are problematic because as far as I know they don't allow programmtic chunk options and they don't the equivalent of `!expr`.
+As a reminder, as I showed in my previous post, this has long been trivial with R Markdown and knitr because they allow programmtic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also trivial. However, it is other Quarto engines which are problematic because as far as I know they don't allow programmtic chunk options and they don't the equivalent of `!expr`.
 
+## Quarto profiles
 
 Profiles documents [on this page](https://quarto.org/docs/projects/profiles.html).
 
