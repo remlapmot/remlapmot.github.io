@@ -108,18 +108,18 @@ quarto render --profile python-questions -o tutorial-python-questions.html
 quarto render --profile python-solutions -o tutorial-python-solutions.html
 ```
 
-And because I have an version using parameters my shell script usually begins.
+And because I have an R version using parameters my shell script usually begins.
 
 ```sh
 quarto render tutorial-r.qmd -P solutions:false -o tutorial-r-questions.html
 quarto render tutorial-r.qmd -o tutorial-r-solutions.html
 ```
 
-And remarkably that's it.
+And that's it.
 
 ## An honorable mention about dynamic metadata
 
-https://quarto.org/docs/authoring/conditional.html#matching-against-metadata
+When I started reading the quarto R package vignette I began trying to use dynamic metadata to achieve the result above. Dynamic metadata involves writing extra YAML blocks into your Quarto document which can include programmatically specified values of parameters, which can then be used by including conditional content by [matching against them](https://quarto.org/docs/authoring/conditional.html#matching-against-metadata). I found that I could achieve except modifying the `execute` state, as that must be specified in the first YAML header.
 
 ## Summary
 
