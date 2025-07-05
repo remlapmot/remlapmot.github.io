@@ -125,7 +125,36 @@ For Quarto documents using the knitr engine, the R package vignette shows how to
 
 ### Python
 
+````{verbatim, language='plaintext'}
+```{python}
+#| include: false
+#| tags: [parameters]
+solutions = 'true'
+```
 
+```{python}
+#| include: false
+from IPython.display import Markdown
+ymltxt = f"  solutions: {solutions}"
+if solutions == 'true':
+    titletxt = "title: Solutions document"
+else:
+    titletxt = "title: Questions document"
+```
+
+`{python} Markdown("---")`
+`{python} Markdown("params:")`
+`{python} Markdown(ymltxt)`
+`{python} Markdown(titletxt)`
+`{python} Markdown("---")`
+
+::: {.content-visible when-meta="params.solutions"}
+```{python}
+print("A solution, which is hidden in questions")
+```
+:::
+
+````
 
 ### Stata
 
@@ -157,7 +186,34 @@ display "A solution, which is hidden in questions"
 
 ### Julia
 
+````{verbatim, language='plaintext'}
+```{julia}
+#| tags: [parameters]
+```
 
+```{julia}
+#| echo: false
+#| output: asis
+println("---")
+if solutions
+  println("title: Solutions document")
+  ymltxt = "  solutions: true"
+else
+  println("title: Questions document")
+  ymltxt = "  solutions: false"
+end
+println("params:")
+println(ymltxt)
+println("---")
+```
+
+::: {.content-visible when-meta="params.solutions"}
+```{julia}
+println("A solution, hidden in questions")
+```
+:::
+
+````
 
 ## Summary
 
