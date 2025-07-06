@@ -27,10 +27,10 @@
   
     
   
-  <meta name="description" content="How to setup a uv virtual environment to run the nbstata Jupyter kernel.">
+  <meta name="description" content="How to create tutorial worksheets, i.e., a questions document and solutions document from the same Quarto document using Quarto profiles.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2025/nbstata-uv-venv/">
+  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/">
 
   
 
@@ -213,7 +213,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu_12bf607bd6d196d.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu_5e536419af3743e2.png">
 
-  <link rel="canonical" href="https://remlapmot.github.io/post/2025/nbstata-uv-venv/">
+  <link rel="canonical" href="https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/">
 
   
   
@@ -228,15 +228,15 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Dr Tom Palmer">
-  <meta property="og:url" content="https://remlapmot.github.io/post/2025/nbstata-uv-venv/">
-  <meta property="og:title" content="Running the nbstata Jupyter kernel within a uv virtual environment | Dr Tom Palmer">
-  <meta property="og:description" content="How to setup a uv virtual environment to run the nbstata Jupyter kernel."><meta property="og:image" content="https://remlapmot.github.io/post/2025/nbstata-uv-venv/featured.png">
-  <meta property="twitter:image" content="https://remlapmot.github.io/post/2025/nbstata-uv-venv/featured.png"><meta property="og:locale" content="en-us">
+  <meta property="og:url" content="https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/">
+  <meta property="og:title" content="Creating tutorial worksheets; Quarto profiles for the win! | Dr Tom Palmer">
+  <meta property="og:description" content="How to create tutorial worksheets, i.e., a questions document and solutions document from the same Quarto document using Quarto profiles."><meta property="og:image" content="https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/featured.png">
+  <meta property="twitter:image" content="https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/featured.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2025-04-29T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2025-07-06T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2025-05-10T07:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2025-07-06T07:00:00&#43;00:00">
   
 
   
@@ -260,16 +260,16 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://remlapmot.github.io/post/2025/nbstata-uv-venv/"
+    "@id": "https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/"
   },
-  "headline": "Running the nbstata Jupyter kernel within a uv virtual environment",
+  "headline": "Creating tutorial worksheets; Quarto profiles for the win!",
   
   "image": [
-    "https://remlapmot.github.io/post/2025/nbstata-uv-venv/featured.png"
+    "https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/featured.png"
   ],
   
-  "datePublished": "2025-04-29T00:00:00Z",
-  "dateModified": "2025-05-10T07:00:00Z",
+  "datePublished": "2025-07-06T00:00:00Z",
+  "dateModified": "2025-07-06T07:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -284,7 +284,7 @@
       "url": "https://remlapmot.github.io/images/icon_hu_5e536419af3743e2.png"
     }
   },
-  "description": "How to setup a uv virtual environment to run the nbstata Jupyter kernel."
+  "description": "How to create tutorial worksheets, i.e., a questions document and solutions document from the same Quarto document using Quarto profiles."
 }
 </script>
 
@@ -302,7 +302,7 @@
 
 
 
-  <title>Running the nbstata Jupyter kernel within a uv virtual environment | Dr Tom Palmer</title>
+  <title>Creating tutorial worksheets; Quarto profiles for the win! | Dr Tom Palmer</title>
 
 </head>
 
@@ -586,9 +586,18 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#setup-basics">Setup basics</a></li>
-    <li><a href="#a-shell-script-to-setup-the-uv-virtual-environment">A shell script to setup the uv virtual environment</a></li>
-    <li><a href="#recording-this-as-a-project-with-pyprojecttoml-and-uvlock-files">Recording this as a project with pyproject.toml and uv.lock files</a></li>
+    <li><a href="#quarto-profiles">Quarto profiles</a>
+      <ul>
+        <li><a href="#questions-and-solutions-profiles-for-python">Questions and solutions profiles for Python</a></li>
+      </ul>
+    </li>
+    <li><a href="#an-honorable-mention-about-dynamic-metadata">An honorable mention about dynamic metadata</a>
+      <ul>
+        <li><a href="#python-jupyter-python3">Python (jupyter: python3)</a></li>
+        <li><a href="#stata-jupyter-nbstata">Stata (jupyter: nbstata)</a></li>
+        <li><a href="#julia-engine-julia">Julia (engine: julia)</a></li>
+      </ul>
+    </li>
     <li><a href="#summary">Summary</a></li>
   </ul>
 </nav>
@@ -624,7 +633,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>Running the nbstata Jupyter kernel within a uv virtual environment</h1>
+  <h1>Creating tutorial worksheets; Quarto profiles for the win!</h1>
 
   
 
@@ -644,7 +653,7 @@
           Last updated on
       
     
-    May 10, 2025
+    Jul 6, 2025
   </span>
   
 
@@ -683,9 +692,9 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 125px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 450px;">
   <div style="position: relative">
-    <img src="/post/2025/nbstata-uv-venv/featured_hu_d3937bfddf76565b.png" alt="Screenshot of a shell script to setup the nbstata Jupyter kernel within a uv virtual environment." class="featured-image">
+    <img src="/post/2025/quarto-profiles-for-tutorials/featured_hu_618d72c0fd818f95.png" alt="Screenshot of ." class="featured-image">
     
   </div>
 </div>
@@ -694,132 +703,174 @@
             <div class="article-container">
               <div class="article-style">
                 <h2 id="introduction">Introduction</h2>
-<p>Any new project using Python or Jupyter is very stongly recommended to use a virtual environment. A virtual environment is a directory (usually at the top level; often called either <em>.venv</em> or <em>venv</em>) within your project directory which contains the dependency Python packages and perhaps the Python installation (or pointers to the Python installation on your system).</p>
-<p>There are many Python project managers, in this post I will use the new and extremely fast project manager 
-<a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener">uv</a>. I will show how to use the 
-<a href="https://hugetim.github.io/nbstata/" target="_blank" rel="noopener">nbstata</a> Jupyter kernel by Tim Huegerich within a uv virtual environment on macOS, Windows, and Linux. The aim is to be able to conveniently and reproducibly render Quarto documents using the 
-<a href="https://hugetim.github.io/nbstata/user_guide.html#quarto-tips" target="_blank" rel="noopener"><code>jupyter: nbstata</code></a> engine from within the virtual environment.</p>
-<p>At this point it&rsquo;s worth saying that I am a contributor to the excellent 
-<a href="https://cran.r-project.org/package=Statamarkdown" target="_blank" rel="noopener">Statamarkdown</a> R package by Doug Hemken. This can be used in Quarto documents using the knitr engine. In this post I&rsquo;ll be using nbstata because nbstata uses 
-<a href="https://www.stata.com/python/pystata/" target="_blank" rel="noopener">pystata</a> which is StataCorp&rsquo;s official Python package (included in each Stata installation) and is their official way of integrating Stata in Python. As such pystata and hence nbstata have more features than Statamarkdown can provide.</p>
-<p>And it is worth emphasizing how useful virtual environments are because it is very easy to get oneself in a complete mess with regards Python, as you will likely end up with many different versions installed. Chaos can then accidentally ensue regarding which versions of dependency packages your different projects require given a certain Python version, as always XKCD have a comic illustrating the problem.</p>
-<figure>
-<img src="https://imgs.xkcd.com/comics/python_environment.png" alt="XKCD 1987, a diagram showing the chaos of not using Python virtual environments." width="630" style="display: block; margin: auto;">
-<figcaption>XKCD 1987, Python Environment. <a href="https://xkcd.com/license.html">XKCD license</a></figcaption>
-</figure>
-<h2 id="setup-basics">Setup basics</h2>
-<p>On your machine you need to have</p>
-<ul>
-<li>Stata installed and know the location of the installation
-<ul>
-<li>and check that within the installation there is the <em>utilities</em> directory containing the <em>pystata</em> directory</li>
-</ul>
-</li>
-<li>uv must be installed, see 
-<a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener">its docs for installation instructions</a></li>
-<li>to render Quarto documents you need 
-<a href="https://quarto.org/docs/get-started/" target="_blank" rel="noopener">Quarto installed</a></li>
-<li>and of course a text editor and a terminal.</li>
-<li>On Windows I would recommend using Git Bash as your shell (this is bundled with 
-<a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">Git for Windows</a>) for running the setup script in the next section.</li>
-</ul>
-<h2 id="a-shell-script-to-setup-the-uv-virtual-environment">A shell script to setup the uv virtual environment</h2>
-<p>What follows are the shell commands we need to run to setup our virtual environment. The script is for macOS but I have included comments in the places where amendments are required for either Windows or Linux. I have also included this script 
-<a href="https://github.com/remlapmot/nbstata-uv-setup" target="_blank" rel="noopener">in a repository</a> (in fact I have included a script per operating system).</p>
-<p>Note that currently on macOS and Linux there cannot be any spaces in the filepath to your virtual environment. And you might need to amend some of the paths, say if you have a different version of Stata or if it&rsquo;s installation location is different.</p>
-<ul>
-<li>On Linux we need to ensure that the directory containing our stata/stata-mp binary is on <code>PATH</code>.</li>
-</ul>
-<pre><code class="language-bash"># export PATH=$PATH:/usr/local/stata18
+<p>I 
+<a href="https://remlapmot.github.io/post/2025/quarto-conditional-content/" target="_blank" rel="noopener">previously posted</a> about creating tutorial worksheets for 4 different Quarto engines (for R, Python, Stata, and Julia) using 
+<a href="https://quarto.org/docs/authoring/conditional.html" target="_blank" rel="noopener">conditional content</a>. However, that approach is a bit hacky and I wasn&rsquo;t very happy with it.</p>
+<p>Thanks to a 
+<a href="https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html" target="_blank" rel="noopener">vignette by Christophe Dervieux</a> in the quarto R package I realised there is a more convenient, and less hacky, way to create tutorial documents using Quarto profiles. I don&rsquo;t use the dynamic metadata approach in the vignette to achieve my solution but it led me to relevant Quarto documentation page and I discuss it at the end of this post.</p>
+<p>My aim is the following</p>
+<blockquote>
+<p>To have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.</p></blockquote>
+<p>As a reminder, as 
+<a href="https://remlapmot.github.io/post/2025/quarto-conditional-content/#introduction" target="_blank" rel="noopener">I showed in my previous post</a>, this has been possible to achieve for a long time with R Markdown and knitr because thanks to the brilliant work of Yihui Xie because they allow programmtic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also straighforward and I won&rsquo;t repeat it in this post. However, it is the three other Quarto engines (for Python, Stata, and Julia) that I am interested in which are problematic because as far as I know they don&rsquo;t allow programmtic chunk options and they don&rsquo;t have the equivalent of the <code>! expr ...</code> YAML tag literal.</p>
+<h2 id="quarto-profiles">Quarto profiles</h2>
+<p>Quarto profiles are introduced 
+<a href="https://quarto.org/docs/projects/profiles.html" target="_blank" rel="noopener">on this page of the Quarto documentation</a>. Specifically, we shall make use of 
+<a href="https://quarto.org/docs/projects/profiles.html#profile-content" target="_blank" rel="noopener">conditional content dependent upon profile</a>.</p>
+<p>First we will create a simple default Quarto profile file <em>_quarto.yml</em> which will simply contain the following.</p>
+<pre><code class="language-yml">execute:
+  eval: true
 </code></pre>
-<ul>
-<li>We then need to ensure that our Python installation will be able to find the pystata package. We can do this by defining the <code>PYTHONPATH</code> environment variable.</li>
-</ul>
-<pre><code class="language-bash"># Required so Python can find pystata package
-export PYTHONPATH=/Applications/Stata/utilities
-# Linux: export PYTHONPATH=/usr/local/stata18/utilities
-# Windows: export PYTHONPATH=&quot;C:/Program Files/Stata18/utilities&quot;
+<p>(This is because I usually have an R version of the tutorial in the same directory using programmatic chunk options, so I don&rsquo;t want to set a default that is language specific nor will affect anything in the R Quarto documents.)</p>
+<p>Next for each language I will make profiles for the questions output and the solutions output in appropriately named YAML files (I just show the Python files as the other two just have Stata/Julia substituted in the appropraite places).</p>
+<h3 id="questions-and-solutions-profiles-for-python">Questions and solutions profiles for Python</h3>
+<p><em>_quarto-python-questions.yml</em></p>
+<pre><code class="language-yml">project:
+  render:
+    - tutorial-python.qmd
+title: 'Questions document: Python version'
+execute:
+  eval: false
 </code></pre>
-<ul>
-<li>We then setup the virtual environment. This will create a directory in our project called <em>.venv</em>. I prefer to explicitly set the version of Python I am using.</li>
-</ul>
-<pre><code class="language-bash">uv venv --python 3.13
+<p><em>_quarto-python-solutions.yml</em></p>
+<pre><code class="language-yml">project:
+  render:
+    - tutorial-python.qmd
+title: 'Solutions document: Python version'
 </code></pre>
-<ul>
-<li>We then activate the virtual environment</li>
-</ul>
-<pre><code class="language-bash">source .venv/bin/activate
-# Windows: source .venv/Scripts/activate
-</code></pre>
-<ul>
-<li>Now we can install the required Python dependency packages as per the 
-<a href="https://hugetim.github.io/nbstata/user_guide.html#install-nbstata" target="_blank" rel="noopener">nbstata docs</a>.</li>
-</ul>
-<pre><code class="language-bash"># Install nbstata dependency Python packages
-uv pip install jupyterlab nbstata jupyterlab_stata_highlight2
-
-# Additional Python packages if using parameterised Quarto documents
-# uv pip install papermill python-dotenv jupyter-cache
-</code></pre>
-<ul>
-<li>Then we setup the nbstata Jupyter kernel</li>
-</ul>
-<pre><code class="language-bash">python -m nbstata.install
-</code></pre>
-<p>The nbstata docs states that the <code>--sys-prefix</code> flag may be required in a virutal environment but I haven&rsquo;t found that to be the case.</p>
-<ul>
-<li>Then we run commands to do our actual work; for example rendering a Quarto document using the <code>jupyter: nbstata</code> engine. An example Quarto document, say <em>index.qmd</em>, could be:</li>
-</ul>
+<p>Then our tutorial Quarto Python document, <em>tutorial-python.qmd</em>, will look like the following.</p>
 <pre><code class="language-plaintext">---
-title: My example nbstata document
-jupyter: nbstata
+format:
+  html:
+    embed-resources: true
+jupyter: python3
 ---
 
-```{stata}
-display &quot;Hello, World!&quot;
+## Question 1
+
+Question text.
+
+```{python}
+print(&quot;The code which is echoed in questions and evaluated in solutions.&quot;)
 ```
+
+::: {.content-visible when-profile=&quot;python-solutions&quot;}
+The text for the solutions.
+:::
+
 </code></pre>
-<pre><code class="language-bash">quarto render index.qmd
+<p>We see the use of the conditional content based upon profile for the text of the solutions, and we could included additional code chunks in these conditional content divs.</p>
+<p>We repeat this for the other 2 tricky Quarto engines, <code>engine: julia</code> and <code>jupyter: nbstata</code>, including making profile yaml files for each engine and the respective <em>tutorial-{stata/julia}.qmd</em> Quarto documents.</p>
+<p>Then we make a shell script with our render commands.</p>
+<pre><code class="language-sh">quarto render --profile python-questions -o tutorial-python-questions.html
+quarto render --profile python-solutions -o tutorial-python-solutions.html
+
+quarto render --profile stata-questions -o tutorial-stata-questions.html
+quarto render --profile stata-solutions -o tutorial-stata-solutions.html
+
+quarto render --profile julia-questions -o tutorial-julia-questions.html
+quarto render --profile julia-solutions -o tutorial-julia-solutions.html
 </code></pre>
-<p>Note that Quarto documents using the nbstata kernel can also be embedded within other Quarto documents, 
-<a href="https://remlapmot.github.io/post/2025/multi-engine-quarto/" target="_blank" rel="noopener">as I have described in a previous post</a>.</p>
-<ul>
-<li>And that&rsquo;s it. When you have finished your work you can deactivate the virtual environment</li>
-</ul>
-<pre><code class="language-bash">deactivate
+<p>And because I have an R version using parameters my shell script usually begins.</p>
+<pre><code class="language-sh">quarto render tutorial-r.qmd -P solutions:false -o tutorial-r-questions.html
+quarto render tutorial-r.qmd -o tutorial-r-solutions.html
 </code></pre>
-<h2 id="recording-this-as-a-project-with-pyprojecttoml-and-uvlock-files">Recording this as a project with pyproject.toml and uv.lock files</h2>
-<p>And of course we can go a step further by setting this up as a proper Python project. This will have a <em>pyproject.toml</em> file to record the dependencies and a <em>uv.lock</em> file to record their exact versions. To do this run</p>
-<pre><code class="language-bash">uv init
+<p>And that&rsquo;s it.</p>
+<p>You can find the full source code in my example repo 
+<a href="https://github.com/remlapmot/tutorial-quarto-profiles" target="_blank" rel="noopener">here</a> and their rendered output can be viewed from 
+<a href="https://remlapmot.github.io/tutorial-quarto-profiles/" target="_blank" rel="noopener">here</a>. This repo also contains a tutorial document including the 4 languages in the same document using the embed shortcode as I described in 
+<a href="https://remlapmot.github.io/post/2025/multi-engine-quarto/" target="_blank" rel="noopener">another previous post</a>. A screenshot of the questions and solutions documents from this approach 
+<a href="#top">is shown above</a>.</p>
+<h2 id="an-honorable-mention-about-dynamic-metadata">An honorable mention about dynamic metadata</h2>
+<p>When I started reading the 
+<a href="https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html" target="_blank" rel="noopener">quarto R package vignette</a> I began trying to use dynamic metadata to achieve the result above. Dynamic metadata involves writing extra YAML blocks into your Quarto document which can include programmatically specified values of parameters, which can then be used by including conditional content by 
+<a href="https://quarto.org/docs/authoring/conditional.html#matching-against-metadata" target="_blank" rel="noopener">matching against them</a>. I found that I could achieve what I wanted except for modifying the <code>execute</code> state of the Quarto document, it seems that must be specified in the first YAML block/header. And this cannot be controlled by the <code>--execute</code> and <code>--no-execute</code> flags to <code>quarto render</code> because one needs the code which generates the additional YAML blocks to be run.</p>
+<p>For Quarto documents using the knitr engine, the R package vignette shows how to use the new <code>write_yaml_metadata_block()</code> function within an R code chunk with output type <code>asis</code> to write the YAML block. In case it is useful to anyone, below I show examples of how to write the YAML blocks in each of the three other engines I have been using.</p>
+<h3 id="python-jupyter-python3">Python (jupyter: python3)</h3>
+<pre><code class="language-plaintext">```{python}
+#| include: false
+#| tags: [parameters]
+solutions = 'true'
+```
+
+```{python}
+#| include: false
+from IPython.display import Markdown
+ymltxt = f&quot;  solutions: {solutions}&quot;
+if solutions == 'true':
+    titletxt = &quot;title: Solutions document&quot;
+else:
+    titletxt = &quot;title: Questions document&quot;
+```
+
+`{python} Markdown(&quot;---&quot;)`
+`{python} Markdown(&quot;params:&quot;)`
+`{python} Markdown(ymltxt)`
+`{python} Markdown(titletxt)`
+`{python} Markdown(&quot;---&quot;)`
+
+::: {.content-visible when-meta=&quot;params.solutions&quot;}
+```{python}
+print(&quot;A solution, which is hidden in questions&quot;)
+```
+:::
+
 </code></pre>
-<p>You can delete the <em>main.py</em> file that&rsquo;s created here, but commit everything else into your repo. Then add the dependencies with</p>
-<pre><code class="language-bash">uv add jupyterlab nbstata jupyterlab_stata_highlight2
+<h3 id="stata-jupyter-nbstata">Stata (jupyter: nbstata)</h3>
+<pre><code class="language-plaintext">```{stata}
+*| include: false
+local solutions : env SOLUTIONS_STATA
+scalar ymltxt = &quot;  solutions: `solutions'&quot;
+if &quot;`solutions'&quot; == &quot;true&quot; {
+  scalar titletxt = &quot;title: Solutions document&quot;
+}
+else {
+  scalar titletxt = &quot;title: Questions document&quot;
+}
+```
+
+`{stata} &quot;---&quot;`
+`{stata} &quot;params:&quot;`
+`{stata} scalar(ymltxt)`
+`{stata} scalar(titletxt)`
+`{stata} &quot;---&quot;`
+
+::: {.content-visible when-meta=&quot;params.solutions&quot;}
+```{stata}
+display &quot;A solution, which is hidden in questions&quot;
+```
+:::
 </code></pre>
-<p>You will see these are entered into the <em>pyproject.toml</em> and <em>uv.lock</em> files. The <em>pyproject.toml</em> file will now look something like this (I have edited the <code>description</code>)</p>
-<pre><code class="language-toml">[project]
-name = &quot;nbstata-uv-setup&quot;
-version = &quot;0.1.0&quot;
-description = &quot;This project demonstrates how to use the nbstata Jupyter kernel in a uv virtual environment, so that one can render Quarto documents using this engine.&quot;
-readme = &quot;README.md&quot;
-requires-python = &quot;&gt;=3.13&quot;
-dependencies = [
-    &quot;jupyterlab&gt;=4.4.2&quot;,
-    &quot;jupyterlab-stata-highlight2&gt;=0.1.2&quot;,
-    &quot;nbstata&gt;=0.8.2&quot;,
-]
+<h3 id="julia-engine-julia">Julia (engine: julia)</h3>
+<pre><code class="language-plaintext">```{julia}
+#| tags: [parameters]
+```
+
+```{julia}
+#| echo: false
+#| output: asis
+println(&quot;---&quot;)
+if solutions
+  println(&quot;title: Solutions document&quot;)
+  ymltxt = &quot;  solutions: true&quot;
+else
+  println(&quot;title: Questions document&quot;)
+  ymltxt = &quot;  solutions: false&quot;
+end
+println(&quot;params:&quot;)
+println(ymltxt)
+println(&quot;---&quot;)
+```
+
+::: {.content-visible when-meta=&quot;params.solutions&quot;}
+```{julia}
+println(&quot;A solution, hidden in questions&quot;)
+```
+:::
+
 </code></pre>
-<p>Commit these files into your repo.</p>
-<p>At a later date you can restore this environment by running</p>
-<pre><code class="language-bash">uv sync
-# which creates the .venv
-# Then activate the virtual environment, etc
-source .venv/bin/activate
-# Windows: source .venv/Scripts/activate
-</code></pre>
-<p>You find out more about uv project commands in its 
-<a href="https://docs.astral.sh/uv/guides/projects/" target="_blank" rel="noopener">documentation</a>.</p>
 <h2 id="summary">Summary</h2>
-<p>I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux; in order to conveniently and reproducibly render Quarto documents using the <code>jupyter: nbstata</code> engine. And I have also shown how to set this up as a Python project.</p>
+<p>I have shown how to create Quarto profiles for creating tutorial worksheets; one for the questions and one for the solutions from the same Quarto document; for several Quarto engines (<code>engine: knitr</code>, <code>jupyter: python3</code>, <code>jupyter: nbstata</code>, and <code>engine: julia</code>). I have also shown how additional metadata may be written into your Quarto document in these engines which can be used in conjunction with parameterised documents and conditional content.</p>
 
               </div>
               
@@ -831,13 +882,21 @@ source .venv/bin/activate
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tag/stata/">Stata</a>
+  <a class="badge badge-light" href="/tag/quarto/">Quarto</a>
   
-  <a class="badge badge-light" href="/tag/jupyter/">Jupyter</a>
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+  <a class="badge badge-light" href="/tag/r-markdown/">R Markdown</a>
+  
+  <a class="badge badge-light" href="/tag/stata/">Stata</a>
   
   <a class="badge badge-light" href="/tag/nbstata/">Nbstata</a>
   
-  <a class="badge badge-light" href="/tag/quarto/">Quarto</a>
+  <a class="badge badge-light" href="/tag/python/">Python</a>
+  
+  <a class="badge badge-light" href="/tag/julia/">Julia</a>
+  
+  <a class="badge badge-light" href="/tag/jupyter/">Jupyter</a>
   
 </div>
 
@@ -1049,15 +1108,15 @@ source .venv/bin/activate
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/2025/quarto-profiles-for-tutorials/">Creating tutorial worksheets; Quarto profiles for the win!</a></li>
-      
       <li><a href="/post/2025/quarto-conditional-content/">Creating R, Python, Stata, and Julia tutorial worksheets (with and without solutions) using Quarto</a></li>
       
       <li><a href="/post/2025/multi-engine-quarto/">Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode</a></li>
       
-      <li><a href="/post/2025/win-11-arm-gha/">Running R on Windows on ARM on GitHub Actions</a></li>
+      <li><a href="/post/2025/nbstata-uv-venv/">Running the nbstata Jupyter kernel within a uv virtual environment</a></li>
       
       <li><a href="/post/2025/checking-packages-and-practicals/">Checking your R packages and practicals on a schedule using GitHub Actions</a></li>
+      
+      <li><a href="/post/2025/win-11-arm-gha/">Running R on Windows on ARM on GitHub Actions</a></li>
       
     </ul>
   </div>
