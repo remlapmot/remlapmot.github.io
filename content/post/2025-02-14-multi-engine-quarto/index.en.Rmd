@@ -41,7 +41,7 @@ I've found an alternative solution allowing you to use the native engines for ea
 
 In the example below I'm using a [tabset](https://quarto.org/docs/output-formats/html-basics.html#tabsets) in a html document using the knitr engine. We embed the documents using the alternative engines for Python, Stata, and Julia using the `{{</* embed */>}}` shortcode as shown below. For each language I just show printing a string and a basic plot.
 
-````{verbatim, file="multi-engine-escaped.qmd", lang="markdown"}
+````{verbatim, file="multi-engine-escaped.qmd", lang="plaintext"}
 ````
 
 * the *python-code-using-jupyter-python3-engine.qmd* document uses the `jupyter: python3` engine ([documentation for using Python in Quarto](https://quarto.org/docs/computations/python.html));
