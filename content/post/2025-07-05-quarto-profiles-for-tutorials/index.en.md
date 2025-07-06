@@ -32,7 +32,7 @@ toc: true
 
 I [previously posted](https://remlapmot.github.io/post/2025/quarto-conditional-content/) about creating tutorial worksheets for 4 different Quarto engines (for R, Python, Stata, and Julia) using [conditional content](https://quarto.org/docs/authoring/conditional.html). However, that approach is a bit hacky and I wasn't very happy with it.
 
-Thanks to a [vignette by Christophe Devrieux](https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html) in the quarto R package I realised there is a more convenient, and less hacky, way to create tutorial documents using Quarto profiles. I don't use the dynamic metadata approach in the vignette to achieve my solution but it led me to relevant Quarto documentation page and I discuss it at the end of this post.
+Thanks to a [vignette by Christophe Dervieux](https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html) in the quarto R package I realised there is a more convenient, and less hacky, way to create tutorial documents using Quarto profiles. I don't use the dynamic metadata approach in the vignette to achieve my solution but it led me to relevant Quarto documentation page and I discuss it at the end of this post.
 
 My aim is the following
 
