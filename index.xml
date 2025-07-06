@@ -1034,7 +1034,7 @@ quarto render exercise-julia.qmd -P hide_answers:false -o exercise-julia-solutio
 &lt;h2 id=&#34;using-the-embed-shortcode-to-create-an-effectively-multi-engine-quarto-document&#34;&gt;Using the embed shortcode to create an effectively multi-engine Quarto document&lt;/h2&gt;
 &lt;p&gt;In the example below I&amp;rsquo;m using a 
 &lt;a href=&#34;https://quarto.org/docs/output-formats/html-basics.html#tabsets&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tabset&lt;/a&gt; in a html document using the knitr engine. We embed the documents using the alternative engines for Python, Stata, and Julia using the &lt;code&gt;{{&amp;lt; embed &amp;gt;}}&lt;/code&gt; shortcode as shown below. For each language I just show printing a string and a basic plot.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;---
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
 title: An effectively multi-engine Quarto document using the embed shortcode
 format:
   html:
