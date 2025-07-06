@@ -128,7 +128,7 @@ quarto render tutorial-r.qmd -o tutorial-r-solutions.html
 
 And that's it.
 
-You can find the full source code in my example repo [here](https://github.com/remlapmot/tutorial-quarto-profiles). This also contains a tutorial document including the 4 languages in the same document using the embed shortcode as I described in [another previous post](https://remlapmot.github.io/post/2025/multi-engine-quarto/).
+You can find the full source code in my example repo [here](https://github.com/remlapmot/tutorial-quarto-profiles) and their rendered output can be viewed from [here](https://remlapmot.github.io/tutorial-quarto-profiles/). This repo also contains a tutorial document including the 4 languages in the same document using the embed shortcode as I described in [another previous post](https://remlapmot.github.io/post/2025/multi-engine-quarto/). A screenshot of the questions and solutions documents from this approach [is shown above](#top).
 
 ## An honorable mention about dynamic metadata
 
