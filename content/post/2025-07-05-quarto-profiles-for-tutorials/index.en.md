@@ -94,7 +94,7 @@ Question text.
 print("The code which is echoed in questions and evaluated in solutions.")
 ```
 
-::: {.content-visible unless-profile="python-questions"}
+::: {.content-visible when-profile="python-solutions"}
 The text for the solutions.
 :::
 
@@ -120,9 +120,11 @@ quarto render tutorial-r.qmd -o tutorial-r-solutions.html
 
 And that's it.
 
+You can find the full source code in my example repo [here](https://github.com/remlapmot/tutorial-quarto-profiles). This also contains a tutorial document including the 4 languages in the same document using the embed shortcode as I described in [another previous post](https://remlapmot.github.io/post/2025/multi-engine-quarto/).
+
 ## An honorable mention about dynamic metadata
 
-When I started reading the quarto R package vignette I began trying to use dynamic metadata to achieve the result above. Dynamic metadata involves writing extra YAML blocks into your Quarto document which can include programmatically specified values of parameters, which can then be used by including conditional content by [matching against them](https://quarto.org/docs/authoring/conditional.html#matching-against-metadata). I found that I could achieve what I wanted except for modifying the `execute` state, it seems that must be specified in the first YAML header.
+When I started reading the quarto R package vignette I began trying to use dynamic metadata to achieve the result above. Dynamic metadata involves writing extra YAML blocks into your Quarto document which can include programmatically specified values of parameters, which can then be used by including conditional content by [matching against them](https://quarto.org/docs/authoring/conditional.html#matching-against-metadata). I found that I could achieve what I wanted except for modifying the `execute` state, it seems that must be specified in the first YAML header. Although now I think about perhaps that could have been controlled by the `--execute` flag to `quarto render`.
 
 For Quarto documents using the knitr engine, the R package vignette shows how to use the new `write_yaml_metadata_block()` function with an R code chunk with output type `asis` to write the YAML block. In case it is useful to anyone, below I show examples of how to write the YAML blocks in each of the three other engines I have been using.
 
