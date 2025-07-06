@@ -10,7 +10,7 @@ tags:
   - R
   - Quarto
 subtitle:
-summary: "How to setup and run the AARCH64/ARM version R on Windows on ARM on GitHub Actions"
+summary: "How to setup and run the AARCH64/ARM version of R on Windows on ARM on GitHub Actions"
 authors: []
 lastmod: '2025-04-16T07:00:00+00:00'
 featured: no
