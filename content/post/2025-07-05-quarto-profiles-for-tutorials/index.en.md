@@ -1,5 +1,5 @@
 ---
-title: "Creating tutorial worksheets; Quarto profiles for the win!"
+title: "Creating tutorial worksheets: Quarto profiles for the win!"
 author: Package Build
 date: '2025-07-06'
 slug: quarto-profiles-for-tutorials
@@ -23,7 +23,7 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'Screenshot of .'
+  alt_text: 'Screenshot of the questions and solutions documents produced from a single tutorial Quarto document using Quarto profiles.'
 projects: []
 toc: true
 ---
