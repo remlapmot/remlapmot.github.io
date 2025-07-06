@@ -17,7 +17,7 @@ tags:
 subtitle: ''
 summary: "How to create tutorial worksheets, i.e., a questions document and solutions document from the same Quarto document using Quarto profiles."
 authors: []
-lastmod: '2025-07-05T07:00:00+00:00'
+lastmod: '2025-07-06T07:00:00+00:00'
 featured: no
 image:
   caption: ''
@@ -52,6 +52,8 @@ execute:
 ```
 
 (This is because I usually have an R version of the tutorial in the same directory using programmatic chunk options, so I don't want to set a default that is language specific nor will affect anything in the R Quarto documents.)
+
+Next for each language I will make profiles for the questions output and the solutions output in appropriately named YAML files (I just show the Python files as the other two just have Stata/Julia substituted in the appropraite places).
 
 ### Questions and solutions profiles for Python
 
@@ -99,15 +101,21 @@ The text for the solutions.
 
 ````
 
-We see the use of the conditional content based upon profile for the text of the solutions, and indeed we could included additional code chunks in these divs.
+We see the use of the conditional content based upon profile for the text of the solutions, and we could included additional code chunks in these conditional content divs.
 
-We repeat this for the other 2 tricky Quarto engines, `engine: julia` and `jupyter: nbstata`, including making profile yaml files for each engine.
+We repeat this for the other 2 tricky Quarto engines, `engine: julia` and `jupyter: nbstata`, including making profile yaml files for each engine and the respective *tutorial-{stata/julia}.qmd* Quarto documents.
 
 Then we make a shell script with our render commands.
 
 ```sh
 quarto render --profile python-questions -o tutorial-python-questions.html
 quarto render --profile python-solutions -o tutorial-python-solutions.html
+
+quarto render --profile stata-questions -o tutorial-stata-questions.html
+quarto render --profile stata-solutions -o tutorial-stata-solutions.html
+
+quarto render --profile julia-questions -o tutorial-julia-questions.html
+quarto render --profile julia-solutions -o tutorial-julia-solutions.html
 ```
 
 And because I have an R version using parameters my shell script usually begins.
@@ -123,9 +131,9 @@ You can find the full source code in my example repo [here](https://github.com/r
 
 ## An honorable mention about dynamic metadata
 
-When I started reading the quarto R package vignette I began trying to use dynamic metadata to achieve the result above. Dynamic metadata involves writing extra YAML blocks into your Quarto document which can include programmatically specified values of parameters, which can then be used by including conditional content by [matching against them](https://quarto.org/docs/authoring/conditional.html#matching-against-metadata). I found that I could achieve what I wanted except for modifying the `execute` state, it seems that must be specified in the first YAML header. And this cannot be controlled by the `--execute` and `--no-execute` flags to `quarto render` because one needs the code which generates the additional YAML blocks to be run.
+When I started reading the [quarto R package vignette](https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html) I began trying to use dynamic metadata to achieve the result above. Dynamic metadata involves writing extra YAML blocks into your Quarto document which can include programmatically specified values of parameters, which can then be used by including conditional content by [matching against them](https://quarto.org/docs/authoring/conditional.html#matching-against-metadata). I found that I could achieve what I wanted except for modifying the `execute` state of the Quarto document, it seems that must be specified in the first YAML block/header. And this cannot be controlled by the `--execute` and `--no-execute` flags to `quarto render` because one needs the code which generates the additional YAML blocks to be run.
 
-For Quarto documents using the knitr engine, the R package vignette shows how to use the new `write_yaml_metadata_block()` function with an R code chunk with output type `asis` to write the YAML block. In case it is useful to anyone, below I show examples of how to write the YAML blocks in each of the three other engines I have been using.
+For Quarto documents using the knitr engine, the R package vignette shows how to use the new `write_yaml_metadata_block()` function within an R code chunk with output type `asis` to write the YAML block. In case it is useful to anyone, below I show examples of how to write the YAML blocks in each of the three other engines I have been using.
 
 ### Python (jupyter: python3)
 
@@ -221,4 +229,4 @@ println("A solution, hidden in questions")
 
 ## Summary
 
-I have shown how to create Quarto profiles for creating tutorial worksheets; one for the questions and one for the solutions from the same Quarto document; for several Quarto engines (`knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`). I have also shown how additional metadata may be written into your Quarto document in these engines which can be used in conjunction with parameterised documents.
+I have shown how to create Quarto profiles for creating tutorial worksheets; one for the questions and one for the solutions from the same Quarto document; for several Quarto engines (`engine: knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`). I have also shown how additional metadata may be written into your Quarto document in these engines which can be used in conjunction with parameterised documents and conditional content.
