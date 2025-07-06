@@ -131,7 +131,7 @@ For Quarto documents using the knitr engine, the R package vignette shows how to
 ### Python (jupyter: python3)
 
 
-```` default
+```` plaintext
 ```{python}
 #| include: false
 #| tags: [parameters]
@@ -165,7 +165,7 @@ print("A solution, which is hidden in questions")
 ### Stata (jupyter: nbstata)
 
 
-```` default
+```` plaintext
 ```{stata}
 *| include: false
 local solutions : env SOLUTIONS_STATA
@@ -194,7 +194,7 @@ display "A solution, which is hidden in questions"
 ### Julia (engine: julia)
 
 
-```` default
+```` plaintext
 ```{julia}
 #| tags: [parameters]
 ```
