@@ -1,0 +1,232 @@
+---
+title: "Creating tutorial worksheets; Quarto profiles for the win!"
+author: Package Build
+date: '2025-07-06'
+slug: quarto-profiles-for-tutorials
+categories:
+  - Blog
+tags:
+  - Quarto
+  - R
+  - R Markdown
+  - Stata
+  - nbstata
+  - Python
+  - Julia
+  - Jupyter
+subtitle: ''
+summary: "How to create tutorial worksheets, i.e., a questions document and solutions document from the same Quarto document using Quarto profiles."
+authors: []
+lastmod: '2025-07-06T07:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of .'
+projects: []
+toc: true
+---
+
+## Introduction
+
+I [previously posted](https://remlapmot.github.io/post/2025/quarto-conditional-content/) about creating tutorial worksheets for 4 different Quarto engines (for R, Python, Stata, and Julia) using [conditional content](https://quarto.org/docs/authoring/conditional.html). However, that approach is a bit hacky and I wasn't very happy with it.
+
+Thanks to a [vignette by Christophe Dervieux](https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html) in the quarto R package I realised there is a more convenient, and less hacky, way to create tutorial documents using Quarto profiles. I don't use the dynamic metadata approach in the vignette to achieve my solution but it led me to relevant Quarto documentation page and I discuss it at the end of this post.
+
+My aim is the following
+
+> To have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.
+
+As a reminder, as [I showed in my previous post](https://remlapmot.github.io/post/2025/quarto-conditional-content/#introduction), this has been possible to achieve for a long time with R Markdown and knitr because thanks to the brilliant work of Yihui Xie because they allow programmtic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also straighforward and I won't repeat it in this post. However, it is the three other Quarto engines (for Python, Stata, and Julia) that I am interested in which are problematic because as far as I know they don't allow programmtic chunk options and they don't have the equivalent of the `! expr ...` YAML tag literal.
+
+## Quarto profiles
+
+Quarto profiles are introduced [on this page of the Quarto documentation](https://quarto.org/docs/projects/profiles.html). Specifically, we shall make use of [conditional content dependent upon profile](https://quarto.org/docs/projects/profiles.html#profile-content).
+
+First we will create a simple default Quarto profile file *_quarto.yml* which will simply contain the following.
+
+```yml
+execute:
+  eval: true
+```
+
+(This is because I usually have an R version of the tutorial in the same directory using programmatic chunk options, so I don't want to set a default that is language specific nor will affect anything in the R Quarto documents.)
+
+Next for each language I will make profiles for the questions output and the solutions output in appropriately named YAML files (I just show the Python files as the other two just have Stata/Julia substituted in the appropraite places).
+
+### Questions and solutions profiles for Python
+
+*_quarto-python-questions.yml*
+
+```yml
+project:
+  render:
+    - tutorial-python.qmd
+title: 'Questions document: Python version'
+execute:
+  eval: false
+```
+
+*_quarto-python-solutions.yml*
+
+```yml
+project:
+  render:
+    - tutorial-python.qmd
+title: 'Solutions document: Python version'
+```
+
+Then our tutorial Quarto Python document, *tutorial-python.qmd*, will look like the following.
+
+````{verbatim, lang="plaintext"}
+---
+format:
+  html:
+    embed-resources: true
+jupyter: python3
+---
+
+## Question 1
+
+Question text.
+
+```{python}
+print("The code which is echoed in questions and evaluated in solutions.")
+```
+
+::: {.content-visible when-profile="python-solutions"}
+The text for the solutions.
+:::
+
+````
+
+We see the use of the conditional content based upon profile for the text of the solutions, and we could included additional code chunks in these conditional content divs.
+
+We repeat this for the other 2 tricky Quarto engines, `engine: julia` and `jupyter: nbstata`, including making profile yaml files for each engine and the respective *tutorial-{stata/julia}.qmd* Quarto documents.
+
+Then we make a shell script with our render commands.
+
+```sh
+quarto render --profile python-questions -o tutorial-python-questions.html
+quarto render --profile python-solutions -o tutorial-python-solutions.html
+
+quarto render --profile stata-questions -o tutorial-stata-questions.html
+quarto render --profile stata-solutions -o tutorial-stata-solutions.html
+
+quarto render --profile julia-questions -o tutorial-julia-questions.html
+quarto render --profile julia-solutions -o tutorial-julia-solutions.html
+```
+
+And because I have an R version using parameters my shell script usually begins.
+
+```sh
+quarto render tutorial-r.qmd -P solutions:false -o tutorial-r-questions.html
+quarto render tutorial-r.qmd -o tutorial-r-solutions.html
+```
+
+And that's it.
+
+You can find the full source code in my example repo [here](https://github.com/remlapmot/tutorial-quarto-profiles) and their rendered output can be viewed from [here](https://remlapmot.github.io/tutorial-quarto-profiles/). This repo also contains a tutorial document including the 4 languages in the same document using the embed shortcode as I described in [another previous post](https://remlapmot.github.io/post/2025/multi-engine-quarto/). A screenshot of the questions and solutions documents from this approach [is shown above](#top).
+
+## An honorable mention about dynamic metadata
+
+When I started reading the [quarto R package vignette](https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html) I began trying to use dynamic metadata to achieve the result above. Dynamic metadata involves writing extra YAML blocks into your Quarto document which can include programmatically specified values of parameters, which can then be used by including conditional content by [matching against them](https://quarto.org/docs/authoring/conditional.html#matching-against-metadata). I found that I could achieve what I wanted except for modifying the `execute` state of the Quarto document, it seems that must be specified in the first YAML block/header. And this cannot be controlled by the `--execute` and `--no-execute` flags to `quarto render` because one needs the code which generates the additional YAML blocks to be run.
+
+For Quarto documents using the knitr engine, the R package vignette shows how to use the new `write_yaml_metadata_block()` function within an R code chunk with output type `asis` to write the YAML block. In case it is useful to anyone, below I show examples of how to write the YAML blocks in each of the three other engines I have been using.
+
+### Python (jupyter: python3)
+
+````{verbatim, lang='plaintext'}
+```{python}
+#| include: false
+#| tags: [parameters]
+solutions = 'true'
+```
+
+```{python}
+#| include: false
+from IPython.display import Markdown
+ymltxt = f"  solutions: {solutions}"
+if solutions == 'true':
+    titletxt = "title: Solutions document"
+else:
+    titletxt = "title: Questions document"
+```
+
+`{python} Markdown("---")`
+`{python} Markdown("params:")`
+`{python} Markdown(ymltxt)`
+`{python} Markdown(titletxt)`
+`{python} Markdown("---")`
+
+::: {.content-visible when-meta="params.solutions"}
+```{python}
+print("A solution, which is hidden in questions")
+```
+:::
+
+````
+
+### Stata (jupyter: nbstata)
+
+````{verbatim, lang='plaintext'}
+```{stata}
+*| include: false
+local solutions : env SOLUTIONS_STATA
+scalar ymltxt = "  solutions: `solutions'"
+if "`solutions'" == "true" {
+  scalar titletxt = "title: Solutions document"
+}
+else {
+  scalar titletxt = "title: Questions document"
+}
+```
+
+`{stata} "---"`
+`{stata} "params:"`
+`{stata} scalar(ymltxt)`
+`{stata} scalar(titletxt)`
+`{stata} "---"`
+
+::: {.content-visible when-meta="params.solutions"}
+```{stata}
+display "A solution, which is hidden in questions"
+```
+:::
+````
+
+### Julia (engine: julia)
+
+````{verbatim, lang='plaintext'}
+```{julia}
+#| tags: [parameters]
+```
+
+```{julia}
+#| echo: false
+#| output: asis
+println("---")
+if solutions
+  println("title: Solutions document")
+  ymltxt = "  solutions: true"
+else
+  println("title: Questions document")
+  ymltxt = "  solutions: false"
+end
+println("params:")
+println(ymltxt)
+println("---")
+```
+
+::: {.content-visible when-meta="params.solutions"}
+```{julia}
+println("A solution, hidden in questions")
+```
+:::
+
+````
+
+## Summary
+
+I have shown how to create Quarto profiles for creating tutorial worksheets; one for the questions and one for the solutions from the same Quarto document; for several Quarto engines (`engine: knitr`, `jupyter: python3`, `jupyter: nbstata`, and `engine: julia`). I have also shown how additional metadata may be written into your Quarto document in these engines which can be used in conjunction with parameterised documents and conditional content.
