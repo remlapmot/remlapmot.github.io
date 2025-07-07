@@ -731,12 +731,20 @@
 title: 'Questions document: Python version'
 execute:
   eval: false
+format:
+  html:
+    output-file: &quot;tutorial-python-questions&quot;
+    output-ext:  &quot;html&quot;
 </code></pre>
 <p><em>_quarto-python-solutions.yml</em></p>
 <pre><code class="language-yml">project:
   render:
     - tutorial-python.qmd
 title: 'Solutions document: Python version'
+format:
+  html:
+    output-file: &quot;tutorial-python-solutions&quot;
+    output-ext:  &quot;html&quot;
 </code></pre>
 <p>Then our tutorial Quarto Python document, <em>tutorial-python.qmd</em>, will look like the following.</p>
 <pre><code class="language-plaintext">---
@@ -762,14 +770,14 @@ The text for the solutions.
 <p>We see the use of the conditional content based upon profile for the text of the solutions, and we could included additional code chunks in these conditional content divs.</p>
 <p>We repeat this for the other 2 tricky Quarto engines, <code>engine: julia</code> and <code>jupyter: nbstata</code>, including making profile yaml files for each engine and the respective <em>tutorial-{stata/julia}.qmd</em> Quarto documents.</p>
 <p>Then we make a shell script with our render commands.</p>
-<pre><code class="language-sh">quarto render --profile python-questions -o tutorial-python-questions.html
-quarto render --profile python-solutions -o tutorial-python-solutions.html
+<pre><code class="language-sh">quarto render --profile python-questions
+quarto render --profile python-solutions
 
-quarto render --profile stata-questions -o tutorial-stata-questions.html
-quarto render --profile stata-solutions -o tutorial-stata-solutions.html
+quarto render --profile stata-questions
+quarto render --profile stata-solutions
 
-quarto render --profile julia-questions -o tutorial-julia-questions.html
-quarto render --profile julia-solutions -o tutorial-julia-solutions.html
+quarto render --profile julia-questions
+quarto render --profile julia-solutions
 </code></pre>
 <p>And because I have an R version using parameters my shell script usually begins.</p>
 <pre><code class="language-sh">quarto render tutorial-r.qmd -P solutions:false -o tutorial-r-questions.html

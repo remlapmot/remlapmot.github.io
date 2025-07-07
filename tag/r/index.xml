@@ -46,12 +46,20 @@
 title: &#39;Questions document: Python version&#39;
 execute:
   eval: false
+format:
+  html:
+    output-file: &amp;quot;tutorial-python-questions&amp;quot;
+    output-ext:  &amp;quot;html&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;em&gt;_quarto-python-solutions.yml&lt;/em&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;project:
   render:
     - tutorial-python.qmd
 title: &#39;Solutions document: Python version&#39;
+format:
+  html:
+    output-file: &amp;quot;tutorial-python-solutions&amp;quot;
+    output-ext:  &amp;quot;html&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Then our tutorial Quarto Python document, &lt;em&gt;tutorial-python.qmd&lt;/em&gt;, will look like the following.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
@@ -77,14 +85,14 @@ The text for the solutions.
 &lt;p&gt;We see the use of the conditional content based upon profile for the text of the solutions, and we could included additional code chunks in these conditional content divs.&lt;/p&gt;
 &lt;p&gt;We repeat this for the other 2 tricky Quarto engines, &lt;code&gt;engine: julia&lt;/code&gt; and &lt;code&gt;jupyter: nbstata&lt;/code&gt;, including making profile yaml files for each engine and the respective &lt;em&gt;tutorial-{stata/julia}.qmd&lt;/em&gt; Quarto documents.&lt;/p&gt;
 &lt;p&gt;Then we make a shell script with our render commands.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;quarto render --profile python-questions -o tutorial-python-questions.html
-quarto render --profile python-solutions -o tutorial-python-solutions.html
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;quarto render --profile python-questions
+quarto render --profile python-solutions
 
-quarto render --profile stata-questions -o tutorial-stata-questions.html
-quarto render --profile stata-solutions -o tutorial-stata-solutions.html
+quarto render --profile stata-questions
+quarto render --profile stata-solutions
 
-quarto render --profile julia-questions -o tutorial-julia-questions.html
-quarto render --profile julia-solutions -o tutorial-julia-solutions.html
+quarto render --profile julia-questions
+quarto render --profile julia-solutions
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;And because I have an R version using parameters my shell script usually begins.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;quarto render tutorial-r.qmd -P solutions:false -o tutorial-r-questions.html
