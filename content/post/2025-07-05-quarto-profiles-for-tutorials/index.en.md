@@ -66,6 +66,10 @@ project:
 title: 'Questions document: Python version'
 execute:
   eval: false
+format:
+  html:
+    output-file: "tutorial-python-questions"
+    output-ext:  "html"
 ```
 
 *_quarto-python-solutions.yml*
@@ -75,6 +79,10 @@ project:
   render:
     - tutorial-python.qmd
 title: 'Solutions document: Python version'
+format:
+  html:
+    output-file: "tutorial-python-solutions"
+    output-ext:  "html"
 ```
 
 Then our tutorial Quarto Python document, *tutorial-python.qmd*, will look like the following.
@@ -109,14 +117,14 @@ We repeat this for the other 2 tricky Quarto engines, `engine: julia` and `jupyt
 Then we make a shell script with our render commands.
 
 ```sh
-quarto render --profile python-questions -o tutorial-python-questions.html
-quarto render --profile python-solutions -o tutorial-python-solutions.html
+quarto render --profile python-questions
+quarto render --profile python-solutions
 
-quarto render --profile stata-questions -o tutorial-stata-questions.html
-quarto render --profile stata-solutions -o tutorial-stata-solutions.html
+quarto render --profile stata-questions
+quarto render --profile stata-solutions
 
-quarto render --profile julia-questions -o tutorial-julia-questions.html
-quarto render --profile julia-solutions -o tutorial-julia-solutions.html
+quarto render --profile julia-questions
+quarto render --profile julia-solutions
 ```
 
 And because I have an R version using parameters my shell script usually begins.
