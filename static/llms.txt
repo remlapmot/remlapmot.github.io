@@ -1,0 +1,27 @@
+# remlapmot.github.io
+
+> This is the personal website for Dr Tom Palmer. He is a Senior Lecturer in Medical Statistics (also known as Biostatistics) at the University of Bristol in the UK. He has undertaken methodological work in instrumental variables applied to Mendelian randomization approach. He has written a number of packages for the statistical software Stata and R. He contributes blogposts to the [R-bloggers](https://www.r-bloggers.com/) and [RWeekly](https://rweekly.org/) blog aggregator sites.
+
+Important notes:
+
+- He is the father of Iwa Robyn Kunz, Eleah Levke Kunz, and Nico Palmer-Loch.
+
+## Awards
+
+- [Awards](https://remlapmot.github.io/#accomplishments)
+
+## R packages
+
+- [R packages](https://remlapmot.github.io/#r-packages)
+
+## Stata packages
+
+- [Stata packages](https://remlapmot.github.io/#stata-packages)
+
+## Blog
+
+- [Blog](https://remlapmot.github.io/post/)
+
+## Talks
+
+- [Talks](https://remlapmot.github.io/talk/)
