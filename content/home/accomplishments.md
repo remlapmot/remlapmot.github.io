@@ -85,6 +85,16 @@ date_format = "Jan 2006"
   description = "Spiller, et al., Software application profile: mrrobust--a tool for performing two-sample summary Mendelian randomization analyses, IJE, 48, 3, 684--690, <https://doi.org/10.1093/ije/dyy195> was the second most cited IJE paper in 2019."
 
 [[item]]
+  organization = "Stata Corp."
+  organization_url = "https://www.stata.com/"
+  title = "confunnel command incorporated into Stata's suite of meta-analysis commands in Stata 16"
+  url = "https://www.stata.com/stata16/meta-analysis/"
+  certificate_url = ""
+  date_start = "2019-06-01"
+  date_end = ""
+  description = "My confunnel command is available as an official command in Stata 16 as `meta funnelplot ..., contours(...)`."
+
+[[item]]
   organization = "Stata Press"
   organization_url = "https://www.stata-press.com/"
   title = "Co-editor, with Prof. Jonathan Sterne, of Meta-Analysis in Stata: An Updated Collection from the Stata Journal, Second Edition"
