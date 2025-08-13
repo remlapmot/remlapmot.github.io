@@ -25,6 +25,40 @@ toc: true
 
 ## Introduction
 
+## Replace all pdfs with docx, pptx, or html for the quick win
+
+If you upload a pdf to get a high accessibility score it needs to be a special type of pdf, called a 'tagged pdf', otherwise it will get a terrible score (approx. 6%).
+
+## Tagged pdfs
+
+It turns out that we can only create tagged pdfs in a few ways; from exporting from Word or Powerpoint, or printing html to pdf in Chrome (and the other Chromium based browsers such as Edge). The professional version of Adobe Acrobat allows users to [add tags to pdfs](https://helpx.adobe.com/uk/acrobat/using/editing-document-structure-content-tags.html), but I don't have that.
+
+Start with a Word document which uses heading styles correctly or a Powerpoint deck which uses slide layouts (e.g., title slide, slides with title and content boxes) then export to pdf. The good news is that on Windows or in Word/Powerpoint in the browser the standard pdf export generates a tagged pdf by default. The bad news is that on macOS the standard pdf export does not generate a tagged pdf and you must select the "Best for electronic distribution and accessibility..." option to generate the tagged version.
+
+<img src="/post/2025/accessibility/img/powerpoint-macos-pdf-export.png" alt="Screenshot of Powerpoint export to pdf window on macOS." width="630" style="display: block; margin: auto;">
+
+Pdfs generated from LaTeX (and typst - the new LaTeX pretender with impressively fast compile times) are not tagged - yes this is surprising - maybe in a few years time they will be. So for the time being this means if you want to upload a pdf with a good score from say an R Markdown or Quarto document then do not render to pdf_document/pdf, instead render to word_document/docx and then export the tagged pdf from Word.
+
+If you have an html document you want to share as pdf, e.g., revealjs slides, the great news is that from within Chrome the "Print | Save as pdf" generates a tagged pdf (I am guessing Edge/any other Chromium based browser will be ok too - but pdfs from Safari don't seem to be tagged, and nor are those from Firefox).
+
+You can check if a pdf has tags by opening it in Adobe Acrobat Reader then bringing up the document properties - the info is in the bottom left of Description tab.
+
+<img src="/post/2025/accessibility/img/adobe-reader-pdf-info.png" alt="Screenshot of document properties tab in Adobe Acrobat Reader." width="630" style="display: block; margin: auto;">
+
+## Alt text
+
+
+## Table accessibility
+
+Row headers
+
+## Custom Word document templates
+
+Adjust the styles in them.
+
+## Different accessibility checkers sometimes equals different results
+
+Microsoft in Word and Powerpoint versus Accessibility Checker 1.13.
 
 ## Summary
 
