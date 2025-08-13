@@ -49,9 +49,30 @@ The LaTeX accessibility package is deprecated. There is tagpdf.
 
 https://latex3.github.io/tagging-project/documentation/prototype-usage-instructions
 
-```latex
-\DocumentMetadata{lang=en, tagging=on}
+https://tex.stackexchange.com/a/605142 - need the following LaTeX packages: 
+
+```r
+tinytex::tlmgr_install(c('latex-lab', 'pdfmanagement-testphase', 'tagpdf', 'luamml'))
 ```
+
+```latex
+\DocumentMetadata{tagging=on}
+\documentclass{article}
+\usepackage{unicode-math}
+\begin{document}
+...
+\end{document}
+```
+
+The problem is that I don't know how to insert commands at the very top of the header.
+
+Compiling with 
+
+```sh
+lualatex mydocument.tex
+```
+
+did generate a tagged pdf.
 
 ## Alt text
 
