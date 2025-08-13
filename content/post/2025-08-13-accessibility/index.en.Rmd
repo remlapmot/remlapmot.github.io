@@ -29,7 +29,7 @@ toc: true
 
 If you upload a pdf to get a high accessibility score it needs to be a special type of pdf, called a 'tagged pdf', otherwise it will get a terrible score (approx. 6%).
 
-## Tagged pdfs
+## (The nightmare of generating) Tagged pdfs
 
 It turns out that we can only create tagged pdfs in a few ways; from exporting from Word or Powerpoint, or printing html to pdf in Chrome (and the other Chromium based browsers such as Edge). The professional version of Adobe Acrobat allows users to [add tags to pdfs](https://helpx.adobe.com/uk/acrobat/using/editing-document-structure-content-tags.html), but I don't have that.
 
@@ -44,6 +44,14 @@ If you have an html document you want to share as pdf, e.g., revealjs slides, th
 You can check if a pdf has tags by opening it in Adobe Acrobat Reader then bringing up the document properties - the info is in the bottom left of Description tab.
 
 <img src="/post/2025/accessibility/img/adobe-reader-pdf-info.png" alt="Screenshot of document properties tab in Adobe Acrobat Reader." width="630" style="display: block; margin: auto;">
+
+The LaTeX accessibility package is deprecated. There is tagpdf.
+
+https://latex3.github.io/tagging-project/documentation/prototype-usage-instructions
+
+```latex
+\DocumentMetadata{lang=en, tagging=on}
+```
 
 ## Alt text
 
