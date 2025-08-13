@@ -1,0 +1,31 @@
+---
+title: "Accessibility for Quarto and R Markdown users: # top tips!"
+author: Package Build
+date: '2025-08-15'
+slug: accessibility
+categories:
+  - Blog
+tags:
+  - Quarto
+  - R
+  - R Markdown
+subtitle: ''
+summary: "# advanced tips for Quarto and R Markdown users about document accessibility."
+authors: []
+lastmod: '2025-08-15T07:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of .'
+projects: []
+toc: true
+---
+
+## Introduction
+
+
+## Summary
+
+I have described # top tips about document accessibility for Quarto and R Markdown users.
