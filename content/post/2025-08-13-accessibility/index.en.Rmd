@@ -141,6 +141,14 @@ You can then adjust the formatting of the various styles in the _Styles Pane_.
 
 If you say add a header to this document that includes an image if you run the Microsoft Accessibility Checker (as detailed in the previous tip) on the document it will give you the option of upgrading the document format to allow you to specify alt text for any images you've added.
 
+And then specify the reference document in your YAML header.
+
+```yaml
+format:
+  docx:
+    reference-doc: reference.docx
+```
+
 ## Tip 7: Uploading Quarto/complex html documents into Blackboard Ultra
 
 My university has upgraded to the latest version of Blackboard. Prior to this upgrade I had no trouble uploading any type of document. But now if I try to upload html documents with embedded resources generated from Quarto the upload animation hangs and the file is not uploaded.
@@ -149,6 +157,7 @@ It turns out this is because Blackboard scans every document we upload, which it
 
 * First, put your html file into a zip archive
 * Then from within your module site, go to _Course Content_ when adding an item
+  <img src="/post/2025/accessibility/img/add-course-content-from-within-site.png" alt="Screenshot of selecting Course Content in Blackboard whn uploading a file." width="630" style="display: block; margin: auto;">
 * Then select _Upload Zip Package_ (choosing any other option will fail)
   <img src="/post/2025/accessibility/img/blackboard-upload-zip-package.png" alt="Screenshot of uploading a zip package of a Quarto html file." width="630" style="display: block; margin: auto;">
 * Make sure to select the button to overwrite an existing file with the same name
