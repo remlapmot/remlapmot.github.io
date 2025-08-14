@@ -123,10 +123,10 @@ It turns out this is because Blackboard scans every document we upload, which it
 
 This method seems to be the only way to bypass the scanning of the html file. Note if you attempt to upload the zip archive from your Course Content area, the upload will also fail (you need to do this from within the course site).
 
-## Different accessibility checkers sometimes equals different results
+## Tip : Different accessibility checkers sometimes give different results
 
-Microsoft in Word and Powerpoint versus Accessibility Checker 1.13.
+Microsoft have built accessibility checkers into alot of their Office suite. Access this from the Review tab then _Check Accessibility_. Compared to Accessibility Checker 1.13 I find this checks for more conditions. I also find that most of the time this agrees with the Accessibility Checker 1.13. But sometimes they don't agree, e.g., the Microsoft checker reported that some slide numbers in a Powerpoint deck were ok, whereas Accessibility Checker 1.13 reported they failed its colour contrast check.
 
 ## Summary
 
-I have described # top tips about document accessibility for Quarto and R Markdown users.
+I have described # hopefully helpful tips about document accessibility for Quarto and R Markdown users.
