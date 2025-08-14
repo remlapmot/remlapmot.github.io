@@ -39,21 +39,21 @@ As I will show in the following tips, it is much easier to make Word, Powerpoint
 
 ## Tip 2: Add alt text to all figures
 
-I guess like many R users the first I remember hearing about accessibility was that there is this thing called alt text and it's good practice for html documents to provide alt text summaries of every image they contain.
+I guess like many R users the first I remember hearing about accessibility was that there is this thing called alt text and it's good practice for html documents to provide alt text summaries of every image they contain, because then screen readers have a description of the image for visually impaired readers using a screen reader.
 
 It turns out that other types of document can also hold alt text for images; including Word, Powerpoint, and pdf documents.
 
-As per tip 1, let's say we have a Quarto or R Markdown document which we render to docx and html output formats. To add alt text to figures in the html document we use the `fig-alt` (`fig.alt` in R Markdown) chunk option. However, it turns out that alt text for a Word document is taken from the `fig-cap` (`fig.cap` in R Markdown) chunk option. Therefore, I specify both `fig-alt` and `fig-cap` chunk options in all code chunks generating figures. Therefore my code chunks generating figures look like
+As per tip 1, let's say we have a Quarto (or R Markdown) document which we render to docx and html output formats. To add alt text to figures in the html document we can use the `fig-alt` (`fig.alt` in R Markdown) chunk option. However, it turns out that alt text for a Word document is taken from the `fig-cap` (`fig.cap` in R Markdown) chunk option. Therefore, I specify both `fig-alt` and `fig-cap` chunk options in all code chunks generating figures. Therefore my code chunks generating figures look like
 
 ````{verbatim, lang='plaintext'}
 ```{r}
-#| fig-cap: 
-#| fig-alt:
-# rest of code
+#| fig-cap: Kaplan-Meier survival curve.
+#| fig-alt: Plot of a Kaplan-Meier survival curve.
+# code to generate plot
 ```
 ````
 
-## Tip 3: (The surprising headache that is generating) Tagged pdfs 😬
+## Tip 3: (The surprising headache that is generating) Tagged pdfs 😬🤯
 
 It is possible for a pdf to obtain a perfect accessibility score. As I said above it must be a tagged pdf.
 
