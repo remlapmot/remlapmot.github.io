@@ -18,7 +18,7 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'Screenshot of selecting the Accessibility Checker 1.3 within Blackboard online learning environment.'
+  alt_text: 'Screenshot of selecting the Ally Accessibility Checker 1.3 within Blackboard online learning environment.'
 projects: []
 toc: true
 ---
@@ -27,15 +27,15 @@ toc: true
 
 When teaching, for my practicals and for about half of my lectures I find myself preparing them using R Markdown and laterly Quarto. The other half of my presentations I prepare in Powerpoint. I enjoy preparing the material in R Markdown and Quarto because it gives me a reproducible way of regenerating my material every year.
 
-Recently, the subject of accessibility has become more prominent within Universities. My University uses Blackboard for its online learning environment (OLE). There are other OLEs, e.g., Moodle, Canvas, and others; they all work in essentially the same way in that they provide a website per Unit/Module within a secure online system. Now every document I upload into Blackboard receives and accessibility score and each module I teach receives an overall accessibility score. My University uses Accessibility Report LTI 1.3 to generate these scores.
+Recently, the subject of accessibility has become more prominent within Universities. My University uses Blackboard for its online learning environment (OLE). There are other OLEs, e.g., Moodle, Canvas, and others; they all work in essentially the same way in that they provide a website per Unit/Module within a secure online system. Now every document I upload into Blackboard receives and accessibility score and each module I teach receives an overall accessibility score. My University uses Ally Accessibility Report LTI 1.3 to generate these scores.
 
-What follows is a set of tips I have discovered which help improve the score for individual documents and hence your overall module score.
+What follows is a set of tips I (think I) have discovered which help improve the score for individual documents and hence your overall module accessibility score.
 
 ## Tip 1: Replace all pdfs with docx, pptx, or html for the quick win
 
 If you upload a pdf to get a high accessibility score it needs to be a special type of pdf, called a 'tagged pdf', otherwise it will get a terrible score (approx. 6%).
 
-As I will show in the following tips, it is much easier to make Word, Powerpoint, and html document accessible, and so if you are looking for the most effective boost in your accessibility scores simply remove all pdf documents from your site and replace with Word, Powerpoint, or html documents.
+As I will show in the following tips, it is much easier to make Word, Powerpoint, and html documents accessible. If you are looking for the most effective boost to your accessibility scores simply remove all pdf documents from your site and replace them with Word, Powerpoint, or html documents.
 
 ## Tip 2: Add alt text to all figures
 
