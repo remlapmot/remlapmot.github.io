@@ -108,7 +108,18 @@ Row headers
 
 Adjust the styles in them.
 
-## How to upload Quarto/complex html documents into Blackboard Ultra
+## Tip : How to upload Quarto/complex html documents into Blackboard Ultra
+
+My university has just upgraded to the latest version of Blackboard. Prior to this upgrade I had no trouble uploading any type of document. But now if I try to upload html documents with embedded resources from Quarto the upload animation hangs and the file is not uploaded.
+
+It turns out this is because Blackboard scans every document we upload and for some reason Quarto html documents are now too complex and fail this scan. However, there is a workaround.
+
+* First, put your html file into a zip archive
+* Then from within your module site, go to Course Content when adding an item
+* Select upload Zip archive
+* Make sure to select the button to overwrite an existing file with the same name
+
+And that's it. This method seems to bypass the scanning of the html file.
 
 ## Different accessibility checkers sometimes equals different results
 
