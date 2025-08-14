@@ -121,7 +121,15 @@ But I cannot face going through this hassle for every document I produce. So the
 
 I find that tables generated using the Markdown syntax generate warnings in Ally Accessibility Checker 1.3. It reports it can't find the header row. However, I find that tables generated using the **gt** package, and other table packages usually pass Ally Accessibility Checker. So I now avoid creating tables using Markdown syntax.
 
-## Tip 5: Custom Word document templates
+## Tip 5: Different accessibility checkers can report different results
+
+Microsoft have built accessibility checkers into alot of their Office suite. Access this from the Review tab then _Check Accessibility_.
+
+<img src="/post/2025/accessibility/img/microsoft-ribbon-accessibility.png" alt="Screenshot of accessing the accessibility checker within Microsoft Word." width="630" style="display: block; margin: auto;">
+
+Compared to Accessibility Checker 1.13 I find this checks for more conditions. I also find that most of the time this agrees with the Accessibility Checker 1.13. But sometimes they don't agree, e.g., the Microsoft checker reported that some slide numbers in a Powerpoint deck were ok, whereas Accessibility Checker 1.13 reported they failed its colour contrast check.
+
+## Tip 6: Custom Word document templates
 
 If you want to use a template Word document for your docx output it needs to be based on the underlying Pandoc docx template. You can obtain that by running
 
@@ -131,9 +139,9 @@ pandoc --print-default-data-file reference.docx > reference.docx
 
 You can then adjust the formatting of the various styles in the _Styles Pane_.
 
-If you say add a header to this document that includes an image if you run the Microsoft Accessibility Checker on the document it will give you the option of upgrading the document format to allow you to specify alt text for any images you've added. This is worth doing.
+If you say add a header to this document that includes an image if you run the Microsoft Accessibility Checker (as detailed in the previous tip) on the document it will give you the option of upgrading the document format to allow you to specify alt text for any images you've added.
 
-## Tip 6: Uploading Quarto/complex html documents into Blackboard Ultra
+## Tip 7: Uploading Quarto/complex html documents into Blackboard Ultra
 
 My university has just upgraded to the latest version of Blackboard. Prior to this upgrade I had no trouble uploading any type of document. But now if I try to upload html documents with embedded resources from Quarto the upload animation hangs and the file is not uploaded.
 
@@ -147,14 +155,6 @@ It turns out this is because Blackboard scans every document we upload, which it
 * And click Ok and that's it.
 
 This method seems to be the only way to bypass the scanning of the html file. Note if you attempt to upload the zip archive from your Course Content area, the upload will also fail (you need to do this from within the course site).
-
-## Tip 7: Different accessibility checkers can report different results
-
-Microsoft have built accessibility checkers into alot of their Office suite. Access this from the Review tab then _Check Accessibility_.
-
-<img src="/post/2025/accessibility/img/microsoft-ribbon-accessibility.png" alt="Screenshot of accessing the accessibility checker within Microsoft Word." width="630" style="display: block; margin: auto;">
-
-Compared to Accessibility Checker 1.13 I find this checks for more conditions. I also find that most of the time this agrees with the Accessibility Checker 1.13. But sometimes they don't agree, e.g., the Microsoft checker reported that some slide numbers in a Powerpoint deck were ok, whereas Accessibility Checker 1.13 reported they failed its colour contrast check.
 
 ## Summary
 
