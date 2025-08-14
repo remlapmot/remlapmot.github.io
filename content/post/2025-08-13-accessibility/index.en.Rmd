@@ -80,7 +80,7 @@ You then need to amend the very top of your TeX file to have a `\DocumentMetadat
 \documentclass{article}
 \usepackage{unicode-math}
 \begin{document}
-...
+% the rest of your document ...
 \end{document}
 ```
 
