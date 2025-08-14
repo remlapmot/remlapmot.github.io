@@ -29,7 +29,9 @@ When teaching, for my practicals and for about half of my lectures I find myself
 
 Recently, the subject of accessibility has become more prominent within Universities. And indeed in the UK and in many other countries we are legally obliged to produce accessible learning materials that do not disadvantage disabled students.
 
-My University uses Blackboard for its online learning environment (OLE)/learning management system (LMS). There are other OLEs, e.g., Moodle, Canvas, and others. They all work in essentially the same way in that they provide a website per Unit/Module within a secure online system. Every document I upload into Blackboard receives and accessibility score and each module I teach receives an overall accessibility score. My University uses Ally Accessibility Report LTI 1.3 to generate these scores. My university doesn't have a rule about what's an acceptable score for either a document or a course.
+My University uses Blackboard for its online learning environment (OLE)/learning management system (LMS). There are other OLEs, e.g., Moodle, Canvas, etc. They all work in essentially the same way in that they provide a website per Unit/Module/Course within a secure online system.
+
+Every document I upload into Blackboard receives an accessibility score and each module I teach receives an overall accessibility score. My University uses Ally Accessibility Report LTI 1.3 to generate these scores. My university doesn't have a rule about what's an acceptable score for either a document or a course.
 
 What follows is a set of tips I (think I) have discovered which help improve the score for individual documents and hence your overall module accessibility score.
 
@@ -41,11 +43,11 @@ As I will show in the following tips, it is much easier to make Word, Powerpoint
 
 ## Tip 2: Add alt text to all figures
 
-I guess like many R users the first I remember hearing about accessibility was that there is this thing called alt text and it's good practice for html documents to provide alt text summaries of every image they contain. Then screen readers have a description of the image for visually impaired readers using a screen reader.
+I guess like many R users the first I remember hearing about accessibility was that there is this thing called alt text and it's best practice for html documents to provide alt text summaries of every image they contain. Then screen readers have a description of the image for visually impaired readers.
 
 It turns out that other types of document can also hold alt text for images; including Word, Powerpoint, and pdf documents.
 
-As per tip 1, let's say we have a Quarto (or R Markdown) document which we render to docx and html output formats. To add alt text to figures in the html document we can use the `fig-alt` (`fig.alt` in R Markdown) chunk option. However, it turns out that alt text for a Word document is taken from the `fig-cap` (`fig.cap` in R Markdown) chunk option. Therefore, I specify both `fig-alt` and `fig-cap` chunk options in all code chunks generating figures. Therefore my code chunks generating figures look like the following.
+As per tip 1, let's say we have a Quarto (or R Markdown) document which we render to docx and html output formats. To add alt text to figures in the html document we can use the `fig-alt` (`fig.alt` in R Markdown) chunk option. However, it turns out that alt text for a Word document is taken from the `fig-cap` (`fig.cap` in R Markdown) chunk option. Therefore, I specify both `fig-alt` and `fig-cap` chunk options in all code chunks generating figures.
 
 ````{verbatim, lang='plaintext'}
 ```{r}
