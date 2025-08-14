@@ -90,7 +90,7 @@ When I tried this I found that compiling with LuaLaTeX did generate a tagged pdf
 lualatex mydocument.tex
 ```
 
-But I cannot face going through this hassle for every document I produce.
+But I cannot face going through this hassle for every document I produce. So the slightly unexpected take home message here is that if you want to give your students a pdf document, the most convenient way to produce a tagged pdf is to render your Quarto document to docx or html and then export the pdf from within either Word or Chrome.
 
 ## Table accessibility
 
