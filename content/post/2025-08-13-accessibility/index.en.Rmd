@@ -18,7 +18,7 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'Screenshot of .'
+  alt_text: 'Screenshot of Accessibility Checker 1.3 summary score for my module within Blackboard online learning environment.'
 projects: []
 toc: true
 ---
