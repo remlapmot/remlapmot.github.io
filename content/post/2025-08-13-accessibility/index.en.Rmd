@@ -112,14 +112,16 @@ Adjust the styles in them.
 
 My university has just upgraded to the latest version of Blackboard. Prior to this upgrade I had no trouble uploading any type of document. But now if I try to upload html documents with embedded resources from Quarto the upload animation hangs and the file is not uploaded.
 
-It turns out this is because Blackboard scans every document we upload and for some reason Quarto html documents are now too complex and fail this scan. However, there is a workaround.
+It turns out this is because Blackboard scans every document we upload, which it calls its content sanitization check. For some reason Quarto html documents, including revealjs html slide decks, are now too complex and fail this check. Annoyingly, Blackboard does not emit any error message to tell us this. However, there is a workaround.
 
 * First, put your html file into a zip archive
 * Then from within your module site, go to Course Content when adding an item
-* Select upload Zip archive
+* Then select _Upload Zip Package_ (choosing any other option will fail)
+  <img src="/post/2025/accessibility/img/blackboard-upload-zip-package.png" alt="Screenshot of uploading a zip package of a Quarto html file." width="630" style="display: block; margin: auto;">
 * Make sure to select the button to overwrite an existing file with the same name
+* And click Ok and that's it.
 
-And that's it. This method seems to bypass the scanning of the html file.
+This method seems to be the only way to bypass the scanning of the html file. Note if you attempt to upload the zip archive from your Course Content area, the upload will also fail (you need to do this from within the course site).
 
 ## Different accessibility checkers sometimes equals different results
 
