@@ -1,5 +1,5 @@
 ---
-title: "Accessibility for Quarto and R Markdown users: # top tips!"
+title: "Seven accessibility tip for Quarto and R Markdown users"
 author: Package Build
 date: '2025-08-15'
 slug: accessibility
@@ -10,7 +10,7 @@ tags:
   - R
   - R Markdown
 subtitle: ''
-summary: "# advanced tips for Quarto and R Markdown users about document accessibility."
+summary: "Seven top tips for Quarto and R Markdown users on document accessibility."
 authors: []
 lastmod: '2025-08-15T07:00:00+00:00'
 featured: no
@@ -18,7 +18,7 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'Screenshot of Accessibility Checker 1.3 summary score for my module within Blackboard online learning environment.'
+  alt_text: 'Screenshot of selecting the Accessibility Checker 1.3 within Blackboard online learning environment.'
 projects: []
 toc: true
 ---
@@ -133,4 +133,6 @@ Compared to Accessibility Checker 1.13 I find this checks for more conditions. I
 
 ## Summary
 
-I have described # hopefully helpful tips about document accessibility for Quarto and R Markdown users. Using my own tips I have increased the Accessibility Check 1.3 summary score for my module from 67% for last year's site to 98% for this year's site. I hope you have similar success.
+<img src="/post/2025/accessibility/img/summary-score.png" alt="Screenshot of Accessibility Checker 1.3 summary score for my module within Blackboard online learning environment." width="630" style="display: block; margin: auto;">
+
+I have described 7 hopefully helpful tips about document accessibility for Quarto and R Markdown users. Using my own tips I have increased the Accessibility Check 1.3 summary score for my module from 67% for last year's site to 98% for this year's site. I hope you have similar success.
