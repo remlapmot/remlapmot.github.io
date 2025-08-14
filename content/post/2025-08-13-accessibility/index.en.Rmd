@@ -57,7 +57,7 @@ As per tip 1, let's say we have a Quarto (or R Markdown) document which we rende
 
 It is possible for a pdf to obtain a perfect accessibility score. As I said above it must be a tagged pdf.
 
-You can check if a pdf has tags by opening it in Adobe Acrobat Reader then bringing up the document properties - the info is in the bottom left of Description tab.
+You can check if a pdf has tags by opening it in Adobe Acrobat Reader then bringing up the document properties - the info is in the bottom left of Description tab (on Windows I found that SumatraPDF also reported that information but on macOS I found I couldn't see this with Preview).
 
 <img src="/post/2025/accessibility/img/adobe-reader-pdf-info.png" alt="Screenshot of document properties tab in Adobe Acrobat Reader." width="630" style="display: block; margin: auto;">
 
