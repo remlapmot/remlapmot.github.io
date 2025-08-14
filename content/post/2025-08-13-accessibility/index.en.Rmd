@@ -53,7 +53,7 @@ As per tip 1, let's say we have a Quarto (or R Markdown) document which we rende
 ```
 ````
 
-## Tip 3: (The surprising headache that is generating) Tagged pdfs 😬🤯
+## Tip 3: (The surprising headache that is) Creating tagged pdfs 😬🤯
 
 It is possible for a pdf to obtain a perfect accessibility score. As I said above it must be a tagged pdf.
 
@@ -61,7 +61,7 @@ You can check if a pdf has tags by opening it in Adobe Acrobat Reader then bring
 
 <img src="/post/2025/accessibility/img/adobe-reader-pdf-info.png" alt="Screenshot of document properties tab in Adobe Acrobat Reader." width="630" style="display: block; margin: auto;">
 
-It turns out that we can only create tagged pdfs in a few ways; 
+It turns out that we can create tagged pdfs in a few ways; 
 
 * by exporting a Word or Powerpoint document to pdf within those programs
   * note macOS users must select the _Best for electronic distribution and accessibility..._ option
