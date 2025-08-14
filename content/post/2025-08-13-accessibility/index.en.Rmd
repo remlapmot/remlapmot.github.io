@@ -131,17 +131,21 @@ Compared to Ally Accessibility Checker 1.13 I find this checks for more conditio
 
 ## Tip 6: Improving the accessibility of custom Word document templates
 
-If you want to use a custom template Word document for your docx output it needs to be based on the underlying Pandoc docx template. You can obtain that by running
+If you want to use a [custom template Word document](https://bookdown.org/yihui/rmarkdown-cookbook/word-template.html) for your docx output it needs to be based on the underlying Pandoc docx template. You can obtain that by running
 
 ```sh
 pandoc --print-default-data-file reference.docx > reference.docx
 ```
 
-You can then adjust the formatting of the various styles in the _Styles Pane_.
+You can then adjust the formatting of the various styles in the _Styles Pane_, and also if you are in the UK/EU you can amend the layout size from US Letter paper to A4.
 
-If you say add a header to this document that includes an image if you run the Microsoft Accessibility Checker (as detailed in the previous tip) on the document it will give you the option of upgrading the document format to allow you to specify alt text for any images you've added.
+Then run the Microsoft Accessibilty checker on this document (_Review_ tab | _Check Accessibility_) and Word will give you the option to upgrade the format of the document so that it can run, so click the _Convert_ button when prompted.
 
-And then specify the reference document in your YAML header.
+<img src="/post/2025/accessibility/img/word-accessibility-checker-convert-format.png" alt="Screenshot of Microsoft Word acccessibility checker convert document." width="630" style="display: block; margin: auto;">
+
+Then if you've added say an image to the document header you can add alt text to it.
+
+And then specify the use of the reference document in your Quarto YAML header.
 
 ```yaml
 format:
