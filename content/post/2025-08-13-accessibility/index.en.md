@@ -25,13 +25,15 @@ toc: true
 
 ## Introduction
 
-When teaching, for my practicals and for about half of my lectures I find myself preparing them using R Markdown and laterly Quarto. I enjoy preparing the material in R Markdown and Quarto because it gives me a reproducible way of regenerating my material every year.
+When teaching, for my practicals/tutorials and for about half of my lectures I find myself preparing them using R Markdown and laterly Quarto. I enjoy preparing the material in R Markdown and Quarto because it gives me a reproducible way of regenerating my material every year and I can track changes in the Rmd/qmd files very precisely with Git.
 
-Recently, the subject of accessibility has become more prominent within Universities. And indeed in the UK and in many other countries we are legally obliged to produce accessible learning materials that do not disadvantage disabled students.
+Recently, the subject of accessibility has become more prominent within Universities. In the UK and in many other countries we are legally obliged to produce accessible learning materials that do not disadvantage disabled students.
 
 My University uses Blackboard for its online learning environment (OLE)/learning management system (LMS). There are other OLEs, e.g., Moodle, Canvas, etc. They all work in essentially the same way in that they provide a website per Unit/Module/Course within a secure online system.
 
-Every document I upload into Blackboard receives an accessibility score and each module I teach receives an overall accessibility score. My University uses Ally Accessibility Report LTI 1.3 to generate these scores. My university doesn't have a rule about what's an acceptable score for either a document or a course.
+Every document I upload into Blackboard receives an accessibility score (out of 100%) and each module I teach receives an overall accessibility score. My University uses Ally Accessibility Report LTI 1.3 to generate these scores. My university doesn't have a rule about what's an acceptable score for either a document or a course.
+
+It turns out acceesibility is sometimes abbreviated to a11y, which like k8s is a numeronym, where the 11 stands for the 11 letters in between the starting a and the ending y of _accessibility_.
 
 What follows is a set of tips I (think I) have discovered which help improve the score for individual documents and hence your overall module accessibility score.
 
