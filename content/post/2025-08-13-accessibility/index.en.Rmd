@@ -76,6 +76,10 @@ It turns out that we can create tagged pdfs in a few ways;
 * by printing html documents to pdf (Print | Save as pdf) in Chrome (and the other Chromium based browsers such as Edge)
   * In my testing I find that by default Safari and Firefox do not generate tagged pdfs
 * The paid for professional version of Adobe Acrobat allows users to [add tags to pdfs](https://helpx.adobe.com/uk/acrobat/using/editing-document-structure-content-tags.html), but I don't have that, and I assuming you don't either.
+* And I should note that within Blackboard itself Ally can generate a tagged pdf from Word and Powerpoint documents, under the _Download Alternative Formats_ option for a file.
+  <img src="/post/2025/accessibility/img/download-alternative-formats-1.png" alt="Screenshot of selecting to download alternative document formats in Blackboard." width="630" style="display: block; margin: auto;">
+  
+  <img src="/post/2025/accessibility/img/download-alternative-formats-2.png" alt="Screenshot of the alternative document formats in Blackboard." width="450" style="display: block; margin: auto;">
 
 The surprise here is that pdf documents produced by LaTeX and typst by default do not (yet) generate tagged pdfs. Therefore, do not render to `pdf`/`typst` output formats in Quarto nor `pdf_document` in R Markdown (nor `pdf_document2` in bookdown).
 
@@ -127,11 +131,11 @@ I find that tables generated using the Markdown syntax generate warnings in Ally
 
 ## Tip 5: Different accessibility checkers can report different results
 
-Microsoft have built accessibility checkers into alot of their Office suite. You can access this from the _Review_ tab then _Check Accessibility_.
+Microsoft has built an accessibility checker into alot of its Office suite. You can access this from the _Review_ tab then _Check Accessibility_.
 
 <img src="/post/2025/accessibility/img/microsoft-ribbon-accessibility.png" alt="Screenshot of accessing the accessibility checker within Microsoft Word." width="630" style="display: block; margin: auto;">
 
-Compared to Ally Accessibility Checker 1.13 I find this checks for more conditions. For the items they both check I find that most of the time they agree. But sometimes they don't agree, e.g., the Microsoft checker reported that some slide numbers in a Powerpoint deck were ok, whereas Ally Accessibility Checker 1.13 reported that they failed its colour contrast check (even though they were black text on a white slide).
+Compared to Ally Accessibility Checker 1.13 I find this checks for more conditions. For the items they both check I find that most of the time they agree. But sometimes they don't agree, e.g., the Microsoft checker reported that the slide numbers in a Powerpoint deck were ok, whereas Ally Accessibility Checker 1.13 reported that they failed its colour contrast check (even though they were black text on a white slide).
 
 ## Tip 6: Improving the accessibility of custom Word document templates
 
@@ -147,9 +151,7 @@ Then run the Microsoft Accessibilty checker on this document (_Review_ tab | _Ch
 
 <img src="/post/2025/accessibility/img/word-accessibility-checker-convert-format.png" alt="Screenshot of Microsoft Word acccessibility checker convert document." width="350" style="display: block; margin: auto;">
 
-Then if you've added an image to the document header you can add alt text to it.
-
-And then specify the use of the reference document in your Quarto YAML header.
+Then if you've added an image to the document header you can add alt text to it. Then resave the document. Then specify the use of the reference document in your Quarto YAML header.
 
 ```yaml
 format:
@@ -159,19 +161,23 @@ format:
 
 ## Tip 7: Uploading Quarto/complex html documents into Blackboard Ultra
 
-My university has upgraded to the latest version of Blackboard. Prior to this upgrade I had no trouble uploading any type of document. But now if I try to upload html documents with embedded resources generated from Quarto the upload animation hangs and the file is not uploaded.
+My university has upgraded to the latest version of Blackboard. Prior to this upgrade I had no trouble uploading any type of document. But now if I try to upload html documents with embedded resources generated from Quarto the upload animation hangs (the 3 squares on the right of the screenshot below simply keep animating) and the file is not uploaded.
+
+<img src="/post/2025/accessibility/img/upload-hang.png" alt="Screenshot of Blackboard file upload hanging." width="750" style="display: block; margin: auto;">
 
 It turns out this is because Blackboard scans every document we upload, which it calls its content sanitization check. For some reason Quarto html documents, including revealjs html slide decks, are now too complex and fail this check. Annoyingly, Blackboard does not emit any error message to tell us this. However, there is a workaround.
 
 * First, put your html file into a zip archive
-* Then from within your module site, go to _Course Content_ when adding an item
+* Then from within your module site, go to _Course Collection_ when adding an item
   <img src="/post/2025/accessibility/img/add-course-content-from-within-site.png" alt="Screenshot of selecting Course Content in Blackboard whn uploading a file." width="630" style="display: block; margin: auto;">
-* Then select _Upload Zip Package_ (choosing any other option will fail)
+* Then select _Upload_ | _Upload Zip Package_ (choosing any other option will fail)
   <img src="/post/2025/accessibility/img/blackboard-upload-zip-package.png" alt="Screenshot of uploading a zip package of a Quarto html file." width="630" style="display: block; margin: auto;">
 * Make sure to select the button to overwrite an existing file with the same name
 * And click _Submit_ and that's it.
 
-This is the only way I can find to bypass the content sanitization check. Note if you attempt to upload the zip archive from your Course Content area instead of from within the course site, the upload will also fail (confusing I know!).
+This is the only way I can find to bypass the content sanitization check. Note if you attempt to upload the zip archive from your _Content Collection_ accessed not from within the course site - as per screenshot below (don't go here!) - the upload will also fail (confusing I know!).
+
+<img src="/post/2025/accessibility/img/blackboard-content-collection.png" alt="Screenshot of Blackboard Content Collection selection not from within a course." width="750" style="display: block; margin: auto;">
 
 ## Summary
 
