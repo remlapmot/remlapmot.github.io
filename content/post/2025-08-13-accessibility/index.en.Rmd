@@ -33,7 +33,7 @@ My University uses Blackboard for its online learning environment (OLE)/learning
 
 Every document I upload into Blackboard receives an accessibility score (out of 100%) and each module I teach receives an overall accessibility score. My University uses Ally Accessibility Report LTI 1.3 to generate these scores. My university doesn't have a rule about what's an acceptable score for either a document or a course.
 
-It turns out acceesibility is sometimes abbreviated to a11y, which like k8s is a numeronym, where the 11 stands for the 11 letters in between the starting a and the ending y of _accessibility_.
+It turns out acceesibility is sometimes abbreviated to a11y, which like k8s (for Kubernetes), is a numeronym, where the 11 stands for the 11 letters in between the starting a and the ending y of _accessibility_.
 
 What follows is a set of tips I (think I) have discovered which help improve the score for individual documents and hence your overall module accessibility score.
 
