@@ -33,7 +33,7 @@ My University uses Blackboard for its online learning environment (OLE)/learning
 
 Every document I upload into Blackboard receives an accessibility score (out of 100%) and each module I teach receives an overall accessibility score. My University uses Ally Accessibility Report LTI 1.3 to generate these scores. My university doesn't have a rule about what's an acceptable score for either a document or a course.
 
-It turns out acceesibility is sometimes abbreviated to a11y, which like k8s is a numeronym, where the 11 stands for the 11 letters in between the starting a and the ending y of _accessibility_.
+It turns out acceesibility is sometimes abbreviated to a11y, which like k8s (for Kubernetes), is a numeronym, where the 11 stands for the 11 letters in between the starting a and the ending y of _accessibility_.
 
 What follows is a set of tips I (think I) have discovered which help improve the score for individual documents and hence your overall module accessibility score.
 
@@ -66,12 +66,12 @@ It is possible for a pdf to obtain a perfect accessibility score; but as I said 
 
 You can check if a pdf has tags by opening it in Adobe Acrobat Reader then bringing up the document properties window. The information is in the bottom left of the _Description_ tab (on Windows I found that SumatraPDF also reported that information but on macOS I found I couldn't see this reported in the Preview app).
 
-<img src="/post/2025/accessibility/img/adobe-reader-pdf-info.png" alt="Screenshot of document properties tab in Adobe Acrobat Reader." width="630" style="display: block; margin: auto;">
+<img src="/post/2025/accessibility/img/adobe-reader-pdf-info.png" alt="Screenshot of document properties tab in Adobe Acrobat Reader." width="550" style="display: block; margin: auto;">
 
 It turns out that we can create tagged pdfs in a few ways; 
 
 * by exporting a Word or Powerpoint document to pdf within those programs
-  * note when exporting to pdf on macOS, users must select the _Best for electronic distribution and accessibility..._ option
+  * note when exporting to pdf on macOS, users must select the _Best for electronic distribution and accessibility..._ option (the _Best for printing_ option does not generate tagged pdfs)
     <img src="/post/2025/accessibility/img/powerpoint-macos-pdf-export.png" alt="Screenshot of Powerpoint export to pdf window on macOS." width="630" style="display: block; margin: auto;">  
   * Word and Powerpoint for Windows and Word and Powerpoint online export tagged pdfs by default
 * by printing html documents to pdf (Print | Save as pdf) in Chrome (and the other Chromium based browsers such as Edge)
@@ -146,7 +146,7 @@ You can then adjust the formatting of the various styles in Word in the _Styles 
 
 Then run the Microsoft Accessibilty checker on this document (_Review_ tab | _Check Accessibility_) and Word will give you the option to upgrade the format of the document so that it can run, so click the _Convert_ button when prompted.
 
-<img src="/post/2025/accessibility/img/word-accessibility-checker-convert-format.png" alt="Screenshot of Microsoft Word acccessibility checker convert document." width="630" style="display: block; margin: auto;">
+<img src="/post/2025/accessibility/img/word-accessibility-checker-convert-format.png" alt="Screenshot of Microsoft Word acccessibility checker convert document." width="350" style="display: block; margin: auto;">
 
 Then if you've added an image to the document header you can add alt text to it.
 
@@ -170,7 +170,7 @@ It turns out this is because Blackboard scans every document we upload, which it
 * Then select _Upload Zip Package_ (choosing any other option will fail)
   <img src="/post/2025/accessibility/img/blackboard-upload-zip-package.png" alt="Screenshot of uploading a zip package of a Quarto html file." width="630" style="display: block; margin: auto;">
 * Make sure to select the button to overwrite an existing file with the same name
-* And click Ok and that's it.
+* And click _Submit_ and that's it.
 
 This is the only way I can find to bypass the content sanitization check. Note if you attempt to upload the zip archive from your Course Content area instead of from within the course site, the upload will also fail (confusing I know!).
 
