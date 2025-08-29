@@ -241,7 +241,7 @@ Imports:
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;we specify &lt;code&gt;upgrade: &#39;TRUE&#39;&lt;/code&gt; to always install the latest version of the dependency packages.&lt;/li&gt;
-&lt;li&gt;then we finally render the two versions of our Quarto document. Here we append the operating system name into the output document filenames and we commit these files back into the repository for our records. We have to specify &lt;code&gt;shell: bash&lt;/code&gt; because otherwise the Windows runner will use Powershell and the environment variable syntax in the &lt;code&gt;git config&lt;/code&gt; commands would be incorrect. Also we need a &lt;code&gt;git pull&lt;/code&gt; before making the commit because we have 3 jobs running in series, so there will new/amended files in the repo after the first and second jobs.&lt;/li&gt;
+&lt;li&gt;then we finally render the two versions of our Quarto document. Here we append the operating system name into the output document filenames and we commit these files back into the repository for our records. We have to specify &lt;code&gt;shell: bash&lt;/code&gt; because otherwise the Windows runner will use Powershell and the environment variable syntax in the &lt;code&gt;git config&lt;/code&gt; commands would be incorrect. Also we need a &lt;code&gt;git pull&lt;/code&gt; before making the commit because we have 3 jobs running in series, so there will be new/amended files in the repo after the first and second jobs.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;

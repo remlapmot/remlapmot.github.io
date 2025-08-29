@@ -822,7 +822,7 @@ Imports:
 </ul>
 </li>
 <li>we specify <code>upgrade: 'TRUE'</code> to always install the latest version of the dependency packages.</li>
-<li>then we finally render the two versions of our Quarto document. Here we append the operating system name into the output document filenames and we commit these files back into the repository for our records. We have to specify <code>shell: bash</code> because otherwise the Windows runner will use Powershell and the environment variable syntax in the <code>git config</code> commands would be incorrect. Also we need a <code>git pull</code> before making the commit because we have 3 jobs running in series, so there will new/amended files in the repo after the first and second jobs.</li>
+<li>then we finally render the two versions of our Quarto document. Here we append the operating system name into the output document filenames and we commit these files back into the repository for our records. We have to specify <code>shell: bash</code> because otherwise the Windows runner will use Powershell and the environment variable syntax in the <code>git config</code> commands would be incorrect. Also we need a <code>git pull</code> before making the commit because we have 3 jobs running in series, so there will be new/amended files in the repo after the first and second jobs.</li>
 </ul>
 </li>
 </ul>
