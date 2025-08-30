@@ -691,7 +691,7 @@
 
 <div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 642px; max-height: 180px;">
   <div style="position: relative">
-    <img src="/post/2025/quarto-accessibility/featured.png" alt="Screenshot of selecting the Ally Accessibility Checker 1.3 within Blackboard online learning environment." class="featured-image">
+    <img src="/post/2025/quarto-accessibility/featured.png" alt="Screenshot of selecting the Ally Accessibility Checker within Blackboard online learning environment." class="featured-image">
     
   </div>
 </div>
@@ -703,7 +703,8 @@
 <p>When teaching, for my practicals/tutorials and for about half of my lectures I find myself preparing them using R Markdown and laterly Quarto. I enjoy preparing the material in R Markdown and Quarto because it gives me a reproducible way of regenerating my material every year and I can track changes in the Rmd/qmd files very precisely with Git.</p>
 <p>Recently, the subject of accessibility has become more prominent within Universities. In the UK, and in many other countries, we are legally obliged to produce accessible learning materials that do not disadvantage disabled students.</p>
 <p>My University uses Blackboard for its online learning environment (OLE)/learning management system (LMS). There are other OLEs, e.g., Moodle, Canvas, etc. They all work in essentially the same way in that they provide a website per Unit/Module/Course within a secure online system.</p>
-<p>Every document I upload into Blackboard receives an accessibility score (out of 100%) and each module I teach receives an overall accessibility score. My University uses Ally Accessibility Report LTI 1.3 to generate these scores. My university doesn&rsquo;t have a rule about what&rsquo;s an acceptable score for either a document or a course.</p>
+<p>Every document I upload into Blackboard receives an accessibility score (out of 100%) and each module I teach receives an overall accessibility score. My University uses 
+<a href="https://ally.ac/" target="_blank" rel="noopener">Anthology Ally</a> Accessibility Report to generate these scores. My university doesn&rsquo;t have a rule about what&rsquo;s an acceptable score for either a document or a course.</p>
 <p>It turns out accessibility is sometimes abbreviated to a11y, which like k8s (for Kubernetes), is a numeronym, where the 11 stands for the 11 letters in between the starting <em>a</em> and the ending <em>y</em> of <em>accessibility</em>.</p>
 <p>I should say there are many guides to accessibility for HTML documents online, and indeed for R and R Markdown there are at least two packages on CRAN, 
 <a href="https://cran.r-project.org/package=accessrmd" target="_blank" rel="noopener"><strong>accessrmd</strong></a> and 
@@ -782,11 +783,11 @@
 </code></pre>
 <p>But I cannot face going through this hassle for every document I produce. So the slightly unexpected take home message here is that if you want to give your students a pdf document, the most convenient way to produce a tagged pdf is to render your Quarto document to docx or html and then export the pdf from within either Word or Chrome or let Ally do the conversion for you.</p>
 <h2 id="tip-4-improving-table-accessibility">Tip 4: Improving table accessibility</h2>
-<p>I find that tables generated using the Markdown syntax generate warnings in Ally Accessibility Checker 1.3. It reports it can&rsquo;t find the header row. However, I find that tables generated using the <strong>gt</strong> package, and other table packages usually pass. So I avoid creating tables using Markdown syntax.</p>
+<p>I find that tables generated using the Markdown syntax generate warnings in Ally Accessibility Checker. It reports it can&rsquo;t find the header row. However, I find that tables generated using the <strong>gt</strong> package, and other table packages usually pass. So I avoid creating tables using Markdown syntax.</p>
 <h2 id="tip-5-different-accessibility-checkers-can-report-different-results">Tip 5: Different accessibility checkers can report different results</h2>
 <p>Microsoft has built an accessibility checker into alot of its Office suite. You can access this in Word and Powerpoint from the <em>Review</em> tab then <em>Check Accessibility</em>.</p>
 <img src="/post/2025/quarto-accessibility/img/microsoft-ribbon-accessibility.png" alt="Screenshot of accessing the accessibility checker within Microsoft Word." width="630" style="display: block; margin: auto;">
-<p>Compared to Ally Accessibility Checker 1.13 I find this checks for more conditions. For the items they both check I find that most of the time they agree. But sometimes they don&rsquo;t agree, e.g., the Microsoft checker reported that the slide numbers in a Powerpoint deck were ok, whereas Ally Accessibility Checker 1.13 reported that they failed its colour contrast check (even though they were black text on a white slide).</p>
+<p>Compared to Ally Accessibility Checker I find this checks for more conditions. For the items they both check I find that most of the time they agree. But sometimes they don&rsquo;t agree, e.g., the Microsoft checker reported that the slide numbers in a Powerpoint deck were ok, whereas Ally Accessibility Checker reported that they failed its colour contrast check (even though they were black text on a white slide).</p>
 <h2 id="tip-6-improving-the-accessibility-of-custom-word-document-templates">Tip 6: Improving the accessibility of custom Word document templates</h2>
 <p>If you want to use a 
 <a href="https://bookdown.org/yihui/rmarkdown-cookbook/word-template.html" target="_blank" rel="noopener">custom template Word document</a> for your docx output it needs to be based on the underlying Pandoc docx template. You can obtain that by running</p>
@@ -801,7 +802,7 @@
     reference-doc: reference.docx
 </code></pre>
 <h2 id="tip-7-uploading-quartocomplex-html-documents-into-blackboard-ultra">Tip 7: Uploading Quarto/complex html documents into Blackboard Ultra</h2>
-<p>My university has upgraded to the latest version of Blackboard. Prior to this upgrade I had no trouble uploading any type of document. But now if I try to upload html documents with embedded resources generated from Quarto the upload animation hangs (the 3 squares on the right of the screenshot below simply keep animating) and the file is not uploaded.</p>
+<p>My university has upgraded to the latest version of Blackboard - Ultra. Prior to this upgrade I had no trouble uploading any type of document. But now if I try to upload html documents with embedded resources generated from Quarto the upload animation hangs (the 3 squares on the right of the screenshot below simply keep animating) and the file is not uploaded.</p>
 <img src="/post/2025/quarto-accessibility/img/upload-hang.png" alt="Screenshot of Blackboard file upload hanging." width="750" style="display: block; margin: auto;">
 <p>It turns out this is because Blackboard scans every document we upload, which it calls its content sanitization check. For some reason Quarto html documents, including revealjs html slide decks, are now too complex and fail this check. Annoyingly, Blackboard does not emit any error message to tell us this. However, there is a workaround.</p>
 <ul>
@@ -817,7 +818,7 @@
 <img src="/post/2025/quarto-accessibility/img/blackboard-content-collection.png" alt="Screenshot of Blackboard Content Collection selection not from within a course." width="750" style="display: block; margin: auto;">
 <h2 id="summary">Summary</h2>
 <p>I have described 7 hopefully helpful tips about how to improve the accessibility scores for documents produced from Quarto and R Markdown. Using these tips I have increased the accessibility score for my module from 67% for last year&rsquo;s site to 98% for this year&rsquo;s site.</p>
-<img src="/post/2025/quarto-accessibility/img/summary-score.png" alt="Screenshot of Ally Accessibility Checker 1.3 summary score for my module within Blackboard online learning environment." width="630" style="display: block; margin: auto;">
+<img src="/post/2025/quarto-accessibility/img/summary-score.png" alt="Screenshot of Ally Accessibility Checker summary score for my module within Blackboard online learning environment." width="630" style="display: block; margin: auto;">
 <p>I hope that you have similar success.</p>
 
               </div>
