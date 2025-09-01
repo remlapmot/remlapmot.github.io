@@ -70,7 +70,7 @@ print('returned value:', retval2)
   # ///
   ```
   If you don't use Stata, and only use `jupyter: python3` then you can delete the `jupyterlab-stata-highlight2` and `nbstata` entries. But if you use additional Python packages in your code then you need to add them to the list.
-* Then comes the actual code. These are simply system calls using the _subprocess_ module.
+* Then comes the actual code. These are simply system calls using the _subprocess_ module. You can amend the number of calls and the calls inside the string quotes as required.
 
 Save the script in a file, say _render_, then make it executable with
 
