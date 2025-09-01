@@ -35,10 +35,7 @@ A recent [post by Matt Dray](https://www.rostrum.blog/posts/2025-08-11-uv-standa
 
 ## The self-contained script
 
-
-
-
-
+I came up with the following.
 
 ```python
 #!/usr/bin/env -S uv run --script
@@ -65,7 +62,17 @@ retval2 = subprocess.call(cmd2, shell=True)
 print('returned value:', retval2)
 ```
 
-Save the script in a file, say _render_. Then make this executable with
+* The first line, the shebang ensures it is run by `uv`
+* Then the Python dependency libraries are declared between the
+  ```python
+  # /// script
+  # ...
+  # ///
+  ```
+  If you don't use Stata, and only use `jupyter: python3` then you can delete the `jupyterlab-stata-highlight2` and `nbstata` entries. But if you use additional Python packages in your code then you need to add them to the list.
+* Then comes the actual code. These are simply system calls using the _subprocess_ module.
+
+Save the script in a file, say _render_, then make it executable with
 
 ```sh
 chmod +x render
@@ -77,7 +84,7 @@ Then all my colleagues need to do is run it with
 ./render
 ```
 
-Of course uv and Quarto need to be installed and on their `PATH`. Also for running Stata code, of course Stata is required to be installed.
+Of course uv and Quarto need to be installed and on their `PATH`. Also for running Stata code, of course Stata is required to be installed. And on Windows I think this needs to be run from Git Bash rather than Powershell or CMD shell.
 
 The full documentation about uv scripts is [here](https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script).
 
