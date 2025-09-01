@@ -69,8 +69,10 @@ print('returned value:', retval2)
   # ...
   # ///
   ```
-  If you don't use Stata, and only use `jupyter: python3` then you can delete the `jupyterlab-stata-highlight2` and `nbstata` entries. But if you use additional Python packages in your code then you need to add them to the list.
-* Then comes the actual code. These are simply system calls using the _subprocess_ module. You can amend the number of calls and the calls inside the string quotes as required. And if you are not using Stata then you can delete the first group of 3 lines for `cmd0`.
+  
+  * If you don't use Stata, and only use `jupyter: python3` then you can delete the `jupyterlab-stata-highlight2` and `nbstata` entries and the first group of 3 lines for `cmd0`.
+  * If you use additional Python packages in your code then you need to add them to the list.
+* Then comes the actual code. These are simply system calls using the _subprocess_ module. You can amend the number of calls and the calls inside the string quotes as required. 
 
 Save the script in a file, say _render_, then make it executable with
 
@@ -84,11 +86,11 @@ Then all my colleagues need to do is run it with
 ./render
 ```
 
-Of course uv and Quarto need to be installed and on their `PATH`. Also for running Stata code, of course Stata is required to be installed. And on Windows I think this needs to be run from Git Bash rather than Powershell or CMD shell.
+Of course uv and Quarto need to be installed and be on their `PATH`. Also for running Stata code, of course Stata is required to be installed. On Windows this needs to be run from a Git Bash shell rather than from Powershell or CMD shell.
 
 The full documentation about uv scripts is [here](https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script).
 
-If you are only using the Quarto knitr engine then you don't need this script. And I don't use the Python quarto package here as it's currently slightly too limited.
+If you are only using the Quarto knitr engine then you don't need this script. And I don't use the Python quarto package here as it's currently slightly too limited for my use (I'm not sure it can render profiles).
 
 ## Summary
 
