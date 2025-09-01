@@ -15,7 +15,7 @@ tags:
   - Stata
   - Uv
 subtitle: ''
-summary: ""
+summary: "How to create a self-contained Python script, which declares the dependencies for the virtual environment to run Jupyter, for rendering Quarto documents. This allows non-technical users to simply run a single command to setup and activate a virtual environment and have the Quarto document rendered for them."
 authors: []
 lastmod: '2025-09-02T07:00:00+00:00'
 featured: no
