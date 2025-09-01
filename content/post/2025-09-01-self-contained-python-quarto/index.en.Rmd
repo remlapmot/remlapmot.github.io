@@ -1,0 +1,75 @@
+---
+title: "Self-contained Python scripts for rendering multi-engine Quarto documents"
+author: Package Build
+date: '2025-09-02'
+slug: self-contained-python-script-for-quarto
+categories:
+  - Blog
+tags:
+  - Quarto
+  - R
+  - R Markdown
+  - Python
+  - UV
+subtitle: ''
+summary: ""
+authors: []
+lastmod: '2025-09-02T07:00:00+00:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: no
+  alt_text: 'Screenshot of .'
+projects: []
+toc: true
+---
+
+## Introduction
+
+In previous posts I have covered creating effectively multi-engine Quarto documents
+
+https://www.rostrum.blog/posts/2025-08-11-uv-standalone/
+
+https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script
+
+https://packaging.python.org/en/latest/specifications/inline-script-metadata/#inline-script-metadata
+
+## The script
+
+Note I don't use the Python quarto package here as it's currently slightly too limited.
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "jupyterlab>=4.4.3",
+#     "jupyterlab-stata-highlight2>=0.1.2",
+#     "nbstata>=0.8.2",
+# ]
+# ///
+import subprocess
+
+cmd0 = "python -m nbstata.install --sys-prefix"
+retval0 = subprocess.call(cmd0, shell=True)
+print('returned value:', retval0)
+
+cmd1  = "quarto render --profile stata-questions"
+retval1 = subprocess.call(cmd1, shell=True)
+print('returned value:', retval1)
+
+cmd2  = "quarto render --profile stata-solutions"
+retval2 = subprocess.call(cmd2, shell=True)
+print('returned value:', retval2)
+```
+
+Make this executable
+
+```
+chmod +x render
+```
+
+Note you don't need this script if you are only using the Quarto knitr engine.
+
+## Summary
