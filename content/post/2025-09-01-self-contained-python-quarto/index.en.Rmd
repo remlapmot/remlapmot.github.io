@@ -94,4 +94,4 @@ If you are only using the Quarto knitr engine then you don't need this script. A
 
 ## Summary
 
-I have shown how to make a self-contained Python script for rendering quarto documents within a uv virtual environment without having to do the leg work of creating the environment yourself.
+I have shown how to make a self-contained Python script for rendering quarto documents within a uv virtual environment without having to do the leg work of creating the environment yourself. Hopefully this is helpful for slightly less technical colleagues.
