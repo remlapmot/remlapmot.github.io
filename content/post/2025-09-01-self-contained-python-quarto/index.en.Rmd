@@ -20,7 +20,7 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'Screenshot of .'
+  alt_text: 'Image of a scroll, representing a script containing the word Quarto and the Python and Jupyter logos.'
 projects: []
 toc: true
 ---
