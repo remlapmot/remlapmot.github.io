@@ -10,6 +10,7 @@ tags:
   - R
   - R Markdown
   - Python
+  - Stata
   - UV
 subtitle: ''
 summary: ""
@@ -20,7 +21,7 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'Image of a scroll, representing a script containing the word Quarto and the Python and Jupyter logos.'
+  alt_text: 'Image of a scroll, representing a script, containing the word Quarto and the Python and Jupyter logos.'
 projects: []
 toc: true
 ---
