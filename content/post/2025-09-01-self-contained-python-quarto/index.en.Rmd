@@ -6,12 +6,14 @@ slug: self-contained-python-script-for-quarto
 categories:
   - Blog
 tags:
+  - Jupyter
+  - Nbstata
   - Quarto
   - R
   - R Markdown
   - Python
   - Stata
-  - UV
+  - Uv
 subtitle: ''
 summary: ""
 authors: []
