@@ -593,6 +593,7 @@
         <li><a href="#zed">Zed</a></li>
         <li><a href="#r-launched-in-a-wezterm-terminal-session">R launched in a WezTerm terminal session</a></li>
         <li><a href="#visual-studio-code-and-positron">Visual Studio Code and Positron</a></li>
+        <li><a href="#ghostty">Ghostty</a></li>
         <li><a href="#saving-and-adding-icons">Saving and adding icons</a></li>
         <li><a href="#adding-the-apps-to-the-finder-toolbar">Adding the apps to the Finder toolbar</a></li>
       </ul>
@@ -727,8 +728,9 @@ end run
     try
       set currentFolder to (folder of window 1) as alias
       set workspaceFiles to (every file of currentFolder whose name extension is &quot;Rproj&quot;)
-      if (count of workspaceFiles) = 0 then 
-        display dialog &quot;No Rproj files found in directory.&quot;
+      if (count of workspaceFiles) = 0 then
+        set thePath to quoted form of POSIX path of (currentFolder as alias)
+        do shell script &quot;/Applications/RStudio.app/Contents/MacOS/RStudio &quot; &amp; thePath
       else if (count of workspaceFiles) = 1 then 
         set workspaceFile to item 1 of workspaceFiles
         set workspacePath to POSIX path of (workspaceFile as alias)
@@ -747,7 +749,7 @@ end run
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
-    do shell script &quot;/opt/homebrew/bin/wezterm-gui start --cwd &quot; &amp; thePath
+    do shell script &quot;/opt/homebrew/bin/wezterm-gui start --cwd &quot; &amp; thePath &amp; &quot;&amp;&gt; /dev/null &amp;&quot;
   end tell
 end run
 </code></pre>
@@ -765,7 +767,7 @@ end run
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
-    do shell script &quot;/opt/homebrew/bin/wezterm-gui start --cwd &quot; &amp; thePath &amp; &quot; -- /usr/local/bin/R&quot;
+    do shell script &quot;/opt/homebrew/bin/wezterm-gui start --cwd &quot; &amp; thePath &amp; &quot; -- /usr/local/bin/R&quot; &amp; &quot;&amp;&gt; /dev/null &amp;&quot;
   end tell
 end run
 </code></pre>
@@ -796,6 +798,15 @@ end run
 end run
 </code></pre>
 <p>(For your Visual Studio Code app simply replace <code>positron</code> with <code>code</code>.)</p>
+<h3 id="ghostty">Ghostty</h3>
+<pre><code class="language-applescript">on run {input, parameters}
+  tell application &quot;Finder&quot;
+    set myWin to window 1
+    set thePath to (quoted form of POSIX path of (target of myWin as alias))
+    do shell script &quot;open -na ghostty --args --title=ghostty-from-finder --working-directory=&quot; &amp; thePath
+  end tell
+end run
+</code></pre>
 <h3 id="saving-and-adding-icons">Saving and adding icons</h3>
 <p>After adding the AppleScript code save each app. I call mine, e.g., <em>RStudio-openhere.app</em>.</p>
 <p>Next it is helpful to give each app the relevant icon. To do this in Finder bring up the Info boxes for the original app and your <em>-openhere</em> version by selecting each app and pressing <kbd>Cmd</kbd>+<kbd>I</kbd>. Next drag the large icon from the original app onto the small icon of your <em>-openhere</em> app.</p>
