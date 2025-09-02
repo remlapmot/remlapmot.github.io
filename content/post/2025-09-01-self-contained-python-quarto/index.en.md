@@ -1,5 +1,5 @@
 ---
-title: "Self-contained Python scripts for rendering multi-engine Quarto documents"
+title: "Self-contained Python scripts for rendering Quarto documents using the Jupyter engine"
 author: Package Build
 date: '2025-09-02'
 slug: self-contained-python-script-for-quarto
@@ -15,7 +15,7 @@ tags:
   - Stata
   - uv
 subtitle: ''
-summary: "How to create a self-contained Python script, which declares the dependencies for the virtual environment to run Jupyter, for rendering Quarto documents. This allows non-technical users to simply run a single command to setup and activate a virtual environment and have the Quarto document rendered for them."
+summary: "How to create a self-contained Python script, which declares the dependencies for the virtual environment to run Jupyter, for rendering Quarto documents using the Jupyter engine. This allows non-technical users to simply run a single command which will setup and activate a virtual environment and have the Quarto document rendered for them and then deactivate the environment."
 authors: []
 lastmod: '2025-09-02T07:00:00+00:00'
 featured: no
@@ -30,11 +30,11 @@ toc: true
 
 ## Introduction
 
-In previous posts I have covered creating [effectively multi-engine Quarto documents](https://remlapmot.github.io/post/2025/multi-engine-quarto/) and also how to use [uv virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to run Quarto documents with Stata code. Hence by trivial extension we can use `uv` to run Quarto documents using the `jupyter: python3` engine.
+In previous posts I have covered creating [effectively multi-engine Quarto documents](https://remlapmot.github.io/post/2025/multi-engine-quarto/) and also how to use [uv virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to run Quarto documents with Stata code. Hence by trivial extension we can use `uv` to run Quarto documents using the `jupyter: python3` engine (as well as the `jupyter: nbstata` engine).
 
-The slight inconvenience about this approach is that you end up leaving a README or shell script with the required commands to activate the environment, install the nbstata kernel, and run Quarto. At this point I wonder if on collaborative projects at work whether I am deliberately trying to make my colleagues hate me, so I have been looking for a way to simplify this process for them.
+The slight inconvenience about this approach is that you end up leaving a README or shell script with the required commands to activate the environment, install the nbstata kernel, and run Quarto. At this point I wonder if on collaborative projects whether I am deliberately trying to make my colleagues hate me, so I have been looking for a way to simplify this process for them.
 
-A recent [post by Matt Dray](https://www.rostrum.blog/posts/2025-08-11-uv-standalone/) about using uv to implement self-contained Python scripts got me thinking. Could I produce a similar self-contained Python script to perform the rendering which would avoid my colleagues the trouble of activating the virtual environment etc?
+A recent [post by Matt Dray](https://www.rostrum.blog/posts/2025-08-11-uv-standalone/) about using uv to implement self-contained Python scripts got me thinking. Could I produce a similar self-contained Python script to perform the Quarto rendering for documents using the Jupyter engine which would avoid my colleagues the trouble of activating the virtual environment etc.?
 
 ## The self-contained script
 
@@ -75,7 +75,7 @@ print('returned value:', retval2)
   
   * If you don't use Stata, and only use `jupyter: python3` then you can delete the `jupyterlab-stata-highlight2` and `nbstata` entries and the first group of 3 lines for `cmd0`.
   * If you use additional Python packages in your code then you need to add them to the list.
-* Then comes the actual code. These are simply system calls using the _subprocess_ module. You can amend the number of calls and the calls themselves inside the string quotes as required. 
+* Then comes the actual code. These are simply system calls using the _subprocess_ module. You can amend the number of calls and the calls themselves inside the string quotes as required. I am recreating the commands in my recent [post about using Quarto profiles for tutorial documents](https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/).
 
 Save the script in a file, say _render_, then make it executable with
 
@@ -89,12 +89,14 @@ Then all my colleagues need to do is run it with
 ./render
 ```
 
-Of course uv and Quarto need to be installed and be on their `PATH`. Also for running Stata code, that is required to be installed. And Windows users need to run this from a Git Bash shell rather than from Powershell or CMD shell.
+Of course uv and Quarto need to be installed and be on their `PATH`, and of course Stata must be installed locally when using that. For my colleagues using Windows, they need to run this from a Git Bash shell rather than from Powershell or CMD shell.
 
-If you are only using the Quarto knitr engine then you don't need this script. And I don't use the Python quarto package here as it's currently slightly too limited for my use (I'm not sure it can render profiles).
+If you are only using the Quarto knitr engine then you don't need this script because you don't need Jupyter.
 
-For more information about uv script, the full documentation is [here](https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script).
+It's worth pointing out that I haven't used the Python quarto package here as it's currently slightly too limited for my use (I'm not sure it can render profiles).
+
+And for more information about uv Python scripts, the full documentation is [here](https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script).
 
 ## Summary
 
-I have shown how to make a self-contained Python script to render Quarto documents within a uv virtual environment without having to do the leg work of creating and activating the environment yourself. Hopefully this is helpful for slightly less technical colleagues.
+I have shown how to make a self-contained Python script to render Quarto documents which automatically create their own virtual environment without having to do the leg work of creating and activating the environment yourself.
