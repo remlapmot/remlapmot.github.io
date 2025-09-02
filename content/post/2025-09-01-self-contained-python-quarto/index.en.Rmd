@@ -30,15 +30,15 @@ toc: true
 
 ## Introduction
 
-In previous posts I have covered creating [effectively multi-engine Quarto documents](https://remlapmot.github.io/post/2025/multi-engine-quarto/) and also how to use [uv virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to run Quarto documents with Stata code. Hence by trivial extension we can use `uv` to run Quarto documents using the `jupyter: python3` engine (as well as the `jupyter: nbstata` engine).
+In previous posts I have covered creating [effectively multi-engine Quarto documents](https://remlapmot.github.io/post/2025/multi-engine-quarto/) and also how to use [uv virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to run Quarto documents with Stata code using the `jupyter: nbstata` engine. Hence by trivial extension we can use `uv` to run Quarto documents using the `jupyter: python3` engine.
 
 The slight inconvenience about this approach is that you end up leaving a README or shell script with the required commands to activate the environment, install the nbstata kernel, and run Quarto. At this point I wonder if on collaborative projects whether I am deliberately trying to make my colleagues hate me, so I have been looking for a way to simplify this process for them.
 
-A recent [post by Matt Dray](https://www.rostrum.blog/posts/2025-08-11-uv-standalone/) about using uv to implement self-contained Python scripts got me thinking. Could I produce a similar self-contained Python script to perform the Quarto rendering for documents using the Jupyter engine which would avoid my colleagues the trouble of activating the virtual environment etc.?
+A recent [post by Matt Dray](https://www.rostrum.blog/posts/2025-08-11-uv-standalone/) about using uv to run self-contained Python scripts got me thinking. Could I produce a similar self-contained Python script to perform the rendering for Quarto documents using the Jupyter engine. Then my colleagues would only need to call the script as an executable at the command line and hence avoid them the trouble of activating the virtual environment etc.?
 
-## The self-contained script
+## The self-contained Python script
 
-I came up with the following script.
+I came up with the following Python script.
 
 ```python
 #!/usr/bin/env -S uv run --script
@@ -66,16 +66,16 @@ print('returned value:', retval2)
 ```
 
 * The first line, the shebang ensures it is run by `uv run`
-* The Python dependency libraries are declared between the
+* The metadata defining the Python environment is declared between the
   ```python
   # /// script
   # ...
   # ///
   ```
   
-  * If you don't use Stata, and only use `jupyter: python3` then you can delete the `jupyterlab-stata-highlight2` and `nbstata` entries and the first group of 3 lines for `cmd0`.
+  * If you don't use Stata, say you are using the `jupyter: python3` engine then you can delete the `jupyterlab-stata-highlight2` and `nbstata` entries and the first group of 3 lines for `cmd0`.
   * If you use additional Python packages in your code then you need to add them to the list.
-* Then comes the actual code. These are simply system calls using the _subprocess_ module. You can amend the number of calls and the calls themselves inside the string quotes as required. I am recreating the commands in my recent [post about using Quarto profiles for tutorial documents](https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/).
+* Then comes the actual code. These are simply system calls using the _subprocess_ module. You can amend the number of calls and the calls themselves inside the string quotes as required. I am recreating some of the commands in my recent [post about using Quarto profiles for tutorial documents](https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/). It's worth pointing out that I haven't used the Python quarto package here as it's currently slightly too limited for my use (I'm not sure it can render profiles).
 
 Save the script in a file, say _render_, then make it executable with
 
@@ -93,10 +93,8 @@ Of course uv and Quarto need to be installed and be on their `PATH`, and of cour
 
 If you are only using the Quarto knitr engine then you don't need this script because you don't need Jupyter.
 
-It's worth pointing out that I haven't used the Python quarto package here as it's currently slightly too limited for my use (I'm not sure it can render profiles).
-
 And for more information about uv Python scripts, the full documentation is [here](https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script).
 
 ## Summary
 
-I have shown how to make a self-contained Python script to render Quarto documents which automatically create their own virtual environment without having to do the leg work of creating and activating the environment yourself.
+I have shown how to make a self-contained Python script to render Quarto documents using the Jupyter engine which automatically create their own virtual environment. This means users don't have to manage the virtual environment themselves, which can be a pain point for new Python users.
