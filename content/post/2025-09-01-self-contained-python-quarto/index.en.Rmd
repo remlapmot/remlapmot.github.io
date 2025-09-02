@@ -13,7 +13,7 @@ tags:
   - R Markdown
   - Python
   - Stata
-  - Uv
+  - uv
 subtitle: ''
 summary: "How to create a self-contained Python script, which declares the dependencies for the virtual environment to run Jupyter, for rendering Quarto documents. This allows non-technical users to simply run a single command to setup and activate a virtual environment and have the Quarto document rendered for them."
 authors: []
