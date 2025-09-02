@@ -34,9 +34,9 @@ In previous posts I have covered creating [effectively multi-engine Quarto docum
 
 The slight inconvenience about this approach when you are working on a collaborative project with new Python users is that you end up leaving a README or shell script with the required commands to activate the environment, install the nbstata kernel, and run Quarto. I sense this management of the virutal environment is a pain point for new Python users - who are likely wondering what on earth a virtual environment is. So I have been looking for a way to simplify this process for them.
 
-A recent [post by Matt Dray](https://www.rostrum.blog/posts/2025-08-11-uv-standalone/) about using uv to run self-contained Python scripts got me thinking. Could I produce a similar self-contained Python script to perform the rendering for Quarto documents using the Jupyter engine. Then my colleagues would only need to call the script as an executable at the command line. This would avoid them the trouble of managing the virtual environment.
+A recent [post by Matt Dray](https://www.rostrum.blog/posts/2025-08-11-uv-standalone/) about using uv to run self-contained executable Python scripts got me thinking. Could I produce a similar self-contained executable Python script to perform the rendering for Quarto documents using the Jupyter engine. Then my colleagues would only need to call the script as an executable at the command line. This would avoid them the trouble of managing the virtual environment.
 
-## The self-contained Python script
+## The self-contained executable Python script
 
 I came up with the following Python script.
 
@@ -75,7 +75,7 @@ print('returned value:', retval2)
   
   * If you don't use Stata, say you are using the `jupyter: python3` engine then you can delete the `jupyterlab-stata-highlight2` and `nbstata` entries and the first group of 3 lines for `cmd0`.
   * If you use additional Python packages in your code then you need to add them to the list.
-* Then comes the actual code. These are simply system calls using the _subprocess_ module. You can amend the number of calls and the calls themselves inside the string quotes as required. I am recreating some of the commands in my recent [post about using Quarto profiles for tutorial documents](https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/). It's worth pointing out that I haven't used the Python quarto package here as it's currently slightly too limited for my use (I'm not sure it can render profiles).
+* Then comes the actual code. These are simply system calls using the _subprocess_ module. You can amend the number of calls and the calls themselves inside the string quotes as required. I am recreating some of the rendering commands in my recent [post about using Quarto profiles for tutorial documents](https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/). It's worth pointing out that I haven't used the Python quarto package here as it's currently slightly too limited for my use (I'm not sure it can render profiles).
 
 Save the script in a file, say _render_, then make it executable with
 
