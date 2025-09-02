@@ -767,7 +767,7 @@ end run
   tell application &quot;Finder&quot;
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
-    do shell script &quot;/opt/homebrew/bin/wezterm-gui start --cwd &quot; &amp; thePath &amp; &quot; -- /usr/local/bin/R&quot; &amp; &quot;&amp;&gt; /dev/null &amp;&quot;
+    do shell script &quot;/opt/homebrew/bin/wezterm-gui start --cwd &quot; &amp; thePath &amp; &quot; -- /usr/local/bin/R &amp;&gt; /dev/null &amp;&quot;
   end tell
 end run
 </code></pre>
