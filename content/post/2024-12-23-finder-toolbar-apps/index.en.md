@@ -61,8 +61,9 @@ on run {input, parameters}
     try
       set currentFolder to (folder of window 1) as alias
       set workspaceFiles to (every file of currentFolder whose name extension is "Rproj")
-      if (count of workspaceFiles) = 0 then 
-        display dialog "No Rproj files found in directory."
+      if (count of workspaceFiles) = 0 then
+        set thePath to quoted form of POSIX path of (currentFolder as alias)
+        do shell script "/Applications/RStudio.app/Contents/MacOS/RStudio " & thePath
       else if (count of workspaceFiles) = 1 then 
         set workspaceFile to item 1 of workspaceFiles
         set workspacePath to POSIX path of (workspaceFile as alias)
@@ -84,7 +85,7 @@ on run {input, parameters}
   tell application "Finder"
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
-    do shell script "/opt/homebrew/bin/wezterm-gui start --cwd " & thePath
+    do shell script "/opt/homebrew/bin/wezterm-gui start --cwd " & thePath & "&> /dev/null &"
   end tell
 end run
 ```
@@ -108,7 +109,7 @@ on run {input, parameters}
   tell application "Finder"
     set myWin to window 1
     set thePath to (quoted form of POSIX path of (target of myWin as alias))
-    do shell script "/opt/homebrew/bin/wezterm-gui start --cwd " & thePath & " -- /usr/local/bin/R"
+    do shell script "/opt/homebrew/bin/wezterm-gui start --cwd " & thePath & " -- /usr/local/bin/R" & "&> /dev/null &"
   end tell
 end run
 ```
@@ -143,6 +144,18 @@ end run
 ```
 
 (For your Visual Studio Code app simply replace `positron` with `code`.)
+
+### Ghostty
+
+```applescript
+on run {input, parameters}
+  tell application "Finder"
+    set myWin to window 1
+    set thePath to (quoted form of POSIX path of (target of myWin as alias))
+    do shell script "open -na ghostty --args --title=ghostty-from-finder --working-directory=" & thePath
+  end tell
+end run
+```
 
 ### Saving and adding icons
 
