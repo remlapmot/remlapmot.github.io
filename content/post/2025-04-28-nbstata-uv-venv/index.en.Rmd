@@ -10,6 +10,7 @@ tags:
   - Jupyter
   - nbstata
   - Quarto
+  - uv
 subtitle:
 summary: "How to setup a uv virtual environment to run the nbstata Jupyter kernel."
 authors: []

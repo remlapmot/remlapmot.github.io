@@ -38,6 +38,9 @@ enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
 ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "_cache$", "(^|/)renv$", "renv\\.lock$"]
 
+# don't capitalise tag names
+capitalizeListTitles = false
+
 # Workaround Hugo publishing taxonomy URLs as plurals - consistently use singular across Academic.
 [permalinks]
   authors = "/author/:slug/"
