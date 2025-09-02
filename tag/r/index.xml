@@ -5,12 +5,84 @@
     <link>https://remlapmot.github.io/tag/r/</link>
       <atom:link href="https://remlapmot.github.io/tag/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 15 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 02 Sep 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
       <title>R</title>
       <link>https://remlapmot.github.io/tag/r/</link>
     </image>
+    
+    <item>
+      <title>Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine</title>
+      <link>https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/</link>
+      <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;In previous posts I have covered creating 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/multi-engine-quarto/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;effectively multi-engine Quarto documents&lt;/a&gt; and also how to use 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/nbstata-uv-venv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;uv virtual environments for the nbstata Jupyter kernel&lt;/a&gt; to run Quarto documents with Stata code. Hence by trivial extension we can use &lt;code&gt;uv&lt;/code&gt; to manage the virutal environments for running Quarto documents using the &lt;code&gt;jupyter: python3&lt;/code&gt; engine.&lt;/p&gt;
+&lt;p&gt;The slight inconvenience about this approach when you are working on a collaborative project with new Python users is that you end up leaving a README or shell script with the required commands to activate the environment, install the nbstata kernel, and run Quarto. I sense this management of the virutal environment is a pain point for new Python users - who are likely wondering what on earth a virtual environment is. So I have been looking for a way to simplify this process for them.&lt;/p&gt;
+&lt;p&gt;A recent 
+&lt;a href=&#34;https://www.rostrum.blog/posts/2025-08-11-uv-standalone/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;post by Matt Dray&lt;/a&gt; about using uv to run self-contained executable Python scripts got me thinking. Could I produce a similar self-contained executable Python script to perform the rendering for Quarto documents using the Jupyter engine. Then my colleagues would only need to call the script as an executable at the command line. This would avoid them the trouble of managing the virtual environment.&lt;/p&gt;
+&lt;h2 id=&#34;the-self-contained-executable-python-script&#34;&gt;The self-contained executable Python script&lt;/h2&gt;
+&lt;p&gt;I came up with the following Python script.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = &amp;quot;&amp;gt;=3.9&amp;quot;
+# dependencies = [
+#     &amp;quot;jupyterlab&amp;gt;=4.4.3&amp;quot;,
+#     &amp;quot;jupyterlab-stata-highlight2&amp;gt;=0.1.2&amp;quot;,
+#     &amp;quot;nbstata&amp;gt;=0.8.3&amp;quot;,
+# ]
+# ///
+import subprocess
+
+cmd0 = &amp;quot;python -m nbstata.install --sys-prefix&amp;quot;
+retval0 = subprocess.call(cmd0, shell=True)
+print(&#39;returned value:&#39;, retval0)
+
+cmd1  = &amp;quot;quarto render --profile stata-questions&amp;quot;
+retval1 = subprocess.call(cmd1, shell=True)
+print(&#39;returned value:&#39;, retval1)
+
+cmd2  = &amp;quot;quarto render --profile stata-solutions&amp;quot;
+retval2 = subprocess.call(cmd2, shell=True)
+print(&#39;returned value:&#39;, retval2)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The first line, the shebang ensures it is run by &lt;code&gt;uv run&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The metadata defining the Python environment is declared between the&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# /// script
+# ...
+# ///
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;If you don&amp;rsquo;t use Stata, say you are using the &lt;code&gt;jupyter: python3&lt;/code&gt; engine then you can delete the &lt;code&gt;jupyterlab-stata-highlight2&lt;/code&gt; and &lt;code&gt;nbstata&lt;/code&gt; entries and the first group of 3 lines for &lt;code&gt;cmd0&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If you use additional Python packages in your code then you need to add them to the list.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Then comes the actual code. These are simply system calls using the &lt;em&gt;subprocess&lt;/em&gt; module. You can amend the number of calls and the calls themselves inside the string quotes as required. I am recreating some of the rendering commands in my recent 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;post about using Quarto profiles for tutorial documents&lt;/a&gt;. It&amp;rsquo;s worth pointing out that I haven&amp;rsquo;t used the Python quarto package here as it&amp;rsquo;s currently slightly too limited for my use (I&amp;rsquo;m not sure it can render profiles).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Save the script in a file, say &lt;em&gt;render&lt;/em&gt;, then make it executable with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;chmod +x render
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then all my colleagues need to do is run it with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;./render
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Of course uv and Quarto need to be installed and be on their &lt;code&gt;PATH&lt;/code&gt;, and Stata needs to be installed locally when using that. For my colleagues using Windows, they need to run this from a Git Bash shell rather than from Powershell or CMD shell (for the shebang line to work).&lt;/p&gt;
+&lt;p&gt;If you are only using the Quarto knitr engine then you don&amp;rsquo;t need this script because you don&amp;rsquo;t need Jupyter.&lt;/p&gt;
+&lt;p&gt;And for more information about uv Python scripts, the full documentation is 
+&lt;a href=&#34;https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to make a self-contained executable Python script to render Quarto documents using the Jupyter engine which automatically manage their own virtual environment. This means users don&amp;rsquo;t have to manage the virtual environment themselves, which can be a pain point for new Python users.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Seven accessibility tips for Quarto and R Markdown users</title>

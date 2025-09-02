@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories | Dr Tom Palmer</title>
+    <title>categories | Dr Tom Palmer</title>
     <link>https://remlapmot.github.io/categories/</link>
       <atom:link href="https://remlapmot.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 15 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <description>categories</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 02 Sep 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
-      <title>Categories</title>
+      <title>categories</title>
       <link>https://remlapmot.github.io/categories/</link>
     </image>
     
