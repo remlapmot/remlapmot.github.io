@@ -47,7 +47,7 @@ I came up with the following script.
 # dependencies = [
 #     "jupyterlab>=4.4.3",
 #     "jupyterlab-stata-highlight2>=0.1.2",
-#     "nbstata>=0.8.2",
+#     "nbstata>=0.8.3",
 # ]
 # ///
 import subprocess
