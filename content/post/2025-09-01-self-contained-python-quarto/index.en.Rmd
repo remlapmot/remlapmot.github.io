@@ -1,5 +1,5 @@
 ---
-title: "Self-contained Python scripts for rendering Quarto documents using the Jupyter engine"
+title: "Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine"
 author: Package Build
 date: '2025-09-02'
 slug: self-contained-python-script-for-quarto
@@ -15,7 +15,7 @@ tags:
   - Stata
   - uv
 subtitle: ''
-summary: "How to create a self-contained Python script, which declares the dependencies for the virtual environment to run Jupyter, for rendering Quarto documents using the Jupyter engine. This allows non-technical users to simply run a single command which will setup and activate a virtual environment and have the Quarto document rendered for them and then deactivate the environment."
+summary: "How to create a self-contained executable Python script, which declares the dependencies for the virtual environment for rendering Quarto documents using the Jupyter engine. This allows non-technical users to render Quarto documents using the Jupyter engine without having to manage the virtual environment themselves."
 authors: []
 lastmod: '2025-09-02T07:00:00+00:00'
 featured: no
@@ -30,11 +30,11 @@ toc: true
 
 ## Introduction
 
-In previous posts I have covered creating [effectively multi-engine Quarto documents](https://remlapmot.github.io/post/2025/multi-engine-quarto/) and also how to use [uv virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to run Quarto documents with Stata code using the `jupyter: nbstata` engine. Hence by trivial extension we can use `uv` to run Quarto documents using the `jupyter: python3` engine.
+In previous posts I have covered creating [effectively multi-engine Quarto documents](https://remlapmot.github.io/post/2025/multi-engine-quarto/) and also how to use [uv virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to run Quarto documents with Stata code. Hence by trivial extension we can use `uv` to manage the virutal environments for running Quarto documents using the `jupyter: python3` engine.
 
-The slight inconvenience about this approach is that you end up leaving a README or shell script with the required commands to activate the environment, install the nbstata kernel, and run Quarto. At this point I wonder if on collaborative projects whether I am deliberately trying to make my colleagues hate me, so I have been looking for a way to simplify this process for them.
+The slight inconvenience about this approach when you are working on a collaborative project with new Python users is that you end up leaving a README or shell script with the required commands to activate the environment, install the nbstata kernel, and run Quarto. I sense this management of the virutal environment is a pain point for new Python users - who are likely wondering what on earth a virtual environment is. So I have been looking for a way to simplify this process for them.
 
-A recent [post by Matt Dray](https://www.rostrum.blog/posts/2025-08-11-uv-standalone/) about using uv to run self-contained Python scripts got me thinking. Could I produce a similar self-contained Python script to perform the rendering for Quarto documents using the Jupyter engine. Then my colleagues would only need to call the script as an executable at the command line and hence avoid them the trouble of activating the virtual environment etc.?
+A recent [post by Matt Dray](https://www.rostrum.blog/posts/2025-08-11-uv-standalone/) about using uv to run self-contained Python scripts got me thinking. Could I produce a similar self-contained Python script to perform the rendering for Quarto documents using the Jupyter engine. Then my colleagues would only need to call the script as an executable at the command line. This would avoid them the trouble of managing the virtual environment.
 
 ## The self-contained Python script
 
@@ -89,7 +89,7 @@ Then all my colleagues need to do is run it with
 ./render
 ```
 
-Of course uv and Quarto need to be installed and be on their `PATH`, and of course Stata must be installed locally when using that. For my colleagues using Windows, they need to run this from a Git Bash shell rather than from Powershell or CMD shell.
+Of course uv and Quarto need to be installed and be on their `PATH`, and Stata needs to be installed locally when using that. For my colleagues using Windows, they need to run this from a Git Bash shell rather than from Powershell or CMD shell (for the shebang line to work).
 
 If you are only using the Quarto knitr engine then you don't need this script because you don't need Jupyter.
 
@@ -97,4 +97,4 @@ And for more information about uv Python scripts, the full documentation is [her
 
 ## Summary
 
-I have shown how to make a self-contained Python script to render Quarto documents using the Jupyter engine which automatically create their own virtual environment. This means users don't have to manage the virtual environment themselves, which can be a pain point for new Python users.
+I have shown how to make a self-contained executable Python script to render Quarto documents using the Jupyter engine which automatically manage their own virtual environment. This means users don't have to manage the virtual environment themselves, which can be a pain point for new Python users.
