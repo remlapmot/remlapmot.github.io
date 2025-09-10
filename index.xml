@@ -5,12 +5,20 @@
     <link>https://remlapmot.github.io/</link>
       <atom:link href="https://remlapmot.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Dr Tom Palmer</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 02 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 10 Sep 2025 14:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
       <title>Dr Tom Palmer</title>
       <link>https://remlapmot.github.io/</link>
     </image>
+    
+    <item>
+      <title>Executable Python scripts with inline metadata and why friends don&#39;t let friends install R packages with remotes::install_github()</title>
+      <link>https://remlapmot.github.io/talk/2025_prog1/</link>
+      <pubDate>Wed, 10 Sep 2025 14:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/talk/2025_prog1/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine</title>

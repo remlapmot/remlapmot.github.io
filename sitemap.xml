@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://remlapmot.github.io/authors/</loc>
+    <lastmod>2025-09-10T14:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/</loc>
+    <lastmod>2025-09-10T14:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/2025_prog1/</loc>
+    <lastmod>2025-09-10T14:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/talk/</loc>
+    <lastmod>2025-09-10T14:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/author/tom-palmer/</loc>
+    <lastmod>2025-09-10T14:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://remlapmot.github.io/category/blog/</loc>
     <lastmod>2025-09-02T07:00:00+00:00</lastmod>
   </url><url>
@@ -9,9 +24,6 @@
     <lastmod>2025-09-02T07:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/</loc>
-    <lastmod>2025-09-02T07:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/</loc>
     <lastmod>2025-09-02T07:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/tag/jupyter/</loc>
@@ -77,16 +89,7 @@
     <loc>https://remlapmot.github.io/tag/html/</loc>
     <lastmod>2025-05-30T10:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://remlapmot.github.io/authors/</loc>
-    <lastmod>2025-05-07T12:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://remlapmot.github.io/talk/2025_code-clinic/</loc>
-    <lastmod>2025-05-07T12:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/talk/</loc>
-    <lastmod>2025-05-07T12:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/author/tom-palmer/</loc>
     <lastmod>2025-05-07T12:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/post/2025/nbstata-uv-venv/</loc>
