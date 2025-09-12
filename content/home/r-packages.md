@@ -117,5 +117,15 @@ date_format = "Jan 2006"
   date_start = "2023-06-02"
   date_end = ""
   description = ""
+
+[[item]]
+  organization = "R"
+  organization_url = "https://r-project.org"
+  title = "Additional R packages I help maintain"
+  url = ""
+  certificate_url = ""
+  date_start = "2024-04-01"
+  date_end = ""
+  description = "[RadialMR](https://github.com/WSpiller/RadialMR), [MVMR](https://github.com/WSpiller/MVMR), [RMVMR](https://github.com/WSpiller/RMVMR)"
   
 +++
