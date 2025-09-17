@@ -127,5 +127,15 @@ date_format = "Jan 2006"
   date_start = "2024-04-01"
   date_end = ""
   description = "[RadialMR](https://github.com/WSpiller/RadialMR), [MVMR](https://github.com/WSpiller/MVMR), [RMVMR](https://github.com/WSpiller/RMVMR)"
-  
+
+[[item]]
+  organization = "R"
+  organization_url = "https://www.r-project.org"
+  title = "SEQTaRget R package"
+  url = "https://causalinference.github.io/SEQTaRget/"
+  certificate_url = ""
+  date_start = "2025-09-17"
+  date_end = ""
+  description = ""
+
 +++
