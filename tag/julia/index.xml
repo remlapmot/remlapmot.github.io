@@ -348,15 +348,11 @@ display &amp;quot;Hidden in questions&amp;quot;
 HIDE_ANSWERS_STATA=0 quarto render exercise-stata.qmd -o exercise-stata-solutions.html
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;julia&#34;&gt;Julia&lt;/h3&gt;
-&lt;p&gt;For the native Julia engine I found that Quarto&amp;rsquo;s parameterisation worked and that I could avoid the inclusion of the injected parameters cell output by leaving the chunk with the &lt;code&gt;parameters&lt;/code&gt; tag empty.&lt;/p&gt;
+&lt;p&gt;For the native Julia engine I found that Quarto&amp;rsquo;s parameterisation worked and that I didn&amp;rsquo;t require a code chunk with a parameters tag.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
 format: html
 engine: julia
 ---
-
-```{julia}
-#| tags: [parameters]
-```
 
 ```{julia}
 #| include: false
