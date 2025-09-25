@@ -213,7 +213,7 @@ HIDE_ANSWERS_STATA=0 quarto render exercise-stata.qmd -o exercise-stata-solution
 
 ### Julia
 
-For the native Julia engine I found that Quarto's parameterisation worked and that I could avoid the inclusion of the injected parameters cell output by leaving the chunk with the `parameters` tag empty.
+For the native Julia engine I found that Quarto's parameterisation worked and that I didn't require a code chunk with a parameters tag.
 
 
 ```` plaintext
@@ -221,10 +221,6 @@ For the native Julia engine I found that Quarto's parameterisation worked and th
 format: html
 engine: julia
 ---
-
-```{julia}
-#| tags: [parameters]
-```
 
 ```{julia}
 #| include: false
