@@ -1096,6 +1096,9 @@ rmarkdown::render(&amp;quot;exercise.Rmd&amp;quot;,
 &lt;p&gt;R Markdown is incredibly flexible because we can include R objects as document and chunk options. When translating this to a pure Quarto version we can do this in a document using in the knitr engine using the 
 &lt;a href=&#34;https://quarto.org/docs/tools/rstudio.html#knitr-engine&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;! expr ...&lt;/code&gt; YAML tag literal&lt;/a&gt;. As far as I am aware, this is not yet possible for any other Quarto engine. Despite this my aim was to see whether I could achieve parameterised conditional content inclusion/exclusion in a Quarto document using other engines.&lt;/p&gt;
 &lt;h2 id=&#34;programmatically-including-conditional-content-in-quarto-documents&#34;&gt;Programmatically including conditional content in Quarto documents&lt;/h2&gt;
+&lt;p&gt;The code described below is presented in the following 
+&lt;a href=&#34;https://github.com/remlapmot/quarto-parameterised-reports-test&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;demo repo&lt;/a&gt;, and the rendered output files can also 
+&lt;a href=&#34;https://remlapmot.github.io/quarto-parameterised-reports-test/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;be viewed&lt;/a&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;r-knitr-and-quarto&#34;&gt;R: knitr and Quarto&lt;/h3&gt;
 &lt;p&gt;I have already shown the R Markdown approach above.&lt;/p&gt;
 &lt;p&gt;For Quarto using the knitr engine, in a blog post 
