@@ -93,6 +93,8 @@ R Markdown is incredibly flexible because we can include R objects as document a
 
 ## Programmatically including conditional content in Quarto documents
 
+The code described below is presented in the following [demo repo](https://github.com/remlapmot/quarto-parameterised-reports-test), and the rendered output files can also [be viewed](https://remlapmot.github.io/quarto-parameterised-reports-test/).
+
 ### R: knitr and Quarto
 
 I have already shown the R Markdown approach above.
