@@ -226,7 +226,8 @@ print(&#39;returned value:&#39;, retval2)
 &lt;a href=&#34;https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;vignette by Christophe Dervieux&lt;/a&gt; in the quarto R package I realised there is a more convenient, and less hacky, way to create tutorial documents using Quarto profiles. I don&amp;rsquo;t use the dynamic metadata approach in the vignette to achieve my solution but it led me to relevant Quarto documentation page and I discuss it at the end of this post.&lt;/p&gt;
 &lt;p&gt;My aim is the following&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;To have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;To have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;As a reminder, as 
 &lt;a href=&#34;https://remlapmot.github.io/post/2025/quarto-conditional-content/#introduction&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;I showed in my previous post&lt;/a&gt;, this has been possible to achieve for a long time with R Markdown and knitr because thanks to the brilliant work of Yihui Xie because they allow programmtic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also straighforward and I won&amp;rsquo;t repeat it in this post. However, it is the three other Quarto engines (for Python, Stata, and Julia) that I am interested in which are problematic because as far as I know they don&amp;rsquo;t allow programmtic chunk options and they don&amp;rsquo;t have the equivalent of the &lt;code&gt;! expr ...&lt;/code&gt; YAML tag literal.&lt;/p&gt;
 &lt;h2 id=&#34;quarto-profiles&#34;&gt;Quarto profiles&lt;/h2&gt;

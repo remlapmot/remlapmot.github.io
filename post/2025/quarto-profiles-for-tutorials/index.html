@@ -710,7 +710,8 @@
 <a href="https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html" target="_blank" rel="noopener">vignette by Christophe Dervieux</a> in the quarto R package I realised there is a more convenient, and less hacky, way to create tutorial documents using Quarto profiles. I don&rsquo;t use the dynamic metadata approach in the vignette to achieve my solution but it led me to relevant Quarto documentation page and I discuss it at the end of this post.</p>
 <p>My aim is the following</p>
 <blockquote>
-<p>To have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.</p></blockquote>
+<p>To have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.</p>
+</blockquote>
 <p>As a reminder, as 
 <a href="https://remlapmot.github.io/post/2025/quarto-conditional-content/#introduction" target="_blank" rel="noopener">I showed in my previous post</a>, this has been possible to achieve for a long time with R Markdown and knitr because thanks to the brilliant work of Yihui Xie because they allow programmtic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also straighforward and I won&rsquo;t repeat it in this post. However, it is the three other Quarto engines (for Python, Stata, and Julia) that I am interested in which are problematic because as far as I know they don&rsquo;t allow programmtic chunk options and they don&rsquo;t have the equivalent of the <code>! expr ...</code> YAML tag literal.</p>
 <h2 id="quarto-profiles">Quarto profiles</h2>
