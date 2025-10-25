@@ -51,6 +51,16 @@ date_format = "Jan 2006"
 [[item]]
   organization = "Stata"
   organization_url = "https://www.stata.com"
+  title = "reffadjust Stata package"
+  url = "https://remlapmot.github.io/reffadjust/"
+  certificate_url = ""
+  date_start = "2014-01-30"
+  date_end = ""
+  description = ""
+
+[[item]]
+  organization = "Stata"
+  organization_url = "https://www.stata.com"
   title = "mrrobust Stata package"
   url = "https://remlapmot.github.io/mrrobust"
   certificate_url = ""
