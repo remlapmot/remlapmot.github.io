@@ -5,12 +5,24 @@
     <link>https://remlapmot.github.io/tag/github/</link>
       <atom:link href="https://remlapmot.github.io/tag/github/index.xml" rel="self" type="application/rss+xml" />
     <description>GitHub</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 16 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 05 Dec 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_72d72b3c768972db.png</url>
       <title>GitHub</title>
       <link>https://remlapmot.github.io/tag/github/</link>
     </image>
+    
+    <item>
+      <title>My #GitHubUnwrapped 2025!</title>
+      <link>https://remlapmot.github.io/post/2025/github-unwrapped-2025/</link>
+      <pubDate>Fri, 05 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/github-unwrapped-2025/</guid>
+      <description>&lt;p&gt;My #GitHubUnwrapped 2025!&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;iframe src=&#34;https://drive.google.com/file/d/1SE5-CKtZDJEEghE8zJz-r3UlW9J8dhDC/preview&#34; width=&#34;640&#34; height=&#34;480&#34; allow=&#34;autoplay&#34;&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;Made with 
+&lt;a href=&#34;https://www.githubunwrapped.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.githubunwrapped.com/&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Running R on Windows on ARM on GitHub Actions</title>
