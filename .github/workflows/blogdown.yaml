@@ -33,7 +33,7 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
       
       - name: Install hugo
-        run: blogdown::install_hugo(version = "0.155.0")
+        run: blogdown::install_hugo(version = "0.155.1")
         shell: Rscript {0}
 
       - name: Build site
