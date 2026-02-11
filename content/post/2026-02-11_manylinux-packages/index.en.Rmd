@@ -23,11 +23,11 @@ toc: true
 
 ## Introduction
 
-I am a massive fan of repositories making binary R packages available. This includes the canonical CRAN repositories, <https://r-universe.dev/>, and the Posit (Public) Package Manager <https://packagemanager.posit.co/>. R-universe is outstanding because it builds binaries of GitHub only packages. The Posit Public Package Manager is outstanding due to its incredible breadth (it makes binaries for 14 Linux distros) and also its depth (its almost daily snapshotting service is remarkably useful for quickly making reproducible R environments).
+I am a massive fan of repositories making binary R packages available. This includes the canonical CRAN repositories, [r-universe](https://r-universe.dev/), and the [Posit (Public) Package Manager](https://packagemanager.posit.co/), and think there may be others. R-universe is outstanding because it builds binaries of GitHub only packages. The Posit Public Package Manager is outstanding due to its incredible breadth (it makes binaries for 14 Linux distros) and also its depth (its almost daily snapshotting service is remarkably useful for quickly making reproducible R environments).
 
-Today I wanted to highlight how the manylinux_2_28 packages in the Posit Public Package Manager helped me out. Posit released this in [June 2025](https://packagemanager.posit.co/cran/__linux__/manylinux_2_28/latest). Ironically, I was using another Posit service, Posit Cloud (formerly RStudio Cloud). Within this I have quite a few projects in workspaces which are 4 or 5 years old. Behind the scenes these are running on Ubuntu Focal Fossa Linux. I believe if I make a new RStudio project that will be running on Ubuntu Noble Numbat.
+Today I wanted to highlight how the manylinux_2_28 packages in the Posit Public Package Manager helped me out. Posit released this in [June 2025](https://packagemanager.posit.co/cran/__linux__/manylinux_2_28/latest). Ironically, I was using another Posit service, Posit Cloud (formerly RStudio Cloud). Within this I have quite a few projects in workspaces which are 4 or 5 years old. Behind the scenes these are running on Ubuntu Focal Fossa Linux. I believe if I make a new RStudio project that will be running on Ubuntu Noble Numbat and so users of new projects won't need this tip.
 
-Unfortunately, Focal Fossa is out of support (except if you have Ubuntu Pro) and hence Posit have removed their Focal repository packages from the Posit Package Manager. Within the Posit Cloud project workspace Posit kindly make available a private version of clearly what was that Focal repository. However, for reasons I don't fully understand a fair number of the packages I required weren't built as binaries.
+Unfortunately, Focal Fossa is out of support (except if you have Ubuntu Pro) and hence Posit have removed their Focal repository packages from the Posit Public Package Manager. Within the Posit Cloud project workspace Posit kindly make available a private version of clearly what was that Focal repository. However, for reasons I don't fully understand a fair number of the packages I required weren't built as binaries.
 
 That got me thinking, could the manylinux packages help here. I realised that I didn't know what version of glibc Ubuntu Focal Fossa came with. A quick
 
@@ -37,7 +37,7 @@ ldd --version
 
 revealed
 
-```
+```plaintext
 ldd (Ubuntu GLIBC 2.31-0ubuntu9.17) 2.31
 Copyright (C) 2020 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
