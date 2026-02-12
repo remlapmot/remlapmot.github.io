@@ -43,7 +43,7 @@ Written by Roland McGrath and Ulrich Drepper.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;and all the packages came in as binaries. If you are not running this from within RStudio your syntax would need to be the following as per 
 &lt;a href=&#34;https://packagemanager.posit.co/client/#/repos/cran/setup&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the setup page&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;options(repos = 
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;options(repos = 
   c(
     CRAN = sprintf(&amp;quot;https://packagemanager.posit.co/cran/latest/bin/linux/manylinux_2_28-%s/%s&amp;quot;,
     R.version[&amp;quot;arch&amp;quot;], 
