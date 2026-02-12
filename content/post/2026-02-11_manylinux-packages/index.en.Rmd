@@ -56,7 +56,7 @@ install.packages(
 
 and all the packages came in as binaries. If you are not running this from within RStudio your syntax would need to be the following as per [the setup page](https://packagemanager.posit.co/client/#/repos/cran/setup)
 
-```
+```r
 options(repos = 
   c(
     CRAN = sprintf("https://packagemanager.posit.co/cran/latest/bin/linux/manylinux_2_28-%s/%s",
