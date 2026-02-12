@@ -50,6 +50,7 @@ Written by Roland McGrath and Ulrich Drepper.
     substr(getRversion(), 1, 3))
   )
 )
+install.packages(&#39;tidyverse&#39;)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;img src=&#34;https://remlapmot.github.io/post/2026/manylinux-packages/img/installing-manylinux-packages.png&#34; alt=&#34;Screenshot of installing packages in a Posit Cloud RStudio project running on Ubuntu Focal Fossa.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
 &lt;p&gt;My other solution could have been to create a new RStudio project, which as I said would be running on Noble Numbat.&lt;/p&gt;
