@@ -5,12 +5,58 @@
     <link>https://remlapmot.github.io/post/</link>
       <atom:link href="https://remlapmot.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 05 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_4c69fe6e68a3b4.png</url>
       <title>posts</title>
       <link>https://remlapmot.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>How Posit&#39;s Public Package Manager manylinux_2_28 repository can help you if your R project is stuck on Ubuntu Focal Fossa</title>
+      <link>https://remlapmot.github.io/post/2026/manylinux-packages/</link>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2026/manylinux-packages/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I am a massive fan of repositories making binary R packages available. This includes the canonical CRAN repositories, 
+&lt;a href=&#34;https://r-universe.dev/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;r-universe&lt;/a&gt;, 
+&lt;a href=&#34;https://eddelbuettel.github.io/r2u/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;r2u&lt;/a&gt;, and the 
+&lt;a href=&#34;https://packagemanager.posit.co/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Posit (Public) Package Manager&lt;/a&gt;, and there are others. R-universe is outstanding because it builds binaries of GitHub only packages. The Posit Public Package Manager is outstanding due to its incredible breadth (it makes binaries for 14 Linux distros) and also its depth (its almost daily snapshotting service is remarkably useful for quickly making reproducible R environments).&lt;/p&gt;
+&lt;p&gt;Today I wanted to highlight how the manylinux_2_28 packages in the Posit Public Package Manager helped me out. Posit released this in 
+&lt;a href=&#34;https://packagemanager.posit.co/cran/__linux__/manylinux_2_28/latest&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;June 2025&lt;/a&gt;. Ironically, I was using another Posit service, Posit Cloud (formerly RStudio Cloud). Within this I have quite a few projects in workspaces which are over 3 years old. Behind the scenes these are running on Ubuntu Focal Fossa Linux. I believe that if I create a new Posit Cloud RStudio project that will be running on Ubuntu Noble Numbat and so users of new projects won&amp;rsquo;t need this tip.&lt;/p&gt;
+&lt;p&gt;Unfortunately, Focal Fossa is out of support (except if you have Ubuntu Pro) and hence Posit have removed their Focal repository packages from the Posit Public Package Manager, which is fair enough. Within the Posit Cloud project workspace Posit kindly make available a private version of what I think was that Focal repository. However, for reasons I don&amp;rsquo;t fully understand a fair number of the packages I required weren&amp;rsquo;t built as binaries.&lt;/p&gt;
+&lt;p&gt;That got me thinking, could the manylinux_2_28 packages help here? In the name the 2.28 refers to the minimum version of the glibc library that the Linux distro needs to come with. I realised that I didn&amp;rsquo;t know what version of glibc Ubuntu Focal Fossa came with. A quick&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ldd --version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;revealed&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;ldd (Ubuntu GLIBC 2.31-0ubuntu9.17) 2.31
+Copyright (C) 2020 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Written by Roland McGrath and Ulrich Drepper.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And hence I was in luck as version 2.31 is after 2.28. Therefore, in my Posit Cloud workspace I simply switched my syntax to installing packages to&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;install.packages(
+  &#39;tidyverse&#39;,
+  repos = &#39;https://packagemanager.posit.co/cran/__linux__/manylinux_2_28/latest&#39;
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and all the packages came in as binaries. If you are not running this from within RStudio your syntax would need to be the following as per 
+&lt;a href=&#34;https://packagemanager.posit.co/client/#/repos/cran/setup&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the setup page&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;options(repos = 
+  c(
+    CRAN = sprintf(&amp;quot;https://packagemanager.posit.co/cran/latest/bin/linux/manylinux_2_28-%s/%s&amp;quot;,
+    R.version[&amp;quot;arch&amp;quot;], 
+    substr(getRversion(), 1, 3))
+  )
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2026/manylinux-packages/img/installing-manylinux-packages.png&#34; alt=&#34;Screenshot of installing packages in a Posit Cloud RStudio project running on Ubuntu Focal Fossa.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;p&gt;My other solution could have been to create a new RStudio project, which as I said would be running on Noble Numbat.&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In summary, manylinux_2_28 binary packages in the Posit Public Package Manager can be used in Ubuntu Focal Fossa. Thanks again to Posit for this great resource.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>My #GitHubUnwrapped 2025!</title>
