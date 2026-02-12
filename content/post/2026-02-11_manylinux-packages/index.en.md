@@ -64,6 +64,7 @@ options(repos =
     substr(getRversion(), 1, 3))
   )
 )
+install.packages('tidyverse')
 ```
 
 <img src="/post/2026/manylinux-packages/img/installing-manylinux-packages.png" alt="Screenshot of installing packages in a Posit Cloud RStudio project running on Ubuntu Focal Fossa." width="630" style="display: block; margin: auto;">
