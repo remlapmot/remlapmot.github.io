@@ -25,6 +25,12 @@
   url = "#r-packages"
   weight = 10
 
+  [[main]]
+    identifier = "python"
+    name = "Python packages"
+    url = "#python-packages"
+    weight = 10  
+  
 #[[main]]
 #  name = "Demo"
 #  url = "#hero"
