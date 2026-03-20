@@ -16,7 +16,7 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'Image of inspeting the version of glibc within Ubuntu Focal Fossa.'
+  alt_text: 'Image of inspecting the version of glibc within Ubuntu Focal Fossa.'
 projects: []
 toc: true
 ---
