@@ -38,7 +38,7 @@ My aim is the following
 
 > To have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.
 
-As a reminder, as [I showed in my previous post](https://remlapmot.github.io/post/2025/quarto-conditional-content/#introduction), this has been possible to achieve for a long time with R Markdown and knitr because thanks to the brilliant work of Yihui Xie because they allow programmtic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also straighforward and I won't repeat it in this post. However, it is the three other Quarto engines (for Python, Stata, and Julia) that I am interested in which are problematic because as far as I know they don't allow programmtic chunk options and they don't have the equivalent of the `! expr ...` YAML tag literal.
+As a reminder, as [I showed in my previous post](https://remlapmot.github.io/post/2025/quarto-conditional-content/#introduction), this has been possible to achieve for a long time with R Markdown and knitr thanks to the brilliant work of Yihui Xie, because they allow programmatic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also straightforward and I won't repeat it in this post. However, it is the three other Quarto engines (for Python, Stata, and Julia) that I am interested in which are problematic because as far as I know they don't allow programmatic chunk options and they don't have the equivalent of the `! expr ...` YAML tag literal.
 
 ## Quarto profiles
 
