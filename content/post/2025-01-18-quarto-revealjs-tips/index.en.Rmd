@@ -25,7 +25,7 @@ toc: true
 
 ## Introduction
 
-Like alot of lecturers I'm teaching at the moment. If I have a presentation to do that's mainly images I'll use Powerpoint or Google Slides. If the presentation includes maths or code or both I used to use LaTeX Beamer. Over the years I have grown tired of Beamer and so I thought I'd try making some revealjs presentations using Quarto.
+Like a lot of lecturers I'm teaching at the moment. If I have a presentation to do that's mainly images I'll use Powerpoint or Google Slides. If the presentation includes maths or code or both I used to use LaTeX Beamer. Over the years I have grown tired of Beamer and so I thought I'd try making some revealjs presentations using Quarto.
 
 Revealjs has been around far longer than Quarto, I remember seeing a colleague present using revealjs in about 2012, and you can happily make a revealjs presentation without Quarto. However, the convenience of writing in the Quarto Markdown format is fantastic.
 
