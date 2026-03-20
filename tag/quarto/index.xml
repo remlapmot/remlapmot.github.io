@@ -229,7 +229,7 @@ print(&#39;returned value:&#39;, retval2)
 &lt;p&gt;To have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;As a reminder, as 
-&lt;a href=&#34;https://remlapmot.github.io/post/2025/quarto-conditional-content/#introduction&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;I showed in my previous post&lt;/a&gt;, this has been possible to achieve for a long time with R Markdown and knitr because thanks to the brilliant work of Yihui Xie because they allow programmtic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also straighforward and I won&amp;rsquo;t repeat it in this post. However, it is the three other Quarto engines (for Python, Stata, and Julia) that I am interested in which are problematic because as far as I know they don&amp;rsquo;t allow programmtic chunk options and they don&amp;rsquo;t have the equivalent of the &lt;code&gt;! expr ...&lt;/code&gt; YAML tag literal.&lt;/p&gt;
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/quarto-conditional-content/#introduction&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;I showed in my previous post&lt;/a&gt;, this has been possible to achieve for a long time with R Markdown and knitr thanks to the brilliant work of Yihui Xie, because they allow programmatic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also straightforward and I won&amp;rsquo;t repeat it in this post. However, it is the three other Quarto engines (for Python, Stata, and Julia) that I am interested in which are problematic because as far as I know they don&amp;rsquo;t allow programmatic chunk options and they don&amp;rsquo;t have the equivalent of the &lt;code&gt;! expr ...&lt;/code&gt; YAML tag literal.&lt;/p&gt;
 &lt;h2 id=&#34;quarto-profiles&#34;&gt;Quarto profiles&lt;/h2&gt;
 &lt;p&gt;Quarto profiles are introduced 
 &lt;a href=&#34;https://quarto.org/docs/projects/profiles.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;on this page of the Quarto documentation&lt;/a&gt;. Specifically, we shall make use of 
@@ -405,7 +405,7 @@ println(&amp;quot;A solution, hidden in questions&amp;quot;)
       <pubDate>Tue, 29 Apr 2025 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2025/nbstata-uv-venv/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Any new project using Python or Jupyter is very stongly recommended to use a virtual environment. A virtual environment is a directory (usually at the top level; often called either &lt;em&gt;.venv&lt;/em&gt; or &lt;em&gt;venv&lt;/em&gt;) within your project directory which contains the dependency Python packages and perhaps the Python installation (or pointers to the Python installation on your system).&lt;/p&gt;
+&lt;p&gt;Any new project using Python or Jupyter is very strongly recommended to use a virtual environment. A virtual environment is a directory (usually at the top level; often called either &lt;em&gt;.venv&lt;/em&gt; or &lt;em&gt;venv&lt;/em&gt;) within your project directory which contains the dependency Python packages and perhaps the Python installation (or pointers to the Python installation on your system).&lt;/p&gt;
 &lt;p&gt;There are many Python project managers, in this post I will use the new and extremely fast project manager 
 &lt;a href=&#34;https://docs.astral.sh/uv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;uv&lt;/a&gt;. I will show how to use the 
 &lt;a href=&#34;https://hugetim.github.io/nbstata/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nbstata&lt;/a&gt; Jupyter kernel by Tim Huegerich within a uv virtual environment on macOS, Windows, and Linux. The aim is to be able to conveniently and reproducibly render Quarto documents using the 
@@ -477,7 +477,7 @@ uv pip install jupyterlab nbstata jupyterlab_stata_highlight2
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;python -m nbstata.install
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The nbstata docs states that the &lt;code&gt;--sys-prefix&lt;/code&gt; flag may be required in a virutal environment but I haven&amp;rsquo;t found that to be the case.&lt;/p&gt;
+&lt;p&gt;The nbstata docs states that the &lt;code&gt;--sys-prefix&lt;/code&gt; flag may be required in a virtual environment but I haven&amp;rsquo;t found that to be the case.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Then we run commands to do our actual work; for example rendering a Quarto document using the &lt;code&gt;jupyter: nbstata&lt;/code&gt; engine. An example Quarto document, say &lt;em&gt;index.qmd&lt;/em&gt;, could be:&lt;/li&gt;
 &lt;/ul&gt;
@@ -1055,7 +1055,7 @@ plot(x, y, type = &amp;quot;l&amp;quot;)
       <pubDate>Sun, 19 Jan 2025 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2025/quarto-revealjs-tips/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Like alot of lecturers I&amp;rsquo;m teaching at the moment. If I have a presentation to do that&amp;rsquo;s mainly images I&amp;rsquo;ll use Powerpoint or Google Slides. If the presentation includes maths or code or both I used to use LaTeX Beamer. Over the years I have grown tired of Beamer and so I thought I&amp;rsquo;d try making some revealjs presentations using Quarto.&lt;/p&gt;
+&lt;p&gt;Like a lot of lecturers I&amp;rsquo;m teaching at the moment. If I have a presentation to do that&amp;rsquo;s mainly images I&amp;rsquo;ll use Powerpoint or Google Slides. If the presentation includes maths or code or both I used to use LaTeX Beamer. Over the years I have grown tired of Beamer and so I thought I&amp;rsquo;d try making some revealjs presentations using Quarto.&lt;/p&gt;
 &lt;p&gt;Revealjs has been around far longer than Quarto, I remember seeing a colleague present using revealjs in about 2012, and you can happily make a revealjs presentation without Quarto. However, the convenience of writing in the Quarto Markdown format is fantastic.&lt;/p&gt;
 &lt;p&gt;To learn the basics of making revealjs slides with Quarto I recommend reading 
 &lt;a href=&#34;https://quarto.org/docs/presentations/revealjs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the user guide&lt;/a&gt;. And full documentation is available 

@@ -18,7 +18,7 @@
       <pubDate>Sun, 19 Jan 2025 00:00:00 +0000</pubDate>
       <guid>https://remlapmot.github.io/post/2025/quarto-revealjs-tips/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Like alot of lecturers I&amp;rsquo;m teaching at the moment. If I have a presentation to do that&amp;rsquo;s mainly images I&amp;rsquo;ll use Powerpoint or Google Slides. If the presentation includes maths or code or both I used to use LaTeX Beamer. Over the years I have grown tired of Beamer and so I thought I&amp;rsquo;d try making some revealjs presentations using Quarto.&lt;/p&gt;
+&lt;p&gt;Like a lot of lecturers I&amp;rsquo;m teaching at the moment. If I have a presentation to do that&amp;rsquo;s mainly images I&amp;rsquo;ll use Powerpoint or Google Slides. If the presentation includes maths or code or both I used to use LaTeX Beamer. Over the years I have grown tired of Beamer and so I thought I&amp;rsquo;d try making some revealjs presentations using Quarto.&lt;/p&gt;
 &lt;p&gt;Revealjs has been around far longer than Quarto, I remember seeing a colleague present using revealjs in about 2012, and you can happily make a revealjs presentation without Quarto. However, the convenience of writing in the Quarto Markdown format is fantastic.&lt;/p&gt;
 &lt;p&gt;To learn the basics of making revealjs slides with Quarto I recommend reading 
 &lt;a href=&#34;https://quarto.org/docs/presentations/revealjs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the user guide&lt;/a&gt;. And full documentation is available 
