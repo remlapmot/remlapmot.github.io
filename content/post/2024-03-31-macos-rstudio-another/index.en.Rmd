@@ -27,7 +27,7 @@ toc: true
 
 On macOS when RStudio Desktop is open it can be inconvenient to open a second (or third or fourth) instance of it.
 
-If you left click the RStudio Desktop icon nothing happens. If you right click on the RStudio Desktop icon there is a convenient *New RStudio Window*. The problem with this is that by default if you have an RStudio project open the new RStudio window is also opened in that project. However, that can be overcome by opening the RStudio preference pane and in the first tab (*General* | *Basic*) deselecting the boxes relating to *Restore most recently opened project at startup* and *Restore previousy open source documents at startup*.
+If you left click the RStudio Desktop icon nothing happens. If you right click on the RStudio Desktop icon there is a convenient *New RStudio Window*. The problem with this is that by default if you have an RStudio project open the new RStudio window is also opened in that project. However, that can be overcome by opening the RStudio preference pane and in the first tab (*General* | *Basic*) deselecting the boxes relating to *Restore most recently opened project at startup* and *Restore previously open source documents at startup*.
 
 <img src="/post/2024/macos-rstudio-another/img/rstudio-preference-pane.png" alt="Screenshot of RStudio Desktop preference pane." width="630" style="display: block; margin: auto;">
 
