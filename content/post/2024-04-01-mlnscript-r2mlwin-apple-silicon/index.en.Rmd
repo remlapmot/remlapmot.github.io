@@ -107,7 +107,7 @@ library(R2MLwiN)
 (mymodel1 <- runMLwiN(normexam ~ 1 + sex + (1 | student), data = tutorial))
 ```
 
-We can see the output is in several sections. The first section tells us about how `mlnscript`, which estimation algorithm it used, hwo long it took to fit the model, and some characteristics of the dataset. The second section tells us about the model, in this case a random intercept model. The third section is the fixed effect estimates and the associated statistical inference for them. The fourth section is the random effect variance estimates.
+We can see the output is in several sections. The first section tells us about how `mlnscript`, which estimation algorithm it used, how long it took to fit the model, and some characteristics of the dataset. The second section tells us about the model, in this case a random intercept model. The third section is the fixed effect estimates and the associated statistical inference for them. The fourth section is the random effect variance estimates.
 
 And we can continue with our multilevel modelling as we like.
 
