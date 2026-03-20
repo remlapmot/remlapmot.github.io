@@ -27,7 +27,7 @@ toc: true
 
 ## Introduction
 
-Any new project using Python or Jupyter is very stongly recommended to use a virtual environment. A virtual environment is a directory (usually at the top level; often called either _.venv_ or _venv_) within your project directory which contains the dependency Python packages and perhaps the Python installation (or pointers to the Python installation on your system).
+Any new project using Python or Jupyter is very strongly recommended to use a virtual environment. A virtual environment is a directory (usually at the top level; often called either _.venv_ or _venv_) within your project directory which contains the dependency Python packages and perhaps the Python installation (or pointers to the Python installation on your system).
 
 There are many Python project managers, in this post I will use the new and extremely fast project manager [uv](https://docs.astral.sh/uv/). I will show how to use the [nbstata](https://hugetim.github.io/nbstata/) Jupyter kernel by Tim Huegerich within a uv virtual environment on macOS, Windows, and Linux. The aim is to be able to conveniently and reproducibly render Quarto documents using the [`jupyter: nbstata`](https://hugetim.github.io/nbstata/user_guide.html#quarto-tips) engine from within the virtual environment.
 
