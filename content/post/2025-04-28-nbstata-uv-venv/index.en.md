@@ -101,7 +101,7 @@ uv pip install jupyterlab nbstata jupyterlab_stata_highlight2
 python -m nbstata.install
 ```
 
-The nbstata docs states that the `--sys-prefix` flag may be required in a virutal environment but I haven't found that to be the case.
+The nbstata docs states that the `--sys-prefix` flag may be required in a virtual environment but I haven't found that to be the case.
 
 * Then we run commands to do our actual work; for example rendering a Quarto document using the `jupyter: nbstata` engine. An example Quarto document, say _index.qmd_, could be:
 
