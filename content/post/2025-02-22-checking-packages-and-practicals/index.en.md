@@ -20,7 +20,7 @@ image:
   caption: ''
   focal_point: 'Center'
   preview_only: no
-  alt_text: 'Screenshot of '
+  alt_text: 'Screenshot of the GitHub Actions workflow cron syntax for automatically running workflows on a schedule.'
 projects: []
 toc: true
 ---
