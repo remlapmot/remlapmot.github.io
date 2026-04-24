@@ -138,4 +138,14 @@ date_format = "Jan 2006"
   date_end = ""
   description = ""
 
+[[item]]
+  organization = "R"
+  organization_url = "https://www.r-project.org"
+  title = "parglm R package"
+  url = "https://remlapmot.github.io/parglm/"
+  certificate_url = ""
+  date_start = "2026-04-21"
+  date_end = ""
+  description = "I was not one of the original authors of the parglm. It was removed from CRAN in January 2026. My colleagues use it alot. I emailed the original maintainer but they didn't reply. I fixed the three small issues and have got it reinstated on CRAN with myself as the maintainer. If the original maintainer would ever like to take over again I will happily pass it back to them."
+
 +++
