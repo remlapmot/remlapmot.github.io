@@ -19,6 +19,14 @@ date_format = "Jan 2006"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 
 [[item]]
+  title = "OpenSAFELY awarded The Queen Elizabeth Prize for Education"
+  organization = "Bennett Institute, University of Oxford"
+  organization_url = "https://www.bennett.ox.ac.uk/"
+  url = "https://royalanniversarytrust.org.uk/winners/university-of-oxford/"
+  date_start = "2025-11-26"
+  description = "The OpenSAFELY team won the highly prestigious Queen Elizabeth Prize for Education."
+
+[[item]]
   title = "Version 2 of the OpenSAFELY R image released"
   organization = "Bennett Institute, University of Oxford"
   organization_url = "https://www.bennett.ox.ac.uk/"
