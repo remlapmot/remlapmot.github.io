@@ -72,10 +72,10 @@ jobs:
       - name: Install R and RTools for Windows on ARM and install TwoSampleMR
         run: |
           $url = "https://www.r-project.org/nosvn/winutf8/aarch64/R-4-signed/R-4.5.0-aarch64.exe"
-          Invoke-WebRequest -Uri "$url" -OutFile R-4.5.0-aarch64.exe -UseBasicParsing -UserAgent "NativeHost"
+          curl.exe -L -A "NativeHost" -o R-4.5.0-aarch64.exe "$url"
           Start-Process -FilePath R-4.5.0-aarch64.exe -ArgumentList "/install /norestart /verysilent /SUPPRESSMSGBOXES" -NoNewWindow -Wait
           $url = "https://cran.r-project.org/bin/windows/Rtools/rtools45/files/rtools45-aarch64-6536-6492.exe"
-          Invoke-WebRequest -Uri "$url" -OutFile rtools45-aarch64-6536-6492.exe -UseBasicParsing -UserAgent "NativeHost"
+          curl.exe -L -A "NativeHost" -o rtools45-aarch64-6536-6492.exe "$url"
           Start-Process -FilePath rtools45-aarch64-6536-6492.exe -ArgumentList "/install /norestart /verysilent /SUPPRESSMSGBOXES" -NoNewWindow -Wait
           $rscript = "C:\Program Files\R-aarch64\R-4.5.0\bin\Rscript.exe"
           $arguments = "-e", "print(R.version); # the rest of your R code goes here ..."
@@ -85,7 +85,7 @@ jobs:
 Breaking down the final `steps` section of this;
 
 * we define the url of the R 4.5.0 aarch64 installer;
-* we then download the installer using `Invoke-WebRequest` (note that the default shell in Windows is Powershell);
+* we then download the installer using `curl.exe` (note that the default shell in Windows is Powershell);
 * we then run the installer using `Start-Process`. I am not sure if I need all of the arguments I have specified here but it seems to work.
 * We then do the same for RTools45.
 * We then define a variable for the path to the _Rscript.exe_ binary;
