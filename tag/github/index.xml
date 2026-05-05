@@ -72,10 +72,10 @@ jobs:
       - name: Install R and RTools for Windows on ARM and install TwoSampleMR
         run: |
           $url = &amp;quot;https://www.r-project.org/nosvn/winutf8/aarch64/R-4-signed/R-4.5.0-aarch64.exe&amp;quot;
-          Invoke-WebRequest -Uri &amp;quot;$url&amp;quot; -OutFile R-4.5.0-aarch64.exe -UseBasicParsing -UserAgent &amp;quot;NativeHost&amp;quot;
+          curl.exe -L -A &amp;quot;NativeHost&amp;quot; -o R-4.5.0-aarch64.exe &amp;quot;$url&amp;quot;
           Start-Process -FilePath R-4.5.0-aarch64.exe -ArgumentList &amp;quot;/install /norestart /verysilent /SUPPRESSMSGBOXES&amp;quot; -NoNewWindow -Wait
           $url = &amp;quot;https://cran.r-project.org/bin/windows/Rtools/rtools45/files/rtools45-aarch64-6536-6492.exe&amp;quot;
-          Invoke-WebRequest -Uri &amp;quot;$url&amp;quot; -OutFile rtools45-aarch64-6536-6492.exe -UseBasicParsing -UserAgent &amp;quot;NativeHost&amp;quot;
+          curl.exe -L -A &amp;quot;NativeHost&amp;quot; -o rtools45-aarch64-6536-6492.exe &amp;quot;$url&amp;quot;
           Start-Process -FilePath rtools45-aarch64-6536-6492.exe -ArgumentList &amp;quot;/install /norestart /verysilent /SUPPRESSMSGBOXES&amp;quot; -NoNewWindow -Wait
           $rscript = &amp;quot;C:\Program Files\R-aarch64\R-4.5.0\bin\Rscript.exe&amp;quot;
           $arguments = &amp;quot;-e&amp;quot;, &amp;quot;print(R.version); # the rest of your R code goes here ...&amp;quot;
@@ -84,7 +84,7 @@ jobs:
 &lt;p&gt;Breaking down the final &lt;code&gt;steps&lt;/code&gt; section of this;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;we define the url of the R 4.5.0 aarch64 installer;&lt;/li&gt;
-&lt;li&gt;we then download the installer using &lt;code&gt;Invoke-WebRequest&lt;/code&gt; (note that the default shell in Windows is Powershell);&lt;/li&gt;
+&lt;li&gt;we then download the installer using &lt;code&gt;curl.exe&lt;/code&gt; (note that the default shell in Windows is Powershell);&lt;/li&gt;
 &lt;li&gt;we then run the installer using &lt;code&gt;Start-Process&lt;/code&gt;. I am not sure if I need all of the arguments I have specified here but it seems to work.&lt;/li&gt;
 &lt;li&gt;We then do the same for RTools45.&lt;/li&gt;
 &lt;li&gt;We then define a variable for the path to the &lt;em&gt;Rscript.exe&lt;/em&gt; binary;&lt;/li&gt;
