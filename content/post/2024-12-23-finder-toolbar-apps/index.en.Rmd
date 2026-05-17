@@ -19,7 +19,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of RStudio, Positron, Visual Studio Code, and R icons in Finder toolbar.'
 projects: []
 toc: true

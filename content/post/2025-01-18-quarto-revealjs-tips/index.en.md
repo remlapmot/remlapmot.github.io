@@ -17,7 +17,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of a Mentimeter presentation embedded in a Quarto revealjs html slide.'
 projects: []
 toc: true

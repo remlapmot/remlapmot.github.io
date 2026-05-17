@@ -16,7 +16,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of a Google Chrome site search shortcut for the METACRAN CRAN mirror.'
 projects: []
 toc: true

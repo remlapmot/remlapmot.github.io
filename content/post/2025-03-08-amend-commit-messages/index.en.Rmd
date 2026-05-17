@@ -17,7 +17,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of dragging an empty commit onto the commit whose commit message you want to amend in GitHub Desktop.'
 projects: []
 toc: true
