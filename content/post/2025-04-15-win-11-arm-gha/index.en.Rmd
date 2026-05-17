@@ -17,7 +17,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of the Windows on ARM runner label in a GitHub Actions workflow file.'
 projects: []
 toc: true

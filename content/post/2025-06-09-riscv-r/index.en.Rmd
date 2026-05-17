@@ -18,7 +18,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'R logo next to the RISC-V logo.'
 projects: []
 toc: true

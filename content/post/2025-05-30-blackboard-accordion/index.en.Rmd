@@ -17,7 +17,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of the top of an accordion element on a Blackboard webpage.'
 projects: []
 toc: true

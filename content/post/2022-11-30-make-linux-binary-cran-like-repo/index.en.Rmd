@@ -18,7 +18,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of testing a CRAN-like repository on Ubuntu Focal Fossa.'
 projects: []
 toc: true

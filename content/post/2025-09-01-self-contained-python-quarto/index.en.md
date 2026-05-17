@@ -22,7 +22,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Image of a scroll, representing a script, containing the word Quarto and the Python and Jupyter logos.'
 projects: []
 toc: true

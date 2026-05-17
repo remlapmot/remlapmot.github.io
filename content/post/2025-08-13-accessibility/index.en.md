@@ -17,7 +17,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of selecting the Ally Accessibility Checker within Blackboard online learning environment.'
 projects: []
 toc: true

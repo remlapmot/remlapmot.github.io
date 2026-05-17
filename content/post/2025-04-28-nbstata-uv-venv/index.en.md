@@ -19,7 +19,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of a shell script to setup the nbstata Jupyter kernel within a uv virtual environment.'
 projects: []
 toc: true

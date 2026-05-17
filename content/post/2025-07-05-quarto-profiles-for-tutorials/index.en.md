@@ -22,7 +22,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of the questions and solutions documents produced from a single tutorial Quarto document using Quarto profiles.'
 projects: []
 toc: true

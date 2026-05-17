@@ -19,7 +19,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of macOS Finder window showing the saved Smart Folder of RStudio project files.'
 projects: []
 toc: true

@@ -17,7 +17,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of an Automator app to launch a new instance of RStudio Desktop in the macOS dock.'
 projects: []
 toc: true

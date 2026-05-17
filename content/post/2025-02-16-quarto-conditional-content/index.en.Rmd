@@ -22,7 +22,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: no
+  preview_only: false
   alt_text: 'Screenshot of programmatically including conditional content in a Quarto document using the Jupyter python3 engine.'
 projects: []
 toc: true

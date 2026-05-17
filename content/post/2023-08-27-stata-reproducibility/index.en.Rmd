@@ -15,7 +15,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Centre'
-  preview_only: no
+  preview_only: false
 projects: []
 bibliography: refs.bib
 link-citations: true
