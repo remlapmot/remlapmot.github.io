@@ -15,7 +15,7 @@ subtitle: ''
 summary: 'Create Automator Apps to launch Data Science apps open in the current Finder window on macOS.'
 authors: []
 lastmod: '2024-12-23T09:15:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

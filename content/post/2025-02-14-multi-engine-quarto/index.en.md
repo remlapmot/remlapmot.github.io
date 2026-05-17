@@ -17,7 +17,7 @@ subtitle: ''
 summary: "Have you ever wanted to include different language engines within the same Quarto document such that the code chunks are executed when the document is rendered? I describe how to achieve this using Quarto's embed shortcode."
 authors: []
 lastmod: '2025-02-16T12:00:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

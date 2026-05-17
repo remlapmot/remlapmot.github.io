@@ -18,7 +18,7 @@ subtitle: 'Programmatically including conditional content for Quarto engines tha
 summary: "How to programmatically include conditional content for several Quarto engines (knitr, jupyter: python3, jupyter: nbstata, and engine: julia) using parameters or environment variables to toggle inline code to write Markdown in the Quarto documents. I use this to write exercise/tutorial documents in which a single Quarto document is used to output both the questions and solutions documents."
 authors: []
 lastmod: '2025-04-29T07:00:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

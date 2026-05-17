@@ -14,7 +14,7 @@ subtitle: ''
 summary: 'Make your own CRAN-like repository serving not only bundled source packages and Windows and macOS binary packages but also Linux binary packages.'
 authors: []
 lastmod: '2025-05-29T08:42:00Z'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

@@ -14,7 +14,7 @@ subtitle:
 summary: "How to run R on RISC-V on Ubuntu Linux."
 authors: []
 lastmod: '2025-06-10T09:30:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

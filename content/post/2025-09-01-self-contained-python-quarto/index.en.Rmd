@@ -18,7 +18,7 @@ subtitle: ''
 summary: "How to create a self-contained executable Python script, which declares the dependencies for the virtual environment for rendering Quarto documents using the Jupyter engine. This allows non-technical users to render Quarto documents using the Jupyter engine without having to manage the virtual environment themselves."
 authors: []
 lastmod: '2025-09-02T07:00:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

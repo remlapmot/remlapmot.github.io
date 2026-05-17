@@ -13,7 +13,7 @@ subtitle:
 summary: "How to make the accordion element on a Blackboard webpage wider."
 authors: []
 lastmod: '2025-05-30T10:00:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

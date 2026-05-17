@@ -13,7 +13,7 @@ subtitle: ''
 summary: "Seven top tips for Quarto and R Markdown users on document accessibility, including; document format, adding alt text, creating tagged pdfs, table accessibility, different accessibility checkers, custom Word document templates, and how to upload complex html documents into Blackboard Ultra."
 authors: []
 lastmod: '2025-08-15T07:00:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

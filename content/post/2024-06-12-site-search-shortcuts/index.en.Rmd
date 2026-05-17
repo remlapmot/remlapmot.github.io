@@ -12,7 +12,7 @@ subtitle: ''
 summary: 'Google Chrome site search shortcuts for R and statistics to enable convenient #rstats web searching.'
 authors: []
 lastmod: '2024-06-14T09:15:00+01:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'
