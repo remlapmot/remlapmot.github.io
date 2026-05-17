@@ -15,7 +15,7 @@ featured: no
 image:
   caption: ''
   focal_point: 'Center'
-  preview_only: false
+  preview_only: true
   alt_text: 'Screenshot of the thumbnail of my GitHub unwrapped 2022 video.'
 projects: []
 ---
