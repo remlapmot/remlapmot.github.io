@@ -5,12 +5,134 @@
     <link>https://remlapmot.github.io/category/blog/</link>
       <atom:link href="https://remlapmot.github.io/category/blog/index.xml" rel="self" type="application/rss+xml" />
     <description>Blog</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 12 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2026 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_4c69fe6e68a3b4.png</url>
       <title>Blog</title>
       <link>https://remlapmot.github.io/category/blog/</link>
     </image>
+    
+    <item>
+      <title>Five tips for managing your R-universe 🚀</title>
+      <link>https://remlapmot.github.io/post/2026/runiverse-tips/</link>
+      <pubDate>Mon, 18 May 2026 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2026/runiverse-tips/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://ropensci.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rOpenSci&lt;/a&gt;&amp;rsquo;s 
+&lt;a href=&#34;https://r-universe.dev/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;R-universe&lt;/a&gt; system is an open source platform allowing users to create their own CRAN-like universe of R packages.&lt;/p&gt;
+&lt;p&gt;It is absolutely fantastic. It is particularly useful in one area I research, Mendelian randomization (at the interface of Epidemiology and Genetic Epidemiology), because a lot of the packages are GitHub/GitLab-only.&lt;/p&gt;
+&lt;p&gt;Therefore, I setup and maintain 
+&lt;a href=&#34;https://mrcieu.r-universe.dev/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://mrcieu.r-universe.dev/&lt;/a&gt; to include both packages from our MRCIEU GitHub organisation (from the MRC Integrative Epidemiology Unit at the University of Bristol, UK), and as many of the GitHub-only packages for Mendelian randomization I could find.&lt;/p&gt;
+&lt;p&gt;It is difficult to overstate how useful this is. For the first time, not only do researchers have a list of the Mendelian randomization packages in one place but they can install binaries - without having to go through the hassle - especially on (Ubuntu) Linux - of &lt;code&gt;remotes::install_github()&lt;/code&gt;. Researchers can also see how often packages are updated and R-universe checks for changes in packages approximately every hour, keeping it always up to date.&lt;/p&gt;
+&lt;p&gt;This post gives five tips I have developed to help manage my R-universe.&lt;/p&gt;
+&lt;h2 id=&#34;tip-1-referring-to-a-package-from-a-pull-request-instead-of-from-a-branch-on-a-fork&#34;&gt;Tip 1: Referring to a package from a pull request instead of from a branch on a fork&lt;/h2&gt;
+&lt;p&gt;In the Mendelian randomization field many of these GitHub-only packages are not well written or abandoned once the PhD student/researcher leaves. Often when I add a package to our R-universe I find that their build fails, or they have &lt;code&gt;R CMD check&lt;/code&gt; errors and warnings, or after several months their build fails because they are not maintained. I sometimes look into the failed builds and &lt;code&gt;check&lt;/code&gt; problems. If it&amp;rsquo;s clear just a few fixes are required to rectify the situation I often open a pull request. Often that pull request is not responded to.&lt;/p&gt;
+&lt;p&gt;Previously, for such cases I would switch the source of the package entry in &lt;em&gt;packages.json&lt;/em&gt; to be from the relevant branch on my fork. However, I have always felt a bit uneasy about this. I wondered if GitHub had a way to refer to the pull request branch without having to switch the repository. It turns out that it does. The format of pull request branch names is &lt;code&gt;refs/pull/{number}/head&lt;/code&gt; where &lt;code&gt;{number}&lt;/code&gt; is the number assigned once the PR is opened. Therefore, when I open a PR on a package I now add the &lt;code&gt;&amp;quot;branch&amp;quot;&lt;/code&gt; field to the package entry in &lt;em&gt;packages.json&lt;/em&gt; as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;  {
+    &amp;quot;package&amp;quot;: &amp;quot;GWASBrewer&amp;quot;,
+    &amp;quot;url&amp;quot;: &amp;quot;https://github.com/jean997/GWASBrewer&amp;quot;,
+    &amp;quot;branch&amp;quot;: &amp;quot;refs/pull/18/head&amp;quot;
+  },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I switch back to the default branch if the PR is merged.&lt;/p&gt;
+&lt;h2 id=&#34;tip-2-justfile-recipe-for-adding-a-package-to-packagesjson&#34;&gt;Tip 2: Justfile recipe for adding a package to packages.json&lt;/h2&gt;
+&lt;p&gt;I regularly find that I need to add or remove a package. Manually editing the &lt;em&gt;packages.json&lt;/em&gt; file is not hard, but I have found the following 
+&lt;a href=&#34;https://just.systems/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Justfile&lt;/a&gt; (Just is like Make, but specifically designed for running commands and has a much friendlier syntax) recipes helpful for doing this quickly.&lt;/p&gt;
+&lt;p&gt;These recipes require 
+&lt;a href=&#34;https://docs.astral.sh/uv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;uv&lt;/a&gt; and just to be installed and on your &lt;code&gt;PATH&lt;/code&gt; (uv automatically installs the required version of Python and creates/destroys/manages any required virtual environments). To use them, copy them into a text file named &lt;em&gt;justfile&lt;/em&gt; at the top level of your R-universe registry repository and follow the instructions.&lt;/p&gt;
+&lt;p&gt;This recipe adds a package to your &lt;em&gt;packages.json&lt;/em&gt; in alphabetical order. It has one required argument and 3 optional arguments.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;# add a package entry to packages.json in alphabetical order
+[arg(&amp;quot;branch&amp;quot;, short=&amp;quot;b&amp;quot;)]
+[arg(&amp;quot;pkgname&amp;quot;, short=&amp;quot;p&amp;quot;)]
+[arg(&amp;quot;subdir&amp;quot;, short=&amp;quot;s&amp;quot;)]
+add url pkgname=&amp;quot;&amp;quot; branch=&amp;quot;&amp;quot; subdir=&amp;quot;&amp;quot;:
+    #!/usr/bin/env -S uv run --python 3.14 python3
+    import json, re, sys
+    url = &amp;quot;{{ url }}&amp;quot;
+    if re.fullmatch(r&#39;[^/]+/[^/]+&#39;, url):
+        url = f&amp;quot;https://github.com/{url}&amp;quot;
+    pkgname = &amp;quot;{{ pkgname }}&amp;quot; or url.rstrip(&amp;quot;/&amp;quot;).split(&amp;quot;/&amp;quot;)[-1]
+    branch = &amp;quot;{{ branch }}&amp;quot;
+    subdir = &amp;quot;{{ subdir }}&amp;quot;
+    with open(&amp;quot;packages.json&amp;quot;) as f:
+        packages = json.load(f)
+    if any(p[&amp;quot;package&amp;quot;] == pkgname for p in packages):
+        print(f&amp;quot;Error: &#39;{pkgname}&#39; already exists in packages.json&amp;quot;, file=sys.stderr)
+        sys.exit(1)
+    entry = {&amp;quot;package&amp;quot;: pkgname, &amp;quot;url&amp;quot;: url}
+    if branch:
+        entry[&amp;quot;branch&amp;quot;] = branch
+    if subdir:
+        entry[&amp;quot;subdir&amp;quot;] = subdir
+    packages.append(entry)
+    packages.sort(key=lambda p: p[&amp;quot;package&amp;quot;].lower())
+    with open(&amp;quot;packages.json&amp;quot;, &amp;quot;w&amp;quot;) as f:
+        json.dump(packages, f, indent=2)
+        f.write(&amp;quot;\n&amp;quot;)
+    print(f&amp;quot;Added {pkgname}&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Where &lt;code&gt;url&lt;/code&gt; is say &lt;code&gt;https://github.com/MRCIEU/TwoSampleMR&lt;/code&gt;, except that for GitHub packages you can specify this as &lt;code&gt;MRCIEU/TwoSampleMR&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To add a GitHub package whose name matches its repository name, simply run&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;just add username/reponame
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can inspect the recipe&amp;rsquo;s arguments and options with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;just --usage add
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;Usage: just add [OPTIONS] url
+
+Arguments:
+  url
+
+Options:
+  -p pkgname [default: &amp;quot;&amp;quot;]
+  -b branch [default: &amp;quot;&amp;quot;]
+  -s subdir [default: &amp;quot;&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The 3 optional arguments allow you to specify the package name (&lt;code&gt;-p pkgname&lt;/code&gt;), branch (&lt;code&gt;-b branchname&lt;/code&gt;), or subdirectory (&lt;code&gt;-s subdirectory&lt;/code&gt;) the package is in. For example, to add a GitHub package whose package name does not match its repository name run&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;just add username/reponame -p pkgname
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;tip-3-justfile-recipe-for-removing-a-package-from-packagesjson&#34;&gt;Tip 3: Justfile recipe for removing a package from packages.json&lt;/h2&gt;
+&lt;p&gt;This recipe removes a package from your &lt;em&gt;packages.json&lt;/em&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;# remove a package entry from packages.json
+remove pkgname:
+    #!/usr/bin/env -S uv run --python 3.14 python3
+    import json, sys
+    pkgname = &amp;quot;{{ pkgname }}&amp;quot;
+    with open(&amp;quot;packages.json&amp;quot;) as f:
+        packages = json.load(f)
+    filtered = [p for p in packages if p[&amp;quot;package&amp;quot;] != pkgname]
+    if len(filtered) == len(packages):
+        print(f&amp;quot;Error: &#39;{pkgname}&#39; not found in packages.json&amp;quot;, file=sys.stderr)
+        sys.exit(1)
+    with open(&amp;quot;packages.json&amp;quot;, &amp;quot;w&amp;quot;) as f:
+        json.dump(filtered, f, indent=2)
+        f.write(&amp;quot;\n&amp;quot;)
+    print(f&amp;quot;Removed {pkgname}&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Run it with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;just remove pkgname
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;tip-4-justfile-recipe-for-checking-packagesjson-is-valid&#34;&gt;Tip 4: Justfile recipe for checking packages.json is valid&lt;/h2&gt;
+&lt;p&gt;When manually editing &lt;em&gt;packages.json&lt;/em&gt; it is very easy to forget a comma or to miss a closing bracket or quotation mark. This recipe checks your JSON is valid.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;# check packages.json
+check:
+    uv run --python 3.14 -m json.tool packages.json &amp;gt; /dev/null &amp;amp;&amp;amp; echo &amp;quot;JSON check passed&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Run it with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;just check
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;tip-5-conveniently-view-a-packages-dependencies&#34;&gt;Tip 5: Conveniently view a package&amp;rsquo;s dependencies&lt;/h2&gt;
+&lt;p&gt;Knowing a package&amp;rsquo;s full strong dependency list is useful — for example, when a breaking change somewhere in the chain causes unexpected build failures. While there are several ways to determine this in R, R-universe shows you the full list immediately.&lt;/p&gt;
+&lt;p&gt;Navigate to the R-universe page for the package you are interested in, say 
+&lt;a href=&#34;https://mrcieu.r-universe.dev/TwoSampleMR&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://mrcieu.r-universe.dev/TwoSampleMR&lt;/a&gt; and click the dependencies pill.&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2026/runiverse-tips/img/twosamplemr-dependencies-hover.png&#34; alt=&#34;Screenshot of hovering mouse over dependencies pill on an R-universe package page.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;p&gt;It expands showing the full dependency list.&lt;/p&gt;
+&lt;img src=&#34;https://remlapmot.github.io/post/2026/runiverse-tips/img/twosamplemr-dependencies-clicked.png&#34; alt=&#34;Screenshot of expanding the dependencies pill on an R-universe package page.&#34; width=&#34;730&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In summary, I have shown five tips I find useful to manage a large R-universe.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>How Posit&#39;s Public Package Manager manylinux_2_28 repository can help you if your R project is stuck on Ubuntu Focal Fossa</title>
