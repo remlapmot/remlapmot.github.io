@@ -13,7 +13,7 @@ subtitle: ''
 summary: 'A convenient way to open a new instance of RStudio Desktop on macOS.'
 authors: []
 lastmod: '2024-03-30T18:54:00Z'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

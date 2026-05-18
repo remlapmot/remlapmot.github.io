@@ -11,7 +11,7 @@ subtitle: ''
 summary: "For fuller reproducibility in Stata ado-files and programs set both the version and the user version."
 authors: []
 lastmod: '2023-09-10T20:43:29+01:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Centre'

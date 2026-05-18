@@ -18,7 +18,7 @@ subtitle: ''
 summary: "How to create tutorial worksheets, i.e., a questions document and solutions document from the same Quarto document using Quarto profiles."
 authors: []
 lastmod: '2025-07-06T07:00:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

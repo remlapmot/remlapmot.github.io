@@ -13,7 +13,7 @@ subtitle: "A trick with an empty commit!"
 summary: "How to amend previous Git commit messages, that aren't for the most recent commit, in GitHub Desktop without performing an interactive rebase."
 authors: []
 lastmod: '2025-03-08T12:00:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

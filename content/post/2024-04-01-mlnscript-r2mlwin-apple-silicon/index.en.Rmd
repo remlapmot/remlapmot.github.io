@@ -13,7 +13,7 @@ subtitle: ''
 summary: 'How to run MLwiN natively on Apple Silicon Macs via R and the R2MLwiN package.'
 authors: []
 lastmod: '2024-04-01T20:18:00+01:00'
-featured: no
+featured: false
 draft: no
 image:
   caption: ''

@@ -11,7 +11,7 @@ subtitle: ''
 summary: "How to use manylinux_2_28 binary packages in R running on Ubuntu Focal Fossa."
 authors: []
 lastmod: '2026-02-12T07:00:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

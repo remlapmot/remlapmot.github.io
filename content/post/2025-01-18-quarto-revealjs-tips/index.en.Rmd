@@ -13,7 +13,7 @@ subtitle: ''
 summary: 'Seven tips for making Quarto revealjs presentations including; testing at a different screen resolution, wider code styling, taller input and output code chunks, embedding Mentimeter presentations, disabling HTML table processing, and programmatic rendering and exporting pdfs for printing.'
 authors: []
 lastmod: '2025-01-19T13:35:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

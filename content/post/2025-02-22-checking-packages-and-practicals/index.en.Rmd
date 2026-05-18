@@ -15,7 +15,7 @@ subtitle:
 summary: How to setup automated checks on a repository containing an R package or R practical using GitHub Actions.
 authors: []
 lastmod: '2025-02-24T08:00:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

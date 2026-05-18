@@ -11,7 +11,7 @@ subtitle: ''
 summary: 'My #GitHubUnwrapped 2022!'
 authors: []
 lastmod: '2023-01-07T12:10:44Z'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'

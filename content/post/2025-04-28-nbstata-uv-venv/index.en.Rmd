@@ -15,7 +15,7 @@ subtitle:
 summary: "How to setup a uv virtual environment to run the nbstata Jupyter kernel."
 authors: []
 lastmod: '2025-05-10T07:00:00+00:00'
-featured: no
+featured: false
 image:
   caption: ''
   focal_point: 'Center'
