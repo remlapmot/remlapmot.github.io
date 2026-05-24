@@ -1,5 +1,5 @@
 ---
-title: "STAN compilation speedup"
+title: "How to speed up your STAN model compilation times"
 author: Package Build
 date: '2026-05-24'
 slug: stan-compile-speedup
@@ -9,7 +9,7 @@ tags:
   - R
   - STAN
 subtitle: ''
-summary: ""
+summary: "Some tips to help speedup STAN model compilation times."
 authors: []
 lastmod: '2026-05-24T06:00:00+00:00'
 featured: false
@@ -24,8 +24,67 @@ toc: true
 
 ## Introduction
 
+In my previous job my work computer was a Windows desktop -- yes the days before laptops and hot-desking!
 
+My PhD student was interested in Bayesian methods so we put together an R package which included some STAN models. I was always frustrated how slowly these compiled on our Windows machines.
+
+When I returned to the Apple kingdom I was shocked how much faster they compiled.
+
+Here are the compilation times for the models in our [mrbayes](https://okezie94.github.io/mrbayes/) package.
+
+* Windows 11: seconds
+* Ubuntu 24.04 through WSL on the same machine: seconds
+* M4 MacBook Air: 73 seconds
+
+## Tip 1: Disabling debug builds essentially makes no difference
+
+I had wondered whether running a non-debug compilation with say
+
+```r
+pkgbuild::compile_dll(debug = FALSE)
+```
+
+would speed things up. It turns out it does not.
+
+## Tip 1: Windows users should use R through Windows Subsystem for Linux
+
+The compilers on Windows are very bad a coping with STAN's templating.
+
+On Linux we can use clang.
+
+## Tip 2: Enable parallel compilations
+
+In your _~/.R/Makevars_ file set
+
+```sh
+MAKEFLAGS = -j8
+```
+
+replacing 8 with some appropriate number for your machine. This sets how many models can be compiled in parallel.
+
+Enabling this on my M4 MacBook Air reduces the compilation time to 36 seconds.
+
+## Tip 3: Enable ccache
+
+Download ccache, e.g., on macOS
+
+```sh
+brew install ccache
+```
+
+In your _~/.R/Makevars_ file set
+
+```sh
+CC = ccache clang
+CXX = ccache clang++
+CXX17 = ccache clang++
+```
+
+On M4 MacBook Air, the second compilation of the package when the STAN code is unchanged only takes 4 seconds.
+
+<!--
 <img src="/post/2026/runiverse-tips/img/twosamplemr-dependencies-clicked.png" alt="Screenshot of expanding the dependencies pill on an R-universe package page." width="730" style="display: block; margin: auto;">
+-->
 
 ## Summary
 
