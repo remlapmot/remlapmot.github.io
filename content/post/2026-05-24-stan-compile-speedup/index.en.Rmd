@@ -1,0 +1,32 @@
+---
+title: "STAN compilation speedup"
+author: Package Build
+date: '2026-05-24'
+slug: stan-compile-speedup
+categories:
+  - Blog
+tags:
+  - R
+  - STAN
+subtitle: ''
+summary: ""
+authors: []
+lastmod: '2026-05-24T06:00:00+00:00'
+featured: false
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: false
+  alt_text: '...'
+projects: []
+toc: true
+---
+
+## Introduction
+
+
+<img src="/post/2026/runiverse-tips/img/twosamplemr-dependencies-clicked.png" alt="Screenshot of expanding the dependencies pill on an R-universe package page." width="730" style="display: block; margin: auto;">
+
+## Summary
+
+In summary, I have shown how to
