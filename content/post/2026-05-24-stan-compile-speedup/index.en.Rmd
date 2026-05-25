@@ -46,13 +46,15 @@ R CMD INSTALL --preclean --nomultiarch .
 
 First find out how many processing cores your machine has.
 
-```
-# Windows
+```sh
+# Windows - in a Git Bash shell
+echo $NUMBER_OF_PROCESSORS
 
 # macOS
+sysctl -n hw.logicalcpu
 
 # Ubuntu Linux
-
+nproc
 ```
 
 In your _~.Renviron_ file set the `MAKEFLAGS` environment variable. This sets how many models can be compiled in parallel. Choose a number smaller than the number of processing cores your machine has. My MacBook Air has 10 cores, but only 4 of those are performance cores, so I set the number as 6, to leave headroom for me inevitably checking my email during a compilation.
