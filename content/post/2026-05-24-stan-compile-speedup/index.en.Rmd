@@ -9,7 +9,7 @@ tags:
   - R
   - Stan
 subtitle: ''
-summary: "Two tips to help speedup Stan model compilation times."
+summary: "Two tips to help speed up Stan model compilation times."
 authors: []
 lastmod: '2026-05-24T06:00:00+00:00'
 featured: false
@@ -26,7 +26,7 @@ toc: true
 
 In my previous job my work computer was a Windows desktop -- yes the days before laptops and hot-desking became ubiquitous!
 
-My PhD student was interested in Bayesian methods so we put together an R package which included some [Stan](https://mc-stan.org/) models. I was always frustrated how slowly these compiled on our Windows machines. A few years later, when I got a MacBook Air I was shocked how much faster they compiled.
+My PhD student was interested in Bayesian methods and we put together an R package which included some [Stan](https://mc-stan.org/) models. I was always frustrated how slowly these compiled on our Windows machines. A few years later, when I got a MacBook Air I was shocked how much faster they compiled.
 
 On my Windows machine our [mrbayes](https://okezie94.github.io/mrbayes/) package takes 3 minutes 55 seconds to compile and install. On my M4 MacBook Air it takes 1 minute 16 seconds.
 
@@ -57,7 +57,7 @@ sysctl -n hw.logicalcpu
 nproc
 ```
 
-In your _~.Renviron_ file set the `MAKEFLAGS` environment variable. This sets how many models can be compiled in parallel. Choose a number smaller than the number of processing cores your machine has. My MacBook Air has 10 cores, but only 4 of those are performance cores, so I set the number as 6, to leave headroom for me inevitably checking my email during a compilation.
+In your _~/.Renviron_ file set the `MAKEFLAGS` environment variable. This sets how many models can be compiled in parallel. Choose a number smaller than the number of processing cores your machine has. My MacBook Air has 10 cores, but only 4 of those are performance cores, so I set the number as 6, to leave headroom for me inevitably checking my email during a compilation.
 
 ```sh
 MAKEFLAGS = -j6
@@ -114,8 +114,9 @@ After a first compilation run for the cache to be generated subsequent compilati
 * Windows, second compilation: 18 seconds
 * M4 MacBook Air, second compilation: 5 seconds
 
-Perhaps more importantly, if say in your package you have 5 models and you only amend the code for one of them, then `ccache` knows to use the cache for the 4 unchanged models.
+Perhaps more importantly, if, say, your package has 5 models and you only amend the code for one of them, then `ccache` knows to use the cache for the 4 unchanged models.
 
+* Windows, second compilation, only 1 model edited: TODO seconds
 * M4 MacBook Air, second compilation, only 1 model edited: 19 seconds
 
 <!--
@@ -132,10 +133,10 @@ pkgbuild::compile_dll(debug = FALSE)
 
 would speed things up. It turns out it does not. Compiling Stan models is mostly templating.
 
-I also wondered whether using using R on Windows Subsystem for Linux would speed things up just by virtue of being on Linux. It did not.
+I also wondered whether using R on Windows Subsystem for Linux would speed things up just by virtue of being on Linux. It did not.
 
 <!-- (TODO: check using clang) -->
 
 ## Summary
 
-In summary, I have shown two tips how to speed up compilation times of Stan models, which are especially useful if you are developing a package including Stan models.
+In summary, I have shown two tips on how to speed up compilation times of Stan models, which are especially useful if you are developing a package including Stan models.
