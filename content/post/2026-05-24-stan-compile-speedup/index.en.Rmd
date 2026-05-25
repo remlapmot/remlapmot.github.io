@@ -44,7 +44,7 @@ R CMD INSTALL --preclean --nomultiarch .
 
 ## Tip 1: Enable parallel compilations with the `MAKEFLAGS` environment variable
 
-First find out how many processing cores your machine has.
+We are going to set the `MAKEFLAGS` environment variable, in our _~/.Renviron_ file. This sets how many models can be compiled in parallel. We need to choose a number smaller than the number of processing cores our machine has. To find this out run
 
 ```sh
 # Windows - in a Git Bash shell
@@ -57,7 +57,21 @@ sysctl -n hw.logicalcpu
 nproc
 ```
 
-In your _~/.Renviron_ file set the `MAKEFLAGS` environment variable. This sets how many models can be compiled in parallel. Choose a number smaller than the number of processing cores your machine has. My MacBook Air has 10 cores, but only 4 of those are performance cores, so I set the number as 6, to leave headroom for me inevitably checking my email during a compilation.
+### Optional test script to determine the sweet spot
+
+Here's a quick test script to run to determine where the sweet spot is to set the number. You can increase the number sequence upto the number of processing cores your machine has.
+
+```sh
+for j in 1 2 3 4 6 8 10; do
+  ccache -C >/dev/null
+  echo "=== -j$j ==="
+  SECONDS=0
+  MAKEFLAGS=-j$j R CMD INSTALL --preclean . >/dev/null 2>&1
+  echo "elapsed: ${SECONDS}s"
+done
+```
+
+My MacBook Air has 10 cores, but only 4 of those are performance cores, so I set the number as 6, to leave headroom for me inevitably checking my email during a compilation.
 
 ```sh
 MAKEFLAGS = -j6
@@ -72,7 +86,7 @@ Enabling this reduced the compilation and installation times to
 
 ## Tip 2: Enable C/C++ compiler cache using `ccache`
 
-Install ccache, I find it easiest to use a package manager, e.g.,
+Install `ccache`, I find it easiest to use a package manager, e.g.,
 
 ```sh
 # macOS
@@ -85,13 +99,13 @@ apt install ccache
 winget install ccache
 ```
 
-Whatever installation method you use make sure `ccache` is on your `PATH` after installation. You can test with
+Whatever installation method you use make sure `ccache` is on your `PATH` after installation. You can test with, say,
 
 ```sh
 ccache --version
 ```
 
-To enable `ccache`, in your _~/.R/Makevars_ file set
+To enable `ccache`, on macOS and Linux in your _~/.R/Makevars_ file (you will need to create the directory and file if they don't exist) set
 
 ```sh
 # macOS or on Linux if using clang
@@ -100,7 +114,7 @@ CXX = ccache clang++
 CXX17 = ccache clang++
 ```
 
-Or on Windows, in your _~/.R/Makevars.win_ file set
+On Windows, in your _~/.R/Makevars.win_ file set
 
 ```sh
 # Windows
@@ -109,12 +123,12 @@ CXX = ccache g++
 CXX17 = ccache g++
 ```
 
-After a first compilation run for the cache to be generated subsequent compilations are staggeringly faster. 
+After a first compilation run for the cache to be generated subsequent compilations are much faster. 
 
 * Windows, second compilation: 18 seconds
 * M4 MacBook Air, second compilation: 5 seconds
 
-Perhaps more importantly, if, say, your package has 5 models and you only amend the code for one of them, then `ccache` knows to use the cache for the 4 unchanged models.
+Perhaps more importantly, if, say, your package has 5 models and you only amend the code for one of them, `ccache` knows to use the cache for the 4 unchanged models.
 
 * Windows, second compilation, only 1 model edited: TODO seconds
 * M4 MacBook Air, second compilation, only 1 model edited: 19 seconds
