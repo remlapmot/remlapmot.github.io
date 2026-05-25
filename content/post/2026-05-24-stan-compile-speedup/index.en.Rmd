@@ -1,15 +1,15 @@
 ---
-title: "How to speed up your STAN model compilation times"
+title: "Two tips to speed up your Stan model compilation times -- especially for package developers"
 author: Package Build
 date: '2026-05-24'
-slug: stan-compile-speedup
+slug: Stan-compile-speedup
 categories:
   - Blog
 tags:
   - R
-  - STAN
+  - Stan
 subtitle: ''
-summary: "Some tips to help speedup STAN model compilation times."
+summary: "Two tips to help speedup Stan model compilation times."
 authors: []
 lastmod: '2026-05-24T06:00:00+00:00'
 featured: false
@@ -24,19 +24,98 @@ toc: true
 
 ## Introduction
 
-In my previous job my work computer was a Windows desktop -- yes the days before laptops and hot-desking!
+In my previous job my work computer was a Windows desktop -- yes the days before laptops and hot-desking became ubiquitous!
 
-My PhD student was interested in Bayesian methods so we put together an R package which included some STAN models. I was always frustrated how slowly these compiled on our Windows machines.
+My PhD student was interested in Bayesian methods so we put together an R package which included some [Stan](https://mc-stan.org/) models. I was always frustrated how slowly these compiled on our Windows machines. A few years later, when I got a MacBook Air I was shocked how much faster they compiled.
 
-When I returned to the Apple kingdom I was shocked how much faster they compiled.
+On my Windows machine our [mrbayes](https://okezie94.github.io/mrbayes/) package takes 3 minutes 55 seconds to compile and install. On my M4 MacBook Air it takes 1 minute 16 seconds.
 
-Here are the compilation times for the models in our [mrbayes](https://okezie94.github.io/mrbayes/) package.
+The following tips show how to improve those timings.
 
-* Windows 11: seconds
-* Ubuntu 24.04 through WSL on the same machine: seconds
-* M4 MacBook Air: 73 seconds
+To generate the timings I used
 
-## Tip 1: Disabling debug builds essentially makes no difference
+```sh
+# macOS and Linux
+R CMD INSTALL --preclean .
+
+# Windows
+R CMD INSTALL --preclean --nomultiarch .
+```
+
+## Tip 1: Enable parallel compilations with the `MAKEFLAGS` environment variable
+
+First find out how many processing cores your machine has.
+
+```
+# Windows
+
+# macOS
+
+# Ubuntu Linux
+
+```
+
+In your _~.Renviron_ file set the `MAKEFLAGS` environment variable. This sets how many models can be compiled in parallel. Choose a number smaller than the number of processing cores your machine has. My MacBook Air has 10 cores, but only 4 of those are performance cores, so I set the number as 6, to leave headroom for me inevitably checking my email during a compilation.
+
+```sh
+MAKEFLAGS = -j6
+```
+
+Close and restart R/RStudio after making this change.
+
+Enabling this reduced the compilation and installation times to
+
+* Windows: 
+* M4 MacBook Air: 27 seconds
+
+## Tip 2: Enable C/C++ compiler cache using `ccache`
+
+Install ccache, I find it easiest to use a package manager, e.g.,
+
+```sh
+# macOS
+brew install ccache
+
+# Ubuntu/Debian Linux
+apt install ccache
+
+# Windows
+winget install ccache
+```
+
+Whatever installation method you use make sure `ccache` is on your `PATH` after installation. You can test with
+
+```sh
+ccache --version
+```
+
+To enable `ccache`, in your _~/.R/Makevars_ file set
+
+```sh
+# macOS or on Linux if using clang
+CC = ccache clang
+CXX = ccache clang++
+CXX17 = ccache clang++
+```
+
+Or on Windows, in your _~/.R/Makevars.win_ file set
+
+```sh
+# Windows
+CC = ccache gcc
+CXX = ccache g++
+CXX17 = ccache g++
+```
+
+After a first compilation run for the cache to be generated subsequent compilations are staggeringly faster. On M4 MacBook Air, the second compilation of the package when the Stan code is unchanged only takes 4 seconds.
+
+Additionally, if say in your package you have 5 models and you only amend the code for one of them, then `ccache` knows to use the cache for the 4 unchanged models.
+
+<!--
+<img src="/post/2026/runiverse-tips/img/twosamplemr-dependencies-clicked.png" alt="Screenshot of expanding the dependencies pill on an R-universe package page." width="730" style="display: block; margin: auto;">
+-->
+
+## Naive guesses that made no difference
 
 I had wondered whether running a non-debug compilation with say
 
@@ -44,48 +123,12 @@ I had wondered whether running a non-debug compilation with say
 pkgbuild::compile_dll(debug = FALSE)
 ```
 
-would speed things up. It turns out it does not.
+would speed things up. It turns out it does not. Compiling Stan models is mostly templating.
 
-## Tip 1: Windows users should use R through Windows Subsystem for Linux
+I also wondered whether using using R on Windows Subsystem for Linux would speed things up just by virtue of being on Linux. It did not.
 
-The compilers on Windows are very bad a coping with STAN's templating.
-
-On Linux we can use clang.
-
-## Tip 2: Enable parallel compilations
-
-In your _~/.R/Makevars_ file set
-
-```sh
-MAKEFLAGS = -j8
-```
-
-replacing 8 with some appropriate number for your machine. This sets how many models can be compiled in parallel.
-
-Enabling this on my M4 MacBook Air reduces the compilation time to 36 seconds.
-
-## Tip 3: Enable ccache
-
-Download ccache, e.g., on macOS
-
-```sh
-brew install ccache
-```
-
-In your _~/.R/Makevars_ file set
-
-```sh
-CC = ccache clang
-CXX = ccache clang++
-CXX17 = ccache clang++
-```
-
-On M4 MacBook Air, the second compilation of the package when the STAN code is unchanged only takes 4 seconds.
-
-<!--
-<img src="/post/2026/runiverse-tips/img/twosamplemr-dependencies-clicked.png" alt="Screenshot of expanding the dependencies pill on an R-universe package page." width="730" style="display: block; margin: auto;">
--->
+<!-- (TODO: check using clang) -->
 
 ## Summary
 
-In summary, I have shown how to
+In summary, I have shown two tips how to speed up compilation times of Stan models, which are especially useful if you are developing a package including Stan models.
