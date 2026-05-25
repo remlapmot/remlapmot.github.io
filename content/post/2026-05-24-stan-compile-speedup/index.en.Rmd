@@ -9,7 +9,7 @@ tags:
   - R
   - Stan
 subtitle: ''
-summary: "Two tips to help speed up Stan model compilation times, especially helpful for R package developers."
+summary: "Tips to help speed up Stan model compilation times, especially helpful for R package developers. Including, setting `MAKEFLAGS` and using `ccache`."
 authors: []
 lastmod: '2026-05-24T06:00:00+00:00'
 featured: false
