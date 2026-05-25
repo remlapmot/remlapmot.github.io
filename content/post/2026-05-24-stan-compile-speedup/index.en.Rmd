@@ -99,7 +99,7 @@ The timing reduced to 1 minute 15 seconds on my Windows machine.
 
 ## Tip 2: Enable C/C++ compiler cache using `ccache`
 
-Install `ccache`, I find it easiest to use a package manager, e.g.,
+Install [`ccache`](https://ccache.dev/), I find it easiest to use a package manager, e.g.,
 
 ```sh
 # macOS
