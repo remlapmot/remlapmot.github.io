@@ -236,6 +236,8 @@ We can even use ccache in GitHub Actions as follows:
 
 You can see the [full file in my repo](https://github.com/okezie94/mrbayes/blob/master/.github/workflows/R-CMD-check.yaml).
 
+This reduced by ubuntu-latest run for r-release from 7 minutes 30 seconds to 4 minutes 49 seconds.
+
 ## Naive guesses that made no difference
 
 I had wondered whether running a non-debug compilation with say
