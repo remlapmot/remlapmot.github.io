@@ -1,5 +1,5 @@
 ---
-title: "Two tips to speed up your Stan model compilation times -- especially for package developers"
+title: "Speeding up Stan model builds for R package developers"
 author: Package Build
 date: '2026-05-24'
 slug: Stan-compile-speedup
@@ -9,7 +9,7 @@ tags:
   - R
   - Stan
 subtitle: ''
-summary: "Two tips to help speed up Stan model compilation times."
+summary: "Two tips to help speed up Stan model compilation times, especially helpful for R package developers."
 authors: []
 lastmod: '2026-05-24T06:00:00+00:00'
 featured: false
@@ -24,7 +24,7 @@ toc: true
 
 ## Introduction
 
-In my previous job my work computer was a Windows desktop -- yes the days before laptops and hot-desking became ubiquitous!
+In my previous job my work computer was a Windows desktop -- yes, those were the days before laptops and hotdesking!
 
 My PhD student was interested in Bayesian methods and we put together an R package which included some [Stan](https://mc-stan.org/) models. I was always frustrated how slowly these compiled on our Windows machines. A few years later, when I got a MacBook Air I was shocked how much faster they compiled.
 
@@ -35,16 +35,12 @@ The following tips show how to improve those timings.
 To generate the timings I used
 
 ```sh
-# macOS and Linux
-R CMD INSTALL --preclean .
-
-# Windows
-R CMD INSTALL --preclean --nomultiarch .
+time R CMD INSTALL --preclean .
 ```
 
 ## Tip 1: Enable parallel compilations with the `MAKEFLAGS` environment variable
 
-We are going to set the `MAKEFLAGS` environment variable, in our _~/.Renviron_ file. This sets how many models can be compiled in parallel. We need to choose a number smaller than the number of processing cores our machine has. To find this out run
+We are going to set the `MAKEFLAGS` environment variable, in our _~/.Renviron_ file. This sets how many models can be compiled in parallel. We need to choose a number smaller than the number of processing cores our machine has. To find this run
 
 ```sh
 # Windows - in a Git Bash shell
@@ -57,9 +53,9 @@ sysctl -n hw.logicalcpu
 nproc
 ```
 
-### Optional test script to determine the sweet spot
+### Optional test script to determine where timings plateau
 
-Here's a quick test script to run to determine where the sweet spot is to set the number. You can increase the number sequence upto the number of processing cores your machine has.
+Here's a quick test script to run to determine where the timings plateau to set the number. You can increase the number sequence upto the number of processing cores your machine has.
 
 ```sh
 for j in 1 2 3 4 6 8 10; do
@@ -71,18 +67,35 @@ for j in 1 2 3 4 6 8 10; do
 done
 ```
 
-My MacBook Air has 10 cores, but only 4 of those are performance cores, so I set the number as 6, to leave headroom for me inevitably checking my email during a compilation.
+The timings on my MacBook Air were
+
+```plaintext
+=== -j1 ===
+elapsed: 76s
+=== -j2 ===
+elapsed: 48s
+=== -j3 ===
+elapsed: 35s
+=== -j4 ===
+elapsed: 36s
+=== -j6 ===
+elapsed: 27s
+=== -j8 ===
+elapsed: 27s
+=== -j10 ===
+elapsed: 28s
+```
+
+My MacBook Air has 10 cores, but only 4 of those are performance cores, so I set the number as 6 as that is where my timings plateau'd and it leaves headroom for me inevitably checking my email during a compilation.
 
 ```sh
-MAKEFLAGS = -j6
+# In ~/.Renviron
+MAKEFLAGS=-j6
 ```
 
 Close and restart R/RStudio after making this change.
 
-Enabling this reduced the compilation and installation times to
-
-* Windows: 1 minute 15 seconds
-* M4 MacBook Air: 27 seconds
+The timing reduced to 1 minute 15 seconds on my Windows machine.
 
 ## Tip 2: Enable C/C++ compiler cache using `ccache`
 
@@ -99,25 +112,23 @@ apt install ccache
 winget install ccache
 ```
 
-Whatever installation method you use make sure `ccache` is on your `PATH` after installation. You can test with, say,
+Whichever installation method you use make sure `ccache` is on your `PATH` after installation. You can test with, say,
 
 ```sh
 ccache --version
 ```
 
-To enable `ccache`, on macOS and Linux in your _~/.R/Makevars_ file (you will need to create the directory and file if they don't exist) set
+To enable `ccache`, on macOS/Linux in your _~/.R/Makevars_ on Windows it is the _~/.R/Makevars.win_ file (you will need to create the directory and file if they don't exist) set
 
 ```sh
-# macOS or on Linux if using clang
+# macOS
 CC = ccache clang
 CXX = ccache clang++
 CXX17 = ccache clang++
 ```
 
-On Windows, in your _~/.R/Makevars.win_ file set
-
 ```sh
-# Windows
+# Windows and Linux (most Linux users will be on gcc by default - change to clang if you're using that)
 CC = ccache gcc
 CXX = ccache g++
 CXX17 = ccache g++
@@ -133,9 +144,97 @@ Perhaps more importantly, if, say, your package has 5 models and you only amend 
 * Windows, second compilation, only 1 model edited: TODO seconds
 * M4 MacBook Air, second compilation, only 1 model edited: 19 seconds
 
+You can verify `ccache` is working, by observing the timing decrease and by checking the output of
+
+```sh
+ccache -s
+```
+
 <!--
 <img src="/post/2026/runiverse-tips/img/twosamplemr-dependencies-clicked.png" alt="Screenshot of expanding the dependencies pill on an R-universe package page." width="730" style="display: block; margin: auto;">
 -->
+
+## Tip 3: Combining these in GitHub Actions workflows
+
+In my _.github/workflows/R-CMD-check.yaml_ I have steps for these speedups. Firstly, to set `MAKEFLAGS`.
+
+```yaml
+      - name: Set parallel compilation flags (Linux and macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          NCPUS=$(nproc 2>/dev/null || sysctl -n hw.logicalcpu)
+          echo "Detected ${NCPUS} processors"
+          echo "MAKEFLAGS=-j${NCPUS}" >> ~/.Renviron
+
+      - name: Set parallel compilation flags (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Write-Output "Detected $env:NUMBER_OF_PROCESSORS processors"
+          Add-Content -Path "$HOME\.Renviron" -Value "MAKEFLAGS=-j$env:NUMBER_OF_PROCESSORS"
+```
+
+We can even use ccache in GitHub Actions as follows:
+
+```yaml
+      # ccache speeds up Stan model compilation dramatically on warm cache.
+      # Note: Windows support via ccache-action is documented as "probably works"
+      # rather than fully stable; if it causes issues, scope this step to non-Windows.
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2.23
+        with:
+          # Key invalidates when Stan models or DESCRIPTION change.
+          # Older caches partially seed new ones via restore-keys.
+          key: ccache-${{ matrix.config.os }}-R-${{ matrix.config.r }}-${{ hashFiles('inst/stan/**/*.stan', 'DESCRIPTION') }}
+          restore-keys: |
+            ccache-${{ matrix.config.os }}-R-${{ matrix.config.r }}-
+            ccache-${{ matrix.config.os }}-R-
+          max-size: "2G"
+
+      - name: Configure R to use ccache (Linux and macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          mkdir -p ~/.R
+          if [ "$RUNNER_OS" = "macOS" ]; then
+            cat >> ~/.R/Makevars <<'EOF'
+          CC = ccache clang
+          CXX = ccache clang++
+          CXX14 = ccache clang++
+          CXX17 = ccache clang++
+          CXX20 = ccache clang++
+          EOF
+          else
+            cat >> ~/.R/Makevars <<'EOF'
+          CC = ccache gcc
+          CXX = ccache g++
+          CXX14 = ccache g++
+          CXX17 = ccache g++
+          CXX20 = ccache g++
+          EOF
+          fi
+          echo "--- ~/.R/Makevars ---"
+          cat ~/.R/Makevars
+
+      - name: Configure R to use ccache (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path "$HOME\.R" | Out-Null
+          $makevars = @"
+          CC = ccache gcc
+          CXX = ccache g++
+          CXX14 = ccache g++
+          CXX17 = ccache g++
+          CXX20 = ccache g++
+          "@
+          Add-Content -Path "$HOME\.R\Makevars.win" -Value $makevars
+          Write-Output "--- ~/.R/Makevars.win ---"
+          Get-Content "$HOME\.R\Makevars.win"
+```
+
+You can see the [full file in my repo](https://github.com/okezie94/mrbayes/blob/master/.github/workflows/R-CMD-check.yaml).
 
 ## Naive guesses that made no difference
 
@@ -145,7 +244,7 @@ I had wondered whether running a non-debug compilation with say
 pkgbuild::compile_dll(debug = FALSE)
 ```
 
-would speed things up. It turns out it does not. Compiling Stan models is mostly templating.
+would speed things up. It turns out it does not. Most of the time is spent in C++ template instantiation by the compiler, not in optimisation passes — so disabling debug flags or lowering the optimisation level barely helps.
 
 I also wondered whether using R on Windows Subsystem for Linux would speed things up just by virtue of being on Linux. It did not.
 
