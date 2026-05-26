@@ -1,15 +1,15 @@
 ---
 title: "Speeding up Stan model builds for R package developers"
-author: Package Build
+author: Tom Palmer
 date: '2026-05-26'
-slug: Stan-compile-speedup
+slug: stan-compile-speedup
 categories:
   - Blog
 tags:
   - R
   - Stan
 subtitle: ''
-summary: "Tips to help speed up Stan model compilation times, especially helpful for R package developers. Including, setting `MAKEFLAGS`, using `ccache`, and using `clang`."
+summary: "Tips to help speed up Stan model compilation times in R packages, including; setting `MAKEFLAGS`, using `ccache`, and using `clang`."
 lastmod: '2026-05-26T15:00:00+00:00'
 featured: false
 image:
@@ -56,40 +56,7 @@ sysctl -n hw.logicalcpu
 nproc
 ```
 
-### Optional test script to determine where timings plateau
-
-Here's a quick test script to run to determine where the timings plateau to set the number. You can increase the number sequence up to the number of processing cores your machine has.
-
-```sh
-for j in 1 2 3 4 6 8 10; do
-  ccache -C >/dev/null
-  echo "=== -j$j ==="
-  SECONDS=0
-  MAKEFLAGS=-j$j R CMD INSTALL --preclean . >/dev/null 2>&1
-  echo "elapsed: ${SECONDS}s"
-done
-```
-
-The timings on my MacBook Air were
-
-```plaintext
-=== -j1 ===
-elapsed: 76s
-=== -j2 ===
-elapsed: 48s
-=== -j3 ===
-elapsed: 35s
-=== -j4 ===
-elapsed: 36s
-=== -j6 ===
-elapsed: 27s
-=== -j8 ===
-elapsed: 27s
-=== -j10 ===
-elapsed: 28s
-```
-
-My MacBook Air has 10 cores, but only 4 of those are performance cores, so I set the number as 6 as that is where my timings plateaued and it leaves headroom for me inevitably checking my email during a compilation.
+A reasonable starting point is your core count, or a few fewer to leave headroom for whatever else you're doing during a compilation. For example,
 
 ```sh
 # In ~/.Renviron
@@ -98,7 +65,7 @@ MAKEFLAGS=-j6
 
 Close and restart R/RStudio after making this change.
 
-On my Windows machine this reduced the build from 3:55 to 1:15.
+On my Windows machine this reduced the build from 3:55 to 1:15. To find your own sweet spot empirically, see the example at the end of Big win 2.
 
 ## Big win 2: Enable C/C++ compiler cache using `ccache`
 
@@ -107,10 +74,14 @@ Install [`ccache`](https://ccache.dev/), I find it easiest to use a package mana
 ```sh
 # macOS
 brew install ccache
+```
 
+```sh
 # Ubuntu/Debian Linux
 apt install ccache
+```
 
+```sh
 # Windows
 winget install ccache
 ```
@@ -121,7 +92,7 @@ Whichever installation method you use make sure `ccache` is on your `PATH` after
 ccache --version
 ```
 
-To enable `ccache`, on macOS/Linux this goes in _~/.R/Makevars_; on Windows it's _~/.R/Makevars.win_ (create the directory and file if they don't exist), set
+To enable `ccache`, on macOS and Linux this goes in _~/.R/Makevars_; on Windows it's _~/.R/Makevars.win_ (create the directory and file if they don't exist), set
 
 ```sh
 # macOS
@@ -131,7 +102,9 @@ CXX17 = ccache clang++
 ```
 
 ```sh
-# Windows and Linux (most Linux users will be on gcc by default - change to clang if you're using that)
+# Windows and Linux
+# Most Linux users will be on gcc by default
+# Change to clang if you're using that
 CC = ccache gcc
 CXX = ccache g++
 CXX17 = ccache g++
@@ -176,6 +149,41 @@ for model in inst/stan/*.stan; do
   mv "$model.bak" "$model"
 done
 ```
+
+### Finding your `MAKEFLAGS` sweet spot
+
+With `ccache` installed you can now benchmark different `-jN` values cleanly (the `ccache -C` calls ensure each run is a cold compile, so you measure raw compilation cost rather than cache hits). You can increase the number sequence up to the number of processing cores your machine has.
+
+```sh
+for j in 1 2 3 4 6 8 10; do
+  ccache -C >/dev/null
+  echo "=== -j$j ==="
+  SECONDS=0
+  MAKEFLAGS=-j$j R CMD INSTALL --preclean . >/dev/null 2>&1
+  echo "elapsed: ${SECONDS}s"
+done
+```
+
+The timings on my MacBook Air were
+
+```plaintext
+=== -j1 ===
+elapsed: 76s
+=== -j2 ===
+elapsed: 48s
+=== -j3 ===
+elapsed: 35s
+=== -j4 ===
+elapsed: 36s
+=== -j6 ===
+elapsed: 27s
+=== -j8 ===
+elapsed: 27s
+=== -j10 ===
+elapsed: 28s
+```
+
+My MacBook Air has 10 cores, but only 4 of those are performance cores, so I settled on `-j6` as that is where my timings plateaued — and it leaves headroom for me inevitably checking my email during a compilation.
 
 ## Big win 3: Combining these in GitHub Actions workflows
 
@@ -263,9 +271,9 @@ This reduced my ubuntu-latest run for r-release from 7 minutes 30 seconds to 4 m
 
 ## Big win 4: Switch to `clang`
 
-I observe that switching from `gcc` to `clang` gives a noticeable speed up; the single core compile time dropped from 3 minutes 55 seconds to 3 minutes flat.
+I found that switching from `gcc` to `clang` gives a noticeable speedup; the single core compile time dropped from 3 minutes 55 seconds to 3 minutes flat on my Windows machine.
 
-To do this you need to install `clang`. This is more involved on Windows than Linux because you install `clang` within RTools45, but it is possible.
+To do this you need to install `clang`. On Windows you install `clang` within RTools45 — more involved than on Linux, but doable.
 
 ```sh
 # Windows within RTools45 Bash shell
@@ -288,7 +296,7 @@ which clang
 
 should return `/ucrt/bin/clang`.
 
-Switch to `clang` in your _~/.R/Makevars_ file (if you're not using `ccache` delete that prefix)
+Switch to `clang` in _~/.R/Makevars_ (if you're not using `ccache` delete that prefix)
 
 ```sh
 # On Linux
@@ -299,7 +307,7 @@ CXX17 = ccache clang++
 CXX20 = ccache clang++
 ```
 
-and in your _~/.R/Makevars.win_ file on Windows
+and in _~/.R/Makevars.win_ on Windows
 
 ```sh
 # On Windows
@@ -321,11 +329,11 @@ You can verify things are working by running
 R CMD config CXX17
 ```
 
-I believe you need `clang` version 18 to see the speedups (I had versions 18.1.3 on Ubuntu and 22.1.4 on Windows).
+I believe you need `clang` version 18 or later to see the speedups.
 
 ## Small win 1: WSL users should use the native file system
 
-Within WSL it is possible to access files from within its native Linux filesystem, i.e., within `/home/user/...`, but it is also possible to access files on the Windows filesystem, e.g., in `/mnt/c/...`. I believe file operations are faster within `/home/user/...`.
+Within WSL it is possible to access files from within its native Linux filesystem, i.e., within `/home/user/...`, and also on the Windows filesystem, e.g., in `/mnt/c/...`. I believe file operations are noticeably faster within `/home/user/...`.
 
 ## Naive guesses that made no difference
 
@@ -335,14 +343,14 @@ I had wondered whether running a non-debug compilation with say
 pkgbuild::compile_dll(debug = FALSE)
 ```
 
-would speed things up. It turns out it does not. Most of the time is spent in C++ template instantiation by the compiler, not in optimisation passes — so disabling debug flags or lowering the optimisation level barely helps.
+would speed things up. It turns out it does not. For Stan models, most of the time is spent in C++ template instantiation by the compiler, not in optimisation passes — so disabling debug flags or lowering the optimisation level barely helps.
 
-I also wondered whether using R on Windows Subsystem for Linux would speed things up just by virtue of being on Linux. It did not, timings using `gcc` on Windows and WSL Ubuntu were essentially identical.
+I also wondered whether using R on Windows Subsystem for Linux would speed things up just by virtue of being on Linux. It did not, timings using `gcc` on Windows and WSL Ubuntu were essentially identical. The advantage of using WSL is that it is easier to switch to using `clang` on Linux.
 
-## (Money no object) Big win: Switch to an Apple Silicon Mac
+## (Money no object) Big win 5: Switch to an Apple Silicon Mac
 
 Apple silicon Macs have excellent single threaded performance, their unified memory architecture has very high bandwidth, they have large L1 and L2 caches, and fast NVMe SSDs. Together these produce very fast Stan model compilation times, even on the lowest end Apple Silicon Macs.
 
 ## Summary
 
-In summary, I have shown four big wins and a small win how to speed up compilation times of Stan models within an R package.
+In summary, five big wins and one small win for speeding up Stan model compilation in R packages.
