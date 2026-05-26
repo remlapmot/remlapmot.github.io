@@ -273,12 +273,29 @@ In my WSL Ubuntu 24.04 I observe that switching from `gcc` to `clang` gives a no
 To do this you need to install `clang`.
 
 ```sh
+# Windows within RTools45 Bash shell
+# Launch C:\rtools45\ucrt64.exe
+pacman -Syu # you may need to close and reopen the shell after this
+pacman -S mingw-w64-ucrt-x86_64-clang
+```
+
+```sh
+# Ubuntu/Debian Linux
 sudo apt install clang
 ```
 
-Then switch to `clang` in your _~/.R/Makevars_ file (if you're not using `ccache` delete that prefix)
+At this point on Windows running
 
 ```sh
+which clang
+```
+
+should return `/ucrt/bin/clang`.
+
+Switch to `clang` in your _~/.R/Makevars_ file (if you're not using `ccache` delete that prefix)
+
+```sh
+# On Linux
 CC = ccache clang
 CXX = ccache clang++
 CXX14 = ccache clang++
@@ -286,7 +303,23 @@ CXX17 = ccache clang++
 CXX20 = ccache clang++
 ```
 
-I believe you need `clang` version 18 to see the speedups (I had 18.1.3).
+and in your _~/.R/Makevars.win_ file on Windows
+
+```sh
+# On Windows
+CC = ccache C:/rtools45/ucrt64/bin/clang.exe
+CXX = ccache C:/rtools45/ucrt64/bin/clang++.exe
+CXX17 = ccache C:/rtools45/ucrt64/bin/clang++.exe
+```
+
+And Windows users will need to add the following to `PATH`
+
+```plaintext
+C:\rtools45\ucrt64\bin
+C:\rtools45\usr\bin
+```
+
+I believe you need `clang` version 18 to see the speedups (I had versions 18.1.3 on Ubuntu and 22.1.4 on Windows).
 
 ## Small win 1: WSL users should use the native file system
 
