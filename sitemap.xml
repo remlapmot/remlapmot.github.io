@@ -1,29 +1,36 @@
+
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://remlapmot.github.io/category/blog/</loc>
-    <lastmod>2026-05-18T06:00:00+00:00</lastmod>
+    <lastmod>2026-05-26T15:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/categories/</loc>
-    <lastmod>2026-05-18T06:00:00+00:00</lastmod>
+    <lastmod>2026-05-26T15:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/</loc>
-    <lastmod>2026-05-18T06:00:00+00:00</lastmod>
+    <lastmod>2026-05-26T15:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/post/</loc>
+    <lastmod>2026-05-26T15:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/r/</loc>
+    <lastmod>2026-05-26T15:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/post/2026/stan-compile-speedup/</loc>
+    <lastmod>2026-05-26T15:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tag/stan/</loc>
+    <lastmod>2026-05-26T15:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://remlapmot.github.io/tags/</loc>
+    <lastmod>2026-05-26T15:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/post/2026/runiverse-tips/</loc>
     <lastmod>2026-05-18T06:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://remlapmot.github.io/post/</loc>
-    <lastmod>2026-05-18T06:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/tag/r/</loc>
-    <lastmod>2026-05-18T06:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://remlapmot.github.io/tag/runiverse/</loc>
-    <lastmod>2026-05-18T06:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://remlapmot.github.io/tags/</loc>
     <lastmod>2026-05-18T06:00:00+00:00</lastmod>
   </url><url>
     <loc>https://remlapmot.github.io/post/2026/manylinux-packages/</loc>

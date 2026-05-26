@@ -5,12 +5,258 @@
     <link>https://remlapmot.github.io/</link>
       <atom:link href="https://remlapmot.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Dr Tom Palmer</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 18 May 2026 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 26 May 2026 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_4c69fe6e68a3b4.png</url>
       <title>Dr Tom Palmer</title>
       <link>https://remlapmot.github.io/</link>
     </image>
+    
+    <item>
+      <title>Speeding up Stan model builds for R package developers</title>
+      <link>https://remlapmot.github.io/post/2026/stan-compile-speedup/</link>
+      <pubDate>Tue, 26 May 2026 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2026/stan-compile-speedup/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;In my previous job my work computer was a Windows desktop &amp;ndash; yes, those were the days before laptops and hotdesking!&lt;/p&gt;
+&lt;p&gt;My PhD student was interested in Bayesian methods and we put together an R package which included some 
+&lt;a href=&#34;https://mc-stan.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Stan&lt;/a&gt; models. I was always frustrated by how slowly these compiled on our Windows machines. A few years later, when I got a MacBook Air I was shocked how much faster they compiled.&lt;/p&gt;
+&lt;p&gt;On my Windows machine our 
+&lt;a href=&#34;https://okezie94.github.io/mrbayes/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;mrbayes&lt;/a&gt; package takes 3 minutes 55 seconds to compile and install. On my M4 MacBook Air it takes 1 minute 16 seconds.&lt;/p&gt;
+&lt;p&gt;The following tips show how to improve those timings.&lt;/p&gt;
+&lt;p&gt;To generate the timings I used&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;time R CMD INSTALL --preclean .
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;big-win-1-enable-parallel-compilations-with-the-makeflags-environment-variable&#34;&gt;Big win 1: Enable parallel compilations with the &lt;code&gt;MAKEFLAGS&lt;/code&gt; environment variable&lt;/h2&gt;
+&lt;p&gt;Set the &lt;code&gt;MAKEFLAGS&lt;/code&gt; environment variable in your &lt;em&gt;~/.Renviron&lt;/em&gt; file. This controls how many &lt;code&gt;make&lt;/code&gt; jobs run concurrently. Choose a number no larger than the number of processing cores your machine has. To find this run&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Windows - in a Git Bash shell
+echo $NUMBER_OF_PROCESSORS
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# macOS
+sysctl -n hw.logicalcpu
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Ubuntu Linux
+nproc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A reasonable starting point is your core count, or a few fewer to leave headroom for whatever else you&amp;rsquo;re doing during a compilation. For example,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# In ~/.Renviron
+MAKEFLAGS=-j6
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Close and restart R/RStudio after making this change.&lt;/p&gt;
+&lt;p&gt;On my Windows machine this reduced the build from 3:55 to 1:15. To find your own sweet spot empirically, see the example at the end of Big win 2.&lt;/p&gt;
+&lt;h2 id=&#34;big-win-2-enable-cc-compiler-cache-using-ccache&#34;&gt;Big win 2: Enable C/C++ compiler cache using &lt;code&gt;ccache&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Install 
+&lt;a href=&#34;https://ccache.dev/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;ccache&lt;/code&gt;&lt;/a&gt;, I find it easiest to use a package manager, e.g.,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# macOS
+brew install ccache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Ubuntu/Debian Linux
+apt install ccache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Windows
+winget install ccache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Whichever installation method you use make sure &lt;code&gt;ccache&lt;/code&gt; is on your &lt;code&gt;PATH&lt;/code&gt; after installation. You can test with, say,&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ccache --version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To enable &lt;code&gt;ccache&lt;/code&gt;, on macOS and Linux this goes in &lt;em&gt;~/.R/Makevars&lt;/em&gt;; on Windows it&amp;rsquo;s &lt;em&gt;~/.R/Makevars.win&lt;/em&gt; (create the directory and file if they don&amp;rsquo;t exist), set&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# macOS
+CC = ccache clang
+CXX = ccache clang++
+CXX17 = ccache clang++
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Windows and Linux
+# Most Linux users will be on gcc by default
+# Change to clang if you&#39;re using that
+CC = ccache gcc
+CXX = ccache g++
+CXX17 = ccache g++
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After a first compilation run for the cache to be generated, subsequent compilations are much faster.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows, second compilation: 18 seconds&lt;/li&gt;
+&lt;li&gt;M4 MacBook Air, second compilation: 5 seconds&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Perhaps more importantly, if, say, your package has 5 models and you only amend the code for one of them, &lt;code&gt;ccache&lt;/code&gt; knows to use the cache for the 4 unchanged models.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows, second compilation, only 1 model edited: 1 minute 10 seconds&lt;/li&gt;
+&lt;li&gt;M4 MacBook Air, second compilation, only 1 model edited: 19 seconds&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can verify &lt;code&gt;ccache&lt;/code&gt; is working, by observing the timing decrease and by checking the output of&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ccache -s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It is also useful to zero the ccache statistics before a timing run with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ccache -z
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;testing-which-of-your-models-takes-the-longest-to-compile&#34;&gt;Testing which of your models takes the longest to compile&lt;/h3&gt;
+&lt;p&gt;Here&amp;rsquo;s a quick script to test which model takes the longest to compile. Save it as say &lt;em&gt;test.sh&lt;/em&gt; at the top level of your repo and add &lt;code&gt;^test\.sh$&lt;/code&gt; to your &lt;em&gt;.Rbuildignore&lt;/em&gt; file (to avoid an &lt;code&gt;R CMD check&lt;/code&gt; NOTE about unknown files at the top level).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;for model in inst/stan/*.stan; do
+  cp &amp;quot;$model&amp;quot; &amp;quot;$model.bak&amp;quot;
+  # Insert at the top of the file
+  sed -i &amp;quot;1i // benchmark $(date +%s%N)&amp;quot; &amp;quot;$model&amp;quot;
+  ccache -z
+  SECONDS=0
+  R CMD INSTALL --preclean . &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
+  echo &amp;quot;$(basename $model): ${SECONDS}s&amp;quot;
+  ccache -s | grep -E &amp;quot;Hits|Misses&amp;quot; | head -2
+  mv &amp;quot;$model.bak&amp;quot; &amp;quot;$model&amp;quot;
+done
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;finding-your-makeflags-sweet-spot&#34;&gt;Finding your &lt;code&gt;MAKEFLAGS&lt;/code&gt; sweet spot&lt;/h3&gt;
+&lt;p&gt;With &lt;code&gt;ccache&lt;/code&gt; installed you can now benchmark different &lt;code&gt;-jN&lt;/code&gt; values cleanly (the &lt;code&gt;ccache -C&lt;/code&gt; calls ensure each run is a cold compile, so you measure raw compilation cost rather than cache hits). You can increase the number sequence up to the number of processing cores your machine has.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;for j in 1 2 3 4 6 8 10; do
+  ccache -C &amp;gt;/dev/null
+  echo &amp;quot;=== -j$j ===&amp;quot;
+  SECONDS=0
+  MAKEFLAGS=-j$j R CMD INSTALL --preclean . &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
+  echo &amp;quot;elapsed: ${SECONDS}s&amp;quot;
+done
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The timings on my MacBook Air were&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;=== -j1 ===
+elapsed: 76s
+=== -j2 ===
+elapsed: 48s
+=== -j3 ===
+elapsed: 35s
+=== -j4 ===
+elapsed: 36s
+=== -j6 ===
+elapsed: 27s
+=== -j8 ===
+elapsed: 27s
+=== -j10 ===
+elapsed: 28s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;My MacBook Air has 10 cores, but only 4 of those are performance cores, so I settled on &lt;code&gt;-j6&lt;/code&gt; as that is where my timings plateaued — and it leaves headroom for me inevitably checking my email during a compilation.&lt;/p&gt;
+&lt;h2 id=&#34;big-win-3-combining-these-in-github-actions-workflows&#34;&gt;Big win 3: Combining these in GitHub Actions workflows&lt;/h2&gt;
+&lt;p&gt;In my &lt;em&gt;.github/workflows/R-CMD-check.yaml&lt;/em&gt; I have steps for these speedups. Firstly, to set &lt;code&gt;MAKEFLAGS&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;      - name: Set parallel compilation flags (Linux and macOS)
+        if: runner.os != &#39;Windows&#39;
+        shell: bash
+        run: |
+          NCPUS=$(nproc 2&amp;gt;/dev/null || sysctl -n hw.logicalcpu)
+          echo &amp;quot;Detected ${NCPUS} processors&amp;quot;
+          echo &amp;quot;MAKEFLAGS=-j${NCPUS}&amp;quot; &amp;gt;&amp;gt; ~/.Renviron
+
+      - name: Set parallel compilation flags (Windows)
+        if: runner.os == &#39;Windows&#39;
+        shell: pwsh
+        run: |
+          Write-Output &amp;quot;Detected $env:NUMBER_OF_PROCESSORS processors&amp;quot;
+          Add-Content -Path &amp;quot;$HOME\.Renviron&amp;quot; -Value &amp;quot;MAKEFLAGS=-j$env:NUMBER_OF_PROCESSORS&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also use ccache in GitHub Actions, as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;      # ccache speeds up Stan model compilation dramatically on warm cache.
+      # Note: Windows support via ccache-action is documented as &amp;quot;probably works&amp;quot;
+      # rather than fully stable; if it causes issues, scope this step to non-Windows.
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2.23
+        with:
+          # Key invalidates when Stan models or DESCRIPTION change.
+          # Older caches partially seed new ones via restore-keys.
+          key: ccache-${{ matrix.config.os }}-R-${{ matrix.config.r }}-${{ hashFiles(&#39;inst/stan/**/*.stan&#39;, &#39;DESCRIPTION&#39;) }}
+          restore-keys: |
+            ccache-${{ matrix.config.os }}-R-${{ matrix.config.r }}-
+            ccache-${{ matrix.config.os }}-R-
+          max-size: &amp;quot;2G&amp;quot;
+
+      - name: Configure R to use ccache (Linux and macOS)
+        if: runner.os != &#39;Windows&#39;
+        shell: bash
+        run: |
+          mkdir -p ~/.R
+          if [ &amp;quot;$RUNNER_OS&amp;quot; = &amp;quot;macOS&amp;quot; ]; then
+            cat &amp;gt;&amp;gt; ~/.R/Makevars &amp;lt;&amp;lt;&#39;EOF&#39;
+          CC = ccache clang
+          CXX = ccache clang++
+          CXX14 = ccache clang++
+          CXX17 = ccache clang++
+          CXX20 = ccache clang++
+          EOF
+          else
+            cat &amp;gt;&amp;gt; ~/.R/Makevars &amp;lt;&amp;lt;&#39;EOF&#39;
+          CC = ccache gcc
+          CXX = ccache g++
+          CXX14 = ccache g++
+          CXX17 = ccache g++
+          CXX20 = ccache g++
+          EOF
+          fi
+          echo &amp;quot;--- ~/.R/Makevars ---&amp;quot;
+          cat ~/.R/Makevars
+
+      - name: Configure R to use ccache (Windows)
+        if: runner.os == &#39;Windows&#39;
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path &amp;quot;$HOME\.R&amp;quot; | Out-Null
+          $makevars = @&amp;quot;
+          CC = ccache gcc
+          CXX = ccache g++
+          CXX14 = ccache g++
+          CXX17 = ccache g++
+          CXX20 = ccache g++
+          &amp;quot;@
+          Add-Content -Path &amp;quot;$HOME\.R\Makevars.win&amp;quot; -Value $makevars
+          Write-Output &amp;quot;--- ~/.R/Makevars.win ---&amp;quot;
+          Get-Content &amp;quot;$HOME\.R\Makevars.win&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can see the 
+&lt;a href=&#34;https://github.com/okezie94/mrbayes/blob/master/.github/workflows/R-CMD-check.yaml&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;full file in my repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This reduced my ubuntu-latest run for r-release from 7 minutes 30 seconds to 4 minutes 49 seconds.&lt;/p&gt;
+&lt;h2 id=&#34;big-win-4-switch-to-clang&#34;&gt;Big win 4: Switch to &lt;code&gt;clang&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;I found that switching from &lt;code&gt;gcc&lt;/code&gt; to &lt;code&gt;clang&lt;/code&gt; gives a noticeable speedup; the single core compile time dropped from 3 minutes 55 seconds to 3 minutes flat on my Windows machine.&lt;/p&gt;
+&lt;p&gt;To do this you need to install &lt;code&gt;clang&lt;/code&gt;. On Windows you install &lt;code&gt;clang&lt;/code&gt; within RTools45 — more involved than on Linux, but doable.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Windows within RTools45 Bash shell
+# Launch C:\rtools45\ucrt64.exe
+# You may need to close and reopen the shell after the first command
+pacman -Syu
+pacman -S mingw-w64-ucrt-x86_64-clang
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Ubuntu/Debian Linux
+sudo apt install clang
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At this point on Windows running&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;which clang
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;should return &lt;code&gt;/ucrt/bin/clang&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Switch to &lt;code&gt;clang&lt;/code&gt; in &lt;em&gt;~/.R/Makevars&lt;/em&gt; (if you&amp;rsquo;re not using &lt;code&gt;ccache&lt;/code&gt; delete that prefix)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# On Linux
+CC = ccache clang
+CXX = ccache clang++
+CXX14 = ccache clang++
+CXX17 = ccache clang++
+CXX20 = ccache clang++
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and in &lt;em&gt;~/.R/Makevars.win&lt;/em&gt; on Windows&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# On Windows
+CC = ccache C:/rtools45/ucrt64/bin/clang.exe
+CXX = ccache C:/rtools45/ucrt64/bin/clang++.exe
+CXX17 = ccache C:/rtools45/ucrt64/bin/clang++.exe
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Windows users will need to add the following to &lt;code&gt;PATH&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;C:\rtools45\ucrt64\bin
+C:\rtools45\usr\bin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can verify things are working by running&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;R CMD config CXX17
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I believe you need &lt;code&gt;clang&lt;/code&gt; version 18 or later to see the speedups.&lt;/p&gt;
+&lt;h2 id=&#34;small-win-1-wsl-users-should-use-the-native-file-system&#34;&gt;Small win 1: WSL users should use the native file system&lt;/h2&gt;
+&lt;p&gt;Within WSL it is possible to access files from within its native Linux filesystem, i.e., within &lt;code&gt;/home/user/...&lt;/code&gt;, and also on the Windows filesystem, e.g., in &lt;code&gt;/mnt/c/...&lt;/code&gt;. I believe file operations are noticeably faster within &lt;code&gt;/home/user/...&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;naive-guesses-that-made-no-difference&#34;&gt;Naive guesses that made no difference&lt;/h2&gt;
+&lt;p&gt;I had wondered whether running a non-debug compilation with say&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;pkgbuild::compile_dll(debug = FALSE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;would speed things up. It turns out it does not. For Stan models, most of the time is spent in C++ template instantiation by the compiler, not in optimisation passes — so disabling debug flags or lowering the optimisation level barely helps.&lt;/p&gt;
+&lt;p&gt;I also wondered whether using R on Windows Subsystem for Linux would speed things up just by virtue of being on Linux. It did not, timings using &lt;code&gt;gcc&lt;/code&gt; on Windows and WSL Ubuntu were essentially identical. The advantage of using WSL is that it is easier to switch to using &lt;code&gt;clang&lt;/code&gt; on Linux.&lt;/p&gt;
+&lt;h2 id=&#34;money-no-object-big-win-5-switch-to-an-apple-silicon-mac&#34;&gt;(Money no object) Big win 5: Switch to an Apple Silicon Mac&lt;/h2&gt;
+&lt;p&gt;Apple silicon Macs have excellent single threaded performance, their unified memory architecture has very high bandwidth, they have large L1 and L2 caches, and fast NVMe SSDs. Together these produce very fast Stan model compilation times, even on the lowest end Apple Silicon Macs.&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In summary, five big wins and one small win for speeding up Stan model compilation in R packages.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Five tips for managing your R-universe 🚀</title>

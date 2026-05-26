@@ -27,10 +27,10 @@
   
     
   
-  <meta name="description" content="How to create a self-contained executable Python script, which declares the dependencies for the virtual environment for rendering Quarto documents using the Jupyter engine. This allows non-technical users to render Quarto documents using the Jupyter engine without having to manage the virtual environment themselves.">
+  <meta name="description" content="Tips to help speed up Stan model compilation times in R packages, including; setting `MAKEFLAGS`, using `ccache`, and using `clang`.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/">
+  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2026/stan-compile-speedup/">
 
   
 
@@ -213,7 +213,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu_bc7b6ec52dc43b44.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu_e95fde987167213e.png">
 
-  <link rel="canonical" href="https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/">
+  <link rel="canonical" href="https://remlapmot.github.io/post/2026/stan-compile-speedup/">
 
   
   
@@ -228,15 +228,15 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Dr Tom Palmer">
-  <meta property="og:url" content="https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/">
-  <meta property="og:title" content="Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine | Dr Tom Palmer">
-  <meta property="og:description" content="How to create a self-contained executable Python script, which declares the dependencies for the virtual environment for rendering Quarto documents using the Jupyter engine. This allows non-technical users to render Quarto documents using the Jupyter engine without having to manage the virtual environment themselves."><meta property="og:image" content="https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/featured.png">
-  <meta property="twitter:image" content="https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/featured.png"><meta property="og:locale" content="en-us">
+  <meta property="og:url" content="https://remlapmot.github.io/post/2026/stan-compile-speedup/">
+  <meta property="og:title" content="Speeding up Stan model builds for R package developers | Dr Tom Palmer">
+  <meta property="og:description" content="Tips to help speed up Stan model compilation times in R packages, including; setting `MAKEFLAGS`, using `ccache`, and using `clang`."><meta property="og:image" content="https://remlapmot.github.io/post/2026/stan-compile-speedup/featured.png">
+  <meta property="twitter:image" content="https://remlapmot.github.io/post/2026/stan-compile-speedup/featured.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2025-09-02T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2026-05-26T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2025-09-02T07:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2026-05-26T15:00:00&#43;00:00">
   
 
   
@@ -260,16 +260,16 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/"
+    "@id": "https://remlapmot.github.io/post/2026/stan-compile-speedup/"
   },
-  "headline": "Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine",
+  "headline": "Speeding up Stan model builds for R package developers",
   
   "image": [
-    "https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/featured.png"
+    "https://remlapmot.github.io/post/2026/stan-compile-speedup/featured.png"
   ],
   
-  "datePublished": "2025-09-02T00:00:00Z",
-  "dateModified": "2025-09-02T07:00:00Z",
+  "datePublished": "2026-05-26T00:00:00Z",
+  "dateModified": "2026-05-26T15:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -284,7 +284,7 @@
       "url": "https://remlapmot.github.io/images/icon_hu_e95fde987167213e.png"
     }
   },
-  "description": "How to create a self-contained executable Python script, which declares the dependencies for the virtual environment for rendering Quarto documents using the Jupyter engine. This allows non-technical users to render Quarto documents using the Jupyter engine without having to manage the virtual environment themselves."
+  "description": "Tips to help speed up Stan model compilation times in R packages, including; setting `MAKEFLAGS`, using `ccache`, and using `clang`."
 }
 </script>
 
@@ -302,7 +302,7 @@
 
 
 
-  <title>Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine | Dr Tom Palmer</title>
+  <title>Speeding up Stan model builds for R package developers | Dr Tom Palmer</title>
 
 </head>
 
@@ -615,7 +615,18 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#the-self-contained-executable-python-script">The self-contained executable Python script</a></li>
+    <li><a href="#big-win-1-enable-parallel-compilations-with-the-makeflags-environment-variable">Big win 1: Enable parallel compilations with the <code>MAKEFLAGS</code> environment variable</a></li>
+    <li><a href="#big-win-2-enable-cc-compiler-cache-using-ccache">Big win 2: Enable C/C++ compiler cache using <code>ccache</code></a>
+      <ul>
+        <li><a href="#testing-which-of-your-models-takes-the-longest-to-compile">Testing which of your models takes the longest to compile</a></li>
+        <li><a href="#finding-your-makeflags-sweet-spot">Finding your <code>MAKEFLAGS</code> sweet spot</a></li>
+      </ul>
+    </li>
+    <li><a href="#big-win-3-combining-these-in-github-actions-workflows">Big win 3: Combining these in GitHub Actions workflows</a></li>
+    <li><a href="#big-win-4-switch-to-clang">Big win 4: Switch to <code>clang</code></a></li>
+    <li><a href="#small-win-1-wsl-users-should-use-the-native-file-system">Small win 1: WSL users should use the native file system</a></li>
+    <li><a href="#naive-guesses-that-made-no-difference">Naive guesses that made no difference</a></li>
+    <li><a href="#money-no-object-big-win-5-switch-to-an-apple-silicon-mac">(Money no object) Big win 5: Switch to an Apple Silicon Mac</a></li>
     <li><a href="#summary">Summary</a></li>
   </ul>
 </nav>
@@ -651,7 +662,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine</h1>
+  <h1>Speeding up Stan model builds for R package developers</h1>
 
   
 
@@ -671,7 +682,7 @@
           Last updated on
       
     
-    Sep 2, 2025
+    May 26, 2026
   </span>
   
 
@@ -710,9 +721,9 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 480px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 378px;">
   <div style="position: relative">
-    <img src="/post/2025/self-contained-python-script-for-quarto/featured_hu_1d4a6ebfbeb8cb87.png" alt="Image of a scroll, representing a script, containing the word Quarto and the Python and Jupyter logos." class="featured-image">
+    <img src="/post/2026/stan-compile-speedup/featured_hu_a393a33872e84542.png" alt="..." class="featured-image">
     
   </div>
 </div>
@@ -721,69 +732,243 @@
             <div class="article-container">
               <div class="article-style">
                 <h2 id="introduction">Introduction</h2>
-<p>In previous posts I have covered creating 
-<a href="https://remlapmot.github.io/post/2025/multi-engine-quarto/" target="_blank" rel="noopener">effectively multi-engine Quarto documents</a> and also how to use 
-<a href="https://remlapmot.github.io/post/2025/nbstata-uv-venv/" target="_blank" rel="noopener">uv virtual environments for the nbstata Jupyter kernel</a> to run Quarto documents with Stata code. Hence by trivial extension we can use <code>uv</code> to manage the virutal environments for running Quarto documents using the <code>jupyter: python3</code> engine.</p>
-<p>The slight inconvenience about this approach when you are working on a collaborative project with new Python users is that you end up leaving a README or shell script with the required commands to activate the environment, install the nbstata kernel, and run Quarto. I sense this management of the virutal environment is a pain point for new Python users - who are likely wondering what on earth a virtual environment is. So I have been looking for a way to simplify this process for them.</p>
-<p>A recent 
-<a href="https://www.rostrum.blog/posts/2025-08-11-uv-standalone/" target="_blank" rel="noopener">post by Matt Dray</a> about using uv to run self-contained executable Python scripts got me thinking. Could I produce a similar self-contained executable Python script to perform the rendering for Quarto documents using the Jupyter engine. Then my colleagues would only need to call the script as an executable at the command line. This would avoid them the trouble of managing the virtual environment.</p>
-<h2 id="the-self-contained-executable-python-script">The self-contained executable Python script</h2>
-<p>I came up with the following Python script.</p>
-<pre><code class="language-python">#!/usr/bin/env -S uv run --script
-# /// script
-# requires-python = &quot;&gt;=3.9&quot;
-# dependencies = [
-#     &quot;jupyterlab&gt;=4.4.3&quot;,
-#     &quot;jupyterlab-stata-highlight2&gt;=0.1.2&quot;,
-#     &quot;nbstata&gt;=0.8.3&quot;,
-# ]
-# ///
-import subprocess
-
-cmd0 = &quot;python -m nbstata.install --sys-prefix&quot;
-retval0 = subprocess.call(cmd0, shell=True)
-print('returned value:', retval0)
-
-cmd1  = &quot;quarto render --profile stata-questions&quot;
-retval1 = subprocess.call(cmd1, shell=True)
-print('returned value:', retval1)
-
-cmd2  = &quot;quarto render --profile stata-solutions&quot;
-retval2 = subprocess.call(cmd2, shell=True)
-print('returned value:', retval2)
+<p>In my previous job my work computer was a Windows desktop &ndash; yes, those were the days before laptops and hotdesking!</p>
+<p>My PhD student was interested in Bayesian methods and we put together an R package which included some 
+<a href="https://mc-stan.org/" target="_blank" rel="noopener">Stan</a> models. I was always frustrated by how slowly these compiled on our Windows machines. A few years later, when I got a MacBook Air I was shocked how much faster they compiled.</p>
+<p>On my Windows machine our 
+<a href="https://okezie94.github.io/mrbayes/" target="_blank" rel="noopener">mrbayes</a> package takes 3 minutes 55 seconds to compile and install. On my M4 MacBook Air it takes 1 minute 16 seconds.</p>
+<p>The following tips show how to improve those timings.</p>
+<p>To generate the timings I used</p>
+<pre><code class="language-sh">time R CMD INSTALL --preclean .
 </code></pre>
+<h2 id="big-win-1-enable-parallel-compilations-with-the-makeflags-environment-variable">Big win 1: Enable parallel compilations with the <code>MAKEFLAGS</code> environment variable</h2>
+<p>Set the <code>MAKEFLAGS</code> environment variable in your <em>~/.Renviron</em> file. This controls how many <code>make</code> jobs run concurrently. Choose a number no larger than the number of processing cores your machine has. To find this run</p>
+<pre><code class="language-sh"># Windows - in a Git Bash shell
+echo $NUMBER_OF_PROCESSORS
+</code></pre>
+<pre><code class="language-sh"># macOS
+sysctl -n hw.logicalcpu
+</code></pre>
+<pre><code class="language-sh"># Ubuntu Linux
+nproc
+</code></pre>
+<p>A reasonable starting point is your core count, or a few fewer to leave headroom for whatever else you&rsquo;re doing during a compilation. For example,</p>
+<pre><code class="language-sh"># In ~/.Renviron
+MAKEFLAGS=-j6
+</code></pre>
+<p>Close and restart R/RStudio after making this change.</p>
+<p>On my Windows machine this reduced the build from 3:55 to 1:15. To find your own sweet spot empirically, see the example at the end of Big win 2.</p>
+<h2 id="big-win-2-enable-cc-compiler-cache-using-ccache">Big win 2: Enable C/C++ compiler cache using <code>ccache</code></h2>
+<p>Install 
+<a href="https://ccache.dev/" target="_blank" rel="noopener"><code>ccache</code></a>, I find it easiest to use a package manager, e.g.,</p>
+<pre><code class="language-sh"># macOS
+brew install ccache
+</code></pre>
+<pre><code class="language-sh"># Ubuntu/Debian Linux
+apt install ccache
+</code></pre>
+<pre><code class="language-sh"># Windows
+winget install ccache
+</code></pre>
+<p>Whichever installation method you use make sure <code>ccache</code> is on your <code>PATH</code> after installation. You can test with, say,</p>
+<pre><code class="language-sh">ccache --version
+</code></pre>
+<p>To enable <code>ccache</code>, on macOS and Linux this goes in <em>~/.R/Makevars</em>; on Windows it&rsquo;s <em>~/.R/Makevars.win</em> (create the directory and file if they don&rsquo;t exist), set</p>
+<pre><code class="language-sh"># macOS
+CC = ccache clang
+CXX = ccache clang++
+CXX17 = ccache clang++
+</code></pre>
+<pre><code class="language-sh"># Windows and Linux
+# Most Linux users will be on gcc by default
+# Change to clang if you're using that
+CC = ccache gcc
+CXX = ccache g++
+CXX17 = ccache g++
+</code></pre>
+<p>After a first compilation run for the cache to be generated, subsequent compilations are much faster.</p>
 <ul>
-<li>
-<p>The first line, the shebang ensures it is run by <code>uv run</code></p>
-</li>
-<li>
-<p>The metadata defining the Python environment is declared between the</p>
-<pre><code class="language-python"># /// script
-# ...
-# ///
-</code></pre>
+<li>Windows, second compilation: 18 seconds</li>
+<li>M4 MacBook Air, second compilation: 5 seconds</li>
+</ul>
+<p>Perhaps more importantly, if, say, your package has 5 models and you only amend the code for one of them, <code>ccache</code> knows to use the cache for the 4 unchanged models.</p>
 <ul>
-<li>If you don&rsquo;t use Stata, say you are using the <code>jupyter: python3</code> engine then you can delete the <code>jupyterlab-stata-highlight2</code> and <code>nbstata</code> entries and the first group of 3 lines for <code>cmd0</code>.</li>
-<li>If you use additional Python packages in your code then you need to add them to the list.</li>
+<li>Windows, second compilation, only 1 model edited: 1 minute 10 seconds</li>
+<li>M4 MacBook Air, second compilation, only 1 model edited: 19 seconds</li>
 </ul>
-</li>
-<li>
-<p>Then comes the actual code. These are simply system calls using the <em>subprocess</em> module. You can amend the number of calls and the calls themselves inside the string quotes as required. I am recreating some of the rendering commands in my recent 
-<a href="https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/" target="_blank" rel="noopener">post about using Quarto profiles for tutorial documents</a>. It&rsquo;s worth pointing out that I haven&rsquo;t used the Python quarto package here as it&rsquo;s currently slightly too limited for my use (I&rsquo;m not sure it can render profiles).</p>
-</li>
-</ul>
-<p>Save the script in a file, say <em>render</em>, then make it executable with</p>
-<pre><code class="language-sh">chmod +x render
+<p>You can verify <code>ccache</code> is working, by observing the timing decrease and by checking the output of</p>
+<pre><code class="language-sh">ccache -s
 </code></pre>
-<p>Then all my colleagues need to do is run it with</p>
-<pre><code class="language-sh">./render
+<p>It is also useful to zero the ccache statistics before a timing run with</p>
+<pre><code class="language-sh">ccache -z
 </code></pre>
-<p>Of course uv and Quarto need to be installed and be on their <code>PATH</code>, and Stata needs to be installed locally when using that. For my colleagues using Windows, they need to run this from a Git Bash shell rather than from Powershell or CMD shell (for the shebang line to work).</p>
-<p>If you are only using the Quarto knitr engine then you don&rsquo;t need this script because you don&rsquo;t need Jupyter.</p>
-<p>And for more information about uv Python scripts, the full documentation is 
-<a href="https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script" target="_blank" rel="noopener">here</a>.</p>
+<h3 id="testing-which-of-your-models-takes-the-longest-to-compile">Testing which of your models takes the longest to compile</h3>
+<p>Here&rsquo;s a quick script to test which model takes the longest to compile. Save it as say <em>test.sh</em> at the top level of your repo and add <code>^test\.sh$</code> to your <em>.Rbuildignore</em> file (to avoid an <code>R CMD check</code> NOTE about unknown files at the top level).</p>
+<pre><code class="language-sh">for model in inst/stan/*.stan; do
+  cp &quot;$model&quot; &quot;$model.bak&quot;
+  # Insert at the top of the file
+  sed -i &quot;1i // benchmark $(date +%s%N)&quot; &quot;$model&quot;
+  ccache -z
+  SECONDS=0
+  R CMD INSTALL --preclean . &gt;/dev/null 2&gt;&amp;1
+  echo &quot;$(basename $model): ${SECONDS}s&quot;
+  ccache -s | grep -E &quot;Hits|Misses&quot; | head -2
+  mv &quot;$model.bak&quot; &quot;$model&quot;
+done
+</code></pre>
+<h3 id="finding-your-makeflags-sweet-spot">Finding your <code>MAKEFLAGS</code> sweet spot</h3>
+<p>With <code>ccache</code> installed you can now benchmark different <code>-jN</code> values cleanly (the <code>ccache -C</code> calls ensure each run is a cold compile, so you measure raw compilation cost rather than cache hits). You can increase the number sequence up to the number of processing cores your machine has.</p>
+<pre><code class="language-sh">for j in 1 2 3 4 6 8 10; do
+  ccache -C &gt;/dev/null
+  echo &quot;=== -j$j ===&quot;
+  SECONDS=0
+  MAKEFLAGS=-j$j R CMD INSTALL --preclean . &gt;/dev/null 2&gt;&amp;1
+  echo &quot;elapsed: ${SECONDS}s&quot;
+done
+</code></pre>
+<p>The timings on my MacBook Air were</p>
+<pre><code class="language-plaintext">=== -j1 ===
+elapsed: 76s
+=== -j2 ===
+elapsed: 48s
+=== -j3 ===
+elapsed: 35s
+=== -j4 ===
+elapsed: 36s
+=== -j6 ===
+elapsed: 27s
+=== -j8 ===
+elapsed: 27s
+=== -j10 ===
+elapsed: 28s
+</code></pre>
+<p>My MacBook Air has 10 cores, but only 4 of those are performance cores, so I settled on <code>-j6</code> as that is where my timings plateaued — and it leaves headroom for me inevitably checking my email during a compilation.</p>
+<h2 id="big-win-3-combining-these-in-github-actions-workflows">Big win 3: Combining these in GitHub Actions workflows</h2>
+<p>In my <em>.github/workflows/R-CMD-check.yaml</em> I have steps for these speedups. Firstly, to set <code>MAKEFLAGS</code>.</p>
+<pre><code class="language-yaml">      - name: Set parallel compilation flags (Linux and macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          NCPUS=$(nproc 2&gt;/dev/null || sysctl -n hw.logicalcpu)
+          echo &quot;Detected ${NCPUS} processors&quot;
+          echo &quot;MAKEFLAGS=-j${NCPUS}&quot; &gt;&gt; ~/.Renviron
+
+      - name: Set parallel compilation flags (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Write-Output &quot;Detected $env:NUMBER_OF_PROCESSORS processors&quot;
+          Add-Content -Path &quot;$HOME\.Renviron&quot; -Value &quot;MAKEFLAGS=-j$env:NUMBER_OF_PROCESSORS&quot;
+</code></pre>
+<p>You can also use ccache in GitHub Actions, as follows:</p>
+<pre><code class="language-yaml">      # ccache speeds up Stan model compilation dramatically on warm cache.
+      # Note: Windows support via ccache-action is documented as &quot;probably works&quot;
+      # rather than fully stable; if it causes issues, scope this step to non-Windows.
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2.23
+        with:
+          # Key invalidates when Stan models or DESCRIPTION change.
+          # Older caches partially seed new ones via restore-keys.
+          key: ccache-${{ matrix.config.os }}-R-${{ matrix.config.r }}-${{ hashFiles('inst/stan/**/*.stan', 'DESCRIPTION') }}
+          restore-keys: |
+            ccache-${{ matrix.config.os }}-R-${{ matrix.config.r }}-
+            ccache-${{ matrix.config.os }}-R-
+          max-size: &quot;2G&quot;
+
+      - name: Configure R to use ccache (Linux and macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          mkdir -p ~/.R
+          if [ &quot;$RUNNER_OS&quot; = &quot;macOS&quot; ]; then
+            cat &gt;&gt; ~/.R/Makevars &lt;&lt;'EOF'
+          CC = ccache clang
+          CXX = ccache clang++
+          CXX14 = ccache clang++
+          CXX17 = ccache clang++
+          CXX20 = ccache clang++
+          EOF
+          else
+            cat &gt;&gt; ~/.R/Makevars &lt;&lt;'EOF'
+          CC = ccache gcc
+          CXX = ccache g++
+          CXX14 = ccache g++
+          CXX17 = ccache g++
+          CXX20 = ccache g++
+          EOF
+          fi
+          echo &quot;--- ~/.R/Makevars ---&quot;
+          cat ~/.R/Makevars
+
+      - name: Configure R to use ccache (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path &quot;$HOME\.R&quot; | Out-Null
+          $makevars = @&quot;
+          CC = ccache gcc
+          CXX = ccache g++
+          CXX14 = ccache g++
+          CXX17 = ccache g++
+          CXX20 = ccache g++
+          &quot;@
+          Add-Content -Path &quot;$HOME\.R\Makevars.win&quot; -Value $makevars
+          Write-Output &quot;--- ~/.R/Makevars.win ---&quot;
+          Get-Content &quot;$HOME\.R\Makevars.win&quot;
+</code></pre>
+<p>You can see the 
+<a href="https://github.com/okezie94/mrbayes/blob/master/.github/workflows/R-CMD-check.yaml" target="_blank" rel="noopener">full file in my repo</a>.</p>
+<p>This reduced my ubuntu-latest run for r-release from 7 minutes 30 seconds to 4 minutes 49 seconds.</p>
+<h2 id="big-win-4-switch-to-clang">Big win 4: Switch to <code>clang</code></h2>
+<p>I found that switching from <code>gcc</code> to <code>clang</code> gives a noticeable speedup; the single core compile time dropped from 3 minutes 55 seconds to 3 minutes flat on my Windows machine.</p>
+<p>To do this you need to install <code>clang</code>. On Windows you install <code>clang</code> within RTools45 — more involved than on Linux, but doable.</p>
+<pre><code class="language-sh"># Windows within RTools45 Bash shell
+# Launch C:\rtools45\ucrt64.exe
+# You may need to close and reopen the shell after the first command
+pacman -Syu
+pacman -S mingw-w64-ucrt-x86_64-clang
+</code></pre>
+<pre><code class="language-sh"># Ubuntu/Debian Linux
+sudo apt install clang
+</code></pre>
+<p>At this point on Windows running</p>
+<pre><code class="language-sh">which clang
+</code></pre>
+<p>should return <code>/ucrt/bin/clang</code>.</p>
+<p>Switch to <code>clang</code> in <em>~/.R/Makevars</em> (if you&rsquo;re not using <code>ccache</code> delete that prefix)</p>
+<pre><code class="language-sh"># On Linux
+CC = ccache clang
+CXX = ccache clang++
+CXX14 = ccache clang++
+CXX17 = ccache clang++
+CXX20 = ccache clang++
+</code></pre>
+<p>and in <em>~/.R/Makevars.win</em> on Windows</p>
+<pre><code class="language-sh"># On Windows
+CC = ccache C:/rtools45/ucrt64/bin/clang.exe
+CXX = ccache C:/rtools45/ucrt64/bin/clang++.exe
+CXX17 = ccache C:/rtools45/ucrt64/bin/clang++.exe
+</code></pre>
+<p>Windows users will need to add the following to <code>PATH</code></p>
+<pre><code class="language-plaintext">C:\rtools45\ucrt64\bin
+C:\rtools45\usr\bin
+</code></pre>
+<p>You can verify things are working by running</p>
+<pre><code class="language-sh">R CMD config CXX17
+</code></pre>
+<p>I believe you need <code>clang</code> version 18 or later to see the speedups.</p>
+<h2 id="small-win-1-wsl-users-should-use-the-native-file-system">Small win 1: WSL users should use the native file system</h2>
+<p>Within WSL it is possible to access files from within its native Linux filesystem, i.e., within <code>/home/user/...</code>, and also on the Windows filesystem, e.g., in <code>/mnt/c/...</code>. I believe file operations are noticeably faster within <code>/home/user/...</code>.</p>
+<h2 id="naive-guesses-that-made-no-difference">Naive guesses that made no difference</h2>
+<p>I had wondered whether running a non-debug compilation with say</p>
+<pre><code class="language-r">pkgbuild::compile_dll(debug = FALSE)
+</code></pre>
+<p>would speed things up. It turns out it does not. For Stan models, most of the time is spent in C++ template instantiation by the compiler, not in optimisation passes — so disabling debug flags or lowering the optimisation level barely helps.</p>
+<p>I also wondered whether using R on Windows Subsystem for Linux would speed things up just by virtue of being on Linux. It did not, timings using <code>gcc</code> on Windows and WSL Ubuntu were essentially identical. The advantage of using WSL is that it is easier to switch to using <code>clang</code> on Linux.</p>
+<h2 id="money-no-object-big-win-5-switch-to-an-apple-silicon-mac">(Money no object) Big win 5: Switch to an Apple Silicon Mac</h2>
+<p>Apple silicon Macs have excellent single threaded performance, their unified memory architecture has very high bandwidth, they have large L1 and L2 caches, and fast NVMe SSDs. Together these produce very fast Stan model compilation times, even on the lowest end Apple Silicon Macs.</p>
 <h2 id="summary">Summary</h2>
-<p>I have shown how to make a self-contained executable Python script to render Quarto documents using the Jupyter engine which automatically manage their own virtual environment. This means users don&rsquo;t have to manage the virtual environment themselves, which can be a pain point for new Python users.</p>
+<p>In summary, five big wins and one small win for speeding up Stan model compilation in R packages.</p>
 
               </div>
               
@@ -795,21 +980,9 @@ print('returned value:', retval2)
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tag/jupyter/">Jupyter</a>
-  
-  <a class="badge badge-light" href="/tag/nbstata/">Nbstata</a>
-  
-  <a class="badge badge-light" href="/tag/quarto/">Quarto</a>
-  
   <a class="badge badge-light" href="/tag/r/">R</a>
   
-  <a class="badge badge-light" href="/tag/r-markdown/">R Markdown</a>
-  
-  <a class="badge badge-light" href="/tag/python/">Python</a>
-  
-  <a class="badge badge-light" href="/tag/stata/">Stata</a>
-  
-  <a class="badge badge-light" href="/tag/uv/">uv</a>
+  <a class="badge badge-light" href="/tag/stan/">Stan</a>
   
 </div>
 
@@ -1021,15 +1194,15 @@ print('returned value:', retval2)
     <h3>Related</h3>
     <ul>
       
-      <li><a href="/post/2025/quarto-profiles-for-tutorials/">Creating tutorial worksheets: Quarto profiles for the win!</a></li>
+      <li><a href="/post/2026/runiverse-tips/">Five tips for managing your R-universe 🚀</a></li>
       
-      <li><a href="/post/2025/quarto-conditional-content/">Creating R, Python, Stata, and Julia tutorial worksheets (with and without solutions) using Quarto</a></li>
+      <li><a href="/post/2026/manylinux-packages/">How Posit&#39;s Public Package Manager manylinux_2_28 repository can help you if your R project is stuck on Ubuntu Focal Fossa</a></li>
       
-      <li><a href="/post/2025/multi-engine-quarto/">Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode</a></li>
-      
-      <li><a href="/post/2025/nbstata-uv-venv/">Running the nbstata Jupyter kernel within a uv virtual environment</a></li>
+      <li><a href="/post/2025/self-contained-python-script-for-quarto/">Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine</a></li>
       
       <li><a href="/post/2025/quarto-accessibility/">Seven accessibility tips for Quarto and R Markdown users</a></li>
+      
+      <li><a href="/post/2025/quarto-profiles-for-tutorials/">Creating tutorial worksheets: Quarto profiles for the win!</a></li>
       
     </ul>
   </div>
