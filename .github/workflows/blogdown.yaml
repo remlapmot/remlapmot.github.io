@@ -37,7 +37,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Build site
-        run: blogdown::build_site(FALSE)
+        run: blogdown::build_site(TRUE)
         shell: Rscript {0}
 
       - name: Deploy to GitHub pages 🚀
