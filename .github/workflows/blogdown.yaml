@@ -36,10 +36,6 @@ jobs:
         run: blogdown::install_hugo(version = "0.163.3")
         shell: Rscript {0}
 
-      - name: Pin xfun to 0.58 (workaround for shQuote bug in 0.59)
-        run: if ((packageVersion('xfun') == '0.59') && (packageVersion('blogdown') < '1.24')) install.packages("https://cran.r-project.org/src/contrib/Archive/xfun/xfun_0.58.tar.gz", repos = NULL, type = "source")
-        shell: Rscript {0}
-
       - name: Build site
         run: blogdown::build_site(TRUE)
         shell: Rscript {0}
