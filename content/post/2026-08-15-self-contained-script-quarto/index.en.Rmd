@@ -1,0 +1,44 @@
+---
+title: "Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine"
+author: Package Build
+date: '2025-09-02'
+slug: self-contained-python-script-for-quarto
+categories:
+  - Blog
+tags:
+  - Jupyter
+  - Nbstata
+  - Quarto
+  - R
+  - R Markdown
+  - Python
+  - Stata
+  - uv
+subtitle: ''
+summary: "How to create a self-contained (and optionally executable) R script, which declares the R package dependencies for rendering Quarto documents using the knitr engine. This allows non-technical users to render Quarto documents using the knitr engine without having to install the R packages themselves."
+authors: []
+lastmod: '2026-08-15T07:00:00+00:00'
+featured: false
+image:
+  caption: ''
+  focal_point: 'Center'
+  preview_only: false
+  alt_text: 'Image of a scroll, representing a script, containing the word Quarto and the R logo.'
+projects: []
+toc: true
+---
+
+## Introduction
+
+In previous posts I have described how to use the self-contained scripts feature in the *uv* package manager to create [uv virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to run Quarto documents with Stata code and to run Quarto documents using the [`jupyter: python3` engine](https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/). In this post I describe how to do the same for Quarto documents using the knitr engine (i.e., running R code).
+
+I recently discovered that there are now 3 *uv* inspired package managers for R; *ir*, *uvr*, and *rv*. I will concentrate on the first two as they allow defining self-contained R scripts.
+
+
+
+
+
+
+## Summary
+
+I have shown how to make a self-contained executable R script to render Quarto documents using the knitr engine which automatically manage the required R packages.
