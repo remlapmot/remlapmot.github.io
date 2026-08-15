@@ -1,8 +1,8 @@
 ---
-title: "Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine"
+title: "Creating self-contained R scripts for rendering Quarto documents using the knitr engine -- courtesy of `ir` and `uvr`"
 author: Package Build
-date: '2025-09-02'
-slug: self-contained-python-script-for-quarto
+date: '2026-08-16'
+slug: self-contained-r-script-for-quarto
 categories:
   - Blog
 tags:
@@ -29,15 +29,39 @@ toc: true
 
 ## Introduction
 
-In previous posts I have described how to use the self-contained scripts feature in the *uv* package manager to create [uv virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to run Quarto documents with Stata code and to run Quarto documents using the [`jupyter: python3` engine](https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/). In this post I describe how to do the same for Quarto documents using the knitr engine (i.e., running R code).
+In previous posts I have described how to use the self-contained Python scripts feature in the *uv* package manager to create [uv virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to run Quarto documents with Stata code and to run Quarto documents using the [`jupyter: python3` engine](https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/). In this post I describe how to do the same for Quarto documents using the knitr engine (i.e., running R code).
 
-I recently discovered that there are now 3 *uv* inspired package managers for R; *ir*, *uvr*, and *rv*. I will concentrate on the first two as they allow defining self-contained R scripts.
+I recently discovered that there are now 3 *uv* inspired package managers for R; *ir*, *uvr*, and *rv* (maybe there are more?). I will concentrate on the first two as they allow defining self-contained R scripts.
 
+## Example uvr R script
 
+```r
 
+```
 
+## Example ir R script
 
+```r
+
+```
+
+### Bonus -- Example ir Quarto document
+
+```markdown
+
+```
+
+## Automation with `just` in a complex directory structure
+
+```makefile
+render:
+    Rscript render.R
+ir:
+    ir run render.R
+uvr:
+    uvr run render.R
+```
 
 ## Summary
 
-I have shown how to make a self-contained executable R script to render Quarto documents using the knitr engine which automatically manage the required R packages.
+I have shown how to make a self-contained executable R script to render Quarto documents using the knitr engine which automatically manage the required R packages. This functionality is provided by both the `ir` and `uvr` package managers.
