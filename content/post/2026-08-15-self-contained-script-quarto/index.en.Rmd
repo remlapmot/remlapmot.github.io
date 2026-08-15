@@ -6,14 +6,13 @@ slug: self-contained-python-script-for-quarto
 categories:
   - Blog
 tags:
-  - Jupyter
-  - Nbstata
+  - ir
   - Quarto
   - R
   - R Markdown
-  - Python
-  - Stata
+  - rv
   - uv
+  - uvr
 subtitle: ''
 summary: "How to create a self-contained (and optionally executable) R script, which declares the R package dependencies for rendering Quarto documents using the knitr engine. This allows non-technical users to render Quarto documents using the knitr engine without having to install the R packages themselves."
 authors: []
