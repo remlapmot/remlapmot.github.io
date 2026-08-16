@@ -33,12 +33,6 @@ In previous posts I have described how to use the self-contained Python scripts 
 
 I recently discovered that there are now 3 *uv* inspired package managers for R; *ir*, *uvr*, and *rv* (maybe there are more?). I will concentrate on the first two as they allow defining self-contained R scripts.
 
-## Example uvr R script
-
-```r
-
-```
-
 ## Example ir R script
 
 ```r
@@ -51,29 +45,35 @@ I recently discovered that there are now 3 *uv* inspired package managers for R;
 
 ```
 
+## Example uvr R script
+
+```r
+
+```
+
 ## Automation with `just` in a complex directory structure
 
 ```makefile
-render:
-    Rscript render.R
-ir:
-    ir run render.R
-uvr:
-    uvr run render.R
+render dir=invocation_directory():
+    cd "{{ dir }}" && Rscript render.R
+ir dir=invocation_directory():
+    cd "{{ dir }}" && ir run render.R
+uvr dir=invocation_directory():
+    cd "{{ dir }}" && uvr run render.R
 ```
 
 ### Bonus 2 -- Making the render script executable
 
-With both ir and uvr we can optionally make the _render.R_ script executable, say renaming to simply _render_ by adding the relevant shebang to the top of the file
+With both [`ir`]() and `uvr` (and indeed [`uv`]()) we can optionally make the _render.R_ script executable, say renaming to simply _render_ by adding the relevant shebang to the top of the file
 
 ```r
-
+#!/usr/bin/env -S ir run
 ```
 
 or
 
 ```r
-#!/usr/bin/env -S uv run --script
+#!/usr/bin/env -S uvr run
 ```
 
 and making it executable
