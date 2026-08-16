@@ -66,14 +66,14 @@ uvr:
 
 With both ir and uvr we can optionally make the _render.R_ script executable, say renaming to simply _render_ by adding the relevant shebang to the top of the file
 
-```sh
+```r
 
 ```
 
 or
 
-```sh
-
+```r
+#!/usr/bin/env -S uv run --script
 ```
 
 and making it executable
