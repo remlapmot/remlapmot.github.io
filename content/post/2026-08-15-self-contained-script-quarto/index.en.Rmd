@@ -1,5 +1,5 @@
 ---
-title: "Creating self-contained R scripts for rendering Quarto documents using the knitr engine -- courtesy of the new R package managers `ir` and `uvr`"
+title: "Creating self-contained R scripts for rendering Quarto documents using the knitr engine – courtesy of the new R package managers ir and uvr"
 author: Package Build
 date: '2026-08-16'
 slug: self-contained-r-script-for-quarto
@@ -48,7 +48,8 @@ The context here is that this script, which I name _render.R_ in all my projects
 #|   - quarto
 #|   - knitr
 
-# Rest of R code follows -- essentially one or sometimes multiple quarto::quarto_render() calls
+# Rest of R code follows ...
+# ... essentially one or sometimes multiple quarto::quarto_render() calls
 ```
 
 ### Bonus -- Example self-contained Quarto document using ir
@@ -86,7 +87,8 @@ Rest of Quarto document follows ...
 # ]
 # ///
 
-# Rest of R code follows -- essentially one or sometimes multiple quarto::quarto_render() calls
+# Rest of R code follows ...
+# ... essentially one or sometimes multiple quarto::quarto_render() calls
 ```
 
 ## Automation with `just` in a complex directory structure
