@@ -3,3 +3,9 @@ start:
 
 stop:
     R -q -e "blogdown::stop_server()"
+
+render:
+    R -q -e "blogdown::build_site()"
+
+post dir=invocation_directory():
+    cd "{{ dir }}" && R -q -e "rmarkdown::render('index.en.Rmd')"
