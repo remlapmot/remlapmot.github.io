@@ -29,15 +29,15 @@ toc: true
 
 ## Introduction
 
-In previous posts I have described how to use the self-contained Python scripts feature in the *uv* package manager to create [uv virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to run Quarto documents with Stata code and to run Quarto documents using the [`jupyter: python3` engine](https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/). In this post I describe how to do the same for Quarto documents using the knitr engine (i.e., running R code).
+In previous posts I have described how to use the self-contained Python scripts feature in the **uv** Python package manager to create [virtual environments for the nbstata Jupyter kernel](https://remlapmot.github.io/post/2025/nbstata-uv-venv/) to render Quarto documents with Stata code and to render Quarto documents using the [`jupyter: python3` engine](https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/). In this post I describe how to do the same for Quarto documents using the knitr engine (i.e., running R code).
 
-I recently discovered that there are now 3 *uv* inspired package managers for R; [*ir*](https://r-lib.github.io/ir/), [*uvr*](https://nbafrank.github.io/uvr/), and [*rv*](https://a2-ai.github.io/rv-docs/) (... maybe there are more?). I will concentrate on the first two as they allow defining self-contained R scripts.
+I recently discovered that there are now 3 uv inspired package managers for R; [ir](https://r-lib.github.io/ir/), [uvr](https://nbafrank.github.io/uvr/), and [rv](https://a2-ai.github.io/rv-docs/) (... maybe there are more?). I will concentrate on the first two as they allow defining self-contained R scripts, as I find self-contained scripts a fast a lightweight way to define R project dependencies, I very rarely require a record of the exact package versions.
 
-## Example self-contained R script using ir
+In the following examples I assume we are creating an R script, _render.R_, which contain one or more calls to `quarto::quarto_render()` for a lecture or tutorial. Hence, for the dependency R packages I include the required list of packages and the quarto and knitr packages.
 
-To define dependencies for `ir` begin each comment line with `#|` then write a list under a `packages` key, as follows -- this is the list of packages I require for one of my practicals on missing data.
+## Example self-contained R script using `ir`
 
-The context here is that this script, which I name _render.R_ in all my projects contains the `quarto::quarto_render()` calls to render a Quarto document for a lecture or tutorial, hence, I include the required list of packages and the quarto and knitr packages.
+To define dependencies for `ir`, at the top of the script begin each comment line with `#| ` then write a list under a `packages` key, as follows -- this is the list of packages I require for one of my practicals on missing data.
 
 ```r
 #| packages:
@@ -52,9 +52,9 @@ The context here is that this script, which I name _render.R_ in all my projects
 # ... essentially one or sometimes multiple quarto::quarto_render() calls
 ```
 
-### Bonus -- Example self-contained Quarto document using ir
+### Bonus -- Example self-contained Quarto document using `ir`
 
-`ir` cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an `ir` key. In this case we can remove the quarto package as we might assume we'd render this document by either clicking the _Render_ button in RStudio.
+`ir` cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an `ir` key. In this case we can remove the quarto package as we might assume we'd render this document by clicking the _Render_ button in RStudio or using `quarto render` in the terminal.
 
 ```markdown
 ---
@@ -71,9 +71,9 @@ ir:
 Rest of Quarto document follows ...
 ```
 
-## Example self-contained R script using uvr
+## Example self-contained R script using `uvr`
 
-`uvr` follows the same dependency syntax as `uv`, so at the top of our _render.R_ looks as follows.
+`uvr` follows the same dependency syntax as `uv`, the top of our _render.R_ script looks as follows.
 
 ```r
 # /// script
