@@ -1,5 +1,5 @@
 ---
-title: "Creating self-contained R scripts for rendering Quarto documents using the knitr engine -- courtesy of `ir` and `uvr`"
+title: "Creating self-contained R scripts for rendering Quarto documents using the knitr engine -- courtesy of the new R package managers `ir` and `uvr`"
 author: Package Build
 date: '2026-08-16'
 slug: self-contained-r-script-for-quarto
@@ -16,13 +16,13 @@ tags:
 subtitle: ''
 summary: "How to create a self-contained (and optionally executable) R script, which declares the R package dependencies for rendering Quarto documents using the knitr engine. This allows non-technical users to render Quarto documents using the knitr engine without having to install the R packages themselves."
 authors: []
-lastmod: '2026-08-15T07:00:00+00:00'
+lastmod: '2026-08-17T07:00:00+00:00'
 featured: false
 image:
   caption: ''
   focal_point: 'Center'
   preview_only: false
-  alt_text: 'Image of a scroll, representing a script, containing the word Quarto and the R logo.'
+  alt_text: 'Image of a scroll, representing a script, containing the word Quarto and the R and knitr logos.'
 projects: []
 toc: true
 ---
