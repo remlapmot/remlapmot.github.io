@@ -52,25 +52,6 @@ To define dependencies for `ir`, at the top of the script begin each comment lin
 # ... essentially one or sometimes multiple quarto::quarto_render() calls
 ```
 
-## Bonus 1 -- Example self-contained Quarto document using `ir`
-
-`ir` cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an `ir` key. In this case we can remove the quarto package as we might assume we'd render this document by clicking the _Render_ button in RStudio or using `quarto render` in the terminal.
-
-```markdown
----
-title: My lecture/workshop
-ir:
-  packages:
-    - gtsummary
-    - haven
-    - tidyverse
-    - VIM
-    - knitr
----
-
-Rest of Quarto document follows ...
-```
-
 ## Example self-contained R script using `uvr`
 
 `uvr` follows the same dependency syntax as `uv`, so the top of our _render.R_ script looks as follows.
@@ -119,6 +100,33 @@ uvr dir=invocation_directory():
 ```
 
 Now I can simply type `just ir` or `just uvr`.
+
+## Bonus 1 -- Example self-contained Quarto document using `ir`
+
+`ir` cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an `ir` key. In this case we can remove the quarto package as we might assume we'd render this document by clicking the _Render_ button in RStudio or using `quarto render` in the terminal.
+
+```markdown
+---
+title: My lecture/tutorial
+ir:
+  packages:
+    - gtsummary
+    - haven
+    - tidyverse
+    - VIM
+    - knitr
+---
+
+Rest of Quarto document follows ...
+```
+
+Say this Quarto document is _tutorial.qmd_ we would then render it with
+
+```sh
+ir render tutorial.qmd
+```
+
+More details are given in the [ir Quarto docs](https://r-lib.github.io/ir/quarto.html).
 
 ## Bonus 2 -- Making the R script executable
 
