@@ -5,12 +5,115 @@
     <link>https://remlapmot.github.io/category/blog/</link>
       <atom:link href="https://remlapmot.github.io/category/blog/index.xml" rel="self" type="application/rss+xml" />
     <description>Blog</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 26 May 2026 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 16 Aug 2026 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://remlapmot.github.io/images/icon_hu_4c69fe6e68a3b4.png</url>
       <title>Blog</title>
       <link>https://remlapmot.github.io/category/blog/</link>
     </image>
+    
+    <item>
+      <title>Creating self-contained R scripts for rendering Quarto documents using the knitr engine – courtesy of the new R package managers ir and uvr</title>
+      <link>https://remlapmot.github.io/post/2026/self-contained-r-script-for-quarto/</link>
+      <pubDate>Sun, 16 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2026/self-contained-r-script-for-quarto/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;In previous posts I have described how to use the self-contained Python scripts feature in the &lt;strong&gt;uv&lt;/strong&gt; Python package manager to create virtual environments to render Quarto documents using the Jupyter 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/nbstata-uv-venv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nbstata kernel&lt;/a&gt; and the 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;python3 kernel&lt;/a&gt;. In this post I describe how to do the same for R scripts to render Quarto documents running R code using the knitr engine.&lt;/p&gt;
+&lt;p&gt;I recently discovered that there are now three uv-inspired package managers for R; 
+&lt;a href=&#34;https://r-lib.github.io/ir/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ir&lt;/a&gt;, 
+&lt;a href=&#34;https://nbafrank.github.io/uvr/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;uvr&lt;/a&gt;, and 
+&lt;a href=&#34;https://a2-ai.github.io/rv-docs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;rv&lt;/a&gt; (&amp;hellip; maybe there are more?). I will concentrate on the first two because they allow defining self-contained R scripts. I find self-contained scripts a fast and lightweight way to define project dependencies, and I very rarely require a record of the exact package versions.&lt;/p&gt;
+&lt;p&gt;In the following examples I assume we are creating an R script, &lt;em&gt;render.R&lt;/em&gt;, which contains one or more calls to &lt;code&gt;quarto::quarto_render()&lt;/code&gt; for a lecture or tutorial. For the dependency R packages I include the packages the document itself needs, plus the quarto and knitr packages.&lt;/p&gt;
+&lt;h2 id=&#34;example-self-contained-r-script-using-ir&#34;&gt;Example self-contained R script using &lt;code&gt;ir&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;To define dependencies for &lt;code&gt;ir&lt;/code&gt;, at the top of the script begin each comment line with &lt;code&gt;#| &lt;/code&gt; then write a list under a &lt;code&gt;packages&lt;/code&gt; key as follows &amp;ndash; this is the list of packages I require for one of my practicals on missing data.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;#| packages:
+#|   - gtsummary
+#|   - haven
+#|   - tidyverse
+#|   - VIM
+#|   - quarto
+#|   - knitr
+
+# Rest of R code follows ...
+# ... essentially one or sometimes multiple quarto::quarto_render() calls
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This script can be run with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ir run render.R
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;example-self-contained-r-script-using-uvr&#34;&gt;Example self-contained R script using &lt;code&gt;uvr&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;uvr&lt;/code&gt; follows the same dependency syntax as &lt;code&gt;uv&lt;/code&gt;. Each line begins with a &lt;code&gt;# &lt;/code&gt; comment, and the dependencies are defined as a TOML array of strings between &lt;code&gt;# /// script&lt;/code&gt; and &lt;code&gt;# ///&lt;/code&gt;. So the top of our &lt;em&gt;render.R&lt;/em&gt; script looks as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# /// script
+# dependencies = [
+#   &amp;quot;gtsummary&amp;quot;,
+#   &amp;quot;haven&amp;quot;,
+#   &amp;quot;tidyverse&amp;quot;,
+#   &amp;quot;VIM&amp;quot;,
+#   &amp;quot;quarto&amp;quot;,
+#   &amp;quot;knitr&amp;quot;,
+# ]
+# ///
+
+# Rest of R code follows ...
+# ... essentially one or sometimes multiple quarto::quarto_render() calls
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This script can be run with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;uvr run render.R
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;automation-with-just-in-a-complex-directory-structure&#34;&gt;Automation with &lt;code&gt;just&lt;/code&gt; in a complex directory structure&lt;/h2&gt;
+&lt;p&gt;For each course I teach I have the lecture or tutorial in a subdirectory. To run each script I could run the shell commands given above. To slightly improve efficiency I find that putting the following 
+&lt;a href=&#34;https://just.systems/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;justfile&lt;/a&gt; at the top of the directory structure saves a bit of typing. The first recipe, &lt;code&gt;render&lt;/code&gt;, uses my system R library, the others resolve packages via &lt;code&gt;ir&lt;/code&gt;/&lt;code&gt;uvr&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-makefile&#34;&gt;render dir=invocation_directory():
+    cd &amp;quot;{{ dir }}&amp;quot; &amp;amp;&amp;amp; Rscript render.R
+
+ir dir=invocation_directory():
+    cd &amp;quot;{{ dir }}&amp;quot; &amp;amp;&amp;amp; ir run render.R
+
+uvr dir=invocation_directory():
+    cd &amp;quot;{{ dir }}&amp;quot; &amp;amp;&amp;amp; uvr run render.R
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I can simply type &lt;code&gt;just ir&lt;/code&gt; or &lt;code&gt;just uvr&lt;/code&gt; to render the lecture/tutorial given whichever directory I&amp;rsquo;m in.&lt;/p&gt;
+&lt;h2 id=&#34;bonus-1--example-self-contained-quarto-document-using-ir&#34;&gt;Bonus 1 &amp;ndash; Example self-contained Quarto document using &lt;code&gt;ir&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;ir&lt;/code&gt; cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an &lt;code&gt;ir&lt;/code&gt; key. In this case we can remove the quarto package as we might assume we&amp;rsquo;d render this document by clicking the &lt;em&gt;Render&lt;/em&gt; button in RStudio or using &lt;code&gt;quarto render ...&lt;/code&gt; in the terminal.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+title: My lecture/tutorial
+ir:
+  packages:
+    - gtsummary
+    - haven
+    - tidyverse
+    - VIM
+    - knitr
+---
+
+Rest of Quarto document follows ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Say this Quarto document is &lt;em&gt;tutorial.qmd&lt;/em&gt; we would then render it with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ir render tutorial.qmd
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More details are given in the 
+&lt;a href=&#34;https://r-lib.github.io/ir/quarto.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ir Quarto docs&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;bonus-2--making-the-r-script-executable&#34;&gt;Bonus 2 &amp;ndash; Making the R script executable&lt;/h2&gt;
+&lt;p&gt;With both 
+&lt;a href=&#34;https://r-lib.github.io/ir/run.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;ir&lt;/code&gt;&lt;/a&gt; and &lt;code&gt;uvr&lt;/code&gt; (and indeed 
+&lt;a href=&#34;https://docs.astral.sh/uv/guides/scripts/#using-a-shebang-to-create-an-executable-file&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;uv&lt;/code&gt;&lt;/a&gt;) we can optionally make the &lt;em&gt;render.R&lt;/em&gt; script executable, say renaming to simply &lt;em&gt;render&lt;/em&gt;, by adding the relevant shebang to the very top of the file.&lt;/p&gt;
+&lt;p&gt;For &lt;code&gt;ir&lt;/code&gt; we add&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;#!/usr/bin/env -S ir run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and for &lt;code&gt;uvr&lt;/code&gt; we add&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;#!/usr/bin/env -S uvr run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We then make the script executable&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;chmod +x render
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and run it with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;./render
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to make a self-contained, and optionally executable, R script to render Quarto documents using the knitr engine which automatically manages the required R packages. This functionality is provided by both the &lt;code&gt;ir&lt;/code&gt; and &lt;code&gt;uvr&lt;/code&gt; R package managers. This approach would also work for RMarkdown documents (of course one would need to swap the quarto package for the rmarkdown package in the list of dependencies).&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Speeding up Stan model builds for R package developers</title>
