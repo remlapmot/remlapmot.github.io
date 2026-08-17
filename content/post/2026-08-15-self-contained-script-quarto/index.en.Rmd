@@ -60,7 +60,7 @@ ir run render.R
 
 ## Example self-contained R script using `uvr`
 
-`uvr` follows the same dependency syntax as `uv`, so the top of our _render.R_ script looks as follows.
+`uvr` follows the same dependency syntax as `uv`. Each line begins with a `# ` comment, and the dependencies are defined as a TOML array of strings between `# /// script` and `# ///`. So the top of our _render.R_ script looks as follows.
 
 ```r
 # /// script
@@ -99,13 +99,13 @@ uvr dir=invocation_directory():
     cd "{{ dir }}" && uvr run render.R
 ```
 
-Now I can simply type `just ir` or `just uvr` to render the lecture/tutorial given whichever directory I'm in.
+I can simply type `just ir` or `just uvr` to render the lecture/tutorial given whichever directory I'm in.
 
 ## Bonus 1 -- Example self-contained Quarto document using `ir`
 
 `ir` cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an `ir` key. In this case we can remove the quarto package as we might assume we'd render this document by clicking the _Render_ button in RStudio or using `quarto render ...` in the terminal.
 
-```markdown
+```plaintext
 ---
 title: My lecture/tutorial
 ir:
