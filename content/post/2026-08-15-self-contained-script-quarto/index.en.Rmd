@@ -33,7 +33,7 @@ In previous posts I have described how to use the self-contained Python scripts 
 
 I recently discovered that there are now three uv-inspired package managers for R; [ir](https://r-lib.github.io/ir/), [uvr](https://nbafrank.github.io/uvr/), and [rv](https://a2-ai.github.io/rv-docs/) (... maybe there are more?). I will concentrate on the first two because they allow defining self-contained R scripts. I find self-contained scripts a fast and lightweight way to define project dependencies, and I very rarely require a record of the exact package versions.
 
-In the following examples I assume we are creating an R script, _render.R_, which contains one or more calls to `quarto::quarto_render()` for a lecture or tutorial. Hence, for the dependency R packages I include the required list of packages and the quarto and knitr packages.
+In the following examples I assume we are creating an R script, _render.R_, which contains one or more calls to `quarto::quarto_render()` for a lecture or tutorial. For the dependency R packages I include the packages the document itself needs, plus the quarto and knitr packages.
 
 ## Example self-contained R script using `ir`
 
@@ -52,7 +52,7 @@ To define dependencies for `ir`, at the top of the script begin each comment lin
 # ... essentially one or sometimes multiple quarto::quarto_render() calls
 ```
 
-### Bonus -- Example self-contained Quarto document using `ir`
+## Bonus 1 -- Example self-contained Quarto document using `ir`
 
 `ir` cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an `ir` key. In this case we can remove the quarto package as we might assume we'd render this document by clicking the _Render_ button in RStudio or using `quarto render` in the terminal.
 
@@ -105,20 +105,22 @@ or
 uvr run render.R
 ```
 
-from that subdirectory. To slightly improve efficiency I find the following justfile at the top of the directory structure saves a bit of typing.
+from that subdirectory. To slightly improve efficiency I find the following justfile at the top of the directory structure saves a bit of typing. The first recipe, `render`, uses my system R library, the others resolve packages via `ir`/`uvr`.
 
 ```makefile
 render dir=invocation_directory():
     cd "{{ dir }}" && Rscript render.R
+
 ir dir=invocation_directory():
     cd "{{ dir }}" && ir run render.R
+
 uvr dir=invocation_directory():
     cd "{{ dir }}" && uvr run render.R
 ```
 
 Now I can simply type `just ir` or `just uvr`.
 
-### Bonus 2 -- Making the R script executable
+## Bonus 2 -- Making the R script executable
 
 With both [`ir`](https://r-lib.github.io/ir/run.html) and `uvr` (and indeed [`uv`](https://docs.astral.sh/uv/guides/scripts/#using-a-shebang-to-create-an-executable-file)) we can optionally make the _render.R_ script executable, say renaming to simply _render_, by adding the relevant shebang to the top of the file. For `ir` we add
 
