@@ -2,7 +2,7 @@ start:
     Rscript -e "blogdown::serve_site()" &
 
 stop:
-    Rscript -e "blogdown::stop_server()"
+    pkill -f "[h]ugo server" || true
 
 render:
     Rscript -e "blogdown::build_site()"
