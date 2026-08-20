@@ -75,7 +75,7 @@ uvr dir=invocation_directory():
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I can simply type &lt;code&gt;just ir&lt;/code&gt; or &lt;code&gt;just uvr&lt;/code&gt; to render the lecture/tutorial given whichever directory I&amp;rsquo;m in.&lt;/p&gt;
 &lt;h2 id=&#34;bonus-1--example-self-contained-quarto-document-using-ir&#34;&gt;Bonus 1 &amp;ndash; Example self-contained Quarto document using &lt;code&gt;ir&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;ir&lt;/code&gt; cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an &lt;code&gt;ir&lt;/code&gt; key. In this case we can remove the quarto package as we might assume we&amp;rsquo;d render this document by clicking the &lt;em&gt;Render&lt;/em&gt; button in RStudio or using &lt;code&gt;quarto render ...&lt;/code&gt; in the terminal.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ir&lt;/code&gt; cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an &lt;code&gt;ir&lt;/code&gt; key. In this case we can remove the quarto package because we won&amp;rsquo;t be using that to call Quarto.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
 title: My lecture/tutorial
 ir:
