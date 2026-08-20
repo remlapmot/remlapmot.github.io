@@ -103,7 +103,7 @@ I can simply type `just ir` or `just uvr` to render the lecture/tutorial given w
 
 ## Bonus 1 -- Example self-contained Quarto document using `ir`
 
-`ir` cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an `ir` key. In this case we can remove the quarto package as we might assume we'd render this document by clicking the _Render_ button in RStudio or using `quarto render ...` in the terminal.
+`ir` cleverly allows us to alternatively define the dependencies within the YAML header of a Quarto document, under an `ir` key. In this case we can remove the quarto package because we won't be using that to call Quarto.
 
 ```plaintext
 ---
