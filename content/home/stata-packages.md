@@ -78,4 +78,14 @@ date_format = "Jan 2006"
   date_end = ""
   description = ""
 
+[[item]]
+  organization = "Stata"
+  organization_url = "https://www.stata.com"
+  title = "seqtte Stata package"
+  url = "https://remlapmot.github.io/seqtte/"
+  certificate_url = ""
+  date_start = "2026-04-29"
+  date_end = ""
+  description = ""
+
 +++
