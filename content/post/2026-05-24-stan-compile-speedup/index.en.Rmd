@@ -10,7 +10,7 @@ tags:
   - Stan
 subtitle: ''
 summary: "Tips to help speed up Stan model compilation times in R packages, including; setting MAKEFLAGS, using ccache, and using clang."
-lastmod: '2026-05-26T15:00:00+00:00'
+lastmod: '2026-09-17T12:00:00+00:00'
 featured: false
 image:
   caption: ''
@@ -95,20 +95,21 @@ ccache --version
 To enable `ccache`, on macOS and Linux this goes in _~/.R/Makevars_; on Windows it's _~/.R/Makevars.win_ (create the directory and file if they don't exist), set
 
 ```sh
-# macOS
-CC = ccache clang
-CXX = ccache clang++
-CXX17 = ccache clang++
+# macOS, Linux, and Windows
+CC := ccache $(CC)
+CXX := ccache $(CXX)
+CXX17 := ccache $(CXX17)
+CXX20 := ccache $(CXX20)
 ```
 
+The `:=` prepends `ccache` to the compiler settings R already has, rather than replacing them. This matters because R's default `CXX` includes a `-std` flag, e.g., on macOS
+
 ```sh
-# Windows and Linux
-# Most Linux users will be on gcc by default
-# Change to clang if you're using that
-CC = ccache gcc
-CXX = ccache g++
-CXX17 = ccache g++
+R CMD config CXX
+## clang++ -arch arm64 -std=gnu++20
 ```
+
+**Update 17 September 2026:** an earlier version of this post set `CXX = ccache clang++` (and `CXX = ccache g++` on Windows and Linux). That drops the `-std` flag, so packages that don't request a C++ standard are compiled with the compiler's default instead. Stan packages were unaffected because _rstantools_ sets `CXX_STD = CXX17`, but on macOS Apple clang defaults to C++14, which broke installing other packages from source, such as _estimatr_. After making the change above `R CMD config CXX` should still show the `-std` flag, now prefixed by `ccache`.
 
 After a first compilation run for the cache to be generated, subsequent compilations are much faster. 
 
@@ -140,7 +141,7 @@ Here's a quick script to test which model takes the longest to compile. Save it 
 for model in inst/stan/*.stan; do
   cp "$model" "$model.bak"
   # Insert at the top of the file
-  sed -i "1i // benchmark $(date +%s%N)" "$model"
+  { echo "// benchmark $(date +%s)"; cat "$model.bak"; } > "$model"
   ccache -z
   SECONDS=0
   R CMD INSTALL --preclean . >/dev/null 2>&1
@@ -228,23 +229,12 @@ You can also use ccache in GitHub Actions, as follows:
         shell: bash
         run: |
           mkdir -p ~/.R
-          if [ "$RUNNER_OS" = "macOS" ]; then
-            cat >> ~/.R/Makevars <<'EOF'
-          CC = ccache clang
-          CXX = ccache clang++
-          CXX14 = ccache clang++
-          CXX17 = ccache clang++
-          CXX20 = ccache clang++
+          cat >> ~/.R/Makevars <<'EOF'
+          CC := ccache $(CC)
+          CXX := ccache $(CXX)
+          CXX17 := ccache $(CXX17)
+          CXX20 := ccache $(CXX20)
           EOF
-          else
-            cat >> ~/.R/Makevars <<'EOF'
-          CC = ccache gcc
-          CXX = ccache g++
-          CXX14 = ccache g++
-          CXX17 = ccache g++
-          CXX20 = ccache g++
-          EOF
-          fi
           echo "--- ~/.R/Makevars ---"
           cat ~/.R/Makevars
 
@@ -253,13 +243,13 @@ You can also use ccache in GitHub Actions, as follows:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path "$HOME\.R" | Out-Null
-          $makevars = @"
-          CC = ccache gcc
-          CXX = ccache g++
-          CXX14 = ccache g++
-          CXX17 = ccache g++
-          CXX20 = ccache g++
-          "@
+          # Single-quoted here-string, so PowerShell doesn't evaluate $(CC) etc.
+          $makevars = @'
+          CC := ccache $(CC)
+          CXX := ccache $(CXX)
+          CXX17 := ccache $(CXX17)
+          CXX20 := ccache $(CXX20)
+          '@
           Add-Content -Path "$HOME\.R\Makevars.win" -Value $makevars
           Write-Output "--- ~/.R/Makevars.win ---"
           Get-Content "$HOME\.R\Makevars.win"
@@ -296,13 +286,14 @@ which clang
 
 should return `/ucrt/bin/clang`.
 
-Switch to `clang` in _~/.R/Makevars_ (if you're not using `ccache` delete that prefix)
+Here we are naming the compiler, so we can't prepend to R's settings as in Big win 2. Before switching, run `R CMD config CC` and `R CMD config CXX`, and keep any `-std` flag they show. The `CXX17` and `CXX20` lines don't need one as R adds those from `CXX17STD` and `CXX20STD`.
+
+Switch to `clang` in _~/.R/Makevars_ (if you're not using `ccache` delete that prefix, and replace the `-std` flag with the one on your machine)
 
 ```sh
 # On Linux
 CC = ccache clang
-CXX = ccache clang++
-CXX14 = ccache clang++
+CXX = ccache clang++ -std=gnu++20
 CXX17 = ccache clang++
 CXX20 = ccache clang++
 ```
@@ -312,8 +303,9 @@ and in _~/.R/Makevars.win_ on Windows
 ```sh
 # On Windows
 CC = ccache C:/rtools45/ucrt64/bin/clang.exe
-CXX = ccache C:/rtools45/ucrt64/bin/clang++.exe
+CXX = ccache C:/rtools45/ucrt64/bin/clang++.exe -std=gnu++20
 CXX17 = ccache C:/rtools45/ucrt64/bin/clang++.exe
+CXX20 = ccache C:/rtools45/ucrt64/bin/clang++.exe
 ```
 
 Windows users will need to add the following to `PATH`
@@ -326,6 +318,7 @@ C:\rtools45\usr\bin
 You can verify things are working by running
 
 ```sh
+R CMD config CXX
 R CMD config CXX17
 ```
 
