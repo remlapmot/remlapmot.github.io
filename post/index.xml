@@ -163,18 +163,17 @@ winget install ccache
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ccache --version
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To enable &lt;code&gt;ccache&lt;/code&gt;, on macOS and Linux this goes in &lt;em&gt;~/.R/Makevars&lt;/em&gt;; on Windows it&amp;rsquo;s &lt;em&gt;~/.R/Makevars.win&lt;/em&gt; (create the directory and file if they don&amp;rsquo;t exist), set&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# macOS
-CC = ccache clang
-CXX = ccache clang++
-CXX17 = ccache clang++
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# macOS, Linux, and Windows
+CC := ccache $(CC)
+CXX := ccache $(CXX)
+CXX17 := ccache $(CXX17)
+CXX20 := ccache $(CXX20)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Windows and Linux
-# Most Linux users will be on gcc by default
-# Change to clang if you&#39;re using that
-CC = ccache gcc
-CXX = ccache g++
-CXX17 = ccache g++
+&lt;p&gt;The &lt;code&gt;:=&lt;/code&gt; prepends &lt;code&gt;ccache&lt;/code&gt; to the compiler settings R already has, rather than replacing them. This matters because R&amp;rsquo;s default &lt;code&gt;CXX&lt;/code&gt; includes a &lt;code&gt;-std&lt;/code&gt; flag, e.g., on macOS&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;R CMD config CXX
+## clang++ -arch arm64 -std=gnu++20
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Update 17 September 2026:&lt;/strong&gt; an earlier version of this post set &lt;code&gt;CXX = ccache clang++&lt;/code&gt; (and &lt;code&gt;CXX = ccache g++&lt;/code&gt; on Windows and Linux). That drops the &lt;code&gt;-std&lt;/code&gt; flag, so packages that don&amp;rsquo;t request a C++ standard are compiled with the compiler&amp;rsquo;s default instead. Stan packages were unaffected because &lt;em&gt;rstantools&lt;/em&gt; sets &lt;code&gt;CXX_STD = CXX17&lt;/code&gt;, but on macOS Apple clang defaults to C++14, which broke installing other packages from source, such as &lt;em&gt;estimatr&lt;/em&gt;. After making the change above &lt;code&gt;R CMD config CXX&lt;/code&gt; should still show the &lt;code&gt;-std&lt;/code&gt; flag, now prefixed by &lt;code&gt;ccache&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;After a first compilation run for the cache to be generated, subsequent compilations are much faster.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Windows, second compilation: 18 seconds&lt;/li&gt;
@@ -196,7 +195,7 @@ CXX17 = ccache g++
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;for model in inst/stan/*.stan; do
   cp &amp;quot;$model&amp;quot; &amp;quot;$model.bak&amp;quot;
   # Insert at the top of the file
-  sed -i &amp;quot;1i // benchmark $(date +%s%N)&amp;quot; &amp;quot;$model&amp;quot;
+  { echo &amp;quot;// benchmark $(date +%s)&amp;quot;; cat &amp;quot;$model.bak&amp;quot;; } &amp;gt; &amp;quot;$model&amp;quot;
   ccache -z
   SECONDS=0
   R CMD INSTALL --preclean . &amp;gt;/dev/null 2&amp;gt;&amp;amp;1
@@ -269,23 +268,12 @@ elapsed: 28s
         shell: bash
         run: |
           mkdir -p ~/.R
-          if [ &amp;quot;$RUNNER_OS&amp;quot; = &amp;quot;macOS&amp;quot; ]; then
-            cat &amp;gt;&amp;gt; ~/.R/Makevars &amp;lt;&amp;lt;&#39;EOF&#39;
-          CC = ccache clang
-          CXX = ccache clang++
-          CXX14 = ccache clang++
-          CXX17 = ccache clang++
-          CXX20 = ccache clang++
+          cat &amp;gt;&amp;gt; ~/.R/Makevars &amp;lt;&amp;lt;&#39;EOF&#39;
+          CC := ccache $(CC)
+          CXX := ccache $(CXX)
+          CXX17 := ccache $(CXX17)
+          CXX20 := ccache $(CXX20)
           EOF
-          else
-            cat &amp;gt;&amp;gt; ~/.R/Makevars &amp;lt;&amp;lt;&#39;EOF&#39;
-          CC = ccache gcc
-          CXX = ccache g++
-          CXX14 = ccache g++
-          CXX17 = ccache g++
-          CXX20 = ccache g++
-          EOF
-          fi
           echo &amp;quot;--- ~/.R/Makevars ---&amp;quot;
           cat ~/.R/Makevars
 
@@ -294,13 +282,13 @@ elapsed: 28s
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path &amp;quot;$HOME\.R&amp;quot; | Out-Null
-          $makevars = @&amp;quot;
-          CC = ccache gcc
-          CXX = ccache g++
-          CXX14 = ccache g++
-          CXX17 = ccache g++
-          CXX20 = ccache g++
-          &amp;quot;@
+          # Single-quoted here-string, so PowerShell doesn&#39;t evaluate $(CC) etc.
+          $makevars = @&#39;
+          CC := ccache $(CC)
+          CXX := ccache $(CXX)
+          CXX17 := ccache $(CXX17)
+          CXX20 := ccache $(CXX20)
+          &#39;@
           Add-Content -Path &amp;quot;$HOME\.R\Makevars.win&amp;quot; -Value $makevars
           Write-Output &amp;quot;--- ~/.R/Makevars.win ---&amp;quot;
           Get-Content &amp;quot;$HOME\.R\Makevars.win&amp;quot;
@@ -324,26 +312,28 @@ sudo apt install clang
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;which clang
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;should return &lt;code&gt;/ucrt/bin/clang&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Switch to &lt;code&gt;clang&lt;/code&gt; in &lt;em&gt;~/.R/Makevars&lt;/em&gt; (if you&amp;rsquo;re not using &lt;code&gt;ccache&lt;/code&gt; delete that prefix)&lt;/p&gt;
+&lt;p&gt;Here we are naming the compiler, so we can&amp;rsquo;t prepend to R&amp;rsquo;s settings as in Big win 2. Before switching, run &lt;code&gt;R CMD config CC&lt;/code&gt; and &lt;code&gt;R CMD config CXX&lt;/code&gt;, and keep any &lt;code&gt;-std&lt;/code&gt; flag they show. The &lt;code&gt;CXX17&lt;/code&gt; and &lt;code&gt;CXX20&lt;/code&gt; lines don&amp;rsquo;t need one as R adds those from &lt;code&gt;CXX17STD&lt;/code&gt; and &lt;code&gt;CXX20STD&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Switch to &lt;code&gt;clang&lt;/code&gt; in &lt;em&gt;~/.R/Makevars&lt;/em&gt; (if you&amp;rsquo;re not using &lt;code&gt;ccache&lt;/code&gt; delete that prefix, and replace the &lt;code&gt;-std&lt;/code&gt; flag with the one on your machine)&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# On Linux
 CC = ccache clang
-CXX = ccache clang++
-CXX14 = ccache clang++
+CXX = ccache clang++ -std=gnu++20
 CXX17 = ccache clang++
 CXX20 = ccache clang++
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;and in &lt;em&gt;~/.R/Makevars.win&lt;/em&gt; on Windows&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# On Windows
 CC = ccache C:/rtools45/ucrt64/bin/clang.exe
-CXX = ccache C:/rtools45/ucrt64/bin/clang++.exe
+CXX = ccache C:/rtools45/ucrt64/bin/clang++.exe -std=gnu++20
 CXX17 = ccache C:/rtools45/ucrt64/bin/clang++.exe
+CXX20 = ccache C:/rtools45/ucrt64/bin/clang++.exe
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Windows users will need to add the following to &lt;code&gt;PATH&lt;/code&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;C:\rtools45\ucrt64\bin
 C:\rtools45\usr\bin
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You can verify things are working by running&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;R CMD config CXX17
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;R CMD config CXX
+R CMD config CXX17
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I believe you need &lt;code&gt;clang&lt;/code&gt; version 18 or later to see the speedups.&lt;/p&gt;
 &lt;h2 id=&#34;small-win-1-wsl-users-should-use-the-native-file-system&#34;&gt;Small win 1: WSL users should use the native file system&lt;/h2&gt;

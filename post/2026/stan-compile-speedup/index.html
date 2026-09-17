@@ -236,7 +236,7 @@
     
       <meta property="article:published_time" content="2026-05-26T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2026-05-26T15:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2026-09-17T12:00:00&#43;00:00">
   
 
   
@@ -269,7 +269,7 @@
   ],
   
   "datePublished": "2026-05-26T00:00:00Z",
-  "dateModified": "2026-05-26T15:00:00Z",
+  "dateModified": "2026-09-17T12:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -675,7 +675,7 @@
           Last updated on
       
     
-    May 26, 2026
+    Sep 17, 2026
   </span>
   
 
@@ -767,18 +767,17 @@ winget install ccache
 <pre><code class="language-sh">ccache --version
 </code></pre>
 <p>To enable <code>ccache</code>, on macOS and Linux this goes in <em>~/.R/Makevars</em>; on Windows it&rsquo;s <em>~/.R/Makevars.win</em> (create the directory and file if they don&rsquo;t exist), set</p>
-<pre><code class="language-sh"># macOS
-CC = ccache clang
-CXX = ccache clang++
-CXX17 = ccache clang++
+<pre><code class="language-sh"># macOS, Linux, and Windows
+CC := ccache $(CC)
+CXX := ccache $(CXX)
+CXX17 := ccache $(CXX17)
+CXX20 := ccache $(CXX20)
 </code></pre>
-<pre><code class="language-sh"># Windows and Linux
-# Most Linux users will be on gcc by default
-# Change to clang if you're using that
-CC = ccache gcc
-CXX = ccache g++
-CXX17 = ccache g++
+<p>The <code>:=</code> prepends <code>ccache</code> to the compiler settings R already has, rather than replacing them. This matters because R&rsquo;s default <code>CXX</code> includes a <code>-std</code> flag, e.g., on macOS</p>
+<pre><code class="language-sh">R CMD config CXX
+## clang++ -arch arm64 -std=gnu++20
 </code></pre>
+<p><strong>Update 17 September 2026:</strong> an earlier version of this post set <code>CXX = ccache clang++</code> (and <code>CXX = ccache g++</code> on Windows and Linux). That drops the <code>-std</code> flag, so packages that don&rsquo;t request a C++ standard are compiled with the compiler&rsquo;s default instead. Stan packages were unaffected because <em>rstantools</em> sets <code>CXX_STD = CXX17</code>, but on macOS Apple clang defaults to C++14, which broke installing other packages from source, such as <em>estimatr</em>. After making the change above <code>R CMD config CXX</code> should still show the <code>-std</code> flag, now prefixed by <code>ccache</code>.</p>
 <p>After a first compilation run for the cache to be generated, subsequent compilations are much faster.</p>
 <ul>
 <li>Windows, second compilation: 18 seconds</li>
@@ -800,7 +799,7 @@ CXX17 = ccache g++
 <pre><code class="language-sh">for model in inst/stan/*.stan; do
   cp &quot;$model&quot; &quot;$model.bak&quot;
   # Insert at the top of the file
-  sed -i &quot;1i // benchmark $(date +%s%N)&quot; &quot;$model&quot;
+  { echo &quot;// benchmark $(date +%s)&quot;; cat &quot;$model.bak&quot;; } &gt; &quot;$model&quot;
   ccache -z
   SECONDS=0
   R CMD INSTALL --preclean . &gt;/dev/null 2&gt;&amp;1
@@ -873,23 +872,12 @@ elapsed: 28s
         shell: bash
         run: |
           mkdir -p ~/.R
-          if [ &quot;$RUNNER_OS&quot; = &quot;macOS&quot; ]; then
-            cat &gt;&gt; ~/.R/Makevars &lt;&lt;'EOF'
-          CC = ccache clang
-          CXX = ccache clang++
-          CXX14 = ccache clang++
-          CXX17 = ccache clang++
-          CXX20 = ccache clang++
+          cat &gt;&gt; ~/.R/Makevars &lt;&lt;'EOF'
+          CC := ccache $(CC)
+          CXX := ccache $(CXX)
+          CXX17 := ccache $(CXX17)
+          CXX20 := ccache $(CXX20)
           EOF
-          else
-            cat &gt;&gt; ~/.R/Makevars &lt;&lt;'EOF'
-          CC = ccache gcc
-          CXX = ccache g++
-          CXX14 = ccache g++
-          CXX17 = ccache g++
-          CXX20 = ccache g++
-          EOF
-          fi
           echo &quot;--- ~/.R/Makevars ---&quot;
           cat ~/.R/Makevars
 
@@ -898,13 +886,13 @@ elapsed: 28s
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path &quot;$HOME\.R&quot; | Out-Null
-          $makevars = @&quot;
-          CC = ccache gcc
-          CXX = ccache g++
-          CXX14 = ccache g++
-          CXX17 = ccache g++
-          CXX20 = ccache g++
-          &quot;@
+          # Single-quoted here-string, so PowerShell doesn't evaluate $(CC) etc.
+          $makevars = @'
+          CC := ccache $(CC)
+          CXX := ccache $(CXX)
+          CXX17 := ccache $(CXX17)
+          CXX20 := ccache $(CXX20)
+          '@
           Add-Content -Path &quot;$HOME\.R\Makevars.win&quot; -Value $makevars
           Write-Output &quot;--- ~/.R/Makevars.win ---&quot;
           Get-Content &quot;$HOME\.R\Makevars.win&quot;
@@ -928,26 +916,28 @@ sudo apt install clang
 <pre><code class="language-sh">which clang
 </code></pre>
 <p>should return <code>/ucrt/bin/clang</code>.</p>
-<p>Switch to <code>clang</code> in <em>~/.R/Makevars</em> (if you&rsquo;re not using <code>ccache</code> delete that prefix)</p>
+<p>Here we are naming the compiler, so we can&rsquo;t prepend to R&rsquo;s settings as in Big win 2. Before switching, run <code>R CMD config CC</code> and <code>R CMD config CXX</code>, and keep any <code>-std</code> flag they show. The <code>CXX17</code> and <code>CXX20</code> lines don&rsquo;t need one as R adds those from <code>CXX17STD</code> and <code>CXX20STD</code>.</p>
+<p>Switch to <code>clang</code> in <em>~/.R/Makevars</em> (if you&rsquo;re not using <code>ccache</code> delete that prefix, and replace the <code>-std</code> flag with the one on your machine)</p>
 <pre><code class="language-sh"># On Linux
 CC = ccache clang
-CXX = ccache clang++
-CXX14 = ccache clang++
+CXX = ccache clang++ -std=gnu++20
 CXX17 = ccache clang++
 CXX20 = ccache clang++
 </code></pre>
 <p>and in <em>~/.R/Makevars.win</em> on Windows</p>
 <pre><code class="language-sh"># On Windows
 CC = ccache C:/rtools45/ucrt64/bin/clang.exe
-CXX = ccache C:/rtools45/ucrt64/bin/clang++.exe
+CXX = ccache C:/rtools45/ucrt64/bin/clang++.exe -std=gnu++20
 CXX17 = ccache C:/rtools45/ucrt64/bin/clang++.exe
+CXX20 = ccache C:/rtools45/ucrt64/bin/clang++.exe
 </code></pre>
 <p>Windows users will need to add the following to <code>PATH</code></p>
 <pre><code class="language-plaintext">C:\rtools45\ucrt64\bin
 C:\rtools45\usr\bin
 </code></pre>
 <p>You can verify things are working by running</p>
-<pre><code class="language-sh">R CMD config CXX17
+<pre><code class="language-sh">R CMD config CXX
+R CMD config CXX17
 </code></pre>
 <p>I believe you need <code>clang</code> version 18 or later to see the speedups.</p>
 <h2 id="small-win-1-wsl-users-should-use-the-native-file-system">Small win 1: WSL users should use the native file system</h2>
