@@ -74,8 +74,11 @@ capitalizeListTitles = false
 
 [imaging]
   resampleFilter = "lanczos"
-  quality = 100
   anchor = "smart"  # Anchor for cropping. Options include Smart and Center.
+  [imaging.jpeg]
+    quality = 100
+  [imaging.webp]
+    quality = 100
 
 # Taxonomies.
 [taxonomies]
