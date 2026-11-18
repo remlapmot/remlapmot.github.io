@@ -4,7 +4,7 @@
 
 {{/* Set default titles for node pages */}}
 {{ $title := .Title }}
-{{ if and (not $title) .IsNode }}
+{{ if and (not $title) (not .IsPage) }}
   {{ if eq .Type "post" }}
     {{ $title = i18n "posts" }}
   {{ else if eq .Type "talk" }}
@@ -75,7 +75,7 @@
 
   {{/* Wider container for nodes */}}
   {{ $ctnr := "article-container" }}
-  {{ if $page.IsNode }}
+  {{ if not $page.IsPage }}
     {{ $ctnr = "universal-wrapper" }}
   {{end}}
 <div class="{{$ctnr}} pt-3">
@@ -85,7 +85,7 @@
   <p class="page-subtitle">{{ . | markdownify | emojify }}</p>
   {{end}}
 
-  {{ if not .IsNode }}
+  {{ if .IsPage }}
     {{ partial "page_metadata" (dict "page" $page "is_list" 0 "share" true) }}
     {{ partial "page_links_div.html" $page }}
   {{end}}
