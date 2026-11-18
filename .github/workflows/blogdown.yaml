@@ -36,8 +36,21 @@ jobs:
         run: blogdown::install_hugo(version = "0.170.1")
         shell: Rscript {0}
 
+      # Hugo >= 0.170.0 dropped LibSass; Dart Sass is required for toCSS
+      - name: Install Dart Sass
+        env:
+          DART_SASS_VERSION: 1.108.2
+        run: |
+          curl -sLJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          tar -C "${RUNNER_TEMP}" -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          echo "${RUNNER_TEMP}/dart-sass" >> "${GITHUB_PATH}"
+
       - name: Build site
-        run: blogdown::build_site(TRUE)
+        run: |
+          blogdown::build_site(TRUE)
+          # blogdown does not fail on Hugo errors, so check the output exists
+          if (!file.exists("public/index.html")) stop("Hugo build failed: public/index.html not found")
         shell: Rscript {0}
 
       - name: Deploy to GitHub pages 🚀
