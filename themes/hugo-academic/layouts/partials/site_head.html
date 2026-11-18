@@ -122,7 +122,8 @@
 
   {{ $css_comment := printf "/*!* Source Themes Academic v%s (https://sourcethemes.com/academic/) */\n" hugo.Data.academic.version }}
   {{ $css_bundle_head := $css_comment | resources.FromString "css/bundle-head.css" }}
-  {{ $css_options := dict "targetPath" "css/academic.css" }}
+  {{/* Silence Dart Sass deprecations from the legacy Academic/Bootstrap 4 SCSS (still compiles fine on Dart Sass 1.x) */}}
+  {{ $css_options := dict "targetPath" "css/academic.css" "silenceDeprecations" (slice "import" "global-builtin" "color-functions" "if-function") }}
   {{- if (in (slice (getenv "HUGO_ENV") hugo.Environment) "production") -}}
     {{- $css_options = merge $css_options (dict "outputStyle" "compressed") -}}
   {{- end -}}
