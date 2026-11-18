@@ -1,0 +1,1408 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Tom Palmer">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Tips to help speed up Stan model compilation times in R packages, including; setting MAKEFLAGS, using ccache, and using clang.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://remlapmot.github.io/post/2026/stan-compile-speedup/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="rgb(0, 136, 204)">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/base16/materia.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/base16/materia.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu_44332875fa6eb105.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu_ef3623a94a43845.png">
+
+  <link rel="canonical" href="https://remlapmot.github.io/post/2026/stan-compile-speedup/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Dr Tom Palmer">
+  <meta property="og:url" content="https://remlapmot.github.io/post/2026/stan-compile-speedup/">
+  <meta property="og:title" content="Speeding up Stan model builds for R package developers | Dr Tom Palmer">
+  <meta property="og:description" content="Tips to help speed up Stan model compilation times in R packages, including; setting MAKEFLAGS, using ccache, and using clang."><meta property="og:image" content="https://remlapmot.github.io/post/2026/stan-compile-speedup/featured.png">
+  <meta property="twitter:image" content="https://remlapmot.github.io/post/2026/stan-compile-speedup/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2026-05-26T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2026-09-17T12:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://remlapmot.github.io/post/2026/stan-compile-speedup/"
+  },
+  "headline": "Speeding up Stan model builds for R package developers",
+  
+  "image": [
+    "https://remlapmot.github.io/post/2026/stan-compile-speedup/featured.png"
+  ],
+  
+  "datePublished": "2026-05-26T00:00:00Z",
+  "dateModified": "2026-09-17T12:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Tom Palmer"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dr Tom Palmer",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://remlapmot.github.io/images/icon_hu_ef3623a94a43845.png"
+    }
+  },
+  "description": "Tips to help speed up Stan model compilation times in R packages, including; setting MAKEFLAGS, using ccache, and using clang."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Speeding up Stan model builds for R package developers | Dr Tom Palmer</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-bs-target="#TableOfContents" class="dark">
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Dr Tom Palmer</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+            data-bs-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Dr Tom Palmer</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#accomplishments"><span>Awards</span></a>
+        </li>
+
+        
+        
+
+        
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"><span>Blog</span><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu">
+            
+              <a class="dropdown-item" href="/#posts"><span>Recent Posts</span></a>
+            
+              <a class="dropdown-item" href="/post/"><span>Blog</span></a>
+            
+              <a class="dropdown-item" href="/tag/r/"><span>R blog</span></a>
+            
+              <a class="dropdown-item" href="/blogroll/"><span>Blogroll</span></a>
+            
+          </div>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#python-packages"><span>Python packages</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#r-packages"><span>R packages</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#stata-packages"><span>Stata packages</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-md-auto">
+      
+
+        
+
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/about/"><span>About</span></a>
+        </li>
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link js-theme-selector" data-bs-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+<div class="container-fluid docs">
+    <div class="row flex-xl-nowrap">
+      <div class="d-none d-xl-block col-xl-2 docs-toc">
+        <ul class="nav toc-top">
+          <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+        </ul>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#big-win-1-enable-parallel-compilations-with-the-makeflags-environment-variable">Big win 1: Enable parallel compilations with the <code>MAKEFLAGS</code> environment variable</a></li>
+    <li><a href="#big-win-2-enable-cc-compiler-cache-using-ccache">Big win 2: Enable C/C++ compiler cache using <code>ccache</code></a>
+      <ul>
+        <li><a href="#testing-which-of-your-models-takes-the-longest-to-compile">Testing which of your models takes the longest to compile</a></li>
+        <li><a href="#finding-your-makeflags-sweet-spot">Finding your <code>MAKEFLAGS</code> sweet spot</a></li>
+      </ul>
+    </li>
+    <li><a href="#big-win-3-combining-these-in-github-actions-workflows">Big win 3: Combining these in GitHub Actions workflows</a></li>
+    <li><a href="#big-win-4-switch-to-clang">Big win 4: Switch to <code>clang</code></a></li>
+    <li><a href="#small-win-1-wsl-users-should-use-the-native-file-system">Small win 1: WSL users should use the native file system</a></li>
+    <li><a href="#naive-guesses-that-made-no-difference">Naive guesses that made no difference</a></li>
+    <li><a href="#money-no-object-big-win-5-switch-to-an-apple-silicon-mac">(Money no object) Big win 5: Switch to an Apple Silicon Mac</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+      </div>
+      <main class="col-12 col-md-0 col-xl-10 py-md-3 pl-md-5 docs-content" role="main">
+
+        <article class="article">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Speeding up Stan model builds for R package developers</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Sep 17, 2026
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/blog/">Blog</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 378px;">
+  <div style="position: relative">
+    <img src="/post/2026/stan-compile-speedup/featured_hu_34ed2863448a2af0.png" alt="..." class="featured-image">
+    
+  </div>
+</div>
+
+
+            <div class="article-container">
+              <div class="article-style">
+                <h2 id="introduction">Introduction</h2>
+<p>In my previous job my work computer was a Windows desktop &ndash; yes, those were the days before laptops and hotdesking!</p>
+<p>My PhD student was interested in Bayesian methods and we put together an R package which included some 
+<a href="https://mc-stan.org/" target="_blank" rel="noopener">Stan</a> models. I was always frustrated by how slowly these compiled on our Windows machines. A few years later, when I got a MacBook Air I was shocked how much faster they compiled.</p>
+<p>On my Windows machine our 
+<a href="https://okezie94.github.io/mrbayes/" target="_blank" rel="noopener">mrbayes</a> package takes 3 minutes 55 seconds to compile and install. On my M4 MacBook Air it takes 1 minute 16 seconds.</p>
+<p>The following tips show how to improve those timings.</p>
+<p>To generate the timings I used</p>
+<pre><code class="language-sh">time R CMD INSTALL --preclean .
+</code></pre>
+<h2 id="big-win-1-enable-parallel-compilations-with-the-makeflags-environment-variable">Big win 1: Enable parallel compilations with the <code>MAKEFLAGS</code> environment variable</h2>
+<p>Set the <code>MAKEFLAGS</code> environment variable in your <em>~/.Renviron</em> file. This controls how many <code>make</code> jobs run concurrently. Choose a number no larger than the number of processing cores your machine has. To find this run</p>
+<pre><code class="language-sh"># Windows - in a Git Bash shell
+echo $NUMBER_OF_PROCESSORS
+</code></pre>
+<pre><code class="language-sh"># macOS
+sysctl -n hw.logicalcpu
+</code></pre>
+<pre><code class="language-sh"># Ubuntu Linux
+nproc
+</code></pre>
+<p>A reasonable starting point is your core count, or a few fewer to leave headroom for whatever else you&rsquo;re doing during a compilation. For example,</p>
+<pre><code class="language-sh"># In ~/.Renviron
+MAKEFLAGS=-j6
+</code></pre>
+<p>Close and restart R/RStudio after making this change.</p>
+<p>On my Windows machine this reduced the build from 3:55 to 1:15. To find your own sweet spot empirically, see the example at the end of Big win 2.</p>
+<h2 id="big-win-2-enable-cc-compiler-cache-using-ccache">Big win 2: Enable C/C++ compiler cache using <code>ccache</code></h2>
+<p>Install 
+<a href="https://ccache.dev/" target="_blank" rel="noopener"><code>ccache</code></a>, I find it easiest to use a package manager, e.g.,</p>
+<pre><code class="language-sh"># macOS
+brew install ccache
+</code></pre>
+<pre><code class="language-sh"># Ubuntu/Debian Linux
+apt install ccache
+</code></pre>
+<pre><code class="language-sh"># Windows
+winget install ccache
+</code></pre>
+<p>Whichever installation method you use make sure <code>ccache</code> is on your <code>PATH</code> after installation. You can test with, say,</p>
+<pre><code class="language-sh">ccache --version
+</code></pre>
+<p>To enable <code>ccache</code>, on macOS and Linux this goes in <em>~/.R/Makevars</em>; on Windows it&rsquo;s <em>~/.R/Makevars.win</em> (create the directory and file if they don&rsquo;t exist), set</p>
+<pre><code class="language-sh"># macOS, Linux, and Windows
+CC := ccache $(CC)
+CXX := ccache $(CXX)
+CXX17 := ccache $(CXX17)
+CXX20 := ccache $(CXX20)
+</code></pre>
+<p>The <code>:=</code> prepends <code>ccache</code> to the compiler settings R already has, rather than replacing them. This matters because R&rsquo;s default <code>CXX</code> includes a <code>-std</code> flag, e.g., on macOS</p>
+<pre><code class="language-sh">R CMD config CXX
+## clang++ -arch arm64 -std=gnu++20
+</code></pre>
+<p><strong>Update 17 September 2026:</strong> an earlier version of this post set <code>CXX = ccache clang++</code> (and <code>CXX = ccache g++</code> on Windows and Linux). That drops the <code>-std</code> flag, so packages that don&rsquo;t request a C++ standard are compiled with the compiler&rsquo;s default instead. Stan packages were unaffected because <em>rstantools</em> sets <code>CXX_STD = CXX17</code>, but on macOS Apple clang defaults to C++14, which broke installing other packages from source, such as <em>estimatr</em>. After making the change above <code>R CMD config CXX</code> should still show the <code>-std</code> flag, now prefixed by <code>ccache</code>.</p>
+<p>After a first compilation run for the cache to be generated, subsequent compilations are much faster.</p>
+<ul>
+<li>Windows, second compilation: 18 seconds</li>
+<li>M4 MacBook Air, second compilation: 5 seconds</li>
+</ul>
+<p>Perhaps more importantly, if, say, your package has 5 models and you only amend the code for one of them, <code>ccache</code> knows to use the cache for the 4 unchanged models.</p>
+<ul>
+<li>Windows, second compilation, only 1 model edited: 1 minute 10 seconds</li>
+<li>M4 MacBook Air, second compilation, only 1 model edited: 19 seconds</li>
+</ul>
+<p>You can verify <code>ccache</code> is working, by observing the timing decrease and by checking the output of</p>
+<pre><code class="language-sh">ccache -s
+</code></pre>
+<p>It is also useful to zero the ccache statistics before a timing run with</p>
+<pre><code class="language-sh">ccache -z
+</code></pre>
+<h3 id="testing-which-of-your-models-takes-the-longest-to-compile">Testing which of your models takes the longest to compile</h3>
+<p>Here&rsquo;s a quick script to test which model takes the longest to compile. Save it as say <em>test.sh</em> at the top level of your repo and add <code>^test\.sh$</code> to your <em>.Rbuildignore</em> file (to avoid an <code>R CMD check</code> NOTE about unknown files at the top level).</p>
+<pre><code class="language-sh">for model in inst/stan/*.stan; do
+  cp &quot;$model&quot; &quot;$model.bak&quot;
+  # Insert at the top of the file
+  { echo &quot;// benchmark $(date +%s)&quot;; cat &quot;$model.bak&quot;; } &gt; &quot;$model&quot;
+  ccache -z
+  SECONDS=0
+  R CMD INSTALL --preclean . &gt;/dev/null 2&gt;&amp;1
+  echo &quot;$(basename $model): ${SECONDS}s&quot;
+  ccache -s | grep -E &quot;Hits|Misses&quot; | head -2
+  mv &quot;$model.bak&quot; &quot;$model&quot;
+done
+</code></pre>
+<h3 id="finding-your-makeflags-sweet-spot">Finding your <code>MAKEFLAGS</code> sweet spot</h3>
+<p>With <code>ccache</code> installed you can now benchmark different <code>-jN</code> values cleanly (the <code>ccache -C</code> calls ensure each run is a cold compile, so you measure raw compilation cost rather than cache hits). You can increase the number sequence up to the number of processing cores your machine has.</p>
+<pre><code class="language-sh">for j in 1 2 3 4 6 8 10; do
+  ccache -C &gt;/dev/null
+  echo &quot;=== -j$j ===&quot;
+  SECONDS=0
+  MAKEFLAGS=-j$j R CMD INSTALL --preclean . &gt;/dev/null 2&gt;&amp;1
+  echo &quot;elapsed: ${SECONDS}s&quot;
+done
+</code></pre>
+<p>The timings on my MacBook Air were</p>
+<pre><code class="language-plaintext">=== -j1 ===
+elapsed: 76s
+=== -j2 ===
+elapsed: 48s
+=== -j3 ===
+elapsed: 35s
+=== -j4 ===
+elapsed: 36s
+=== -j6 ===
+elapsed: 27s
+=== -j8 ===
+elapsed: 27s
+=== -j10 ===
+elapsed: 28s
+</code></pre>
+<p>My MacBook Air has 10 cores, but only 4 of those are performance cores, so I settled on <code>-j6</code> as that is where my timings plateaued — and it leaves headroom for me inevitably checking my email during a compilation.</p>
+<h2 id="big-win-3-combining-these-in-github-actions-workflows">Big win 3: Combining these in GitHub Actions workflows</h2>
+<p>In my <em>.github/workflows/R-CMD-check.yaml</em> I have steps for these speedups. Firstly, to set <code>MAKEFLAGS</code>.</p>
+<pre><code class="language-yaml">      - name: Set parallel compilation flags (Linux and macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          NCPUS=$(nproc 2&gt;/dev/null || sysctl -n hw.logicalcpu)
+          echo &quot;Detected ${NCPUS} processors&quot;
+          echo &quot;MAKEFLAGS=-j${NCPUS}&quot; &gt;&gt; ~/.Renviron
+
+      - name: Set parallel compilation flags (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Write-Output &quot;Detected $env:NUMBER_OF_PROCESSORS processors&quot;
+          Add-Content -Path &quot;$HOME\.Renviron&quot; -Value &quot;MAKEFLAGS=-j$env:NUMBER_OF_PROCESSORS&quot;
+</code></pre>
+<p>You can also use ccache in GitHub Actions, as follows:</p>
+<pre><code class="language-yaml">      # ccache speeds up Stan model compilation dramatically on warm cache.
+      # Note: Windows support via ccache-action is documented as &quot;probably works&quot;
+      # rather than fully stable; if it causes issues, scope this step to non-Windows.
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2.23
+        with:
+          # Key invalidates when Stan models or DESCRIPTION change.
+          # Older caches partially seed new ones via restore-keys.
+          key: ccache-${{ matrix.config.os }}-R-${{ matrix.config.r }}-${{ hashFiles('inst/stan/**/*.stan', 'DESCRIPTION') }}
+          restore-keys: |
+            ccache-${{ matrix.config.os }}-R-${{ matrix.config.r }}-
+            ccache-${{ matrix.config.os }}-R-
+          max-size: &quot;2G&quot;
+
+      - name: Configure R to use ccache (Linux and macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          mkdir -p ~/.R
+          cat &gt;&gt; ~/.R/Makevars &lt;&lt;'EOF'
+          CC := ccache $(CC)
+          CXX := ccache $(CXX)
+          CXX17 := ccache $(CXX17)
+          CXX20 := ccache $(CXX20)
+          EOF
+          echo &quot;--- ~/.R/Makevars ---&quot;
+          cat ~/.R/Makevars
+
+      - name: Configure R to use ccache (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path &quot;$HOME\.R&quot; | Out-Null
+          # Single-quoted here-string, so PowerShell doesn't evaluate $(CC) etc.
+          $makevars = @'
+          CC := ccache $(CC)
+          CXX := ccache $(CXX)
+          CXX17 := ccache $(CXX17)
+          CXX20 := ccache $(CXX20)
+          '@
+          Add-Content -Path &quot;$HOME\.R\Makevars.win&quot; -Value $makevars
+          Write-Output &quot;--- ~/.R/Makevars.win ---&quot;
+          Get-Content &quot;$HOME\.R\Makevars.win&quot;
+</code></pre>
+<p>You can see the 
+<a href="https://github.com/okezie94/mrbayes/blob/master/.github/workflows/R-CMD-check.yaml" target="_blank" rel="noopener">full file in my repo</a>.</p>
+<p>This reduced my ubuntu-latest run for r-release from 7 minutes 30 seconds to 4 minutes 49 seconds.</p>
+<h2 id="big-win-4-switch-to-clang">Big win 4: Switch to <code>clang</code></h2>
+<p>I found that switching from <code>gcc</code> to <code>clang</code> gives a noticeable speedup; the single core compile time dropped from 3 minutes 55 seconds to 3 minutes flat on my Windows machine.</p>
+<p>To do this you need to install <code>clang</code>. On Windows you install <code>clang</code> within RTools45 — more involved than on Linux, but doable.</p>
+<pre><code class="language-sh"># Windows within RTools45 Bash shell
+# Launch C:\rtools45\ucrt64.exe
+# You may need to close and reopen the shell after the first command
+pacman -Syu
+pacman -S mingw-w64-ucrt-x86_64-clang
+</code></pre>
+<pre><code class="language-sh"># Ubuntu/Debian Linux
+sudo apt install clang
+</code></pre>
+<p>At this point on Windows running</p>
+<pre><code class="language-sh">which clang
+</code></pre>
+<p>should return <code>/ucrt/bin/clang</code>.</p>
+<p>Here we are naming the compiler, so we can&rsquo;t prepend to R&rsquo;s settings as in Big win 2. Before switching, run <code>R CMD config CC</code> and <code>R CMD config CXX</code>, and keep any <code>-std</code> flag they show. The <code>CXX17</code> and <code>CXX20</code> lines don&rsquo;t need one as R adds those from <code>CXX17STD</code> and <code>CXX20STD</code>.</p>
+<p>Switch to <code>clang</code> in <em>~/.R/Makevars</em> (if you&rsquo;re not using <code>ccache</code> delete that prefix, and replace the <code>-std</code> flag with the one on your machine)</p>
+<pre><code class="language-sh"># On Linux
+CC = ccache clang
+CXX = ccache clang++ -std=gnu++20
+CXX17 = ccache clang++
+CXX20 = ccache clang++
+</code></pre>
+<p>and in <em>~/.R/Makevars.win</em> on Windows</p>
+<pre><code class="language-sh"># On Windows
+CC = ccache C:/rtools45/ucrt64/bin/clang.exe
+CXX = ccache C:/rtools45/ucrt64/bin/clang++.exe -std=gnu++20
+CXX17 = ccache C:/rtools45/ucrt64/bin/clang++.exe
+CXX20 = ccache C:/rtools45/ucrt64/bin/clang++.exe
+</code></pre>
+<p>Windows users will need to add the following to <code>PATH</code></p>
+<pre><code class="language-plaintext">C:\rtools45\ucrt64\bin
+C:\rtools45\usr\bin
+</code></pre>
+<p>You can verify things are working by running</p>
+<pre><code class="language-sh">R CMD config CXX
+R CMD config CXX17
+</code></pre>
+<p>I believe you need <code>clang</code> version 18 or later to see the speedups.</p>
+<h2 id="small-win-1-wsl-users-should-use-the-native-file-system">Small win 1: WSL users should use the native file system</h2>
+<p>Within WSL it is possible to access files from within its native Linux filesystem, i.e., within <code>/home/user/...</code>, and also on the Windows filesystem, e.g., in <code>/mnt/c/...</code>. I believe file operations are noticeably faster within <code>/home/user/...</code>.</p>
+<h2 id="naive-guesses-that-made-no-difference">Naive guesses that made no difference</h2>
+<p>I had wondered whether running a non-debug compilation with say</p>
+<pre><code class="language-r">pkgbuild::compile_dll(debug = FALSE)
+</code></pre>
+<p>would speed things up. It turns out it does not. For Stan models, most of the time is spent in C++ template instantiation by the compiler, not in optimisation passes — so disabling debug flags or lowering the optimisation level barely helps.</p>
+<p>I also wondered whether using R on Windows Subsystem for Linux would speed things up just by virtue of being on Linux. It did not, timings using <code>gcc</code> on Windows and WSL Ubuntu were essentially identical. The advantage of using WSL is that it is easier to switch to using <code>clang</code> on Linux.</p>
+<h2 id="money-no-object-big-win-5-switch-to-an-apple-silicon-mac">(Money no object) Big win 5: Switch to an Apple Silicon Mac</h2>
+<p>Apple silicon Macs have excellent single threaded performance, their unified memory architecture has very high bandwidth, they have large L1 and L2 caches, and fast NVMe SSDs. Together these produce very fast Stan model compilation times, even on the lowest end Apple Silicon Macs.</p>
+<h2 id="summary">Summary</h2>
+<p>In summary, five big wins and one small win for speeding up Stan model compilation in R packages.</p>
+
+              </div>
+              
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/r/">R</a>
+  
+  <a class="badge badge-light" href="/tag/stan/">Stan</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/tom-palmer/avatar_hu_244f9aa35045ee28.jpg" alt="Tom Palmer">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="https://remlapmot.github.io/">Tom Palmer</a></h5>
+        <h6 class="card-subtitle">Senior Lecturer in Biostatistics applied to Genetics</h6>
+        <p class="card-text">My research interests include statistical methods for epidemiology.</p>
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:tom.palmer@bristol.ac.uk" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=9H1a8CEAAAAJ&amp;hl" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/remlapmot" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://research-information.bris.ac.uk/en/persons/tom-m-palmer%28bd750b43-03d6-4e2e-af74-c24eb2bf5c5a%29.html" target="_blank" rel="noopener">
+        <i class="fas fa-university"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://orcid.org/0000-0003-4655-4511" target="_blank" rel="noopener">
+        <i class="ai ai-orcid"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://remlapmot.github.io/index.xml" target="_blank" rel="noopener">
+        <i class="fa fa-rss"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://remlapmot.r-universe.dev/" target="_blank" rel="noopener">
+        <i class="fa fa-rocket"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://mrcieu.r-universe.dev/" target="_blank" rel="noopener">
+        <i class="fa fa-rocket"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+<section id="comments">
+  <script src="https://giscus.app/client.js"
+        data-repo="remlapmot/remlapmot.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxODk1ODg4OTQ="
+        data-category="Announcements"
+        data-category-id="DIC_kwDOC0zlns4CTLL5"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+  </script>
+</section>
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/2026/self-contained-r-script-for-quarto/">Creating self-contained R scripts for rendering Quarto documents using the knitr engine – courtesy of the new R package managers ir and uvr</a></li>
+      
+      <li><a href="/post/2026/runiverse-tips/">Five tips for managing your R-universe 🚀</a></li>
+      
+      <li><a href="/post/2026/manylinux-packages/">How Posit&#39;s Public Package Manager manylinux_2_28 repository can help you if your R project is stuck on Ubuntu Focal Fossa</a></li>
+      
+      <li><a href="/post/2025/self-contained-python-script-for-quarto/">Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine</a></li>
+      
+      <li><a href="/post/2025/quarto-accessibility/">Seven accessibility tips for Quarto and R Markdown users</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+            </div>
+        </article>
+  
+      </main>
+    </div>
+  </div>
+  
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js" integrity="sha512-6QBAC6Sxc4IF04SvIg0k78l5rP5YgVjmHX2NeArelbxM3JGj4imMqfNzEta3n+mi7iG3nupdLnl3QrbfjdXyTg==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/applescript.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/markdown.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/plaintext.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/stata.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/html.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/css.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/yaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/toml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/julia.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/makefile.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/latex.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/languages/json.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.5a648f87bfc14a81f9da936fcd5c95a2.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    Powered by the
+    <a href="https://github.com/HugoBlox/theme-academic-cv" target="_blank" rel="noopener">Academic CV theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stata | Dr Tom Palmer</title>
+    <link>https://remlapmot.github.io/tag/stata/</link>
+      <atom:link href="https://remlapmot.github.io/tag/stata/index.xml" rel="self" type="application/rss+xml" />
+    <description>Stata</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 02 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://remlapmot.github.io/images/icon_hu_6ddb6168b464f0e7.png</url>
+      <title>Stata</title>
+      <link>https://remlapmot.github.io/tag/stata/</link>
+    </image>
+    
+    <item>
+      <title>Creating self-contained executable Python scripts for rendering Quarto documents using the Jupyter engine</title>
+      <link>https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/</link>
+      <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/self-contained-python-script-for-quarto/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;In previous posts I have covered creating 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/multi-engine-quarto/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;effectively multi-engine Quarto documents&lt;/a&gt; and also how to use 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/nbstata-uv-venv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;uv virtual environments for the nbstata Jupyter kernel&lt;/a&gt; to run Quarto documents with Stata code. Hence by trivial extension we can use &lt;code&gt;uv&lt;/code&gt; to manage the virutal environments for running Quarto documents using the &lt;code&gt;jupyter: python3&lt;/code&gt; engine.&lt;/p&gt;
+&lt;p&gt;The slight inconvenience about this approach when you are working on a collaborative project with new Python users is that you end up leaving a README or shell script with the required commands to activate the environment, install the nbstata kernel, and run Quarto. I sense this management of the virutal environment is a pain point for new Python users - who are likely wondering what on earth a virtual environment is. So I have been looking for a way to simplify this process for them.&lt;/p&gt;
+&lt;p&gt;A recent 
+&lt;a href=&#34;https://www.rostrum.blog/posts/2025-08-11-uv-standalone/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;post by Matt Dray&lt;/a&gt; about using uv to run self-contained executable Python scripts got me thinking. Could I produce a similar self-contained executable Python script to perform the rendering for Quarto documents using the Jupyter engine. Then my colleagues would only need to call the script as an executable at the command line. This would avoid them the trouble of managing the virtual environment.&lt;/p&gt;
+&lt;h2 id=&#34;the-self-contained-executable-python-script&#34;&gt;The self-contained executable Python script&lt;/h2&gt;
+&lt;p&gt;I came up with the following Python script.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = &amp;quot;&amp;gt;=3.9&amp;quot;
+# dependencies = [
+#     &amp;quot;jupyterlab&amp;gt;=4.4.3&amp;quot;,
+#     &amp;quot;jupyterlab-stata-highlight2&amp;gt;=0.1.2&amp;quot;,
+#     &amp;quot;nbstata&amp;gt;=0.8.3&amp;quot;,
+# ]
+# ///
+import subprocess
+
+cmd0 = &amp;quot;python -m nbstata.install --sys-prefix&amp;quot;
+retval0 = subprocess.call(cmd0, shell=True)
+print(&#39;returned value:&#39;, retval0)
+
+cmd1  = &amp;quot;quarto render --profile stata-questions&amp;quot;
+retval1 = subprocess.call(cmd1, shell=True)
+print(&#39;returned value:&#39;, retval1)
+
+cmd2  = &amp;quot;quarto render --profile stata-solutions&amp;quot;
+retval2 = subprocess.call(cmd2, shell=True)
+print(&#39;returned value:&#39;, retval2)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The first line, the shebang ensures it is run by &lt;code&gt;uv run&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The metadata defining the Python environment is declared between the&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# /// script
+# ...
+# ///
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;If you don&amp;rsquo;t use Stata, say you are using the &lt;code&gt;jupyter: python3&lt;/code&gt; engine then you can delete the &lt;code&gt;jupyterlab-stata-highlight2&lt;/code&gt; and &lt;code&gt;nbstata&lt;/code&gt; entries and the first group of 3 lines for &lt;code&gt;cmd0&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If you use additional Python packages in your code then you need to add them to the list.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Then comes the actual code. These are simply system calls using the &lt;em&gt;subprocess&lt;/em&gt; module. You can amend the number of calls and the calls themselves inside the string quotes as required. I am recreating some of the rendering commands in my recent 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;post about using Quarto profiles for tutorial documents&lt;/a&gt;. It&amp;rsquo;s worth pointing out that I haven&amp;rsquo;t used the Python quarto package here as it&amp;rsquo;s currently slightly too limited for my use (I&amp;rsquo;m not sure it can render profiles).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Save the script in a file, say &lt;em&gt;render&lt;/em&gt;, then make it executable with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;chmod +x render
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then all my colleagues need to do is run it with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;./render
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Of course uv and Quarto need to be installed and be on their &lt;code&gt;PATH&lt;/code&gt;, and Stata needs to be installed locally when using that. For my colleagues using Windows, they need to run this from a Git Bash shell rather than from Powershell or CMD shell (for the shebang line to work).&lt;/p&gt;
+&lt;p&gt;If you are only using the Quarto knitr engine then you don&amp;rsquo;t need this script because you don&amp;rsquo;t need Jupyter.&lt;/p&gt;
+&lt;p&gt;And for more information about uv Python scripts, the full documentation is 
+&lt;a href=&#34;https://docs.astral.sh/uv/guides/scripts/#creating-a-python-script&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to make a self-contained executable Python script to render Quarto documents using the Jupyter engine which automatically manage their own virtual environment. This means users don&amp;rsquo;t have to manage the virtual environment themselves, which can be a pain point for new Python users.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Creating tutorial worksheets: Quarto profiles for the win!</title>
+      <link>https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/</link>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/quarto-profiles-for-tutorials/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/quarto-conditional-content/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;previously posted&lt;/a&gt; about creating tutorial worksheets for 4 different Quarto engines (for R, Python, Stata, and Julia) using 
+&lt;a href=&#34;https://quarto.org/docs/authoring/conditional.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;conditional content&lt;/a&gt;. However, that approach is a bit hacky and I wasn&amp;rsquo;t very happy with it.&lt;/p&gt;
+&lt;p&gt;Thanks to a 
+&lt;a href=&#34;https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;vignette by Christophe Dervieux&lt;/a&gt; in the quarto R package I realised there is a more convenient, and less hacky, way to create tutorial documents using Quarto profiles. I don&amp;rsquo;t use the dynamic metadata approach in the vignette to achieve my solution but it led me to the relevant Quarto documentation page and I discuss it at the end of this post.&lt;/p&gt;
+&lt;p&gt;My aim is the following&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To have a single Quarto document from which both the question and solution documents can be rendered for a tutorial.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As a reminder, as 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/quarto-conditional-content/#introduction&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;I showed in my previous post&lt;/a&gt;, this has been possible to achieve for a long time with R Markdown and knitr thanks to the brilliant work of Yihui Xie, because they allow programmatic chunk options. Therefore, implementing this in a Quarto document using the knitr engine is also straightforward and I won&amp;rsquo;t repeat it in this post. However, it is the three other Quarto engines (for Python, Stata, and Julia) that I am interested in which are problematic because as far as I know they don&amp;rsquo;t allow programmatic chunk options and they don&amp;rsquo;t have the equivalent of the &lt;code&gt;! expr ...&lt;/code&gt; YAML tag literal.&lt;/p&gt;
+&lt;h2 id=&#34;quarto-profiles&#34;&gt;Quarto profiles&lt;/h2&gt;
+&lt;p&gt;Quarto profiles are introduced 
+&lt;a href=&#34;https://quarto.org/docs/projects/profiles.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;on this page of the Quarto documentation&lt;/a&gt;. Specifically, we shall make use of 
+&lt;a href=&#34;https://quarto.org/docs/projects/profiles.html#profile-content&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;conditional content dependent upon profile&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;First we will create a simple default Quarto profile file &lt;em&gt;_quarto.yml&lt;/em&gt; which will simply contain the following.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;execute:
+  eval: true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(This is because I usually have an R version of the tutorial in the same directory using programmatic chunk options, so I don&amp;rsquo;t want to set a default that is language specific nor will affect anything in the R Quarto documents.)&lt;/p&gt;
+&lt;p&gt;Next for each language I will make profiles for the questions output and the solutions output in appropriately named YAML files (I just show the Python files as the other two just have Stata/Julia substituted in the appropraite places).&lt;/p&gt;
+&lt;h3 id=&#34;questions-and-solutions-profiles-for-python&#34;&gt;Questions and solutions profiles for Python&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;_quarto-python-questions.yml&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;project:
+  render:
+    - tutorial-python.qmd
+title: &#39;Questions document: Python version&#39;
+execute:
+  eval: false
+format:
+  html:
+    output-file: &amp;quot;tutorial-python-questions&amp;quot;
+    output-ext:  &amp;quot;html&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;_quarto-python-solutions.yml&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;project:
+  render:
+    - tutorial-python.qmd
+title: &#39;Solutions document: Python version&#39;
+format:
+  html:
+    output-file: &amp;quot;tutorial-python-solutions&amp;quot;
+    output-ext:  &amp;quot;html&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then our tutorial Quarto Python document, &lt;em&gt;tutorial-python.qmd&lt;/em&gt;, will look like the following.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+format:
+  html:
+    embed-resources: true
+jupyter: python3
+---
+
+## Question 1
+
+Question text.
+
+```{python}
+print(&amp;quot;The code which is echoed in questions and evaluated in solutions.&amp;quot;)
+```
+
+::: {.content-visible when-profile=&amp;quot;python-solutions&amp;quot;}
+The text for the solutions.
+:::
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We see the use of the conditional content based upon profile for the text of the solutions, and we could included additional code chunks in these conditional content divs.&lt;/p&gt;
+&lt;p&gt;We repeat this for the other 2 tricky Quarto engines, &lt;code&gt;engine: julia&lt;/code&gt; and &lt;code&gt;jupyter: nbstata&lt;/code&gt;, including making profile yaml files for each engine and the respective &lt;em&gt;tutorial-{stata/julia}.qmd&lt;/em&gt; Quarto documents.&lt;/p&gt;
+&lt;p&gt;Then we make a shell script with our render commands.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;quarto render --profile python-questions
+quarto render --profile python-solutions
+
+quarto render --profile stata-questions
+quarto render --profile stata-solutions
+
+quarto render --profile julia-questions
+quarto render --profile julia-solutions
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And because I have an R version using parameters my shell script usually begins.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;quarto render tutorial-r.qmd -P solutions:false -o tutorial-r-questions.html
+quarto render tutorial-r.qmd -o tutorial-r-solutions.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And that&amp;rsquo;s it.&lt;/p&gt;
+&lt;p&gt;You can find the full source code in my example repo 
+&lt;a href=&#34;https://github.com/remlapmot/tutorial-quarto-profiles&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; and their rendered output can be viewed from 
+&lt;a href=&#34;https://remlapmot.github.io/tutorial-quarto-profiles/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. This repo also contains a tutorial document including the 4 languages in the same document using the embed shortcode as I described in 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/multi-engine-quarto/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;another previous post&lt;/a&gt;. A screenshot of the questions and solutions documents from this approach 
+&lt;a href=&#34;#top&#34;&gt;is shown above&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;an-honorable-mention-about-dynamic-metadata&#34;&gt;An honorable mention about dynamic metadata&lt;/h2&gt;
+&lt;p&gt;When I started reading the 
+&lt;a href=&#34;https://quarto-dev.github.io/quarto-r/articles/dynamic-metadata.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;quarto R package vignette&lt;/a&gt; I began trying to use dynamic metadata to achieve the result above. Dynamic metadata involves writing extra YAML blocks into your Quarto document which can include programmatically specified values of parameters, which can then be used by including conditional content by 
+&lt;a href=&#34;https://quarto.org/docs/authoring/conditional.html#matching-against-metadata&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;matching against them&lt;/a&gt;. I found that I could achieve what I wanted if I used the &lt;code&gt;--metadata-file&lt;/code&gt; argument to &lt;code&gt;quarto render&lt;/code&gt; with the settings included in their own YAML files &lt;del&gt;except for modifying the &lt;code&gt;execute&lt;/code&gt; state of the Quarto document, it seems that must be specified in the first YAML block/header. And this cannot be controlled by the &lt;code&gt;--execute&lt;/code&gt; and &lt;code&gt;--no-execute&lt;/code&gt; flags to &lt;code&gt;quarto render&lt;/code&gt; because one needs the code which generates the additional YAML blocks to be run&lt;/del&gt; (with thanks to Christophe for pointing this out to me).&lt;/p&gt;
+&lt;p&gt;For Quarto documents using the knitr engine, the R package vignette shows how to use the new &lt;code&gt;write_yaml_metadata_block()&lt;/code&gt; function within an R code chunk with output type &lt;code&gt;asis&lt;/code&gt; to write the YAML block. In case it is useful to anyone, below I show examples of how to write the YAML blocks in each of the three other engines I have been using. (Admittedly this is not needed if one uses the &lt;code&gt;--metadata-file&lt;/code&gt; argument to &lt;code&gt;quarto render&lt;/code&gt; in which these settings are included in their own YAML files.)&lt;/p&gt;
+&lt;h3 id=&#34;python-jupyter-python3&#34;&gt;Python (jupyter: python3)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;```{python}
+#| include: false
+#| tags: [parameters]
+solutions = &#39;true&#39;
+```
+
+```{python}
+#| include: false
+from IPython.display import Markdown
+ymltxt = f&amp;quot;  solutions: {solutions}&amp;quot;
+if solutions == &#39;true&#39;:
+    titletxt = &amp;quot;title: Solutions document&amp;quot;
+else:
+    titletxt = &amp;quot;title: Questions document&amp;quot;
+```
+
+`{python} Markdown(&amp;quot;---&amp;quot;)`
+`{python} Markdown(&amp;quot;params:&amp;quot;)`
+`{python} Markdown(ymltxt)`
+`{python} Markdown(titletxt)`
+`{python} Markdown(&amp;quot;---&amp;quot;)`
+
+::: {.content-visible when-meta=&amp;quot;params.solutions&amp;quot;}
+```{python}
+print(&amp;quot;A solution, which is hidden in questions&amp;quot;)
+```
+:::
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;stata-jupyter-nbstata&#34;&gt;Stata (jupyter: nbstata)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;```{stata}
+*| include: false
+local solutions : env SOLUTIONS_STATA
+scalar ymltxt = &amp;quot;  solutions: `solutions&#39;&amp;quot;
+if &amp;quot;`solutions&#39;&amp;quot; == &amp;quot;true&amp;quot; {
+  scalar titletxt = &amp;quot;title: Solutions document&amp;quot;
+}
+else {
+  scalar titletxt = &amp;quot;title: Questions document&amp;quot;
+}
+```
+
+`{stata} &amp;quot;---&amp;quot;`
+`{stata} &amp;quot;params:&amp;quot;`
+`{stata} scalar(ymltxt)`
+`{stata} scalar(titletxt)`
+`{stata} &amp;quot;---&amp;quot;`
+
+::: {.content-visible when-meta=&amp;quot;params.solutions&amp;quot;}
+```{stata}
+display &amp;quot;A solution, which is hidden in questions&amp;quot;
+```
+:::
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;julia-engine-julia&#34;&gt;Julia (engine: julia)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;```{julia}
+#| tags: [parameters]
+```
+
+```{julia}
+#| echo: false
+#| output: asis
+println(&amp;quot;---&amp;quot;)
+if solutions
+  println(&amp;quot;title: Solutions document&amp;quot;)
+  ymltxt = &amp;quot;  solutions: true&amp;quot;
+else
+  println(&amp;quot;title: Questions document&amp;quot;)
+  ymltxt = &amp;quot;  solutions: false&amp;quot;
+end
+println(&amp;quot;params:&amp;quot;)
+println(ymltxt)
+println(&amp;quot;---&amp;quot;)
+```
+
+::: {.content-visible when-meta=&amp;quot;params.solutions&amp;quot;}
+```{julia}
+println(&amp;quot;A solution, hidden in questions&amp;quot;)
+```
+:::
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to create Quarto profiles for creating tutorial worksheets; one for the questions and one for the solutions from the same Quarto document; for several Quarto engines (&lt;code&gt;engine: knitr&lt;/code&gt;, &lt;code&gt;jupyter: python3&lt;/code&gt;, &lt;code&gt;jupyter: nbstata&lt;/code&gt;, and &lt;code&gt;engine: julia&lt;/code&gt;). I have also shown how additional metadata may be written into your Quarto document in these engines which can be used in conjunction with parameterised documents and conditional content.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Running the nbstata Jupyter kernel within a uv virtual environment</title>
+      <link>https://remlapmot.github.io/post/2025/nbstata-uv-venv/</link>
+      <pubDate>Tue, 29 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/nbstata-uv-venv/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Any new project using Python or Jupyter is very strongly recommended to use a virtual environment. A virtual environment is a directory (usually at the top level; often called either &lt;em&gt;.venv&lt;/em&gt; or &lt;em&gt;venv&lt;/em&gt;) within your project directory which contains the dependency Python packages and perhaps the Python installation (or pointers to the Python installation on your system).&lt;/p&gt;
+&lt;p&gt;There are many Python project managers, in this post I will use the new and extremely fast project manager 
+&lt;a href=&#34;https://docs.astral.sh/uv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;uv&lt;/a&gt;. I will show how to use the 
+&lt;a href=&#34;https://hugetim.github.io/nbstata/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nbstata&lt;/a&gt; Jupyter kernel by Tim Huegerich within a uv virtual environment on macOS, Windows, and Linux. The aim is to be able to conveniently and reproducibly render Quarto documents using the 
+&lt;a href=&#34;https://hugetim.github.io/nbstata/user_guide.html#quarto-tips&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;jupyter: nbstata&lt;/code&gt;&lt;/a&gt; engine from within the virtual environment.&lt;/p&gt;
+&lt;p&gt;At this point it&amp;rsquo;s worth saying that I am a contributor to the excellent 
+&lt;a href=&#34;https://cran.r-project.org/package=Statamarkdown&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Statamarkdown&lt;/a&gt; R package by Doug Hemken. This can be used in Quarto documents using the knitr engine. In this post I&amp;rsquo;ll be using nbstata because nbstata uses 
+&lt;a href=&#34;https://www.stata.com/python/pystata/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;pystata&lt;/a&gt; which is StataCorp&amp;rsquo;s official Python package (included in each Stata installation) and is their official way of integrating Stata in Python. As such pystata and hence nbstata have more features than Statamarkdown can provide.&lt;/p&gt;
+&lt;p&gt;And it is worth emphasizing how useful virtual environments are because it is very easy to get oneself in a complete mess with regards Python, as you will likely end up with many different versions installed. Chaos can then accidentally ensue regarding which versions of dependency packages your different projects require given a certain Python version, as always XKCD have a comic illustrating the problem.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&#34;https://imgs.xkcd.com/comics/python_environment.png&#34; alt=&#34;XKCD 1987, a diagram showing the chaos of not using Python virtual environments.&#34; width=&#34;630&#34; style=&#34;display: block; margin: auto;&#34;&gt;
+&lt;figcaption&gt;XKCD 1987, Python Environment. &lt;a href=&#34;https://xkcd.com/license.html&#34;&gt;XKCD license&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h2 id=&#34;setup-basics&#34;&gt;Setup basics&lt;/h2&gt;
+&lt;p&gt;On your machine you need to have&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Stata installed and know the location of the installation
+&lt;ul&gt;
+&lt;li&gt;and check that within the installation there is the &lt;em&gt;utilities&lt;/em&gt; directory containing the &lt;em&gt;pystata&lt;/em&gt; directory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;uv must be installed, see 
+&lt;a href=&#34;https://docs.astral.sh/uv/getting-started/installation/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;its docs for installation instructions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;to render Quarto documents you need 
+&lt;a href=&#34;https://quarto.org/docs/get-started/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quarto installed&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;and of course a text editor and a terminal.&lt;/li&gt;
+&lt;li&gt;On Windows I would recommend using Git Bash as your shell (this is bundled with 
+&lt;a href=&#34;https://git-scm.com/downloads/win&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Git for Windows&lt;/a&gt;) for running the setup script in the next section.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;a-shell-script-to-setup-the-uv-virtual-environment&#34;&gt;A shell script to setup the uv virtual environment&lt;/h2&gt;
+&lt;p&gt;What follows are the shell commands we need to run to setup our virtual environment. The script is for macOS but I have included comments in the places where amendments are required for either Windows or Linux. I have also included this script 
+&lt;a href=&#34;https://github.com/remlapmot/nbstata-uv-setup&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;in a repository&lt;/a&gt; (in fact I have included a script per operating system).&lt;/p&gt;
+&lt;p&gt;Note that currently on macOS and Linux there cannot be any spaces in the filepath to your virtual environment. And you might need to amend some of the paths, say if you have a different version of Stata or if it&amp;rsquo;s installation location is different.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;On Linux we need to ensure that the directory containing our stata/stata-mp binary is on &lt;code&gt;PATH&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# export PATH=$PATH:/usr/local/stata18
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;We then need to ensure that our Python installation will be able to find the pystata package. We can do this by defining the &lt;code&gt;PYTHONPATH&lt;/code&gt; environment variable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Required so Python can find pystata package
+export PYTHONPATH=/Applications/Stata/utilities
+# Linux: export PYTHONPATH=/usr/local/stata18/utilities
+# Windows: export PYTHONPATH=&amp;quot;C:/Program Files/Stata18/utilities&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;We then setup the virtual environment. This will create a directory in our project called &lt;em&gt;.venv&lt;/em&gt;. I prefer to explicitly set the version of Python I am using.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;uv venv --python 3.13
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;We then activate the virtual environment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;source .venv/bin/activate
+# Windows: source .venv/Scripts/activate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Now we can install the required Python dependency packages as per the 
+&lt;a href=&#34;https://hugetim.github.io/nbstata/user_guide.html#install-nbstata&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nbstata docs&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Install nbstata dependency Python packages
+uv pip install jupyterlab nbstata jupyterlab_stata_highlight2
+
+# Additional Python packages if using parameterised Quarto documents
+# uv pip install papermill python-dotenv jupyter-cache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Then we setup the nbstata Jupyter kernel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;python -m nbstata.install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The nbstata docs states that the &lt;code&gt;--sys-prefix&lt;/code&gt; flag may be required in a virtual environment but I haven&amp;rsquo;t found that to be the case.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Then we run commands to do our actual work; for example rendering a Quarto document using the &lt;code&gt;jupyter: nbstata&lt;/code&gt; engine. An example Quarto document, say &lt;em&gt;index.qmd&lt;/em&gt;, could be:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+title: My example nbstata document
+jupyter: nbstata
+---
+
+```{stata}
+display &amp;quot;Hello, World!&amp;quot;
+```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;quarto render index.qmd
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that Quarto documents using the nbstata kernel can also be embedded within other Quarto documents, 
+&lt;a href=&#34;https://remlapmot.github.io/post/2025/multi-engine-quarto/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;as I have described in a previous post&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;And that&amp;rsquo;s it. When you have finished your work you can deactivate the virtual environment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;deactivate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;recording-this-as-a-project-with-pyprojecttoml-and-uvlock-files&#34;&gt;Recording this as a project with pyproject.toml and uv.lock files&lt;/h2&gt;
+&lt;p&gt;And of course we can go a step further by setting this up as a proper Python project. This will have a &lt;em&gt;pyproject.toml&lt;/em&gt; file to record the dependencies and a &lt;em&gt;uv.lock&lt;/em&gt; file to record their exact versions. To do this run&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;uv init
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can delete the &lt;em&gt;main.py&lt;/em&gt; file that&amp;rsquo;s created here, but commit everything else into your repo. Then add the dependencies with&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;uv add jupyterlab nbstata jupyterlab_stata_highlight2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will see these are entered into the &lt;em&gt;pyproject.toml&lt;/em&gt; and &lt;em&gt;uv.lock&lt;/em&gt; files. The &lt;em&gt;pyproject.toml&lt;/em&gt; file will now look something like this (I have edited the &lt;code&gt;description&lt;/code&gt;)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[project]
+name = &amp;quot;nbstata-uv-setup&amp;quot;
+version = &amp;quot;0.1.0&amp;quot;
+description = &amp;quot;This project demonstrates how to use the nbstata Jupyter kernel in a uv virtual environment, so that one can render Quarto documents using this engine.&amp;quot;
+readme = &amp;quot;README.md&amp;quot;
+requires-python = &amp;quot;&amp;gt;=3.13&amp;quot;
+dependencies = [
+    &amp;quot;jupyterlab&amp;gt;=4.4.2&amp;quot;,
+    &amp;quot;jupyterlab-stata-highlight2&amp;gt;=0.1.2&amp;quot;,
+    &amp;quot;nbstata&amp;gt;=0.8.2&amp;quot;,
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Commit these files into your repo.&lt;/p&gt;
+&lt;p&gt;At a later date you can restore this environment by running&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;uv sync
+# which creates the .venv
+# Then activate the virtual environment, etc
+source .venv/bin/activate
+# Windows: source .venv/Scripts/activate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You find out more about uv project commands in its 
+&lt;a href=&#34;https://docs.astral.sh/uv/guides/projects/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to setup and run the nbstata Jupyter kernel within a uv virtual environment on macOS, Windows, and Linux; in order to conveniently and reproducibly render Quarto documents using the &lt;code&gt;jupyter: nbstata&lt;/code&gt; engine. And I have also shown how to set this up as a Python project.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Creating R, Python, Stata, and Julia tutorial worksheets (with and without solutions) using Quarto</title>
+      <link>https://remlapmot.github.io/post/2025/quarto-conditional-content/</link>
+      <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/quarto-conditional-content/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I regularly need to produce exercises/tutorials for my students. One fantastic feature of R Markdown is that it allows me to create one R Markdown document which can be rendered to both the question document and the solutions document. This is achieved by toggling knitr chunk options such as eval, echo, and include, and using asis chunks to include the text for the solutions. I wrote a little package, 
+&lt;a href=&#34;https://remlapmot.github.io/knitexercise/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;knitexercise&lt;/strong&gt;&lt;/a&gt; to help with this.&lt;/p&gt;
+&lt;p&gt;The toggling of the knitr chunk options can be parameterised making it possible to have an R script which contains the code to conveniently produce both questions and solutions documents. An example R Markdown file, &lt;em&gt;exercise.Rmd&lt;/em&gt;, might look like the following.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+title: &amp;quot;`r params$title`&amp;quot;
+output: html_document
+params:
+  solutions: TRUE
+  title: &amp;quot;Example exercise: Solutions&amp;quot;
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = params$solutions)
+```
+
+1. This is question 1. Which might have some R code you always want to show.
+
+   ```{r, include=TRUE}
+   # example code for the question
+   ```
+
+   ```{asis}
+   Paragraph text for the solution can be kept in the document in an `asis` chunk.
+   And solution R code in an `r` chunk.
+   Both of these will use the `include` value from the `setup` chunk.
+   ```
+    
+   ```{r}
+   # example code for the solution
+   ```
+
+2. This is question 2 ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And the rendering script might look like this.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;rmarkdown::render(&amp;quot;exercise.Rmd&amp;quot;,
+  output_file = &amp;quot;exercise-questions&amp;quot;,
+  params = list(solutions = FALSE, title = &amp;quot;Example exercise: Questions&amp;quot;)
+)
+
+rmarkdown::render(&amp;quot;exercise.Rmd&amp;quot;,
+  output_file = &amp;quot;exercise-solutions&amp;quot;
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;inline-code&#34;&gt;Inline code&lt;/h3&gt;
+&lt;p&gt;Inline code has been a 
+&lt;a href=&#34;https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;feature of R Markdown&lt;/a&gt; for a while. Yihui Xie and Christophe Dervieux have used it to pull off some fantastic tricks. My favourite trick is using it to programmatically write out R Markdown/Markdown code within an R Markdown document when a certain condition is met.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;`r if (knitr::is_latex_output()) &amp;quot;...some_Markdown_to_include_when_rendering_to_pdf...&amp;quot;`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;the-problem&#34;&gt;The problem&lt;/h3&gt;
+&lt;p&gt;R Markdown is incredibly flexible because we can include R objects as document and chunk options. When translating this to a pure Quarto version we can do this in a document using in the knitr engine using the 
+&lt;a href=&#34;https://quarto.org/docs/tools/rstudio.html#knitr-engine&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;! expr ...&lt;/code&gt; YAML tag literal&lt;/a&gt;. As far as I am aware, this is not yet possible for any other Quarto engine. Despite this my aim was to see whether I could achieve parameterised conditional content inclusion/exclusion in a Quarto document using other engines.&lt;/p&gt;
+&lt;h2 id=&#34;programmatically-including-conditional-content-in-quarto-documents&#34;&gt;Programmatically including conditional content in Quarto documents&lt;/h2&gt;
+&lt;p&gt;The code described below is presented in the following 
+&lt;a href=&#34;https://github.com/remlapmot/quarto-parameterised-reports-test&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;demo repo&lt;/a&gt;, and the rendered output files can also 
+&lt;a href=&#34;https://remlapmot.github.io/quarto-parameterised-reports-test/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;be viewed&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;r-knitr-and-quarto&#34;&gt;R: knitr and Quarto&lt;/h3&gt;
+&lt;p&gt;I have already shown the R Markdown approach above.&lt;/p&gt;
+&lt;p&gt;For Quarto using the knitr engine, in a blog post 
+&lt;a href=&#34;https://nrennie.rbind.io/blog/r-tutorial-worksheets-quarto/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Nicola Rennie&lt;/a&gt; used inline code to write out Quarto&amp;rsquo;s 
+&lt;a href=&#34;https://quarto.org/docs/authoring/conditional.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;conditional content classes&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+format: html
+params:
+  hide_answers: true
+engine: knitr
+---
+
+`r if (params$hide_answers) &amp;quot;::: {.content-hidden}&amp;quot;`
+
+Text and code for answers.
+
+`r if (params$hide_answers) &amp;quot;:::&amp;quot;`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that if you use the curly braces around the &lt;code&gt;r&lt;/code&gt; to write you inline code then you need to enclose the output string in the 
+&lt;a href=&#34;https://quarto.org/docs/computations/inline-code.html#markdown-output&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;I()&lt;/code&gt; function&lt;/a&gt; and include the &lt;code&gt;else&lt;/code&gt; statement as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;`{r} if (params$hide_answers) I(&amp;quot;::: {.content-hidden}&amp;quot;) else &amp;quot;&amp;quot;`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we can have a shell script to render our questions and solutions documents as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;quarto render exercise-r.qmd -o exercise-r-questions.html
+quarto render exercise-r.qmd -P hide_answers:false -o exercise-r-solutions.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;python&#34;&gt;Python&lt;/h3&gt;
+&lt;p&gt;I realised I could adapt Nicola Rennie&amp;rsquo;s approach for other engines. For the &lt;code&gt;jupyter: python3&lt;/code&gt; engine we can do so as follows, the following code uses 
+&lt;a href=&#34;https://quarto.org/docs/computations/parameters.html#jupyter&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quarto&amp;rsquo;s parameters feature&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+format: html
+jupyter: python3
+---
+
+```{python}
+#| include: false
+#| tags: [parameters]
+hide_answers = True
+```
+
+```{python}
+#| include: false
+from IPython.display import Markdown
+```
+
+`{python} Markdown(&amp;quot;::: {.content-hidden}&amp;quot;) if hide_answers else Markdown(&amp;quot; &amp;quot;)`
+
+```{python}
+print(&amp;quot;Hidden in questions&amp;quot;)
+```
+
+`{python} Markdown(&amp;quot;:::&amp;quot;) if hide_answers else Markdown(&amp;quot; &amp;quot;)`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The shell script to render our questions and solutions documents is as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;quarto render exercise-python.qmd -o exercise-python-questions.html
+quarto render exercise-python.qmd -P hide_answers:False -o exercise-python-solutions.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As of Quarto version 1.7.23 it is possible to suppress the injected parameters cell.&lt;/p&gt;
+&lt;h3 id=&#34;stata&#34;&gt;Stata&lt;/h3&gt;
+&lt;p&gt;The Stata case involved two additional tricks. First, the 
+&lt;a href=&#34;https://hugetim.github.io/nbstata/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nbstata Jupyter kernel&lt;/a&gt; allows inline code, however this must be a 
+&lt;a href=&#34;https://www.stata.com/manuals/pdisplay.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;display&lt;/code&gt; command&lt;/a&gt;, so we cannot write the if statement within the inline code. I found I can overcome this by saving the different strings in scalars (because the inline code can&amp;rsquo;t use local macros) at the top of the document as follows. Second, I didn&amp;rsquo;t try but I suspect the nbstata kernel doesn&amp;rsquo;t support parameters, and so I achieved the toggling of the code using an environment variable, e.g. &lt;code&gt;HIDE_ANSWERS_STATA&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+format: html
+jupyter: nbstata
+---
+
+```{stata}
+*| include: false
+local hide_answers : env HIDE_ANSWERS_STATA
+if (`hide_answers&#39;) {
+    scalar hide_answers_open = &amp;quot;::: {.content-hidden}&amp;quot;
+    scalar hide_answers_close = &amp;quot;:::&amp;quot;     
+}
+else {
+    scalar hide_answers_open = &amp;quot; &amp;quot;
+    scalar hide_answers_close = &amp;quot; &amp;quot;
+}
+```
+
+`{stata} scalar(hide_answers_open)`
+
+```{stata}
+display &amp;quot;Hidden in questions&amp;quot;
+```
+
+`{stata} scalar(hide_answers_close)`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The shell script to render the documents is then as follows, here we define the environment variable before the call to &lt;code&gt;quarto&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;HIDE_ANSWERS_STATA=1 quarto render exercise-stata.qmd -o exercise-stata-questions.html
+HIDE_ANSWERS_STATA=0 quarto render exercise-stata.qmd -o exercise-stata-solutions.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;julia&#34;&gt;Julia&lt;/h3&gt;
+&lt;p&gt;For the native Julia engine I found that Quarto&amp;rsquo;s parameterisation worked and that I didn&amp;rsquo;t require a code chunk with a parameters tag.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+format: html
+engine: julia
+---
+
+```{julia}
+#| include: false
+using Markdown
+```
+
+`{julia} hide_answers ? md&amp;quot;::: {.content-hidden}&amp;quot; : md&amp;quot;&amp;quot;`
+
+```{julia}
+println(&amp;quot;Hidden in questions&amp;quot;)
+```
+
+`{julia} hide_answers ? md&amp;quot;:::&amp;quot; : md&amp;quot;&amp;quot;`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The shell script to render the documents is then as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;quarto render exercise-julia.qmd -P hide_answers:true -o exercise-julia-questions.html
+quarto render exercise-julia.qmd -P hide_answers:false -o exercise-julia-solutions.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;problems-with-environment-variables&#34;&gt;Problems with environment variables&lt;/h2&gt;
+&lt;p&gt;I found that passing environment variables, to the &lt;code&gt;jupyter: python3&lt;/code&gt; and &lt;code&gt;engine: julia&lt;/code&gt; is unreliable/broken. Admittedly, I was not using Quarto in project mode with an 
+&lt;a href=&#34;https://quarto.org/docs/projects/environment.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;_environment&lt;/em&gt; file&lt;/a&gt;, but honestly it doesn&amp;rsquo;t feel to me I should need to do that for a single document.&lt;/p&gt;
+&lt;p&gt;The problem I found was that after a first render the value of the environment variable seems to be cached within the Quarto output document and I couldn&amp;rsquo;t change it on subsequent renders. I also found that using the 
+&lt;a href=&#34;https://pypi.org/project/python-dotenv/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;dotenv&lt;/strong&gt; package&lt;/a&gt; to access was broken in the same way.&lt;/p&gt;
+&lt;p&gt;For &lt;code&gt;engine: julia&lt;/code&gt; I also found that passing environment variables is unreliable and like for the &lt;code&gt;jupyter: python3&lt;/code&gt; engine I experienced environment variable values being stuck after the first render. However, using the Julia 
+&lt;a href=&#34;https://juliapackages.com/p/dotenv&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;DotEnv&lt;/strong&gt; package&lt;/a&gt; did seem to be reliable.&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to programmatically include conditional content for several Quarto engines (&lt;code&gt;knitr&lt;/code&gt;, &lt;code&gt;jupyter: python3&lt;/code&gt;, &lt;code&gt;jupyter: nbstata&lt;/code&gt;, and &lt;code&gt;engine: julia&lt;/code&gt;) using parameters or environment variables to toggle inline code to write Quarto Markdown in the Quarto documents. I use this to write exercise/tutorial documents in which a single Quarto document is used to output both the questions and solutions documents.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Creating effectively multi-engine Quarto documents using Quarto&#39;s embed shortcode</title>
+      <link>https://remlapmot.github.io/post/2025/multi-engine-quarto/</link>
+      <pubDate>Sat, 15 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2025/multi-engine-quarto/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Have you ever needed to present the code and output for several languages in the same document or website? I work in (non-infectious disease) Epidemiology and so it is common that researchers would like to present R and Stata code in the same document. However, a Quarto document can only run a single engine. There are already several work around solutions, which include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;writing out the different language code cells but making them unevaluated/not executed chunks (this is done alot on the 
+&lt;a href=&#34;https://quarto.org/docs/reference/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quarto documentation website&lt;/a&gt;). One can also include saved plots from the different languages;&lt;/li&gt;
+&lt;li&gt;if your document has a combination of languages from which you can call one from the other, such as using 
+&lt;a href=&#34;https://rstudio.github.io/reticulate/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;reticulate&lt;/strong&gt;&lt;/a&gt; from within R to run Python, or using 
+&lt;a href=&#34;https://cran.r-project.org/package=Statamarkdown&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Statamarkdown&lt;/strong&gt;&lt;/a&gt; from within R to run Stata, or using 
+&lt;a href=&#34;https://cran.r-project.org/package=JuliaCall&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;JuliaCall&lt;/strong&gt;&lt;/a&gt; from within R to run Julia, then these can be combined in a Quarto document;&lt;/li&gt;
+&lt;li&gt;or for some languages like R and Python we could even embed full WebAssembly implementations of the language (
+&lt;a href=&#34;https://docs.r-wasm.org/webr/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;WebR&lt;/a&gt; and 
+&lt;a href=&#34;https://pyodide.org/en/stable/#&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Pyodide&lt;/a&gt; respectively) within a webpage (which admittedly seems a little overkill for my work).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I&amp;rsquo;ve found an alternative solution allowing you to use the native engines for each language. I recently stumbled across 
+&lt;a href=&#34;https://quarto.org/docs/authoring/notebook-embed.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Quarto&amp;rsquo;s embed shortcode&lt;/a&gt;. This allows another (or selected cells from another) Quarto document to be embedded in a Quarto document. A thought occurred to me, what if the embedded Quarto document/s used a different engine? Would that work? This isn&amp;rsquo;t explicitly mentioned on the documentation page, so I gave it a go. Remarkably, the answer turns out to be that it works! Let&amp;rsquo;s find out what to do.&lt;/p&gt;
+&lt;h2 id=&#34;using-the-embed-shortcode-to-create-an-effectively-multi-engine-quarto-document&#34;&gt;Using the embed shortcode to create an effectively multi-engine Quarto document&lt;/h2&gt;
+&lt;p&gt;In the example below I&amp;rsquo;m using a 
+&lt;a href=&#34;https://quarto.org/docs/output-formats/html-basics.html#tabsets&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;tabset&lt;/a&gt; in a html document using the knitr engine. We embed the documents using the alternative engines for Python, Stata, and Julia using the &lt;code&gt;{{&amp;lt; embed &amp;gt;}}&lt;/code&gt; shortcode as shown below. For each language I just show printing a string and a basic plot.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-plaintext&#34;&gt;---
+title: An effectively multi-engine Quarto document using the embed shortcode
+format:
+  html:
+    embed-resources: true
+engine: knitr
+---
+
+::: {.panel-tabset .nav-pills}
+## R
+
+```{r}
+print(&amp;quot;Hello World, from R&amp;quot;)
+```
+
+```{r}
+#| fig-align: &amp;quot;center&amp;quot;
+x &amp;lt;- seq(-10,10, by = 0.1)
+y &amp;lt;- x ^ 3
+plot(x, y, type = &amp;quot;l&amp;quot;)
+```
+
+## Python
+
+{{&amp;lt; embed python-code-using-jupyter-python3-engine.qmd echo=true &amp;gt;}}
+
+## Stata
+
+{{&amp;lt; embed stata-code-using-jupyter-nbstata-engine.qmd echo=true &amp;gt;}}
+
+## Julia
+
+{{&amp;lt; embed julia-code-using-julia-engine.qmd echo=true &amp;gt;}}
+
+:::
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;em&gt;python-code-using-jupyter-python3-engine.qmd&lt;/em&gt; document uses the &lt;code&gt;jupyter: python3&lt;/code&gt; engine (
+&lt;a href=&#34;https://quarto.org/docs/computations/python.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation for using Python in Quarto&lt;/a&gt;);&lt;/li&gt;
+&lt;li&gt;the &lt;em&gt;stata-code-using-jupyter-nbstata-engine.qmd&lt;/em&gt; document uses the &lt;code&gt;jupyter: nbstata&lt;/code&gt; engine (
+&lt;a href=&#34;https://hugetim.github.io/nbstata/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation for nbstata&lt;/a&gt;);&lt;/li&gt;
+&lt;li&gt;and the &lt;em&gt;julia-code-using-julia-engine.qmd&lt;/em&gt; uses &lt;code&gt;engine: julia&lt;/code&gt;. Alternatively, it should be possible to use the 
+&lt;a href=&#34;https://julialang.github.io/IJulia.jl/stable/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IJulia&lt;/a&gt; Jupyter kernel (
+&lt;a href=&#34;https://quarto.org/docs/computations/julia.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation for using Julia in Quarto&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Of course, I assume that you have setup each engine beforehand.&lt;/p&gt;
+&lt;p&gt;Rendering the Quarto document above results in the embedded documents being executed and embedded within it. I&amp;rsquo;ve included the output below (and the full source code is in 
+&lt;a href=&#34;https://github.com/remlapmot/quarto-multi-engine-using-embed-example&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this repository&lt;/a&gt;). Click the tabs to show the code and output for each language.&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;
+&lt;iframe src=&#34;https://remlapmot.github.io/quarto-multi-engine-using-embed-example/&#34; height=&#34;1075&#34; width=&#34;800&#34;&gt;
+&lt;/iframe&gt;
+&lt;/p&gt;
+&lt;p&gt;In the code above, in each case, I embed the whole Quarto document but you can also specify a specific code block id (or if the embedded document is a Jupyter Notebook, &lt;em&gt;.ipynb&lt;/em&gt; file, you can specify a cell id, label, or tag).&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I have shown how to use the Quarto embed shortcode to embed Quarto documents using alternative engines to create an effectively multi-engine Quarto document.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fuller reproducibility in Stata ado-files and programs: setting the version and user version</title>
+      <link>https://remlapmot.github.io/post/2023/stata-reproducibility/</link>
+      <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://remlapmot.github.io/post/2023/stata-reproducibility/</guid>
+      <description>&lt;p&gt;Most proficient Stata users have come across the &lt;code&gt;version&lt;/code&gt; command. This is an incredibly powerful command, which simply by issuing say&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-stata&#34;&gt;version 18
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;at the top of a do-file or within a program (typically in an ado-file) means that you have pretty much guaranteed your code will run in the same way when you come to run it later (most likely in a newer version of Stata). But it turns out there’s a subtle difference between issuing &lt;code&gt;version&lt;/code&gt; in a do-file/interactively compared to within a program or ado-file.&lt;/p&gt;
+&lt;p&gt;Several years ago I wrote the &lt;strong&gt;reffadjust&lt;/strong&gt; package (
+&lt;a href=&#34;#ref-palmer-sj-2014&#34;&gt;Palmer et al. 2014&lt;/a&gt;) as part of some work using random effects models (
+&lt;a href=&#34;#ref-mcdw-sim-2012&#34;&gt;Macdonald-Wallis et al. 2012&lt;/a&gt;). It has two programs &lt;code&gt;reffadjustsim&lt;/code&gt; and &lt;code&gt;reffadjust4nlcom&lt;/code&gt; which use the output of various random effects commands, including those from MLwiN, run from Stata using the user-written &lt;code&gt;runmlwin&lt;/code&gt; command (
+&lt;a href=&#34;#ref-leckie-jss-2013&#34;&gt;Leckie and Charlton 2013&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;reffadjust&lt;/strong&gt; package doesn’t have many users and over the years I hadn’t regularly checked if the programs were still working. But in the ado-files I had set &lt;code&gt;version 13&lt;/code&gt;, which gave me some residual confidence that the programs might still work.&lt;/p&gt;
+&lt;p&gt;However, a few years ago, when I eventually did run some test code I saw that the &lt;code&gt;reffadjustsim&lt;/code&gt; tests were failing for MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models. I didn’t have time to investigate further at this point, and I didn’t have any intuition whether the error resulted from a change in MLwiN, &lt;code&gt;runmlwin&lt;/code&gt;, or Stata.&lt;/p&gt;
+&lt;p&gt;At the beginning of this year one of my colleagues mentioned that they were using &lt;strong&gt;reffadjust&lt;/strong&gt; in their work and had observed the same error with &lt;code&gt;reffadjustsim&lt;/code&gt;. My guilt kicked in, and I eventually found some time to investigate. I discovered that since I wrote the package, Stata processes matrix row and column stripes (essentially the row and column names) in a more advanced way. This meant that the row and column stripes for covariance elements in the &lt;code&gt;e(V)&lt;/code&gt; matrix (the variance-covariance matrix of parameter estimates) from MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models were being renamed when I hadn’t intended them to be, which caused the error.&lt;/p&gt;
+&lt;p&gt;But wait … I had specified &lt;code&gt;version 13&lt;/code&gt; at the top of my program, so why was this update in later versions of Stata taking effect?&lt;/p&gt;
+&lt;p&gt;I couldn’t work it out, so I had to ask Stata Technical Support. They were kind enough to tell me that there’s an additional method of invoking the &lt;code&gt;version&lt;/code&gt; command which controls what is known as the “user version”. There are some modifications in new versions of Stata which are exempt from the basic invocation of the &lt;code&gt;version&lt;/code&gt; command (but only in programs and ado-files). In do-files issuing &lt;code&gt;version&lt;/code&gt; sets both the version and the user version, however, in programs and ado-files the “user version”, is set by &lt;code&gt;version #, user&lt;/code&gt;, and holds these additional modifications in Stata to the required version.&lt;/p&gt;
+&lt;p&gt;Naturally, this is explained in the &lt;code&gt;version&lt;/code&gt; helpfile and 
+&lt;a href=&#34;https://www.stata.com/manuals/pversion.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;manual entry&lt;/a&gt;, which I admit I had not read until this point. Hence, simply editing the top of my program to&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-stata&#34;&gt;version 13
+version 13, user
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;fixed my error. So in a program or ado-file, we require both lines, whereas in a do-file we’d only require &lt;code&gt;version 13&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We can see the different operation of &lt;code&gt;version&lt;/code&gt; by the following short example.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-stata&#34;&gt;/* Do-file/interactive code to set both the version and the user version */
+version 13
+display c(version), c(userversion), c(stata_version)
+// 13 13 18.5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-stata&#34;&gt;/* Ado-file/program code to set both the version and the user version */
+program mytest
+version 13
+display c(version), c(userversion), c(stata_version)
+version 13, user
+display c(version), c(userversion), c(stata_version)
+end
+
+mytest
+// 13 18.5 18.5
+// 13 13 18.5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In summary, my &lt;code&gt;reffadjustsim&lt;/code&gt; command works again for MLwiN/&lt;code&gt;runmlwin&lt;/code&gt; models. The updated version is available from 
+&lt;a href=&#34;https://github.com/remlapmot/reffadjust&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;its GitHub repo&lt;/a&gt;. And if you ever need &lt;em&gt;fuller&lt;/em&gt; reproducibility in your Stata ado-file or program remember to set both the version and the user version.&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references csl-bib-body hanging-indent&#34; entry-spacing=&#34;0&#34;&gt;
+&lt;div id=&#34;ref-leckie-jss-2013&#34; class=&#34;csl-entry&#34;&gt;
+&lt;p&gt;Leckie, George, and Chris Charlton. 2013. “&lt;span class=&#34;nocase&#34;&gt;runmlwin: A Program to Run the MLwiN Multilevel Modeling Software from within Stata&lt;/span&gt;.” &lt;em&gt;Journal of Statistical Software&lt;/em&gt; 52 (11): 1–40. 
+&lt;a href=&#34;https://doi.org/10.18637/jss.v052.i11&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://doi.org/10.18637/jss.v052.i11&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-mcdw-sim-2012&#34; class=&#34;csl-entry&#34;&gt;
+&lt;p&gt;Macdonald-Wallis, Corrie, Debbie A. Lawlor, Tom Palmer, and Kate Tilling. 2012. “Multivariate Multilevel Spline Models for Parallel Growth Processes: Application to Weight and Mean Arterial Pressure in Pregnancy.” &lt;em&gt;Statistics in Medicine&lt;/em&gt; 31 (26): 3147–64. 
+&lt;a href=&#34;https://doi.org/doi.org/10.1002/sim.5385&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://doi.org/doi.org/10.1002/sim.5385&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-palmer-sj-2014&#34; class=&#34;csl-entry&#34;&gt;
+&lt;p&gt;Palmer, Tom M., Corrie M. Macdonald-Wallis, Debbie A. Lawlor, and Kate Tilling. 2014. “&lt;span class=&#34;nocase&#34;&gt;Estimating adjusted associations between random effects from multilevel models: The reffadjust package&lt;/span&gt;.” &lt;em&gt;The Stata Journal&lt;/em&gt; 14 (1): 119–40. 
+&lt;a href=&#34;https://doi.org/10.1177/1536867X1401400109&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://doi.org/10.1177/1536867X1401400109&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
